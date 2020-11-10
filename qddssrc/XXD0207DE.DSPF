@@ -1,0 +1,95 @@
+     A*%%TS  SD  20100311  231335  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* BESTELLUNG ANLEGEN/ÄNDERN                                     *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  11.03.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE/ÄNDERN BESTELLUNG                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A          R FMT01
+     A*%%TS  SD  20100311  231335  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A                                  1  2'XXD0207DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  5  2'Datum . . . . . :'
+     A            DT_A          10A  B  5 20
+     A  42                                  DSPATR(HI)
+     A  42                                  DSPATR(PR)
+     A  41                              5 62'Neuanlage'
+     A                                      COLOR(RED)
+     A                                  6  2'Typ . . . . . .?:'
+     A            KBTYP     R     A  B  6 20REFFLD(KBTYP APG/PKDBST1)
+     A                                      DSPATR(HI)
+     A                                      DSPATR(PR)
+     A            TYPBEZ        50A  O  6 31COLOR(BLU)
+     A                                  8  2'Artikelnummer .?:'
+     A            KBIDEN    R        B  8 20REFFLD(KBIDEN APG/PKDBST1)
+     A  43                                   DSPATR(PR)
+     A            ARTBEZ        40A  O  8 41COLOR(BLU)
+     A                                  9  2'Bestellmenge  . :'
+     A            KBBMEN    R        B  9 20REFFLD(KBBMEN APG/PKDBST1)
+     A  43                                   DSPATR(PR)
+     A                                      EDTCDE(3)
+     A N41                             11  2'Gelieferte Menge:'
+     A N41        KBLMEN    R        O 11 20REFFLD(KBLMEN APG/PKDBST1)
+     A                                      EDTCDE(3)
+     A N41                             13 48'Erstellt von . . . :'
+     A N41                             14 50'User . . . . . . :'
+     A N41        KBAUSR    R        O 14 69REFFLD(KBAUSR APG/PKDBST1)
+     A N41                             15 50'Datum  . . . . . :'
+     A N41        DT_ANL        10A  O 15 69
+     A N41                             16  2'Bestellstatus . :'
+     A N41        KBVSTS    R        O 16 20REFFLD(KBVSTS APG/PKDBST1)
+     A N41        STSBEZ        20A  O 16 22COLOR(BLU)
+     A N41                             16 50'Uhrzeit  . . . . :'
+     A N41        TI_ANL         8A  O 16 69
+     A N41                             18 48'Letzte Modifikation:'
+     A N41                             19 50'User . . . . . . :'
+     A N41        KBMSER    R        O 19 69REFFLD(KBMSER APG/PKDBST1)
+     A N41                             20 50'Datum  . . . . . :'
+     A N41        DT_MOD        10A  O 20 69
+     A N41                             21 50'Uhrzeit  . . . . :'
+     A N41        TI_MOD         8A  O 21 69
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

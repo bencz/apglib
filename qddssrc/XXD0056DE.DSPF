@@ -1,0 +1,51 @@
+     A*%%TS  SD  20140119  100614  APG         REL-V6R1M0  5761-WDS
+     A*---------------------------------------------------------------*
+     A* HILFSTOOLS                                                    *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  19.01.2014                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE DES PORT AUS WRKSRVTBLE              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80  *DS3                 -
+     A                                             27 132 *DS4)
+     A  *DS4                                MSGLOC(27)
+     A  *DS3                                MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20140119  100614  APG         REL-V6R1M0  5761-WDS
+     A  *DS4                                WINDOW(FMT02)
+     A  *DS3                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       19A  O  1 12DSPATR(HI)
+     A                                  3  1'Service. . :'
+     A            PRTSRV        20A  B  3 14CHECK(LC)
+     A                                  5  1'Port . . . :'
+     A            PRTNUM         6A  O  5 14
+     A                                  6  1'Protokoll  :'
+     A            PRTPRT         6A  O  6 14
+     A                                  8  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(3 37 9 40)
+     A  *DS4                                WINDOW(13 76 9 40)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

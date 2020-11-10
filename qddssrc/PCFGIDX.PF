@@ -1,0 +1,30 @@
+     ‚*---------------------------------------------------------------*
+     ‚* INDEX-DATEI                                                   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  05.11.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  INDEX-DATEI                                  *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGIDXF                  TEXT('CONFIG')
+     A*
+     ‚* DATEI UND WERT BILDEN DEN SCHLÜSSEL
+     A            IXLIB         10A         COLHDG('BIBLIOTHEK')
+     A            IXFILE        10A         COLHDG('DATEI')
+     A            IXVAL         50A         COLHDG('WERT')
+     A
+     A            IXKEY         50A         COLHDG('KEY')
+     A
+     ‚* KEY
+     A          K IXLIB
+     A          K IXFILE
+     A          K IXVAL

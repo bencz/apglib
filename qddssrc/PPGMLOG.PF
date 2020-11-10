@@ -1,0 +1,68 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGGEN DER PROGRAMMAUFRUFE                                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.08.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  PROGRAMMLOGGING                              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PPGMLOGF                  TEXT('PGMLOG')
+     A*
+     ‚* PROGRAMM UND USER
+     A            LGPGM         10A         COLHDG('PROGRAMM')
+     A            LGUSER        10A         COLHDG('USER')
+     A
+     ‚* ANZAHL DER AUFRUFE
+     A            LGLFDN         9S 0       COLHDG('ANZAHL')
+     A            LGEFDN         9S 0       COLHDG('ANZAHL EXIT')
+     A
+     ‚* ANLAGEDATEN
+     A            LGAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            LGABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            LGAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            LGADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            LGATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            LGMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            LGMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            LGMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            LGMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            LGMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            LGFK01         1S 0       COLHDG('FUNKTION 1')
+     A            LGFK02         1S 0       COLHDG('FUNKTION 2')
+     A            LGFK03         1S 0       COLHDG('FUNKTION 3')
+     A            LGFK04         1S 0       COLHDG('FUNKTION 4')
+     A            LGFK05         1S 0       COLHDG('FUNKTION 5')
+     A            LGFK06         1S 0       COLHDG('FUNKTION 6')
+     A            LGFK07         1S 0       COLHDG('FUNKTION 7')
+     A            LGFK08         1S 0       COLHDG('FUNKTION 8')
+     A            LGFK09         1S 0       COLHDG('FUNKTION 9')
+     A            LGFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            LGDAT1        10A         COLHDG('DATEN/10-1')
+     A            LGDAT2        10A         COLHDG('DATEN/10-2')
+     A            LGDAT3        10A         COLHDG('DATEN/10-3')
+     A            LGDAT4        10A         COLHDG('DATEN/10-4')
+     A            LGDAT5        10A         COLHDG('DATEN/10-5')
+     A            LGDAT6        10A         COLHDG('DATEN/10-6')
+     A            LGDAT7        10A         COLHDG('DATEN/10-7')
+     A            LGDAT8        10A         COLHDG('DATEN/10-8')
+     A            LGDAT9        10A         COLHDG('DATEN/10-9')
+     A            LGDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K LGPGM
+     A          K LGUSER

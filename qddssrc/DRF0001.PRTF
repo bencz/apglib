@@ -1,0 +1,19 @@
+     ‚*---------------------------------------------------------------*
+     ‚* STANDARDETIKETT FÜR LABELDRUCK                                *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.09.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  DRUCKEN ETIKETT FÜR DUMMY-LABEL ETIKETT      *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R FMT01
+     ‚* ZEILE 1
+     A            AUSTEXT      130A       01
+     A                                       SPACEA(1)

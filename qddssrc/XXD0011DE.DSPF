@@ -1,0 +1,92 @@
+     A*%%TS  SD  20160316  084944  CFR         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE KW-BERICHTSHEFTE                                      *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  20.08.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE BERICHTSHEFTBESTÄTIGUNG              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      PRINT
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      CA24(24)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20101224  081732  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLNXTCHG
+     A            ABKW      R        H      REFFLD(ABKW APG/PAZUBER)
+     A            ABJAHR    R        H      REFFLD(ABJAHR APG/PAZUBER)
+     A            AUSW           1A  B  5  1VALUES(' ' '1' '2' '6')
+     A            ABUSER    R        O  5  3REFFLD(ABUSER APG/PAZUBER)
+     A            ABERR     R        O  5 14REFFLD(ABERR APG/PAZUBER)
+     A                                      EDTCDE(4)
+     A                                      COLOR(PNK)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20160316  084944  CFR         REL-V7R1M0  5770-WDS
+     A  *DS3                                SFLSIZ(0011)
+     A  *DS4                                SFLSIZ(0011)
+     A  *DS3                                SFLPAG(0010)
+     A  *DS4                                SFLPAG(0010)
+     A  *DS3                                WINDOW(FMT05)
+     A  *DS4                                WINDOW(FMT05)
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      BLINK
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  1'XXD0011DE'
+     A                                      COLOR(BLU)
+     A                                  1 11'KW:'
+     A            KW             2Y 0B  1 15EDTCDE(4)
+     A            ABJAHR    R        B  1 18REFFLD(ABJAHR APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A                                  2  1'Anzahl:'
+     A            ANZREC         4S 0O  2  9COLOR(RED)
+     A                                  3  1'Verantw.:'
+     A            CFDAT1    R        B  3 11REFFLD(CFDAT1 APG/PCONFIG)
+     A            SFT0009       10A  O  4  3DSPATR(HI)
+     A            SFT0043        9A  O  4 14DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20101224  081732  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT05)
+     A  *DS4                                WINDOW(FMT05)
+     A                                      OVERLAY
+     A                                 10  7'Keine Daten'
+     A                                      DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  20101224  081732  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(4 3 16 23)
+     A  *DS4                                WINDOW(4 3 16 23)
+     A                                      OVERLAY
+     A                                 15  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

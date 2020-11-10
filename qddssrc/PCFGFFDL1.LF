@@ -1,0 +1,22 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH LIB/FILE/FMT                         *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  30.10.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH LIB/FILE/FMT                 *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCFGFFDF                  PFILE(PCFGFFD)
+     ‚*
+     A          K WHLIB
+     A          K WHFILE
+     A          K WHNAME
+     A          K WHFLDE
+     ‚*€

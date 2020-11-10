@@ -1,0 +1,82 @@
+     A*%%TS  SD  20090202  104241  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* WINDOW ZUR TAG-SELEKTION                                      *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  27.01.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  WINDOW ZUR TAG-SELEKTION                     *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4-
+     A                                             24 80 *DS3)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      PRINT
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20090202  104241  APG         REL-V5R4M0  5722-WDS
+     A            PTLFDN    R        H      REFFLD(PTLFDN APG/PTAGLIB)
+     A            AUSW           1A  B  4  2VALUES(' ' '1' '6')
+     A            PTTAG     R        O  4  4REFFLD(PTTAG APG/PTAGLIB)
+     A  42                                  COLOR(PNK)
+     A            PTTEXT    R        O  4 15REFFLD(PTTEXT APG/PTAGLIB)
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A  03                                  CSRLOC(CURY       CURX)
+     A*%%TS  SD  20090129  203723  APG         REL-V5R4M0  5722-WDS
+     A                                      CA13(13)
+     A                                      SFLSIZ(0007)
+     A                                      SFLPAG(0006)
+     A                                      WINDOW(FMT04)
+     A                                      BLINK
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            A_PTTEXT       1A  P
+     A            PTTAG     R        B  3  4REFFLD(PTTAG APG/PTAGLIB)
+     A                                      DSPATR(PC)
+     A            PTTEXT    R        B  3 15REFFLD(PTTEXT APG/PTAGLIB)
+     A  02                                  DSPATR(&A_PTTEXT)
+     A  41                                  DSPATR(PC)
+     A                                      CHECK(LC)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            MAINUEB       32A  O  1 13DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20090202  103144  APG         REL-V5R4M0  5722-WDS
+     A                                      WINDOW(12 30 11 46)
+     A                                 10  2'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 10 17'F13=Alle anzeigen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  20090127  224738  APG         REL-V5R4M0  5722-WDS
+     A                                      WINDOW(FMT04)
+     A                                      OVERLAY
+     A                                  7  2'Keine Daten angelegt'
+     A                                      DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

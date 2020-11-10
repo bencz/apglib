@@ -1,0 +1,54 @@
+     A*%%TS  SD  20090129  201414  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* EINGABE BIBLITOHEK/PROGRAMM                                   *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  27.01.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  EINGABE BIBLITOHEK/DATEI                     *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4                 -
+     A                                             24 80  *DS3)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      HELP
+     A                                      HLPTITLE('LFS 400')
+     A                                      CA12(12 'Abbrechen')
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20090129  201414  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A          H                           HLPPNLGRP('LGDSP033/FMT01' LGPNL033)
+     A  *DS3                                HLPARA(08 023 10 035)
+     A  *DS4                                HLPARA(08 023 10 035)
+     A                                  1  1'HMD0004DE'
+     A                                      COLOR(BLU)
+     A            MAINUEB       24A  O  1 12DSPATR(HI)
+     A                                  4  1'Bibliothek . :'
+     A            PLLIB     R        B  4 16REFFLD(PLLIB APG/PPGMLIB)
+     A                                  6  1'Programmname :'
+     A            PLFILE    R        B  6 16REFFLD(PLFILE APG/PPGMLIB)
+     A  41                                  DSPATR(PC)
+     A                                  9  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20000511  151043  JPF         REL-V4R2M0  5769-PW1
+     A                                      WINDOW(8 23 10 35)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

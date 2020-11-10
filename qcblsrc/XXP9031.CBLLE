@@ -1,0 +1,28 @@
+       IDENTIFICATION DIVISION.
+         PROGRAM-ID.              XXP9031.
+           COPY COPYRIGHT  OF APG-QCPYSRC.
+       ENVIRONMENT DIVISION.
+        CONFIGURATION SECTION.
+         SOURCE-COMPUTER.         IBM-AS400.
+         OBJECT-COMPUTER.         IBM-AS400.
+        SPECIAL-NAMES. , DECIMAL-POINT IS COMMA,
+                         ATTRIBUTE-DATA IS BS-ATRIBUTE,
+                         I-O-FEEDBACK   IS FILE-IO-FEEDBACK.
+       INPUT-OUTPUT SECTION.
+         FILE-CONTROL.
+       DATA DIVISION.
+       FILE SECTION.
+       WORKING-STORAGE SECTION.
+       01  PGM-WRK                        PIC X(10) VALUE "XXP9031".
+       01  THIS-IS-NOT-GLOBAL             PIC X(1).
+       01  THIS-IS-GLOBAL GLOBAL          PIC X(1).
+       LINKAGE SECTION.
+       PROCEDURE DIVISION.
+       STEUER SECTION.
+       ANFANG.
+           MOVE "1" TO THIS-IS-NOT-GLOBAL.
+           MOVE "2" TO THIS-IS-GLOBAL.
+           CALL PROCEDURE "XXP9032".
+           CONTINUE.
+       ENDE.
+           GOBACK.

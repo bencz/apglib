@@ -1,0 +1,20 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH SHARE-NUMBER                         *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.03.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH SHARE-NUMBER                 *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R POPLLSTF                  PFILE(POPLLST)
+     ‚*
+     A          K OPSHRN
+     A          K OPUSER
+     ‚*€

@@ -1,0 +1,70 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TAG FÜR JEDES PROGRAMM                                        *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  08.01.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TAGS FÜR EIN PROGRAMM                        *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PTAGLIBF                  TEXT('HERMES PTAGLIB')
+     A*
+     ‚* LAUFENDE NUMMER
+     A            PTLFDN         9S 0       COLHDG('LFDN')
+     ‚* LIB/DATEI
+     A            PTLIB         10A         COLHDG('LIB')
+     A            PTFILE        10A         COLHDG('DATEI')
+     A            PTTAG         10A         COLHDG('TAG')
+     A
+     A            PTTEXT        30A         COLHDG('KOMMENTAR')
+     A
+     ‚* ANLAGEDATEN
+     A            PTAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            PTABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            PTAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            PTADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            PTATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            PTMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            PTMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            PTMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            PTMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            PTMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     ‚*
+     ‚* PTFK01: TAG SICHTBAR/UNSICHTBAR
+     A            PTFK01         1S 0       COLHDG('FUNKTION 1')
+     A            PTFK02         1S 0       COLHDG('FUNKTION 2')
+     A            PTFK03         1S 0       COLHDG('FUNKTION 3')
+     A            PTFK04         1S 0       COLHDG('FUNKTION 4')
+     A            PTFK05         1S 0       COLHDG('FUNKTION 5')
+     A            PTFK06         1S 0       COLHDG('FUNKTION 6')
+     A            PTFK07         1S 0       COLHDG('FUNKTION 7')
+     A            PTFK08         1S 0       COLHDG('FUNKTION 8')
+     A            PTFK09         1S 0       COLHDG('FUNKTION 9')
+     A            PTFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            PTDAT1        10A         COLHDG('DATEN/10-1')
+     A            PTDAT2        10A         COLHDG('DATEN/10-2')
+     A            PTDAT3        10A         COLHDG('DATEN/10-3')
+     A            PTDAT4        10A         COLHDG('DATEN/10-4')
+     A            PTDAT5        10A         COLHDG('DATEN/10-5')
+     A            PTDAT6        10A         COLHDG('DATEN/10-6')
+     A            PTDAT7        10A         COLHDG('DATEN/10-7')
+     A            PTDAT8        10A         COLHDG('DATEN/10-8')
+     A            PTDAT9        10A         COLHDG('DATEN/10-9')
+     A            PTDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K PTLFDN

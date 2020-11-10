@@ -1,0 +1,72 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ALLE DOKUMENTIERTEN PROGRAMME                                 *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  08.01.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SAMMLUNG DER PROGRAMME                       *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PPGMLIBF                  TEXT('HERMES PGMLIB')
+     A*
+     ‚* BIBLIOTHEK BZW. VERSION + PGM-NAME
+     A            PLLIB         10A         COLHDG('LIB')
+     A            PLFILE        10A         COLHDG('DATEI/PGM')
+     ‚* BESCHREIBUNGSTEXT DES PROGRAMMS + KOMMENTAR
+     A            PLMTXT        50A         COLHDG('BESCHREIBUNG')
+     A            PLKOM1        80A         COLHDG('KOMMENTAR 1')
+     A            PLKOM2        80A         COLHDG('KOMMENTAR 2')
+     A            PLKOM3        80A         COLHDG('KOMMENTAR 3')
+     A            PLKOML       250A         COLHDG('LANG KOMMENTAR')
+     ‚* DATEIINFORMATIONEN
+     A            PLSEU2        10A         COLHDG('QUELLENART')
+     A
+     ‚* ANLAGEDATEN
+     A            PLAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            PLABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            PLAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            PLADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            PLATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            PLMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            PLMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            PLMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            PLMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            PLMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            PLFK01         1S 0       COLHDG('FUNKTION 1')
+     A            PLFK02         1S 0       COLHDG('FUNKTION 2')
+     A            PLFK03         1S 0       COLHDG('FUNKTION 3')
+     A            PLFK04         1S 0       COLHDG('FUNKTION 4')
+     A            PLFK05         1S 0       COLHDG('FUNKTION 5')
+     A            PLFK06         1S 0       COLHDG('FUNKTION 6')
+     A            PLFK07         1S 0       COLHDG('FUNKTION 7')
+     A            PLFK08         1S 0       COLHDG('FUNKTION 8')
+     A            PLFK09         1S 0       COLHDG('FUNKTION 9')
+     A            PLFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            PLDAT1        10A         COLHDG('DATEN/10-1')
+     A            PLDAT2        10A         COLHDG('DATEN/10-2')
+     A            PLDAT3        10A         COLHDG('DATEN/10-3')
+     A            PLDAT4        10A         COLHDG('DATEN/10-4')
+     A            PLDAT5        10A         COLHDG('DATEN/10-5')
+     A            PLDAT6        10A         COLHDG('DATEN/10-6')
+     A            PLDAT7        10A         COLHDG('DATEN/10-7')
+     A            PLDAT8        10A         COLHDG('DATEN/10-8')
+     A            PLDAT9        10A         COLHDG('DATEN/10-9')
+     A            PLDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K PLLIB
+     A          K PLFILE

@@ -1,0 +1,110 @@
+     A*%%TS  SD  20101112  071646  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* KÜCHENDIENSTEINTRAG ÄNDERN                                    *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  29.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE/ÄNDERN KÜCHENDIENST                  *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A          R FMT01
+     A*%%TS  SD  20101112  071646  APG         REL-V5R4M0  5722-WDS
+     A                                      CF04(04)
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG       128   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            A_DATWRK       1A  P
+     A            A_KDTYP        1A  P
+     A            SFRECNR        4S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21   O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  5  2'Datum . . . . . :'
+     A            DT_KD         10A  B  5 20DSPATR(&A_DATWRK)
+     A  42                                  DSPATR(HI)
+     A  42                                  DSPATR(PR)
+     A  41                              5 93'Neuanlage'
+     A                                      COLOR(RED)
+     A                                  6  2'Typ . . . . . .?:'
+     A            KDTYP     R     A  B  6 20REFFLD(KDTYP APG/PKDPLAN)
+     A                                      DSPATR(&A_KDTYP)
+     A  42                                  DSPATR(HI)
+     A  42                                  DSPATR(PR)
+     A                                  6 32'(KD-EUP/KD-IAW/LAGER1/LAGER2/...)'
+     A                                      COLOR(BLU)
+     A                                  8  2'Benutzer  . . . :'
+     A            KDUSER    R        B  8 20REFFLD(KDUSER APG/PKDPLAN)
+     A  42                                  DSPATR(HI)
+     A  42                                  DSPATR(PR)
+     A  44                                  DSPATR(PC)
+     A                                  9  2'Getauscht mit . :'
+     A            KDGUSR    R        B  9 20REFFLD(KDGUSR APG/PKDPLAN)
+     A                                  9 32'Grund:'
+     A            KDGRND    R        B  9 39REFFLD(KDGRND APG/PKDPLAN)
+     A                                 11  2'Beschreibung  . :'
+     A            KDKOM1    R   60   B 11 20REFFLD(KDKOM1 APG/PKDPLAN)
+     A                                      CHECK(LC)
+     A            KDKOM2    R   60   B 12 20REFFLD(KDKOM2 APG/PKDPLAN)
+     A                                      CHECK(LC)
+     A            KDKOM3    R   60   B 13 20REFFLD(KDKOM3 APG/PKDPLAN)
+     A                                      CHECK(LC)
+     A                                 15  2'Lagerdienst . . :'
+     A                                 16  4'Lager wischen :'
+     A            KDFK01    R        B 16 20REFFLD(KDFK01 APG/PKDPLAN)
+     A                                      VALUES(0 1)
+     A                                      EDTCDE(3)
+     A                                 16 23'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A N41                             17 99'Anlagedatum  . . . :'
+     A N41                             18101'User . . . . . . :'
+     A N41        KDAUSR    R        O 18120REFFLD(KDAUSR APG/PKDPLAN)
+     A N41                             19101'Datum  . . . . . :'
+     A N41        DT_CRT        10A  O 19120
+     A N41                             20101'Uhrzeit  . . . . :'
+     A N41        TI_CRT         8A  O 20120
+     A N41                             21 99'Letzte Modifikation:'
+     A N41                             22101'User . . . . . . :'
+     A N41        KDMSER    R        O 22120REFFLD(KDMSER APG/PKDPLAN)
+     A N41        CHGWRK1        1A  O 22131COLOR(BLU)
+     A N41                             23101'Datum  . . . . . :'
+     A N41        DT_MOD        10A  O 23120
+     A N41        CHGWRK2        1A  O 23131COLOR(BLU)
+     A N41                             24101'Uhrzeit  . . . . :'
+     A N41        TI_MOD         8A  O 24120
+     A N41        CHGWRK3        1A  O 24131COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F4=Anlage + Nächster Tag'
+     A                                      COLOR(BLU)
+     A                                 26 42'F12=Abbrechen'
+     A                                      COLOR(BLU)

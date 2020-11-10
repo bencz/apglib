@@ -1,0 +1,52 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ÜBUNGSUAFGABEN FÜR AZUBIS                                     *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  23.11.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SOURCEN ZU ÜBUNGSAUFGABEN                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PAZUSRCF                  TEXT('AZUBI ÜBUNGSSOURCEN')
+     A*
+     ‚* ANGEBOTSNUMMER + POS + SOURCE (KEY)
+     A            ASUSER        10A         COLHDG('USER')
+     A            ASLFDN         9S 0       COLHDG('LFDN' 'PAZUUEB')
+     A
+     A            ASSLIB        10A         COLHDG('LIB')
+     A            ASSRCN        10A         COLHDG('FILE')
+     A            ASSMBR        10A         COLHDG('MBR')
+     A            ASMTXT        80A         COLHDG('MBR-TEXT')
+     A
+     ‚* STATUS ZU EINER SOURCE
+     A            ASVSTS         1A         COLHDG('STATUS')
+     A            ASANCR         4S 0       COLHDG('ANZAHL' 'CODEREVIEW')
+     A
+     ‚* ANLAGEDATEN
+     A            ASAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            ASABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            ASAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            ASADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            ASATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            ASMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            ASMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            ASMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            ASMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            ASMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K ASUSER
+     A          K ASLFDN
+     A          K ASSLIB
+     A          K ASSRCN
+     A          K ASSMBR

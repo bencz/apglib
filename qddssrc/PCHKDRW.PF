@@ -1,0 +1,41 @@
+     ‚*---------------------------------------------------------------*
+     ‚* GESPEICHERTE BILDER FÜR APG/DRAW                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  07.07.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  BILDER                                       *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCHKDRWF                  TEXT('CHKDRW')
+     A*
+     ‚* KEY
+     A            DWLFDN         6S 2       COLHDG('LFDN')
+     A
+     A            DWFNAM        30A         COLHDG('FILENAME')
+     A            DWREC       4000A         COLHDG('RECORD')
+     A
+     ‚* ANLAGEDATEN
+     A            DWAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            DWABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            DWAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            DWADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            DWATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            DWMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            DWMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            DWMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            DWMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            DWMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K DWLFDN

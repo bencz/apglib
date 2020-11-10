@@ -1,0 +1,15 @@
+           xxPnnnn
+              xx =˜CC€= C-Programme                (QCSRC)
+                  ˜CF€= Config                     (QCBLSRC)
+                  ˜CL€= CL-Programme               (QCLSRC)
+                  ˜CM€= Compiler                   (QCBLSRC)
+                  ˜CR€= Checksource                (QCBLSRC)
+                  ˜DR€= Druckprogramme             (QCBLSRC)
+                  ˜AJ€= Ajax                       (QCBLSRC)
+                  ˜HM€= Hermes                     (QCBLSRC)
+                  ˜HL€= Hilfsprogramme             (QCBLSRC)
+                  ˜SC€= Schulungsprogramme         (QCBLSRC)
+                  ˜XX€= Experiment/Test/Sonstiges  (QCBLSRC)
+                  ˜EX€= Extensions (Public)        (QCBLPUB)
+
+            nnnn = 0001 - 9999

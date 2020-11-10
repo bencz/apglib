@@ -1,0 +1,95 @@
+     A*%%TS  SD  20100217  073954  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* MEMBERINFORMATIONEN                                           *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  27.05.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  INFORMATIONEN ZU EINER SOURCE                *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS3)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20091230  072034  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      BLINK
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  2'CRD0010DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       92A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1114COLOR(BLU)
+     A                                  1123SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        92A  O  2 20DSPATR(HI)
+     A                                  2114DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2123TIME
+     A                                  4  2'Text . . . . . . . . . . . . . :'
+     A            RTVTXT        50A  B  4 35
+     A                                  5 35'....+... 1 ...+... 2 ...+... 3 ...-
+     A                                      +... 4 ...+... 5'
+     A                                      COLOR(BLU)
+     A                                  6 67'LÖ MM/JJ UUU'
+     A                                      COLOR(PNK)
+     A                                  6 80'##KKK'
+     A                                      COLOR(PNK)
+     A                                  8  2'Teildatei  . . . . . . . . . . :'
+     A            RTVMBR        10A  O  8 35
+     A                                  8 73'Erstellungszeitpunkt  . . . :'
+     A                                  9  2'Datei  . . . . . . . . . . . . :'
+     A            RTVRCN        10A  O  9 35
+     A                                  9 76'Datum  . . . . . . . . . :'
+     A            DT_CRT        10A  O  9103
+     A                                 10  4'Bibliothek . . . . . . . . . :'
+     A            RTVLIB        10A  O 10 37
+     A                                 10 76'Uhrzeit  . . . . . . . . :'
+     A            TI_CRT         8A  O 10103
+     A                                 11  2'Teildateiart . . . . . . . . . :'
+     A            RTVTYPE       10A  O 11 35
+     A                                 12 73'Änderungszeitpunkt  . . . . :'
+     A                                 13  2'Anzahl der Sätze . . . . . . . :'
+     A            RTVCNT         9Y 0O 13 35EDTCDE(1)
+     A                                 13 76'Datum  . . . . . . . . . :'
+     A            DT_CHG        10A  O 13103
+     A                                 14  2'Gelöschte Sätze  . . . . . . . :'
+     A            RTVDEL         9Y 0O 14 35EDTCDE(1)
+     A                                 14 76'Uhrzeit  . . . . . . . . :'
+     A            TI_CHG         8A  O 14103
+     A                                 16 73'Sicherungszeitpunkt . . . . :'
+     A                                 17 76'Datum  . . . . . . . . . :'
+     A            DT_SAV        10A  O 17103
+     A                                 18 76'Uhrzeit  . . . . . . . . :'
+     A            TI_SAV         8A  O 18103
+     A                                 20 73'Rückspeicherungszeitpunkt . :'
+     A                                 21 76'Datum  . . . . . . . . . :'
+     A            DT_RST        10A  O 21103
+     A                                 22 76'Uhrzeit  . . . . . . . . :'
+     A            TI_RST         8A  O 22103
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

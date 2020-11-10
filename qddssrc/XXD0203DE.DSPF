@@ -1,0 +1,113 @@
+     A*%%TS  SD  20090922  191216  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* KÜCHEN UND LAGERDIENST                                        *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  28.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  PLANUNG KÜCHENDIENST                         *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20090922  191216  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            AUSW           1A  B 10  2VALUES(' ' '1' '4')
+     A                                      DSPATR(ND)
+     A                                      DSPATR(PR)
+     A            KDTYP     R        O 10  4REFFLD(KDTYP APG/PKDPLAN)
+     A            MONTAG        10A  O 10 15
+     A  41                                  COLOR(YLW)
+     A  46                                  DSPATR(RI)
+     A            DIENSTAG      10   O 10 26
+     A  42                                  COLOR(YLW)
+     A  47                                  DSPATR(RI)
+     A            MITTWOCH      10A  O 10 37
+     A  43                                  COLOR(YLW)
+     A  48                                  DSPATR(RI)
+     A            DONNERST      10A  O 10 48
+     A  44                                  COLOR(YLW)
+     A  49                                  DSPATR(RI)
+     A            FREITAG       10A  O 10 59
+     A  45                                  COLOR(YLW)
+     A  50                                  DSPATR(RI)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20090902  213022  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0014)
+     A                                      SFLPAG(0013)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  6  2'Datum  . . :'
+     A            DT_WRK        10A  B  6 15DSPATR(PC)
+     A            DT_VON        10A  O  6 26COLOR(BLU)
+     A                                  6 37'-'
+     A                                      COLOR(BLU)
+     A            DT_BIS        10A  O  6 39COLOR(BLU)
+     A            SFT0008       10A  O  9  4DSPATR(HI)
+     A            SFT0012       10A  O  9 15DSPATR(HI)
+     A  46                                  DSPATR(RI)
+     A            SFT0013       10A  O  9 26DSPATR(HI)
+     A  47                                  DSPATR(RI)
+     A            SFT0014       10A  O  9 37DSPATR(HI)
+     A  48                                  DSPATR(RI)
+     A            SFT0015       10A  O  9 48DSPATR(HI)
+     A  49                                  DSPATR(RI)
+     A            SFT0016       10A  O  9 59DSPATR(HI)
+     A  50                                  DSPATR(RI)
+     A          R FMT04
+     A*%%TS  SD  20090902  200133  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

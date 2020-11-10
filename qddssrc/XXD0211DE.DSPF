@@ -1,0 +1,160 @@
+     A*%%TS  SD  20100830  093315  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE KAFFEEMASCHINEN STATUS                                *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  16.08.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE OB KAFFEEMASCHINE AKTIV ODER DEFEKT  *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA12(12 'Abbrechen')
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20100830  093253  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT03)
+     A  *DS4                                WINDOW(FMT03)
+     A                                      CA02(02)
+     A                                      CA05(05)
+     A                                      CA14(14)
+     A                                      CA17(17)
+     A                                      CA18(18)
+     A                                      CA22(22)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       37A  O  1 12DSPATR(HI)
+     A            SFT0041       10A  O  3  8DSPATR(HI)
+     A            SFT0042       30A  O  3 19DSPATR(HI)
+     A                                  4  1'EUP:'
+     A            EUP_NUM        1Y 0O  4  6EDTCDE(3)
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A            EUP_STAT      10A  O  4  8
+     A  40                                  COLOR(RED)
+     A  40                                  DSPATR(RI)
+     A  41                                  COLOR(YLW)
+     A            DT_EUP        10A  O  4 19
+     A            TI_EUP         8A  O  4 30
+     A            EUP_USER      10A  O  4 39
+     A                                  5  1'IAW:'
+     A            IAW_NUM        1Y 0O  5  6EDTCDE(3)
+     A  42                                  DSPATR(BL)
+     A  42                                  COLOR(RED)
+     A            IAW_STAT      10A  O  5  8
+     A  42                                  COLOR(RED)
+     A  42                                  DSPATR(RI)
+     A  43                                  COLOR(YLW)
+     A            DT_IAW        10A  O  5 19
+     A            TI_IAW         8A  O  5 30
+     A            IAW_USER      10A  O  5 39
+     A N40N41                           7  1'F2=EUP defekt'
+     A                                      COLOR(BLU)
+     A  40
+     AO 41                              7  1'F2=EUP aktiv'
+     A                                      COLOR(BLU)
+     A                                  7 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A N42N43                           7 31'F14=IAW defekt'
+     A                                      COLOR(BLU)
+     A  42
+     AO 43                              7 31'F14=IAW aktiv'
+     A                                      COLOR(BLU)
+     A                                  8  1'F17=KD EUP'
+     A                                      COLOR(BLU)
+     A                                  8 13'F18=KD IAW'
+     A                                      COLOR(BLU)
+     A                                  8 25'F22=Statustext'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02
+     A*%%TS  SD  20100830  093315  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT04)
+     A  *DS4                                WINDOW(FMT04)
+     A                                      CA02(02)
+     A                                      CA05(05)
+     A                                      CA14(14)
+     A                                      CA17(17)
+     A                                      CA18(18)
+     A                                      CA22(22)
+     A                                      CF23(23)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       37A  O  1 12DSPATR(HI)
+     A            SFT0041       10A  O  3  8DSPATR(HI)
+     A            SFT0042       30A  O  3 19DSPATR(HI)
+     A                                  4  1'EUP:'
+     A            EUP_NUM        1Y 0O  4  6EDTCDE(3)
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A            EUP_STAT      10A  O  4  8
+     A  40                                  COLOR(RED)
+     A  40                                  DSPATR(RI)
+     A  41                                  COLOR(YLW)
+     A            DT_EUP        10A  O  4 19
+     A            TI_EUP         8A  O  4 30
+     A            EUP_USER      10A  O  4 39
+     A                                  5  1'IAW:'
+     A            IAW_NUM        1Y 0O  5  6EDTCDE(3)
+     A  42                                  DSPATR(BL)
+     A  42                                  COLOR(RED)
+     A            IAW_STAT      10A  O  5  8
+     A  42                                  COLOR(RED)
+     A  42                                  DSPATR(RI)
+     A  43                                  COLOR(YLW)
+     A            DT_IAW        10A  O  5 19
+     A            TI_IAW         8A  O  5 30
+     A            IAW_USER      10A  O  5 39
+     A                                  7  1'EUP:'
+     A N44        EUP_TXT   R        O  7  8REFFLD(CFIN21 APG/PCONFIG)
+     A  44        EUP_TXE   R        B  7  8REFFLD(CFIN21 APG/PCONFIG)
+     A                                      CHECK(LC)
+     A                                  8  1'IAW:'
+     A N44        IAW_TXT   R        O  8  8REFFLD(CFIN21 APG/PCONFIG)
+     A  44        IAW_TXE   R        B  8  8REFFLD(CFIN21 APG/PCONFIG)
+     A                                      CHECK(LC)
+     A N40N41                          10  1'F2=EUP defekt'
+     A                                      COLOR(BLU)
+     A  40
+     AO 41                             10  1'F2=EUP aktiv'
+     A                                      COLOR(BLU)
+     A                                 10 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A N42N43                          10 31'F14=IAW defekt'
+     A                                      COLOR(BLU)
+     A  42
+     AO 43                             10 31'F14=IAW aktiv'
+     A                                      COLOR(BLU)
+     A                                 11  1'F17=KD EUP'
+     A                                      COLOR(BLU)
+     A                                 11 13'F18=KD IAW'
+     A                                      COLOR(BLU)
+     A                                 11 25'F22=Statustext aus'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT03
+     A*%%TS  SD  20000511  151043  JPF         REL-V4R2M0  5769-PW1
+     A                                      WINDOW(8 17 9 49)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20000511  151043  JPF         REL-V4R2M0  5769-PW1
+     A                                      WINDOW(8 17 12 49)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

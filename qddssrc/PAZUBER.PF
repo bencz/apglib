@@ -1,0 +1,45 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ANZEIGE BERICHTSHEFT-DATEN                                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  20.08.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  ANZEIGE BERICHTSHEFTDATEN                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PAZUBERF                  TEXT('AZUBI BERICHTSHEFT')
+     A*
+     ‚* KW UND USERNAME
+     A            ABKW           2S 0       COLHDG('KW')
+     A            ABJAHR         4S 0       COLHDG('JAHR')
+     A            ABUSER        10A         COLHDG('USER')
+     ‚* STATUS
+     A            ABSTAT         1A         COLHDG('STATUS')
+     A            ABERR          9S 0       COLHDG('FEHLER')
+     A
+     ‚* ANLAGEDATEN
+     A            ABAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            ABABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            ABAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            ABADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            ABATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            ABMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            ABMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            ABMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            ABMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            ABMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K ABKW
+     A          K ABJAHR
+     A          K ABUSER

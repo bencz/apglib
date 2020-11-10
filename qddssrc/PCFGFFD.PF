@@ -1,0 +1,138 @@
+     ‚*---------------------------------------------------------------*
+     ‚* FELDBESCHREIBUNGEN                                            *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  12.10.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  ERGEBNIS VON DSPFFD                          *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGFFDF                  TEXT('COMPILE PCFGFFD')
+     A*
+     ‚* LAUFENDE NUMMER (KEY)
+     A            WHLFDN         9S 0       COLHDG('LFDN')
+     A
+     ‚* FELDER AUS DSPFFD
+     A            WHFILE        10A         COLHDG('DATEI')
+     A            WHLIB         10A         COLHDG('BIBLIOTHEK')
+     A            WHCRTD         7A         COLHDG('ERSTELLUNG' 'DATUM')
+     A            WHFTYP         1A         COLHDG('DATEIART')
+     A            WHCNT          5S 0       COLHDG('ANZAHL' 'SATZFORMATE')
+     A            WHDTTM        13A         COLHDG('ABRUFDATUM')
+     A            WHNAME        10A         COLHDG('SATZFORMAT')
+     A            WHSEQ         13A         COLHDG('KENNZEICH.' 'FORMATEBENE')
+     A            WHTEXT        50A         COLHDG('BESCHREIBUNG' 'TEXTFORMAT')
+     A            WHFLDN         5S 0       COLHDG('ANZAHL' 'FELDER')
+     A            WHRLEN         5S 0       COLHDG('SATZFORMAT' 'LÄNGE')
+     A            WHFLDI        10A         COLHDG('FELDNAME' 'INTERN')
+     A            WHFLDE        10A         COLHDG('FELDNAME' 'EXTERN')
+     A            WHFOBO         5S 0       COLHDG('POSITION' 'AUSGABE')
+     A            WHIBO          5S 0       COLHDG('POSITION' 'EINGABE')
+     A            WHFLDB         5S 0       COLHDG('FELDLÄNGE' 'BYTE')
+     A            WHFLDD         2S 0       COLHDG('FELDLÄNGE' 'STELLEN')
+     A            WHFLDP         2S 0       COLHDG('FELDLÄNGE' 'NACHKOMMA')
+     A            WHFTXT        50A         COLHDG('FELDTEXT' 'BESCHREIBUNG')
+     A            WHRCDE         3S 0       COLHDG('DATENART')
+     A            WHRFIL        10A         COLHDG('REFERENZ' 'DATEI')
+     A            WHRLIB        10A         COLHDG('REFERENZ' 'BILIOTHEK')
+     A            WHRFMT        10A         COLHDG('REFERENZ' 'FORMAT')
+     A            WHRFLD        10A         COLHDG('REFERENZ' 'FELD')
+     A            WHCHD1        20A         COLHDG('SPALTEN' 'ÜBERSCHRIFT 1')
+     A            WHCHD2        20A         COLHDG('SPALTEN' 'ÜBERSCHRIFT 2')
+     A            WHCHD3        20A         COLHDG('SPALTEN' 'ÜBERSCHRIFT 3')
+     A            WHFLDT         1A         COLHDG('FELDART')
+     A            WHFIOB         1A         COLHDG('E/A ATTRIBUT')
+     A            WHECDE         2A         COLHDG('EDITIERCODE')
+     A            WHEWRD        32A         COLHDG('EDITIERWORT')
+     A            WHVCNE         4S 0       COLHDG('ANZAHL' 'GÜLTIGKEIT')
+     A            WHNFLD         5S 0       COLHDG('ANZAHL' 'FELDER')
+     A            WHNIND         2S 0       COLHDG('ANZAHL' 'BEZUGSZAHLEN')
+     A            WHSHFT         1A         COLHDG('TASTATUR' 'UMSCHALTUNG')
+     A            WHALTY         1A         COLHDG('ZEICHENFELD' 'DBCS')
+     A            WHALIS        30A         COLHDG('ALTERNATIVER' 'FELDNAME')
+     A            WHJREF         2S 0       COLHDG('JOINREFERENZ')
+     A            WHDFTL         2S 0       COLHDG('DFT' 'LÄNGE')
+     A            WHDFT         30A         COLHDG('DFT' 'WERT')
+     A            WHCHRI         1A         COLHDG('ÄNDERUNG' 'ZULÄSSIG')
+     A            WHCTNT         1A         COLHDG('UMSETZTABELLE')
+     A            WHFONT        10A         COLHDG('SCHRIFTART' 'ID')
+     A            WHCSWD         3S 1       COLHDG('ZEICHEN' 'BREITE')
+     A            WHCSHI         3S 1       COLHDG('ZEICHEN' 'HÖHE')
+     A            WHBCNM        10A         COLHDG('BARCODE' 'NAME')
+     A            WHBCHI         3S 1       COLHDG('BARCODE' 'HÖHE')
+     A            WHMAP          1A         COLHDG('UNTERZEICHENFOLGE')
+     A            WHMAPS         5S 0       COLHDG('BEGINN' 'UNTERZ.')
+     A            WHMAPL         5S 0       COLHDG('ANZAHL BYTES' 'UNTERZ.')
+     A            WHSYSN         8A         COLHDG('SYSTEMNAME')
+     A            WHRES1         2A         COLHDG('RESERVIERT')
+     A            WHSQLT         1A         COLHDG('SQL' 'DATEIART')
+     A            WHHEX          1A         COLHDG('HEXADEZIMAL')
+     A            WHPNTS         4S 1       COLHDG('PUNKT' 'GRÖßE')
+     A            WHCSID         5S 0       COLHDG('ID' 'ZEICHENSATZ')
+     A            WHFMT          4A         COLHDG('FORMAT' 'PARAMETER')
+     A            WHSEP          1A         COLHDG('SEPERATOR')
+     A            WHVARL         1A         COLHDG('VARIABLE' 'LÄNGE')
+     A            WHALLC         5S 0       COLHDG('ZUGEORDNETE' 'LÄNGE')
+     A            WHNULL         1A         COLHDG('NULLWERT' 'ZUGELASSEN')
+     A            WHFCSN        10A         COLHDG('SCHRIFTART' 'ZEICHENSATZ')
+     A            WHFCSL        10A         COLHDG('ZEICHENSATZ' 'BIBLIOTHEK')
+     A            WHFCPN        10A         COLHDG('SCHRIFTART' 'CODEPAGE')
+     A            WHFCPL        10A         COLHDG('CODEPAGE' 'BIBLIOTHEK')
+     A            WHCDFN        10A         COLHDG('CODIERTE' 'SCHRIFTART')
+     A            WHCDFL        10A         COLHDG('CODIERTE' 'BIBLIOTHEK')
+     A            WHDCDF        10A         COLHDG('DBCS COD.' 'SCHRIFTART')
+     A            WHDCDL        10A         COLHDG('DBCS COD.' 'BIBLIOTHEK')
+     A            WHTXRT         3A         COLHDG('GRAD DER' 'TEXTDREHUNG')
+     A            WHFLDG         5S 0       COLHDG('FELDLÄNGE' 'IN ZEICHEN')
+     A            WHFDSL         5S 0       COLHDG('FELDLÄNGE' 'ALTERNATIV')
+     A            WHFSPS         4S 1       COLHDG('PUNKTGRÖßE' 'SCHRIFRART')
+     A            WHCFPS         4S 1       COLHDG('PUNKTGRÖßE' 'COD. SCHRIFT.')
+     A            WHIFPS         4S 1       COLHDG('DBCS' 'PUNKTGRÖßE')
+     A            WHDBLL        10S 0       COLHDG('LOB' 'FELDLÄNGE')
+     A            WHDBUN       128A         COLHDG('UDT' 'NAME')
+     A            WHDBUL        10A         COLHDG('UDT' 'BIBLIOTHEK')
+     A            WHDBFC         1A         COLHDG('0=KEINE ST.' '1=DATEISYS.')
+     A            WHDBFI         1A         COLHDG('0=SELEKTIV' '1=ALLE')
+     A            WHDBRP         1A         COLHDG('0=DATENBANK' '1=DATEISYS.')
+     A            WHDBWP         1A         COLHDG('0=GEBLOCKT' '1=DATEISYS.')
+     A            WHDBRC         1A         COLHDG('0=NEIN' '1=JA')
+     A            WHDBOU         1A         COLHDG('0=LÖSCHEN' '1=WIEDERHER.')
+     A            WHPSUD         1A         COLHDG('0=*NOCONVERT' '1=*CONVERT')
+     A            WHBCUH         5S 2       COLHDG('BARCODE' 'HÖHE MIT UOM')
+     A            WHFPSW         4S 1       COLHDG('SCHRIFTART' 'PUNKTGRÖßE')
+     A            WHFSPW         4S 1       COLHDG('PUNKTGRÖßE' 'SCHRIFTZ.')
+     A            WHCFPW         4S 1       COLHDG('PUNKTGRÖßE' 'COD. SCHRIFT.')
+     A            WHIFPW         4S 1       COLHDG('PUNKTGRÖßE' 'DBCS COD.')
+     A            WHRWID         1A         COLHDG('ROWID' 'ANGEGEBEN')
+     A            WHIDC          1A         COLHDG('IDENTITY' 'SPALTE')
+     A            WHDROW         3S 0       COLHDG('ZEILE' 'ANZEIGEN')
+     A            WHDCOL         3S 0       COLHDG('SPALTE' 'ANZEIGEN')
+     A            WHALI2       258A         COLHDG('ALTERNATIVER' 'NAME')
+     A            WHALCH         1A         COLHDG('ALTERNATIVE' 'LÄNGE')
+     A            WHNRML         1A         COLHDG('FELD' 'NORMALISIERT')
+     A            WHJRF2         3S 0       COLHDG('JOINREFERENZ')
+     A
+     ‚* ANLAGEDATEN
+     A            WHAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            WHABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            WHAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            WHADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            WHATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            WHMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            WHMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            WHMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            WHMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            WHMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K WHLFDN

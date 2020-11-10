@@ -1,0 +1,23 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH TEXT-ID                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  07.11.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH TEXT/FEHLER-TEXTE            *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R POPLLSTF                  PFILE(POPLLST)
+     ‚*
+     A          K OPTTYP
+     A          K OPUSER
+     A          K OPTID
+     A
+     A          O OPTTYP                    COMP(EQ ' ')
+     ‚*€

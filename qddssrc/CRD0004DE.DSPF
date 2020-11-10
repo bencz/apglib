@@ -1,0 +1,132 @@
+     A*%%TS  SD  20100202  121906  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* WINDOW ZUR SYNTAX-EINGABE                                     *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  13.11.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  WINDOW ZUR SYNTAX-EINGABE                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      PRINT
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20091120  130146  APG         REL-V5R4M0  5722-WDS
+     A            SYUSER    R        H      REFFLD(SYUSER APG/PCHKHGH)
+     A            SYTYP     R        H      REFFLD(SYTYP APG/PCHKHGH)
+     A            AUSW           1A  B  4  2VALUES(' ' '2' '4' '6')
+     A            SYCMD     R        O  4  4REFFLD(SYCMD APG/PCHKHGH)
+     A            SYLEN     R     Y  O  4 37REFFLD(SYLEN APG/PCHKHGH)
+     A                                      EDTCDE(3)
+     A            SYAKT     R        O  4 35REFFLD(SYAKT APG/PCHKHGH)
+     A                                      EDTCDE(3)
+     A                                      COLOR(RED)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100202  121906  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                SFLSIZ(0007)
+     A  *DS4                                SFLSIZ(0007)
+     A  *DS3                                SFLPAG(0006)
+     A  *DS4                                SFLPAG(0006)
+     A  *DS3                                WINDOW(FMT05)
+     A  *DS4                                WINDOW(FMT05)
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA13(13)
+     A                                      BLINK
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  2'CRD0004DE'
+     A                                      COLOR(BLU)
+     A            MAINUEB       21A  O  1 13DSPATR(HI)
+     A            SYTYP     R        O  1 35REFFLD(SYTYP APG/PCHKHGH)
+     A                                      COLOR(RED)
+     A                                  2  2'2=Ändern'
+     A                                      COLOR(BLU)
+     A                                  2 12'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  2 23'6=Inaktivieren'
+     A                                      COLOR(BLU)
+     A            SYCMD     R        B  3  4REFFLD(SYCMD APG/PCHKHGH)
+     A                                      DSPATR(PC)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20090127  224738  APG         REL-V5R4M0  5722-WDS
+     A                                      WINDOW(FMT05)
+     A                                      OVERLAY
+     A                                  7  2'Keine Daten angelegt'
+     A                                      DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  20090202  103144  APG         REL-V5R4M0  5722-WDS
+     A                                      WINDOW(12 30 11 46)
+     A                                 10  2'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT06
+     A*%%TS  SD  20100202  073417  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(12 30 11 46)
+     A  *DS4                                WINDOW(12 30 11 46)
+     A                                  1  2'CRD0004DE'
+     A                                      COLOR(BLU)
+     A            MAINUEB       20A  O  1 13DSPATR(HI)
+     A                                  3  2'Befehl . . :'
+     A            BEFEHL    R   +2   O  3 15REFFLD(SYCMD APG/PCHKHGH)
+     A                                  4  2'Farbe  . . :'
+     A            SYCOLR    R        B  4 16REFFLD(SYCOLR APG/PCHKHGH)
+     A                                  4 34'GREEN'
+     A                                  4 41'PINK'
+     A                                      COLOR(PNK)
+     A                                  5 34'BLUE'
+     A                                      COLOR(BLU)
+     A                                  5 41'RED'
+     A                                      COLOR(RED)
+     A                                  6  2'Invers . . :'
+     A            SYINVS    R        B  6 15REFFLD(SYINVS APG/PCHKHGH)
+     A                                      VALUES('0' '1')
+     A                                  6 18'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  6 34'WHITE'
+     A                                      COLOR(WHT)
+     A                                  6 41'YELLOW'
+     A                                      COLOR(YLW)
+     A                                  7  2'Unterstr.  :'
+     A            SYUNDR    R        B  7 15REFFLD(SYUNDR APG/PCHKHGH)
+     A                                      VALUES('0' '1')
+     A                                  7 18'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  7 34'LIGHTBLUE'
+     A                                      COLOR(TRQ)
+     A                                  8  2'Blinken  . :'
+     A            SYBLNK    R        B  8 15REFFLD(SYBLNK APG/PCHKHGH)
+     A                                      VALUES('0' '1')
+     A                                  8 18'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 10  2'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

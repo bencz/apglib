@@ -1,0 +1,56 @@
+     A*%%TS  SD  20101104  100220  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE EINES ABSTURZ                                         *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  04.11.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  MELDUNG FÜR QSECOFR                          *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20101104  100220  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       32A  O  1 12DSPATR(HI)
+     A                                  3  1'Wenn ich jetzt ein böser Programmi-
+     A                                      erer'
+     A                                  4  1'wäre, hätte ich mir einfach ohne d-
+     A                                      as es'
+     A                                  5  1'jemand merkt, von dir alle berecht-
+     A                                      igungen'
+     A                                  6  1'geben lassen können.'
+     A                                  6 22'==>'
+     A                                  6 26'QSECOFR'
+     A                                      DSPATR(HI)
+     A                                  8  1'Aber wir sind mal nicht so ...'
+     A                                 11  1'F3=Verlassen und komplett beenden'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02
+     A*%%TS  SD  20010214  094701  JPF         REL-V4R2M0  5769-PW1
+     A                                      OVERLAY
+     A  *DS3                                WINDOW(8 17 12 43)
+     A  *DS4                                WINDOW(8 73 12 43)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  20000821  124406  KAB         REL-V4R2M0  5769-PW1
+     A                                      ASSUME
+     A                                  1  2' '
+     A                                      DSPATR(ND)

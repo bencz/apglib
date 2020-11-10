@@ -1,0 +1,24 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TESTDATEI FÜR LF                                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  22.05.2017                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TESTDATEI FÜR ATTRIBUT-SELEKTION MIT VIELEN  *
+     ‚*                  DATEN                                        *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A          R PTSTATRF                  PFILE(PTSTATR)
+     A*
+     A          K ATATRK
+     A          K ATATRV
+     A          K ATPALP
+     A          K ATPALN
+     A

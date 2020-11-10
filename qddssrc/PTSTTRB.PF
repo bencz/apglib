@@ -1,0 +1,34 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TEST-DATEI                                                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  30.05.2012                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TRIGGER-TEST                                 *
+     ‚*                                                               *
+     ‚*TRIGGER:                                                     ‚*
+     ‚*   CREATE TRIGGER PTSTTRB_APG_TEST                             *
+     ‚*    BEFORE UPDATE ON APG/PTSTTRB                               *
+     ‚*    REFERENCING OLD AS OLD                                     *
+     ‚*                NEW AS NEW                                     *
+     ‚*    FOR EACH ROW                                               *
+     ‚*    WHEN (OLD.TTMANU <> NEW.TTMANU)                            *
+     ‚*     SET (NEW.TTTRG)=(UCASE(NEW.TTMANU))                       *
+     ‚*                                                             ‚*
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A          R PTSTTRBF                  TEXT('TEST')
+     A
+     ‚* DATENFELDER
+     A            TTMANU        10A         COLHDG('MANUELLE EINGABE')
+     A            TTTRG         10A         COLHDG('TRIGGER')
+     A
+     ‚* KEY
+     A          K TTMANU

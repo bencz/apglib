@@ -1,0 +1,607 @@
+     A*%%TS  SD  20110703  230527  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* COMPILEREINSTELLUNGEN                                         *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  08.09.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  COMPILEREINSTELLUNGEN ANZEIGEN UND ÄNDERN    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20110703  230527  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA08(08)
+     A                                      CA09(09)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                 19  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   B 19 23REFFLD(CFKEY APG/PCONFIG)
+     A                                 19 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                 20  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   B 20 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                 20 35'(mit Funktion *)'
+     A                                      COLOR(BLU)
+     A                                 21  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   B 21 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                 21 35'(mit Funktion *)'
+     A                                      COLOR(BLU)
+     A                                 22  2'Dateiart . . . . . :'
+     A            CFIN01    R        B 22 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                 22 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                 24  2'Beschreibung . . . :'
+     A            TXTSEL        30A  B 24 23
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20110703  230336  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            CFID      R        H      REFFLD(CFID APG/PCONFIG)
+     A            CFKEY     R        H      REFFLD(CFKEY APG/PCONFIG)
+     A            CFKEY2    R        H      REFFLD(CFKEY2 APG/PCONFIG)
+     A            CFKEY3    R        H      REFFLD(CFKEY3 APG/PCONFIG)
+     A            CFKEY4    R        H      REFFLD(CFKEY4 APG/PCONFIG)
+     A            AUSW           1A  B  9  2VALUES(' ' '1' '4' '5' '6')
+     A            MBR       R   10   O  9  4REFFLD(CFKEY3 APG/PCONFIG)
+     A            FILENM    R   10   O  9 15REFFLD(CFKEY2 APG/PCONFIG)
+     A            LIB       R   10   O  9 26REFFLD(CFKEY APG/PCONFIG)
+     A            CFTXT1    R        O  9 37REFFLD(CFTXT1 APG/PCONFIG)
+     A            GEWANDELT     10A  O  9 88
+     A  41                                  COLOR(RED)
+     A  41                                  DSPATR(RI)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20110703  230527  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0018)
+     A                                      SFLPAG(0017)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA09(09)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  6 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  6 28'5=Source anzeigen'
+     A                                      COLOR(BLU)
+     A                                  6 47'6=Beschreibung'
+     A                                      COLOR(BLU)
+     A            SFT0002       10A  O  8  4DSPATR(HI)
+     A            SFT0019       10A  O  8 15DSPATR(HI)
+     A            SFT0001       10A  O  8 26DSPATR(HI)
+     A            SFT0003       50A  O  8 37DSPATR(HI)
+     A            SFT0009       10A  O  8 88DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20091028  073430  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F1=Zweite Zeile'
+     A                                      COLOR(BLU)
+     A                                 26 19'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 33'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 51'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 65'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT06
+     A*%%TS  SD  20110627  173311  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   B  4 23REFFLD(CFKEY APG/PCONFIG)
+     A                                  4 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  5  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   B  5 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                  5 35'(z.B. QCBLSRC)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   B  6 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                  6 35'(z.B. HMP0003)'
+     A                                      COLOR(BLU)
+     A                                  7  2'Dateiart . . . . . :'
+     A            CFIN01    R        B  7 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                  7 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Debug-Informationen:'
+     A            CFFK01    R     Y  B  9 23REFFLD(CFFK01 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  9 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 10  2'Berechtigungen . . :'
+     A            CFFK02    R     Y  B 10 23REFFLD(CFFK02 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                 10 26'(0=alle/1=alle auf USE/2=alle auf -
+     A                                      EXCLUDE)'
+     A                                      COLOR(BLU)
+     A                                 11  2'Interaktiv wandeln :'
+     A            CFFK03    R     Y  B 11 23REFFLD(CFFK03 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 11 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 13  2'PGM-Aufruf vor CP  :'
+     A            CFDAT1    R        B 13 23REFFLD(CFDAT1 APG/PCONFIG)
+     A                                 14  4'Bibiliothek  . . :'
+     A            CFDAT2    R        B 14 23REFFLD(CFDAT2 APG/PCONFIG)
+     A                                 14 35'(Name, *LIBL, *CURLIB)'
+     A                                      COLOR(BLU)
+     A                                 15  4'Parameter  . . . :'
+     A            CFTXT2    R        B 15 23REFFLD(CFTXT2 APG/PCONFIG)
+     A                                 17  2'PGM-Aufruf nach CP :'
+     A            CFDAT3    R        B 17 23REFFLD(CFDAT3 APG/PCONFIG)
+     A                                 18  4'Bibiliothek  . . :'
+     A            CFDAT4    R        B 18 23REFFLD(CFDAT4 APG/PCONFIG)
+     A                                 18 35'(Name, *LIBL, *CURLIB)'
+     A                                      COLOR(BLU)
+     A                                 19  4'Parameter  . . . :'
+     A            CFTXT3    R        B 19 23REFFLD(CFTXT3 APG/PCONFIG)
+     A                                 21  2'Eigner ändern auf  :'
+     A            CFIN12    R        B 21 23REFFLD(CFIN12 APG/PCONFIG)
+     A                                 22  2'Version  . . . . . :'
+     A                                 22 23'V'
+     A                                      COLOR(BLU)
+     A            CFFK38    R     Y  B 22 25REFFLD(CFFK38 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A                                 22 27'R'
+     A                                      COLOR(BLU)
+     A            CFFK39    R     Y  B 22 29REFFLD(CFFK39 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A                                 22 31'M'
+     A                                      COLOR(BLU)
+     A            CFFK40    R     Y  B 22 33REFFLD(CFFK40 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A                                 22 35'.'
+     A                                      COLOR(BLU)
+     A            CFNM04    R        B 22 37REFFLD(CFNM04 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A                                 22 43'(letzte Nummer wird beim CP hochge-
+     A                                      zählt)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT07
+     A*%%TS  SD  20110207  131125  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   O  4 23REFFLD(CFKEY APG/PCONFIG)
+     A                                  4 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  4 62'CBLLE/CBL'
+     A                                      COLOR(RED)
+     A                                  5  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   O  5 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                  5 35'(z.B. QCBLSRC)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   O  6 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                  6 35'(z.B. HMP0003)'
+     A                                      COLOR(BLU)
+     A                                  7  2'Dateiart . . . . . :'
+     A            CFIN01    R        O  7 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                  7 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Benutzerprofil . . :'
+     A            CFIN02    R     A  B  9 23REFFLD(CFIN02 APG/PCONFIG)
+     A                                  9 35'(*OWNER, *USER)'
+     A                                      COLOR(BLU)
+     A                                 10  2'Release  . . . . . :'
+     A            CFIN03    R     A  B 10 23REFFLD(CFIN03 APG/PCONFIG)
+     A                                 10 35'(VxRxMx, *CURRENT)'
+     A                                      COLOR(BLU)
+     A                                 11  2'Aktivierungsgruppe :'
+     A            CFIN04    R     A  B 11 23REFFLD(CFIN04 APG/PCONFIG)
+     A                                 11 35'(QILE, *NEW, *CALLER, Name)'
+     A                                      COLOR(BLU)
+     A                                 12  2'Optimierungsstufe  :'
+     A            CFIN05    R     A  B 12 23REFFLD(CFIN05 APG/PCONFIG)
+     A                                 12 35'(*NONE, *BASIC, *FULL)'
+     A                                      COLOR(BLU)
+     A                                 13  2'Binderverzeichnis  :'
+     A            CFIN06    R     A  B 13 23REFFLD(CFIN05 APG/PCONFIG)
+     A                                 13 35'(z.B. APGGUI)'
+     A                                      COLOR(BLU)
+     A                                 15  2'Objekt erstellen . :'
+     A            CFFK06    R        B 15 23REFFLD(CFFK06 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                 15 26'(0=PGM/1=Modul/2=Beides)'
+     A                                      COLOR(BLU)
+     A                                 16  2'Source scramblen . :'
+     A            CFFK07    R        B 16 23REFFLD(CFFK07 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 16 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT08
+     A*%%TS  SD  20091028  073618  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  2'CMD0002DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT08'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  4  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   O  4 23REFFLD(CFKEY APG/PCONFIG)
+     A                                  4 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  4 62'CMD'
+     A                                      COLOR(RED)
+     A                                  5  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   O  5 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                  5 35'(z.B. QCBLSRC)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   O  6 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                  6 35'(z.B. HMP0003)'
+     A                                      COLOR(BLU)
+     A                                  7  2'Dateiart . . . . . :'
+     A            CFIN01    R        O  7 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                  7 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Produktbibliothek  :'
+     A            CFIN07    R        B  9 23REFFLD(CFIN07 APG/PCONFIG)
+     A                                  9 35'(Name, *NOCHG)'
+     A                                      COLOR(BLU)
+     A                                 11  2'Bedienerf. Programm:'
+     A            CFIN08    R        B 11 23REFFLD(CFIN08 APG/PCONFIG)
+     A                                 11 35'(Name, *NONE)'
+     A                                      COLOR(BLU)
+     A                                 12  4'Bibliothek . . . :'
+     A            CFIN09    R        B 12 23REFFLD(CFIN09 APG/PCONFIG)
+     A                                 12 35'(Name, *LIBL, *CURLIB)'
+     A                                      COLOR(BLU)
+     A                                 13  2'Verarbeitungsprog. :'
+     A            CFIN10    R        B 13 23REFFLD(CFIN10 APG/PCONFIG)
+     A                                 13 35'(Name)'
+     A                                      COLOR(BLU)
+     A                                 14  4'Bibliothek . . . :'
+     A            CFIN11    R        B 14 23REFFLD(CFIN10 APG/PCONFIG)
+     A                                 14 35'(Name, *LIBL, *CURLIB)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT09
+     A*%%TS  SD  20091105  070820  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A  01        ERRMSG        78   M
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   O  4 23REFFLD(CFKEY APG/PCONFIG)
+     A                                  4 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  4 62'DSPF'
+     A                                      COLOR(RED)
+     A                                  5  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   O  5 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                  5 35'(z.B. QCBLSRC)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   O  6 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                  6 35'(z.B. HMP0003)'
+     A                                      COLOR(BLU)
+     A                                  7  2'Dateiart . . . . . :'
+     A            CFIN01    R        O  7 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                  7 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Anzeige wiederher. :'
+     A            CFFK04    R        B  9 23REFFLD(CFFK04 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  9 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 10  2'Schreiben verzögern:'
+     A            CFFK05    R     Y  B 10 23REFFLD(CFFK05 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 10 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT10
+     A*%%TS  SD  20100201  201857  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   O  4 23REFFLD(CFKEY APG/PCONFIG)
+     A                                  4 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  4 62'CLLE/CLP'
+     A                                      COLOR(RED)
+     A                                  5  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   O  5 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                  5 35'(z.B. QCBLSRC)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   O  6 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                  6 35'(z.B. HMP0003)'
+     A                                      COLOR(BLU)
+     A                                  7  2'Dateiart . . . . . :'
+     A            CFIN01    R        O  7 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                  7 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Benutzerprofil . . :'
+     A            CFIN02    R     A  B  9 23REFFLD(CFIN02 APG/PCONFIG)
+     A                                  9 35'(*OWNER, *USER)'
+     A                                      COLOR(BLU)
+     A                                 10  2'Release  . . . . . :'
+     A            CFIN03    R     A  B 10 23REFFLD(CFIN03 APG/PCONFIG)
+     A                                 10 35'(VxRxMx, *CURRENT)'
+     A                                      COLOR(BLU)
+     A                                 11  2'Aktivierungsgruppe :'
+     A            CFIN04    R     A  B 11 23REFFLD(CFIN04 APG/PCONFIG)
+     A                                 11 35'(QILE, *NEW, *CALLER, Name)'
+     A                                      COLOR(BLU)
+     A                                 12  2'Optimierungsstufe  :'
+     A            CFIN05    R     A  B 12 23REFFLD(CFIN05 APG/PCONFIG)
+     A                                 12 35'(*NONE, *BASIC, *FULL)'
+     A                                      COLOR(BLU)
+     A                                 13  2'Binderverzeichnis  :'
+     A            CFIN06    R     A  B 13 23REFFLD(CFIN05 APG/PCONFIG)
+     A                                 13 35'(z.B. APGGUI)'
+     A                                      COLOR(BLU)
+     A                                 15  2'Objekt erstellen . :'
+     A            CFFK06    R        B 15 23REFFLD(CFFK06 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                 15 26'(0=PGM/1=Modul/2=Beides)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT11
+     A*%%TS  SD  20100410  162658  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A  01        ERRMSG        78   M
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Bibliothek . . . . :'
+     A            CFKEY     R   10   O  4 23REFFLD(CFKEY APG/PCONFIG)
+     A                                  4 35'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  4 62'C'
+     A                                      COLOR(RED)
+     A                                  5  2'Datei  . . . . . . :'
+     A            CFKEY2    R   10   O  5 23REFFLD(CFKEY2 APG/PCONFIG)
+     A                                  5 35'(z.B. QCBLSRC)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Teildatei  . . . . :'
+     A            CFKEY3    R   10   O  6 23REFFLD(CFKEY3 APG/PCONFIG)
+     A                                  6 35'(z.B. HMP0003)'
+     A                                      COLOR(BLU)
+     A                                  7  2'Dateiart . . . . . :'
+     A            CFIN01    R        O  7 23REFFLD(CFIN01 APG/PCONFIG)
+     A                                  7 35'(PF/LF/CBLLE/...)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Benutzerprofil . . :'
+     A            CFIN02    R     A  B  9 23REFFLD(CFIN02 APG/PCONFIG)
+     A                                  9 35'(*OWNER, *USER)'
+     A                                      COLOR(BLU)
+     A                                 10  2'Release  . . . . . :'
+     A            CFIN03    R     A  B 10 23REFFLD(CFIN03 APG/PCONFIG)
+     A                                 10 35'(VxRxMx, *CURRENT)'
+     A                                      COLOR(BLU)
+     A                                 11  2'Aktivierungsgruppe :'
+     A            CFIN04    R     A  B 11 23REFFLD(CFIN04 APG/PCONFIG)
+     A                                 11 35'(QILE, *NEW, *CALLER, Name)'
+     A                                      COLOR(BLU)
+     A                                 12  2'Optimierungsstufe  :'
+     A            CFIN05    R     A  B 12 23REFFLD(CFIN05 APG/PCONFIG)
+     A                                 12 35'(*NONE, *BASIC, *FULL)'
+     A                                      COLOR(BLU)
+     A                                 13  2'Binderverzeichnis  :'
+     A            CFIN06    R     A  B 13 23REFFLD(CFIN05 APG/PCONFIG)
+     A                                 13 35'(z.B. APGGUI)'
+     A                                      COLOR(BLU)
+     A                                 15  2'Objekt erstellen . :'
+     A            CFFK06    R        B 15 23REFFLD(CFFK06 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                 15 26'(0=PGM/1=Modul/2=Beides)'
+     A                                 16  2'Define Names . . . :'
+     A            CFBG01    R   50   B 16 23REFFLD(CFBG01 APG/PCONFIG)
+     A                                      CHECK(LC)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

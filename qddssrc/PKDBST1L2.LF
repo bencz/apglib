@@ -1,0 +1,23 @@
+     ‚*---------------------------------------------------------------*
+     ‚* OFFENE BESTELLUNGEN ANZEIGEN                                  *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  11.03.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH KBTYP/KBDTB                  *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PKDBST1F                  PFILE(PKDBST1)
+     ‚*
+     A          K KBTYP
+     A          K KBBST1
+     A
+     A          O KBVSTS                    COMP(EQ '4')
+     A          O KBVSTS                    COMP(EQ '9')
+     ‚*€

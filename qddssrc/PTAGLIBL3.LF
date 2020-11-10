@@ -1,0 +1,22 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH TAG (KOPFSÄTZE)                      *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  27.01.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH TAG => HMP0005               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PTAGLIBF                  PFILE(PTAGLIB)
+     ‚*
+     A          K PTTAG
+     A
+     A          O PTLIB                     COMP(NE ' ')
+     A          O PTFILE                    COMP(NE ' ')
+     ‚*€

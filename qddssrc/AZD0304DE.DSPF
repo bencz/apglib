@@ -1,0 +1,151 @@
+     A*%%TS  SD  20100817  072953  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE/ÄNDERN EINER ÜBUNG                                    *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  13.08.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ALLE ÜBUNGSSOURCEN EINES USERS ANZEIGEN      *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A          R FMT01
+     A*%%TS  SD  20100817  072953  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A  03                                  CSRLOC(CURY       CURX)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A            DT_SYS         8A  O  2114
+     A            TI_SYS         8A  O  2124
+     A                                 15  2'User . . . . . . . :'
+     A            ASUSER    R        B 15 23REFFLD(ASUSER APG/PAZUSRC)
+     A                                 17  2'Übung  . . . . . . :'
+     A                                 18  4'Projektnummer  . :'
+     A            FLD001        15   B 18 23
+     A            AUPRN2    R     Y  B 18 39REFFLD(AUPRN2 APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A            AUPRN3    R     Y  B 18 44REFFLD(AUPRN3 APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A                                 19  4'Angebot/-pos.  . :'
+     A            AUANG     R     Y  B 19 23REFFLD(AUANG APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A            AUANGP    R     Y  B 19 33REFFLD(AUANGP APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A                                 21  2'Source . . . . . . :'
+     A                                 22  4'Teildatei  . . . :'
+     A            ASSMBR    R        B 22 23REFFLD(ASSMBR APG/PAZUSRC)
+     A                                 23  4'Datei  . . . . . :'
+     A            ASSRCN    R        B 23 23REFFLD(ASSRCN APG/PAZUSRC)
+     A                                 24  4'Bibliothek . . . :'
+     A            ASSLIB    R        B 24 23REFFLD(ASSLIB APG/PAZUSRC)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 30'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 45'F20=Infos'
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A  40                                  DSPATR(BL)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20100813  121306  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            AULFDN    R        H      REFFLD(AULFDN APG/PAZUUEB)
+     A            AUSW           1A  B  8  2VALUES(' ' '1' '4' '8')
+     A            PRJNUM         7A  O  8  4
+     A            AUKDK     R        O  8 12REFFLD(AUKDK APG/PAZUUEB)
+     A            ASSMBR    R        O  8 16REFFLD(ASSMBR APG/PAZUSRC)
+     A            ASSRCN    R        O  8 27REFFLD(ASSRCN APG/PAZUSRC)
+     A            ASSLIB    R        O  8 38REFFLD(ASSLIB APG/PAZUSRC)
+     A            AUTEXT    R   50   O  8 49REFFLD(AUTEXT APG/PAZUUEB)
+     A            ASANCR    R        O  8100REFFLD(ASANCR APG/PAZUSRC)
+     A                                      EDTCDE(4)
+     A            ASVSTS    R        O  8105REFFLD(ASVSTS APG/PAZUSRC)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100813  121306  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0019)
+     A                                      SFLPAG(0018)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            AULFDN    R        H      REFFLD(AULFDN APG/PAZUUEB)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A            DT_SYS         8A  O  2114
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  5  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  5 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A            SFT0039        7A  O  7  4DSPATR(HI)
+     A            SFT0040        3A  O  7 12DSPATR(HI)
+     A            SFT0034       10A  O  7 16DSPATR(HI)
+     A            SFT0019       10A  O  7 27DSPATR(HI)
+     A            SFT0001       10   O  7 38DSPATR(HI)
+     A            SFT0006       50A  O  7 49DSPATR(HI)
+     A            FLD001         4   O  7100DSPATR(HI)
+     A            FLD002         1   O  7105DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20100803  173201  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20090127  183236  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

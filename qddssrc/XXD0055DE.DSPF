@@ -1,0 +1,62 @@
+     A*%%TS  SD  20160607  110139  CFR         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* BERICHTSHEFTE                                                 *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  05.01.2014                                   *
+     A*                                                               *
+     A* FUNKTION      :  BERICHTSHEFTDATEN ANLEGEN                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4                 -
+     A                                             24 80 *DS3)
+     A  *DS4                                MSGLOC(27)
+     A  *DS3                                MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20160607  110139  CFR         REL-V7R1M0  5770-WDS
+     A  *DS4                                WINDOW(FMT02)
+     A  *DS3                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       19A  O  1 12DSPATR(HI)
+     A                                  3  1'Gruppe  :'
+     A            CFKEY     R        B  3 11REFFLD(CFKEY APG/PCONFIG)
+     A                                  4  1'Verantw.:'
+     A            CFDAT1    R        B  4 11REFFLD(CFDAT1 APG/PCONFIG)
+     A                                  4 24'(optional)'
+     A                                      COLOR(BLU)
+     A                                  5  1'Jahrgang:'
+     A            CFNM04    R        B  5 11REFFLD(CFNM04 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A                                  5 24'(optional)'
+     A                                      COLOR(BLU)
+     A                                  6  1'Jahr. . :'
+     A            JAHR           4Y 0B  6 11EDTCDE(4)
+     A                                  6 20'KW:'
+     A            VONKW          2Y 0B  6 24EDTCDE(4)
+     A                                  6 27'bis'
+     A                                      COLOR(BLU)
+     A            BISKW          2Y 0B  6 31EDTCDE(4)
+     A                                  8  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(3 37 9 40)
+     A  *DS4                                WINDOW(13 76 9 40)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

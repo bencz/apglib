@@ -1,0 +1,69 @@
+     A*%%TS  SD  20110907  094607  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ÄNDERN EINES TEXTES                                           *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  17.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE/ÄNDERN EINES TEXTES                  *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A          R FMT01
+     A*%%TS  SD  20110907  094607  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Sprache . . . . :'
+     A            TXSPR     R     A  B  4 20REFFLD(TXSPR APG/PCFGTXT)
+     A  42                                  DSPATR(HI)
+     A  42                                  DSPATR(PR)
+     A  41                              4 93'Neuanlage'
+     A                                      COLOR(RED)
+     A                                  5  2'Text-ID . . . . :'
+     A            TXID      R        B  5 20REFFLD(TXID APG/PCFGTXT)
+     A  43                                  DSPATR(HI)
+     A  43                                  DSPATR(PR)
+     A                                  7  2'Text  . . . . . :'
+     A            TXTEXT    R        B  7 20REFFLD(TXTEXT APG/PCFGTXT)
+     A                                      CHECK(LC)
+     A                                  8 20'....5...10....5...20....5...30....-
+     A                                      5...40....5...50'
+     A                                      COLOR(RED)
+     A                                  8 72'(Max)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

@@ -1,0 +1,24 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH PROJEKT                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  23.09.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH PROJEKT XXP0804              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PPRJMBRF                  PFILE(PPRJMBR)
+     ‚*
+     A          K COPROJ
+     A          K COTPRJ
+     A
+     A          K COSLIB
+     A          K COSRCN
+     A          K COLMBR
+     ‚*€

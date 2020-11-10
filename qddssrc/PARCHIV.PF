@@ -1,0 +1,68 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TAG FÜR JEDES PROGRAMM                                        *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  26.01.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  HISTORY-DATENSÄTZE                           *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PARCHIVF                  TEXT('CONFIG PARCHIV')
+     A*
+     ‚* LAUFENDE NUMMER
+     A            HSLFDN         9S 0       COLHDG('LFDN')
+     ‚* LIB/DATEI
+     A            HSLIB         10A         COLHDG('LIB')
+     A            HSFILE        10A         COLHDG('DATEI')
+     A
+     ‚* RECORD
+     A            HSREC       4096A         COLHDG('RECORD')
+     A
+     ‚* ANLAGEDATEN
+     A            HSAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            HSABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            HSAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            HSADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            HSATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            HSMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            HSMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            HSMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            HSMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            HSMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            HSFK01         1S 0       COLHDG('FUNKTION 1')
+     A            HSFK02         1S 0       COLHDG('FUNKTION 2')
+     A            HSFK03         1S 0       COLHDG('FUNKTION 3')
+     A            HSFK04         1S 0       COLHDG('FUNKTION 4')
+     A            HSFK05         1S 0       COLHDG('FUNKTION 5')
+     A            HSFK06         1S 0       COLHDG('FUNKTION 6')
+     A            HSFK07         1S 0       COLHDG('FUNKTION 7')
+     A            HSFK08         1S 0       COLHDG('FUNKTION 8')
+     A            HSFK09         1S 0       COLHDG('FUNKTION 9')
+     A            HSFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            HSDAT1        10A         COLHDG('DATEN/10-1')
+     A            HSDAT2        10A         COLHDG('DATEN/10-2')
+     A            HSDAT3        10A         COLHDG('DATEN/10-3')
+     A            HSDAT4        10A         COLHDG('DATEN/10-4')
+     A            HSDAT5        10A         COLHDG('DATEN/10-5')
+     A            HSDAT6        10A         COLHDG('DATEN/10-6')
+     A            HSDAT7        10A         COLHDG('DATEN/10-7')
+     A            HSDAT8        10A         COLHDG('DATEN/10-8')
+     A            HSDAT9        10A         COLHDG('DATEN/10-9')
+     A            HSDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K HSLFDN

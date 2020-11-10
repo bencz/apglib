@@ -1,0 +1,61 @@
+     ‚*---------------------------------------------------------------*
+     ‚* STEUERUNG DES SYNTAXHIGHLIGTING                               *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  13.11.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SYNTAXHIGHLIGHTING                           *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCHKHGHF                  TEXT('CHKHGH')
+     A*
+     ‚* USER/SYNTAX-TYP/BEFEHL (KEY)
+     A            SYUSER        10A         COLHDG('USER')
+     A            SYTYP         10A         COLHDG('TYP')
+     A            SYCMD         30A         COLHDG('BEFEHL')
+     A            SYLEN          9S 0       COLHDG('LÄNGE')
+     A
+     ‚* FUNKTIONSFELDER
+     ‚*
+     ‚* 0 = KEIN STANDARD / 1 = STANDARD
+     A            SYSTAN         1S 0       COLHDG('STANDARD' 'FELD')
+     ‚* 0 = INAKTIV / 1 = AKTIV
+     A            SYAKT          1S 0       COLHDG('AKTIV')
+     A
+     ‚* GREEN / WHITE / RED / LIGHTBLUE / YELLOW / PINK / BLUE
+     A            SYCOLR        10A         COLHDG('FARBE')
+     ‚* 0 = NICHT INVERS / 1 = INVERS
+     A            SYINVS         1A         COLHDG('INVERS')
+     ‚* 0 = NICHT BLINKEND / 1 = BLINKEND
+     A            SYBLNK         1A         COLHDG('BLINKEND')
+     ‚* 0 = NICHT UNTERSTRICHEN / 1 = UNTERSTRICHEN
+     A            SYUNDR         1A         COLHDG('UNDERLINE')
+     ‚* HEX-WERT
+     A            SYHEX          1A         COLHDG('HEX-WERT')
+     A
+     ‚* ANLAGEDATEN
+     A            SYAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            SYABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            SYAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            SYADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            SYATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            SYMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            SYMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            SYMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            SYMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            SYMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K SYUSER
+     A          K SYTYP
+     A          K SYCMD

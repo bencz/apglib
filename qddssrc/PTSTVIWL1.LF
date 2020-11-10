@@ -1,0 +1,25 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG                                           *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  18.12.2012                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TEST MIT SELECT                              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PTSTVIWF                  PFILE(PTSTVIW)
+     ‚*
+                  VWDAT1        10A
+                  VWDAT2        10A
+                  VWDAT3         5A
+     ‚*
+     A          K VWDAT1
+     A          K VWDAT2
+     A          K VWDAT3
+     ‚*€

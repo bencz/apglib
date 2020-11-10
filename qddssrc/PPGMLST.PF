@@ -1,0 +1,68 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TEXTE ZU EINEM PROGRAMM                                       *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  29.01.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TEXTE SPEICHERN                              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PPGMLSTF                  TEXT('HERMES PGMLST')
+     A*
+     ‚* BIBLIOTHEK BZW. VERSION + PGM-NAME
+     A            PSLIB         10A         COLHDG('LIB')
+     A            PSFILE        10A         COLHDG('DATEI/PGM')
+     A            PSLFPO         9S 0       COLHDG('POSITION')
+     ‚* BESCHREIBUNGSTEXT
+     A            PSTEXT        80A         COLHDG('TEXT')
+     A
+     ‚* ANLAGEDATEN
+     A            PSAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            PSABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            PSAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            PSADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            PSATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            PSMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            PSMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            PSMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            PSMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            PSMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            PSFK01         1S 0       COLHDG('FUNKTION 1')
+     A            PSFK02         1S 0       COLHDG('FUNKTION 2')
+     A            PSFK03         1S 0       COLHDG('FUNKTION 3')
+     A            PSFK04         1S 0       COLHDG('FUNKTION 4')
+     A            PSFK05         1S 0       COLHDG('FUNKTION 5')
+     A            PSFK06         1S 0       COLHDG('FUNKTION 6')
+     A            PSFK07         1S 0       COLHDG('FUNKTION 7')
+     A            PSFK08         1S 0       COLHDG('FUNKTION 8')
+     A            PSFK09         1S 0       COLHDG('FUNKTION 9')
+     A            PSFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            PSDAT1        10A         COLHDG('DATEN/10-1')
+     A            PSDAT2        10A         COLHDG('DATEN/10-2')
+     A            PSDAT3        10A         COLHDG('DATEN/10-3')
+     A            PSDAT4        10A         COLHDG('DATEN/10-4')
+     A            PSDAT5        10A         COLHDG('DATEN/10-5')
+     A            PSDAT6        10A         COLHDG('DATEN/10-6')
+     A            PSDAT7        10A         COLHDG('DATEN/10-7')
+     A            PSDAT8        10A         COLHDG('DATEN/10-8')
+     A            PSDAT9        10A         COLHDG('DATEN/10-9')
+     A            PSDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K PSLIB
+     A          K PSFILE
+     A          K PSLFPO

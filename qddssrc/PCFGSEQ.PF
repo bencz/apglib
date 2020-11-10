@@ -1,0 +1,43 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LAUFENDE NUMMERN                                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  09.09.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  LAUFENDE NUMMERN                             *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGSEQF                  TEXT('LFDN')
+     A*
+     ‚* ID UND KEY BILDEN DEN SCHLÜSSEL
+     A            CFID          10A         COLHDG('ID')
+     A            CFKEY         20A         COLHDG('KEY1')
+     A
+     ‚* LAUFENDE NUMMER FÜR TABELLEN O.Ä.
+     A            CFLFDN         9S 0       COLHDG('LFD-NUMMER')
+     A
+     ‚* ANLAGEDATEN
+     A            CFAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            CFABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            CFAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            CFADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            CFATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            CFMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            CFMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            CFMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            CFMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            CFMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K CFID
+     A          K CFKEY

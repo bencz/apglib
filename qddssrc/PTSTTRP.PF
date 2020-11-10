@@ -1,0 +1,27 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TEST-DATEI                                                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.10.2014                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TRIGGER-TEST MIT PROGRAMM                    *
+     ‚*                                                               *
+     ‚* ADDPFTRG FILE(APG/PTSTTRP) TRGTIME(*AFTER)                    *
+     ‚*          TRGEVENT(*UPDATE) PGM(APG/XXP9072)                   *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A          R PTSTTRPF                  TEXT('TEST')
+     A
+     ‚* DATENFELDER
+     A            TTMANU        10A         COLHDG('MANUELLE EINGABE')
+     A            TTTRG         10A         COLHDG('TRIGGER')
+     A
+     ‚* KEY
+     A          K TTMANU

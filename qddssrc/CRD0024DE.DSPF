@@ -1,0 +1,201 @@
+     A*%%TS  SD  20100901  094742  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* SEU-OPTIONEN                                                  *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  11.11.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  SEU-OPTIONEN                                 *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS3)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      HELP
+     A                                      HLPTITLE('CRD0024DE')
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20100901  094742  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      BLINK
+     A                                      CA12(12)
+     A                                      CA18(18)
+     A                                      CA19(19)
+     A                                      CA20(20)
+     A                                      CA21(21)
+     A          H                           HLPPNLGRP('CRH0024DE/FMT06' CRH0024-
+     A                                      DE)
+     A                                      HLPARA(01 001 27 132)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Erhöhungswert bei Satzeinfügung:'
+     A            CFNK01    R    5Y02B  4 35REFFLD(CFNK01 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                  4 43'(0,01-999,99)'
+     A                                      COLOR(BLU)
+     A                                  4 73'Syntaxhighlighting aktivieren:'
+     A                                  5  2'Teildatei neu anordnen . . . . :'
+     A            CFFK08    R        B  5 35REFFLD(CFFK08 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  5 38'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  5 76'Befehle highlighten . . .?:'
+     A            CFFK01         1A  B  5104VALUES('0' '1' '?')
+     A                                  5107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  6 79'Verwendeter Sourcetyp  :'
+     A            SYTYP         10A  O  6104COLOR(RED)
+     A                                  7  2'Bei Datenfreigabe beenden  . . :'
+     A            CFFK12    R        B  7 35REFFLD(CFFK12 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  7 38'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  7 76'E+P Befehle . . . . . . .?:'
+     A            CFFK03         1A  B  7104VALUES('0' '1' '?')
+     A                                  7107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  8  2'Eingabe nur in Großbuchstaben  :'
+     A            CFFK09    R        B  8 35REFFLD(CFFK09 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  8 38'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  8 76'Sonstige Elemente . . . .?:'
+     A            CFFK05         1A  B  8104VALUES('0' '1' '?')
+     A                                  8107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  9  2'Linkes Auswahlfeld ausblenden  :'
+     A            CFFK14    R        B  9 35REFFLD(CFFK14 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  9 38'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                  9 76'Kommentare weiß färben  . :'
+     A            CFFK04    R        B  9104REFFLD(CFFK04 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                  9107'(0=nein/1=ja/2=erzwingen)'
+     A                                      COLOR(BLU)
+     A                                 10  2'Metadaten speichern  . . . . . :'
+     A            CFFK18    R        B 10 35REFFLD(CFFK18 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 10 38'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 11 73'Datumshighlighting aktivieren:'
+     A            CFFK06    R        B 11104REFFLD(CFFK06 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 11107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 12 76'Unzutreffendes ausblenden :'
+     A            CFFK11    R        B 12104REFFLD(CFFK11 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 12107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 13 76'Datum . . . . . . . . . . :'
+     A            DT_VGL        10A  B 13104
+     A                                 14 76'Vergleichsoperator  . . . :'
+     A            CFFK07    R        B 14104REFFLD(CFFK07 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                 14107'(0=kleiner/1=gleich/'
+     A                                      COLOR(BLU)
+     A                                 15108'2=größer)'
+     A                                      COLOR(BLU)
+     A                                 16 73'Geänderte Zeilen hervorheben :'
+     A            CFFK16    R        B 16104REFFLD(CFFK16 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 16107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 17  2'Standardpfad für Templates . . :'
+     A            CFDAT2    R        B 17 35REFFLD(CFDAT2 APG/PCONFIG)
+     A                                 17 73'Zeile mit Notizen hervorheben:'
+     A            CFFK13    R        B 17104REFFLD(CFFK13 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 17107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 18  4'Bibliothek . . . . . . . . . :'
+     A            CFDAT3    R        B 18 35REFFLD(CFDAT3 APG/PCONFIG)
+     A                                 18 73'Trennlinie für 24x80 Anzeige :'
+     A            CFFK10    R        B 18104REFFLD(CFFK10 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 18107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 19 76'Zusätzliche Linien  . . . :'
+     A            CFNM03    R        B 19104REFFLD(CFNM03 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A            CFNM04    R    3   B 19108REFFLD(CFNM04 APG/PCONFIG)
+     A                                      EDTCDE(4)
+     A                                 20  2'Sicherung vor jedem Speichern  :'
+     A            CFFK15    R        B 20 35REFFLD(CFFK15 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 20 38'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 21  4'Bibliothek . . . . . . . . . :'
+     A            CFDAT4    R        B 21 35REFFLD(CFDAT4 APG/PCONFIG)
+     A                                 21 47'(*SAME, Name)'
+     A                                      COLOR(BLU)
+     A                                 21 73'API ausführen  . . . . . . . :'
+     A            CFFK17    R        B 21104REFFLD(CFFK17 APG/PCONFIG)
+     A                                      EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                 21107'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 22  4'Datei  . . . . . . . . . . . :'
+     A            CFDAT5    R        B 22 35REFFLD(CFDAT5 APG/PCONFIG)
+     A                                 22 47'(*SAME, Name)'
+     A                                      COLOR(BLU)
+     A                                 22 75'Programm . . . . . . . . . :'
+     A            CFDAT6    R        B 22104REFFLD(CFDAT6 APG/PCONFIG)
+     A                                 23  4'Letzte Sicherungsnummer  . . :'
+     A            SEUHST        10A  O 23 35COLOR(BLU)
+     A                                 23 75'Bibliothek . . . . . . . . :'
+     A            CFDAT7    R        B 23104REFFLD(CFDAT7 APG/PCONFIG)
+     A                                 25  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 25 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 25 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 25 49'F18=Pflege Syntaxhighlighting'
+     A                                      COLOR(BLU)
+     A                                 25 80'F19=Pflege Sourcentypen für Highli-
+     A                                      ghting'
+     A                                      COLOR(BLU)
+     A                                 26  2'F20=Memberinformationen'
+     A                                      COLOR(BLU)
+     A                                 26 27'F21=Objektinformationen'
+     A                                      COLOR(BLU)

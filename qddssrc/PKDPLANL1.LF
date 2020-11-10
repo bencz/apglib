@@ -1,0 +1,21 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH TYP                                  *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.09.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH KDTYP                        *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PKDPLANF                  PFILE(PKDPLAN)
+     ‚*
+     A          K KDTYP
+     A          K KDDATE
+     A          K KDWOTA
+     ‚*€

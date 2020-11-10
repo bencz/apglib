@@ -1,0 +1,66 @@
+     ‚*---------------------------------------------------------------*
+     ‚* GESPEICHERTE SOURCEN JE VERSION                               *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.09.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SOURCEN                                      *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     A*
+     A                                      UNIQUE
+     A
+     A          R PPRJVERF                  TEXT('PROJEKT VERSION')
+     A
+     ‚* SOURCENAME + VERSION (KEY)
+     A            VSSLIB        10A         COLHDG('BIBLIOTHEK')
+     A            VSSRCN        10A         COLHDG('DATEI')
+     A            VSSMBR        10A         COLHDG('MEMBER')
+     A
+     A            VSVERS         2S 0       COLHDG('VERSION')
+     A            VSRRLS         2S 0       COLHDG('RELEASE')
+     A            VSMRLS         2S 0       COLHDG('MIN. RELEASE')
+     A*
+     ‚* LANGER SOURCENAME + BESCHREIBUNG
+     A            VSLMBR        20A         COLHDG('MEMBER NAME')
+     A            VSTEXT        50A         COLHDG('BESCHREIBUNG')
+     A*
+     ‚* TEILDATEI-TYP, DATUM, SPRACHE
+     A            VSTYP         10A         COLHDG('MEMBER TYP')
+     A            VSDTSC         8S 0       COLHDG('SOURCE-DATUM')
+     A            VSLANG         3A         COLHDG('SPRACHE')
+     A*
+     ‚* PROJEKT UND UNTERPROJEKT
+     A            VSPROJ        10A         COLHDG('PROJEKT')
+     A            VSTPRJ        10A         COLHDG('TEILPROJEKT')
+     A*
+     ‚* SOURCEDATEN
+     A            VSSEQ          6S 2       COLHDG('SOURCE' 'ZEILE')
+     A            VSDTA        250A         COLHDG('SOURCE' 'DATA')
+     A            VSDAT          6S 0       COLHDG('SOURCE' 'DATUM')
+     A*
+     ‚* ANLAGEDATEN
+     A            VSAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            VSABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            VSAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            VSADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            VSATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            VSMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            VSMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            VSMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            VSMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            VSMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A*
+     A          K VSSLIB
+     A          K VSSRCN
+     A          K VSSMBR
+     A          K VSVERS
+     A          K VSRRLS
+     A          K VSMRLS

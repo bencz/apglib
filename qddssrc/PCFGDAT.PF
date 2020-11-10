@@ -1,0 +1,43 @@
+     ‚*---------------------------------------------------------------*
+     ‚* DATUM                                                         *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  28.08.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  DATENSÄTZE FÜR EIN DATUM                     *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGDATF                  TEXT('CONFIG PCFGDAT')
+     A*
+     ‚* LAUFENDE NUMMER - IN DIESEM FALL DAS DATUM
+     A            DTLFDN         8S 0       COLHDG('DATUM')
+     A            DTSEQ          9S 0       COLHDG('SEQUENZ' 'NUMMER')
+     ‚* KALENDERWOCHE
+     A            DTKW           2S 0       COLHDG('KW')
+     ‚* TAG IN DER WOCHE (1-7)
+     A            DTWOTA         1S 0       COLHDG('TAG IN' 'KW')
+     A
+     ‚* ANLAGEDATEN
+     A            DTAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            DTABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            DTAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            DTADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            DTATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            DTMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            DTMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            DTMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            DTMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            DTMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K DTLFDN

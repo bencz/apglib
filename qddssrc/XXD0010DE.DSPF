@@ -1,0 +1,88 @@
+     A*%%TS  SD  20110908  173341  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* BINÄRE ADDITION                                               *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  12.08.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  BINÄRE ADDITION                              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03 'Ende/Zurück')
+     A                                      CA12(12 'Abbrechen')
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20110908  173341  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  9 38'512'
+     A                                      COLOR(BLU)
+     A                                 10 38'|256'
+     A                                      COLOR(BLU)
+     A                                 11 38'||128'
+     A                                      COLOR(BLU)
+     A                                 12 38'|||64'
+     A                                      COLOR(BLU)
+     A                                 13 38'||||32'
+     A                                      COLOR(BLU)
+     A                                 14 38'|||||16'
+     A                                      COLOR(BLU)
+     A                                 15 38'||||||8'
+     A                                      COLOR(BLU)
+     A                                 16 38'|||||||4'
+     A                                      COLOR(BLU)
+     A                                 17 38'||||||||2'
+     A                                      COLOR(BLU)
+     A                                 18 38'|||||||||1'
+     A                                      COLOR(BLU)
+     A                                 19 38'||||||||||'
+     A                                      COLOR(BLU)
+     A                                 20  2'Wert 1 . . :'
+     A            BINVAL1       32A  B 20 16
+     A  70                                  ERRMSG('Eingabe ungültig')
+     A            DEZVAL1       15Y 0O 20 49EDTCDE(2)
+     A                                 20 70'(z.B. 10010011      = 147)'
+     A                                      COLOR(BLU)
+     A                                 21  2'Wert 2 . . :'
+     A            BINVAL2       32A  B 21 16
+     A  71                                  ERRMSG('Eingabe ungültig')
+     A            DEZVAL2       15Y 0O 21 49EDTCDE(2)
+     A                                 21 70'(z.B. 00100010      =  34)'
+     A                                      COLOR(BLU)
+     A                                 23  2'Ergebnis . :'
+     A            BINERG        33A  O 23 15
+     A            DEZERG        15Y 0O 23 49EDTCDE(2)
+     A                                 23 70'(wäre dann 10110101 = 181)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

@@ -1,0 +1,150 @@
+     A*%%TS  SD  20090604  204716  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* AJAX-THEMEN                                                   *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  04.06.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE UND AUSWAHL ALLER THEMEN             *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20090604  204716  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            A_AXID         1A  P
+     A                                  1  2'AJD0001DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                 18  2'Thema  . . . . . .?:'
+     A            AXID      R     A  B 18 23REFFLD(AXID APG/PAJXTHM)
+     A  02                                  DSPATR(&A_AXID)
+     A                                 20  2'Beschreibung . . . :'
+     A            TXTSEL        30A  B 20 23
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 23 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 23 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20090604  173624  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            AXID      R        H      REFFLD(AXID APG/PAJXTHM)
+     A            AUSW           1A  B 10  2VALUES(' ' '1' '4' '6')
+     A            AXKEY     R        O 10  4REFFLD(AXKEY APG/PAJXTHM)
+     A            AXMTXT    R        O 10 26REFFLD(AXMTXT APG/PAJXTHM)
+     A            AXKOM1    R   -5   O 11  4REFFLD(AXKOM1 APG/PAJXTHM)
+     A                                      COLOR(BLU)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20090604  173624  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0007)
+     A                                      SFLPAG(0006)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A                                  1  2'AJD0001DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT03'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT03'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  6 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  6 28'6=Beschreibung'
+     A                                      COLOR(BLU)
+     A            SFT0028       30A  O  9  4DSPATR(HI)
+     A*            17:14:43    QPGMR       REL-R07M00  5714-UT1
+     A*                                     OVERLAY
+     A*                                     OVERLAY
+     A          R FMT04
+     A*%%TS  SD  20090202  131006  APG         REL-V5R4M0  5722-WDS
+     A*                                     OVERLAY
+     A                                 22  2'F1=Zweite Zeile'
+     A                                      COLOR(BLU)
+     A                                 22 19'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 22 33'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 22 51'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 22 65'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 13'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

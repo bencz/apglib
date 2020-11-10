@@ -1,0 +1,26 @@
+     A*%%TS  SD  20090820  212850  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* BLUESCREEN                                                    *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  13.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE EINES BLUESCREEN                     *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      PRINT
+     A                                      HELP
+     A                                      CA24(24)
+     A*----------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20090820  212850  APG         REL-V5R4M0  5722-WDS
+     A            TEXTST      1760A  O  2  1DSPATR(RI)
+     A                                      COLOR(BLU)

@@ -1,0 +1,143 @@
+     ‚*---------------------------------------------------------------*
+     ‚* HISTORIE ÜBER CP-AKTIONEN                                     *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.10.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  COMPILER-HISTORIE                            *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCMPHISF                  TEXT('CMPHIS')
+     A
+     ‚* LAUFENDE NUMMER (KEY)
+     A            CMLFDN         9S 0       COLHDG('LFD-NUMMER')
+     A
+     ‚* OBJEKTINFORMATIONEN
+     A            CMOLIB        10A         COLHDG('OBJEKT' 'BIBLIOTHEK')
+     A            CMOPGM        10A         COLHDG('OBJEKT' 'NAME')
+     A
+     ‚* SOURCEINFORMATIONEN
+     A            CMSLIB        10A         COLHDG('SOURCE' 'BIBLIOTHEK')
+     A            CMSFIL        10A         COLHDG('SOURCE' 'DATEI')
+     A            CMSMBR        10A         COLHDG('SOURCE' 'MEMBER')
+     A            CMSTYP        10A         COLHDG('SOURCE' 'TYP')
+     A
+     ‚* SOURCEEINSTELLUNGEN (CBLLE)
+     A            CMACTG        10A         COLHDG('AKTIVIERUNGS' 'GRUPPE')
+     A            CMTRLS        10A         COLHDG('TARGET' 'RELEASE')
+     A            CMUSPR         6A         COLHDG('USER' 'PROFILE')
+     A            CMOPTI         6A         COLHDG('OPTIMIERUNGS' 'STUFE')
+     A            CMDBG          7A         COLHDG('DEBUG' 'EINSTELLUNG')
+     A            CMBNDD        10A         COLHDG('BINDER' 'VERZEICHNIS')
+     A            CMCRTO         1S 0       COLHDG('OBJEKT' 'ERSTELLEN')
+     A
+     ‚* SOURCEEINSTELLUNGEN (SQLCBLLE)
+     A            CMCOMT         5A         COLHDG('COMMIT')
+     A
+     ‚* SOURCEEINSTELLUNGEN (CMD)
+     A            CMOVRP        10A         COLHDG('ÜBERSCHREIBUNGS' 'PGM')
+     A            CMOVRL        10A         COLHDG('ÜBERSCHREIBUNGS' 'LIB')
+     A            CMEXCP        10A         COLHDG('AUSFÜHRUNGS' 'PGM')
+     A            CMEXCL        10A         COLHDG('AUSFÜHRUNGS' 'LIB')
+     A            CMPRDL        10A         COLHDG('PRODUKTIONS' 'LIB')
+     A
+     ‚* SOURCEEINSTELLUNGEN (DSPF)
+     A            CMRSTD         4A         COLHDG('ANZEIGE' 'WIDERHERSTELLEN')
+     A            CMDFRW         4A         COLHDG('SCHREIBEN' 'VERZÖGERN')
+     A
+     ‚* SOURCEEINSTELLUNGEN (PF)
+     A            CMPFSZ        10A         COLHDG('ANZAHL' 'SÄTZE')
+     A            CMPFEX         5A         COLHDG('SATZANZAHL' 'ERWEITERUNG')
+     A            CMPFME         5A         COLHDG('MAXIMALE' 'ERWEITERUNGEN')
+     A
+     ‚* SOURCEEINSTELLUNGEN (C)
+     A            CMCDEF        80A         COLHDG('DEFINE')
+     A
+     ‚* SOURCEEINSTELLUNGEN (PRTF)
+     A            CMPDEV        80A         COLHDG('DRUCKER' 'TYP')
+     A            CMPPGZ         8S 3       COLHDG('ZEILEN' 'PRO SEITE')
+     A            CMPPGB         8S 3       COLHDG('STELLEN' 'PRO ZEILE')
+     A            CMPLPI         4S 2       COLHDG('LPI')
+     A            CMPCPI         4S 2       COLHDG('CPI')
+     A            CMPOVF         3S 0       COLHDG('OVERFLOW')
+     A            CMPDRW         7A         COLHDG('PAPIER' 'FACH')
+     A            CMPROT         5A         COLHDG('SEITEN' 'DREHUNG')
+     A            CMPUOM         5A         COLHDG('MAß' 'EINHEIT')
+     A            CMPCPY         3S 0       COLHDG('KOPIEN')
+     A            CMPSAV         4A         COLHDG('SPOOL' 'SICHERN')
+     A            CMPHLD         4A         COLHDG('SPOOL' 'HALTEN')
+     A
+     ‚* SOURCEEINSTELLUNGEN (TBL)
+     A            CMTTYP        10A         COLHDG('TABELLEN' 'TYP')
+     A
+     ‚* SONSTIGE EINSTELLUNGEN
+     A            CMRECT         1A         COLHDG('RECHTEVERGABE')
+     A            CMINTA         1A         COLHDG('INTERAKTIV')
+     A            CMNOWN        10A         COLHDG('NEUER' 'EIGNER')
+     A            CMSCRM         1S 0       COLHDG('SCRAMBLEN')
+     A
+     ‚* SOURCEINFORMATIONEN AUS RTVMBRD
+     A            CMRTDE        13A         COLHDG('ERSTELLUNGS' 'DATUM')
+     A            CMRTDC        13A         COLHDG('ÄNDERUNGS' 'DATUM')
+     A            CMRTDS        13A         COLHDG('SICHERUNGS' 'DATUM')
+     A            CMRTDR        13A         COLHDG('RÜCKSPIEL' 'DATUM')
+     A            CMRTUD         7A         COLHDG('USE' 'DATUM')
+     A            CMRTUC         5S 0       COLHDG('USE' 'COUNT')
+     A            CMRTZA        10S 0       COLHDG('ZEILEN' 'AKTUELL')
+     A            CMRTZD        10S 0       COLHDG('ZEILEN' 'GELÖSCHT')
+     A            CMRTMT        50A         COLHDG('MEMBER' 'TEXT')
+     A
+     ‚* PROGRAMMAUFRUF VOR DEM WANDELN
+     A            CMVCLI        10A         COLHDG('VOR WANDELN' 'PGM-LIB')
+     A            CMVCPG        10A         COLHDG('VOR WANDELN' 'PGM-NAME')
+     A            CMVCPA       150A         COLHDG('VOR WANDELN' 'PARM')
+     A
+     ‚* PROGRAMMAUFRUF NACH DEM WANDELN
+     A            CMNCLI        10A         COLHDG('NACH WANDELN' 'PGM-LIB')
+     A            CMNCPG        10A         COLHDG('NACH WANDELN' 'PGM-NAME')
+     A            CMNCPA       150A         COLHDG('NACH WANDELN' 'PARM')
+     A
+     ‚* STARTDATUM/ZEIT COMPILIERUNG
+     A            CMCUSR        10A         COLHDG('USER    ' 'START CP')
+     A            CMCBS         10A         COLHDG('TERMINAL' 'START CP')
+     A            CMCPGM        10A         COLHDG('PROGRAMM' 'START CP')
+     A            CMCDTA         8S 0       COLHDG('DATUM   ' 'START CP')
+     A            CMCTIA         6S 0       COLHDG('ZEIT    ' 'START CP')
+     A
+     ‚* ENDEDATUM/ZEIT COMPILIERUNG
+     A            CMEUSR        10A         COLHDG('USER    ' 'ENDE CP')
+     A            CMEBS         10A         COLHDG('TERMINAL' 'ENDE CP')
+     A            CMEPGM        10A         COLHDG('PROGRAMM' 'ENDE CP')
+     A            CMEDTA         8S 0       COLHDG('DATUM   ' 'ENDE CP')
+     A            CMETIA         6S 0       COLHDG('ZEIT    ' 'ENDE CP')
+     A
+     ‚* ANLAGEDATEN
+     A            CMAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            CMABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            CMAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            CMADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            CMATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            CMMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            CMMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            CMMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            CMMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            CMMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FEHLERCODE
+     A            CMFCDE        10A         COLHDG('FEHLERCODE')
+     A
+     ‚* VERARBEITUNGSSTATUS
+     A            CMVSTS         1A         COLHDG('VERARBEITUNGS' 'STATUS')
+     A
+     ‚* KEY
+     A          K CMLFDN

@@ -1,0 +1,75 @@
+     A*%%TS  SD  20090929  181943  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* WINDOW ZUR SCHLÜSSELSELEKTION                                 *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  29.09.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ID-SELEKTION (NICHT KEY!)                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      PRINT
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20090929  181943  APG         REL-V5R4M0  5722-WDS
+     A            CFKEY     R        H      REFFLD(CFKEY APG/PCONFIG)
+     A            CFKEY2    R        H      REFFLD(CFKEY2 APG/PCONFIG)
+     A            CFKEY3    R        H      REFFLD(CFKEY3 APG/PCONFIG)
+     A            CFKEY4    R        H      REFFLD(CFKEY4 APG/PCONFIG)
+     A            AUSW           1A  B  3  2VALUES(' ' '1')
+     A            CFID      R        O  3  4REFFLD(CFID APG/PCONFIG)
+     A            CFTXT1    R   30   O  3 15REFFLD(CFTXT1 APG/PCONFIG)
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20090929  123840  APG         REL-V5R4M0  5722-WDS
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLSIZ(0008)
+     A                                      SFLPAG(0007)
+     A                                      WINDOW(FMT05)
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  2'CFD0007DE'
+     A                                      COLOR(BLU)
+     A            MAINUEB       32A  O  1 13DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20090127  224738  APG         REL-V5R4M0  5722-WDS
+     A                                      WINDOW(FMT05)
+     A                                      OVERLAY
+     A                                  7  2'Keine Daten angelegt'
+     A                                      DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  20090202  103144  APG         REL-V5R4M0  5722-WDS
+     A                                      WINDOW(12 30 11 46)
+     A                                 10  2'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

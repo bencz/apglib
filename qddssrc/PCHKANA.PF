@@ -1,0 +1,75 @@
+     ‚*---------------------------------------------------------------*
+     ‚* PROGRAMMANALYSE                                               *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  22.06.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  PROGRAMMANALYSE ZU EINEM CR-DURCHLAUF        *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCHKANAF                  TEXT('CHKANA')
+     A*
+     ‚* VORGANGSNUMMER (KEY)
+     A            CAVORG         9S 0       COLHDG('VORGANG')
+     A
+     ‚* DATEINAME/LIB/ETC
+     A            CALIB         10A         COLHDG('BIBLIOTHEK')
+     A            CAFILE        10A         COLHDG('DATEI')
+     A            CAMBR         10A         COLHDG('TEILDATEI')
+     A
+     ‚* P3/AUTOR/PRÜFEN AB DATUM/...
+     A            CAPGMA         9S 0       COLHDG('P3-NUMMER')
+     A            CACUSR        10A         COLHDG('AUTOR')
+     A            CACDTA         8S 0       COLHDG('PRÜFDATUM')
+     A
+     ‚* ANALYSEFELDER
+      * TODO
+     A
+     ‚* ANLAGEDATEN
+     A            CAAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            CAABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            CAAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            CAADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            CAATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            CAMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            CAMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            CAMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            CAMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            CAMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            CAFK01         1S 0       COLHDG('FUNKTION 1')
+     A            CAFK02         1S 0       COLHDG('FUNKTION 2')
+     A            CAFK03         1S 0       COLHDG('FUNKTION 3')
+     A            CAFK04         1S 0       COLHDG('FUNKTION 4')
+     A            CAFK05         1S 0       COLHDG('FUNKTION 5')
+     A            CAFK06         1S 0       COLHDG('FUNKTION 6')
+     A            CAFK07         1S 0       COLHDG('FUNKTION 7')
+     A            CAFK08         1S 0       COLHDG('FUNKTION 8')
+     A            CAFK09         1S 0       COLHDG('FUNKTION 9')
+     A            CAFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            CADAT1        10A         COLHDG('DATEN/10-1')
+     A            CADAT2        10A         COLHDG('DATEN/10-2')
+     A            CADAT3        10A         COLHDG('DATEN/10-3')
+     A            CADAT4        10A         COLHDG('DATEN/10-4')
+     A            CADAT5        10A         COLHDG('DATEN/10-5')
+     A            CADAT6        10A         COLHDG('DATEN/10-6')
+     A            CADAT7        10A         COLHDG('DATEN/10-7')
+     A            CADAT8        10A         COLHDG('DATEN/10-8')
+     A            CADAT9        10A         COLHDG('DATEN/10-9')
+     A            CADAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K CAVORG

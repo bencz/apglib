@@ -1,0 +1,17 @@
+     A*%%TS  SD  20100225  112652  GGO         REL-V6R1M0  5761-WDS
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03 'Ende/Zurück')
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20091201  163832  GGO         REL-V6R1M0  5761-WDS
+     A                                 03 02'TEST1  40'
+     A  40                                  DSPATR(ND)
+     A                                 03 02'TEST1 N40'
+     A N40                                  DSPATR(ND)
+     A N40                             05 02'TEST2 N40'
+     A  40                             05 02'TEST2  40'

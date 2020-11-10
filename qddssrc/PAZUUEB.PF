@@ -1,0 +1,50 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ÜBUNGSAUFGABEN FÜR AZUBIS                                     *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  20.11.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  ÜBUNGSAUFGABEN                               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PAZUUEBF                  TEXT('AZUBI ÜBUNGEN')
+     A*
+     ‚* LAUFENDE NUMMER (KEY)
+     A            AULFDN         9S 0       COLHDG('LFDN')
+     A
+     ‚* ANGEBOTSNUMMER + POS
+     A            AUPRN1         2S 0       COLHDG('PRJ JAHR')
+     A            AUPRN2         4S 0       COLHDG('LFD.PRJ NR')
+     A            AUPRN3         2S 0       COLHDG('FOLGE PRJ-NR')
+     A
+     A            AUANG          9S 0       COLHDG('ANGEBOT')
+     A            AUANGP         9S 0       COLHDG('ANGEBOTS-' 'POSITION')
+     A
+     ‚* BESCHREIBUNGSTEXT
+     A            AUTEXT        80A         COLHDG('TEXT')
+     A            AUKDK          3A         COLHDG('KUNDEN' 'KÜRZEL')
+     A
+     ‚* ANLAGEDATEN
+     A            AUAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            AUABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            AUAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            AUADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            AUATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            AUMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            AUMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            AUMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            AUMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            AUMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K AULFDN

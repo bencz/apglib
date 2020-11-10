@@ -1,0 +1,89 @@
+     A*%%TS  SD  20090904  144329  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* xxx                                                           *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  XXXXXXXXXX                                   *
+     A*                                                               *
+     A* ERSTELLT AM   :  XXXXX JJJJ                                   *
+     A*                                                               *
+     A* FUNKTION      :  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      PRINT
+     A                                      ERRSFL
+     A                                      CA03(03 'Ende/Zurück')
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20090904  144329  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12 'Ende/Zurück')
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        LFSMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            A_EINN01       1A  P
+     A            A_EINN02       1A  P
+     A            A_EINN03       1A  P
+     A                                  1  2'SCD0002DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A                                  1 22'COBOL Ausbildung Ehrhardt + Partne-
+     A                                      r'
+     A                                      DSPATR(HI)
+     A                                  1 65'Z0001 '
+     A                                      COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/LFSSPRACH)
+     A                                      COLOR(BLU)
+     A                                  2 32'COBOL Befehle'
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  6  2'Aktion . . . . . . :'
+     A            AKTION         2Y 0B  6 23
+     A                                  9  2'Eingabefeld Alpha 1:'
+     A            EINA01        20A  B  9 23CHECK(LC)
+     A                                 10  2'Eingabefeld Alpha 2:'
+     A            EINA02        20A  B 10 23CHECK(LC)
+     A                                 11  2'Eingabefeld Alpha 3:'
+     A            EINA03        20A  B 11 23CHECK(LC)
+     A                                 13  2'Ausgabefeld Alpha 1:'
+     A            AUSA01        50A  O 13 23
+     A                                 14  2'Ausgabefeld Alpha 2:'
+     A            AUSA02        50A  O 14 23
+     A                                 16  2'Numm. 1  9(7)V9(3) :'
+     A            EINN01        10Y 3B 16 23EDTCDE(J)
+     A  02                                  DSPATR(&A_EINN01)
+     A                                 17  2'Numm. 2  9(7)V9(3) :'
+     A            EINN02        10Y 3B 17 23EDTCDE(J)
+     A  02                                  DSPATR(&A_EINN02)
+     A                                 18  2'Numm. 3  9(7)V9(3) :'
+     A            EINN03        10Y 3B 18 23EDTCDE(J)
+     A  02                                  DSPATR(&A_EINN03)
+     A                                 20  2'Ausgabefeld Numm. 1:'
+     A            AUSN01        15Y 3O 20 23EDTCDE(J)
+     A            KOMN01        30A  O 20 45COLOR(BLU)
+     A                                 21  2'Ausgabefeld Numm. 2:'
+     A            AUSN02        15Y 3O 21 23EDTCDE(J)
+     A            KOMN02        30A  O 21 45COLOR(BLU)
+     A                                 22  2'Ausgabefeld Numm. 3:'
+     A            AUSN03        15Y 3O 22 23EDTCDE(J)
+     A            KOMN03        30A  O 22 45COLOR(BLU)
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 23 30' '

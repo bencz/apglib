@@ -1,0 +1,143 @@
+     A*%%TS  SD  20121005  092629  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE/ÄNDERN EINER ÜBUNG                                    *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  09.06.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE/ÄNDERN EINER ÜBUNG                   *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20121005  092629  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      CA18(18)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                 22  2'Kunde  . . . . . . :'
+     A            AUKDK     R        B 22 23REFFLD(AUKDK APG/PAZUUEB)
+     A                                 22 28'(EUP=Übungen/AZU=Bewerbertest/PRA=-
+     A                                      Praktikant)'
+     A                                      COLOR(BLU)
+     A                                 23  2'Text-Selektion . . :'
+     A            AUTEXT    R        B 23 23REFFLD(AUTEXT APG/PAZUUEB)
+     A                                      CHECK(LC)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20121005  092629  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            AULFDN    R        H      REFFLD(AULFDN APG/PAZUUEB)
+     A            AUSW           1A  B  8  2VALUES(' ' '1' '4' '8' '9')
+     A            PRJNUM         7A  O  8  4
+     A            AUKDK     R        O  8 12REFFLD(AUKDK APG/PAZUUEB)
+     A            AUANG     R        O  8 16REFFLD(AUANG APG/PAZUUEB)
+     A                                      EDTCDE(3)
+     A            AUANGP    R        O  8 26REFFLD(AUANGP APG/PAZUUEB)
+     A                                      EDTCDE(3)
+     A            AUTEXT    R        O  8 36REFFLD(AUTEXT APG/PAZUUEB)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20110727  070629  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0019)
+     A                                      SFLPAG(0018)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            AULFDN    R        H      REFFLD(AULFDN APG/PAZUUEB)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  5  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  5 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  5 28'8=User zuordnen'
+     A                                      COLOR(BLU)
+     A                                  5 45'9=Gruppe zuordnen'
+     A                                      COLOR(BLU)
+     A            SFT0039        7A  O  7  4DSPATR(HI)
+     A            SFT0040        3A  O  7 12DSPATR(HI)
+     A            SFT0037        9A  O  7 16DSPATR(HI)
+     A            SFT0038        9A  O  7 26DSPATR(HI)
+     A            SFT0006       80A  O  7 36DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20100803  173201  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20090127  183236  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 19 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

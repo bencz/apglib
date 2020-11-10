@@ -1,0 +1,29 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TESTDATEI FÜR LF                                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  22.05.2017                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TESTDATEI FÜR ATTRIBUT-SELEKTION MIT VIELEN  *
+     ‚*                  DATEN (SIEHE AUCH PTSTSQL)                   *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A                                      UNIQUE
+     A          R PTSTATRF                  TEXT('TEST FILE')
+     A*
+     ‚* KW UND USERNAME
+     A            ATPALN         9S 0       COLHDG('PALN')
+     A            ATPALP         3S 0       COLHDG('PALP')
+     A            ATATRK        50A         COLHDG('ATTRIBUT KEY')
+     A            ATATRV        50A         COLHDG('ATTRIBUT VALUE')
+     A
+     A          K ATPALN
+     A          K ATPALP
+     A          K ATATRK

@@ -1,0 +1,43 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ÜBUNGSUAFGABEN FÜR AZUBIS                                     *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  23.11.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  STATUS DER ÜBUNGSAUFGABEN                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PAZUSTSF                  TEXT('AZUBI ÜBUNGSSTATUS')
+     A*
+     ‚* ANGEBOTSNUMMER + POS (KEY)
+     A            ATUSER        10A         COLHDG('USER')
+     A            ATLFDN         9S 0       COLHDG('LFDN' 'PAZUUEB')
+     A
+     ‚* STATUS DER ÜBUNG
+     A            ATVSTS         1A         COLHDG('STATUS')
+     A
+     ‚* ANLAGEDATEN
+     A            ATAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            ATABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            ATAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            ATADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            ATATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            ATMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            ATMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            ATMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            ATMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            ATMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K ATUSER
+     A          K ATLFDN

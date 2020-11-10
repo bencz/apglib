@@ -1,0 +1,193 @@
+     A*----------------------------------------------------------------
+     A* LAGERFÜHRUNGSSYSTEM  LFS 400
+     A*ˆ---------------------------------------------------------------
+     A*ˆBEI FELD ÄNDERUNGEN BITTE AUCH DATEI PDTAQRG ANPASSEN !
+     A*ˆ---------------------------------------------------------------
+     A*----------------------------------------------------------------
+     A* COPYRIGHT BY  :  EHRHARDT + PARTNER GMBH & CO. KG
+     A*                  SOFTWARE-SYSTEME FÜR WAREHOUSE-LOGISTIK
+     A*                  56154 BOPPARD-BUCHHOLZ
+     A*                  +49 (0) 67 42 / 87 27 0
+     A*                  INFO@EHRHARDT-PARTNER.COM
+     A*--------------------------------------------------------------
+     A*
+     A                                      REF(BFSREF)
+     A*
+     A                                      UNIQUE
+     A          R PDTAQF
+     A*
+     A* DTAQ FELDER (SIEHE AUCH WRKDTAQ/LGPGM570)
+     A            DQLFDN    R               REFFLD(RFLFDN)
+     A            DQGRPID   R               REFFLD(DQGRPID)
+     A            DQUGRPI   R               REFFLD(DQUGRPI)
+     A            DQETYPE   R               REFFLD(DQETYPE)
+     A            DQDTAID   R               REFFLD(DQDTAID)
+     A            DQACODE   R               REFFLD(DQACODE)
+     A            DQEVERS   R               REFFLD(DQEVERS)
+     A            DQOUTQ    R               REFFLD(RFOUTQ)
+     A            DQPRTY    R               REFFLD(DQPRTY)
+     A            DQPARM1   R               REFFLD(DQPARM1)
+     A            DQPARM2   R               REFFLD(DQPARM2)
+     A            DQPARM3   R               REFFLD(DQPARM3)
+     A            DQKONZ    R               REFFLD(RFKONZ)
+     A            DQFIRM    R               REFFLD(RFFIRM)
+     A            DQANLK    R               REFFLD(RFANLK)
+     A            DQMFCN    R               REFFLD(RFMFCN)
+     A            DQMFCB    R               REFFLD(RFMFCB)
+     A            DQSYCC    R               REFFLD(RFSYCC)
+     A            DQSPID    R               REFFLD(RFSPID)
+     A            DQDTC     R               REFFLD(RFDTC)
+     A            DQTIC     R               REFFLD(RFTIC)
+     A            DQAPGM    R               REFFLD(RFAPGM)
+     A            DQABS     R               REFFLD(RFABS)
+     A            DQAUSR    R               REFFLD(RFAUSR)
+     A            DQAJBN    R               REFFLD(RFJBNR)
+     A            DQSQID    R               REFFLD(DQSQID)
+     A            DQSQKEY   R               REFFLD(DQSQKEY)
+     A            DQIAKZ    R               REFFLD(RFIAKZ)
+     A            DQPARM4   R               REFFLD(DQPARM4)
+     A*
+     A* VERARBEITET DURCH PROGRAMM, JOB, USER
+     A* DATUM/UHRZEIT WANN DTAQ EINTRAG VON LGBATXX JOB EMPFANGEN WURDE
+     A            DQPGM     R               REFFLD(RFVPGM)
+     A            DQJOB     R               REFFLD(RFVBS)
+     A            DQUSR     R               REFFLD(RFVUSR)
+     A            DQJBNRB   R               REFFLD(RFJBNRB)
+     A            DQDTV     R               REFFLD(RFDTV)
+     A            DQTIV     R               REFFLD(RFTIV)
+     A            DQVUTIM   R               REFFLD(RFVUTIM)
+     A*
+     A* DATUM/UHRZEIT FUNKTIONSBEENDIGUNG
+     A            DQDTFI    R               REFFLD(RFDTFI)
+     A            DQTIFI    R               REFFLD(RFTIFI)
+     A            DQFIUTI   R               REFFLD(RFFIUTI)
+     A*
+     A* PROTOKOLLIERTE DTAQ
+     A            DQDTAQ    R               REFFLD(RFDTAQ)
+     A
+     A* BEZUGSNUMMER
+     A* GIBT AN, WELCHE BEDINGUNG IN MENÜ B34 FÜR EINEN AUSDRUCK GREIFT
+     A            DQZUNR    R               REFFLD(RFZUNR)
+     A* EMAIL-ADRESSE
+     A            DQEMAI    R               REFFLD(RFEMAI)
+     A* ANZAHL AUSRUCKE
+     A            DQNBR     R     A         REFFLD(RFNBR)
+     A* FORMULARGRUPPE
+     A            DQFGRP    R     A         REFFLD(DQFGRP)
+     A*
+     A* RESERVEFELDER
+     A            DQRN1     R               REFFLD(RFRN1)
+      * FD DEU    DQRN1      Reservefeld einstellig numerisch, keine Nachkomma-
+      * FD DEU    DQRN1      stelle
+     A            DQRN2     R               REFFLD(RFRN2)
+      * FD DEU    DQRN2      Reservefeld zweistellig numerisch, keine Nachkomma-
+      * FD DEU    DQRN2      stelle
+     A            DQRN5     R               REFFLD(RFRN5)
+      * FD DEU    DQRN5      Reservefeld fünfstellig numerisch, keine Nachkomma-
+      * FD DEU    DQRN5      stelle
+     A            DQRN7     R               REFFLD(RFRN7)
+      * FD DEU    DQRN7      Reservefeld siebenst. numerisch, keine Nachkomma-
+      * FD DEU    DQRN7      stelle
+     A            DQRN9     R               REFFLD(RFRN9)
+      * FD DEU    DQRN9      Reservefeld neunstellig numerisch, keine Nachkomma-
+      * FD DEU    DQRN9      stelle
+     A            DQRN92    R               REFFLD(RFRN92)
+      * FD DEU    DQRN92     Reservefeld neunstellig numerisch, zwei Nachkomma-
+      * FD DEU    DQRN92     stellen
+     A            DQRN113   R               REFFLD(RFRN113)
+      * FD DEU    DQRN113    Reservefeld elfstellig numerisch, drei Nachkomma-
+      * FD DEU    DQRN113    stellen
+     A            DQRN114   R               REFFLD(RFRN114)
+      * FD DEU    DQRN114    Reservefeld elfstellig numerisch, vier Nachkomma-
+      * FD DEU    DQRN114    stellen
+     A            DQRA1     R               REFFLD(RFRA1)
+      * FD DEU    DQRA1      Reservefeld einstellig alphanumerisch
+     A            DQRA2     R               REFFLD(RFRA2)
+      * FD DEU    DQRA2      Reservefeld zweistellig alphanumerisch
+     A            DQRA3     R               REFFLD(RFRA3)
+      * FD DEU    DQRA3      Reservefeld dreistellig alphanumerisch
+     A            DQRA4     R               REFFLD(RFRA4)
+      * FD DEU    DQRA4      Reservefeld vierstellig alphanumerisch
+     A            DQRA5     R               REFFLD(RFRA5)
+      * FD DEU    DQRA5      Reservefeld fünfstellig alphanumerisch
+     A            DQRA7     R               REFFLD(RFRA7)
+      * FD DEU    DQRA7      Reservefeld siebenstellig alphanumerisch
+     A            DQRA10    R               REFFLD(RFRA10)
+      * FD DEU    DQRA10     Reservefeld zehnstellig alphanumerisch
+     A            DQRA13    R               REFFLD(RFRA13)
+      * FD DEU    DQRA13     Reservefeld dreizehnstellig alphanumerisch
+     A            DQRA15    R               REFFLD(RFRA15)
+      * FD DEU    DQRA15     Reservefeld fünfzehnstellig alphanumerisch
+     A            DQRA18    R               REFFLD(RFRA18)
+      * FD DEU    DQRA18     Reservefeld achtzehnstellig alphanumerisch
+     A*
+     A* FREIE RESERVEFELDER
+     A            DQFN1     R               REFFLD(RFFN1)
+      * FD DEU    DQFN1      Reservefeld einstellig numerisch, keine Nachkomma-
+      * FD DEU    DQFN1      stelle
+     A            DQFN2     R               REFFLD(RFFN2)
+      * FD DEU    DQFN2      Reservefeld zweistellig numerisch, keine Nachkomma-
+      * FD DEU    DQFN2      stelle
+     A            DQFN5     R               REFFLD(RFFN5)
+      * FD DEU    DQFN5      Reservefeld fünfstellig numerisch, keine Nachkomma-
+      * FD DEU    DQFN5      stelle
+     A            DQFN7     R               REFFLD(RFFN7)
+      * FD DEU    DQFN7      Reservefeld siebenst. numerisch, keine Nachkomma-
+      * FD DEU    DQFN7      stelle
+     A            DQFN9     R               REFFLD(RFFN9)
+      * FD DEU    DQFN9      Reservefeld neunstellig numerisch, keine Nachkomma-
+      * FD DEU    DQFN9      stelle
+     A            DQFN92    R               REFFLD(RFFN92)
+      * FD DEU    DQFN92     Reservefeld neunstellig numerisch, zwei Nachkomma-
+      * FD DEU    DQFN92     stellen
+     A            DQFN113   R               REFFLD(RFFN113)
+      * FD DEU    DQFN113    Reservefeld elfstellig numerisch, drei Nachkomma-
+      * FD DEU    DQFN113    stellen
+     A            DQFN114   R               REFFLD(RFFN114)
+      * FD DEU    DQFN114    Reservefeld elfstellig numerisch, vier Nachkomma-
+      * FD DEU    DQFN114    stellen
+     A            DQFA1     R               REFFLD(RFFA1)
+      * FD DEU    DQFA1      Reservefeld einstellig alphanumerisch
+     A            DQFA2     R               REFFLD(RFFA2)
+      * FD DEU    DQFA2      Reservefeld zweistellig alphanumerisch
+     A            DQFA3     R               REFFLD(RFFA3)
+      * FD DEU    DQFA3      Reservefeld dreistellig alphanumerisch
+     A            DQFA4     R               REFFLD(RFFA4)
+      * FD DEU    DQFA4      Reservefeld vierstellig alphanumerisch
+     A            DQFA5     R               REFFLD(RFFA5)
+      * FD DEU    DQFA5      Reservefeld fünfstellig alphanumerisch
+     A            DQFA7     R               REFFLD(RFFA7)
+      * FD DEU    DQFA7      Reservefeld siebenstellig alphanumerisch
+     A            DQFA10    R               REFFLD(RFFA10)
+      * FD DEU    DQFA10     Reservefeld zehnstellig alphanumerisch
+     A            DQFA13    R               REFFLD(RFFA13)
+      * FD DEU    DQFA13     Reservefeld dreizehnstellig alphanumerisch
+     A            DQFA15    R               REFFLD(RFFA15)
+      * FD DEU    DQFA15     Reservefeld fünfzehnstellig alphanumerisch
+     A            DQFA18    R               REFFLD(RFFA18)
+      * FD DEU    DQFA18     Reservefeld achtzehnstellig alphanumerisch
+     A*
+     A* DBMAIN JOURNAL FIELDS
+     A            DQDTDI    R               REFFLD(RFDTDI)
+     A            DQTIDI    R               REFFLD(RFTIDI)
+     A            DQDIUSR   R               REFFLD(RFDIUSR)
+     A            DQDIBS    R               REFFLD(RFDIBS)
+     A            DQDIJBN   R               REFFLD(RFDIJBN)
+     A            DQDIUSRB  R               REFFLD(RFDIUSRB)
+     A            DQDIBSB   R               REFFLD(RFDIBSB)
+     A            DQDIJBNB  R               REFFLD(RFDIJBNB)
+     A            DQDIPGM   R               REFFLD(RFDIPGM)
+     A            DQDIPGMU  R               REFFLD(RFDIPGMU)
+     A            DQDTDU    R               REFFLD(RFDTDU)
+     A            DQTIDU    R               REFFLD(RFTIDU)
+     A            DQDUUSR   R               REFFLD(RFDUUSR)
+     A            DQDUBS    R               REFFLD(RFDUBS)
+     A            DQDUJBN   R               REFFLD(RFDUJBN)
+     A            DQDUUSRB  R               REFFLD(RFDUUSRB)
+     A            DQDUBSB   R               REFFLD(RFDUBSB)
+     A            DQDUJBNB  R               REFFLD(RFDUJBNB)
+     A            DQDUPGM   R               REFFLD(RFDUPGM)
+     A            DQDUPGMU  R               REFFLD(RFDUPGMU)
+     A*
+     A*
+     A          K DQLFDN

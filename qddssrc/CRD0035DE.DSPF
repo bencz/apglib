@@ -1,0 +1,400 @@
+     A*%%TS  SD  20110708  071639  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ZEICHENPROGRAMM                                               *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  07.07.2011                                   *
+     A*                                                               *
+     A* FUNKTION      :  ZEICHENPROGRAMM (FAST SO GUT WIE PAINT ;-) ) *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS3)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      HELP
+     A                                      HLPTITLE('CRD0035DE')
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20110708  071639  APG         REL-V5R4M0  5722-WDS
+     A                                      CA05(05)
+     A                                      CA09(09)
+     A                                      CA10(10)
+     A                                      CA12(12)
+     A                                      CA13(13)
+     A                                      CF16(16)
+     A                                      CF17(17)
+     A                                      CA20(20)
+     A                                      CA21(21)
+     A                                      PAGEDOWN(98)
+     A                                      PAGEUP(99)
+     A                                      RTNCSRLOC(&CURFMT &CURFLD &CURPOS)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A          H                           HLPPNLGRP('CRH0035DE/FMT01' CRH0035-
+     A                                      DE)
+     A                                      HLPARA(01 001 27 132)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            CURFMT        10A  H
+     A            CURFLD        10A  H
+     A            CURPOS         4S 0H
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            A_CHGINF       1A  P
+     A            A_SRCDTA01     1A  P
+     A            A_SRCDTA02     1A  P
+     A            A_SRCDTA03     1A  P
+     A            A_SRCDTA04     1A  P
+     A            A_SRCDTA05     1A  P
+     A            A_SRCDTA06     1A  P
+     A            A_SRCDTA07     1A  P
+     A            A_SRCDTA08     1A  P
+     A            A_SRCDTA09     1A  P
+     A            A_SRCDTA10     1A  P
+     A            A_SRCDTA11     1A  P
+     A            A_SRCDTA12     1A  P
+     A            A_SRCDTA13     1A  P
+     A            A_SRCDTA14     1A  P
+     A            A_SRCDTA15     1A  P
+     A            A_SRCDTA16     1A  P
+     A            A_SRCDTA17     1A  P
+     A            A_SRCDTA18     1A  P
+     A            A_SRCDTA19     1A  P
+     A            A_SRCDTA20     1A  P
+     A            A_AUSW01       1A  P
+     A            A_AUSW02       1A  P
+     A            A_AUSW03       1A  P
+     A            A_AUSW04       1A  P
+     A            A_AUSW05       1A  P
+     A            A_AUSW06       1A  P
+     A            A_AUSW07       1A  P
+     A            A_AUSW08       1A  P
+     A            A_AUSW09       1A  P
+     A            A_AUSW10       1A  P
+     A            A_AUSW11       1A  P
+     A            A_AUSW12       1A  P
+     A            A_AUSW13       1A  P
+     A            A_AUSW14       1A  P
+     A            A_AUSW15       1A  P
+     A            A_AUSW16       1A  P
+     A            A_AUSW17       1A  P
+     A            A_AUSW18       1A  P
+     A            A_AUSW19       1A  P
+     A            A_AUSW20       1A  P
+     A            A_SRCSEQ01     1A  P
+     A            A_SRCSEQ02     1A  P
+     A            A_SRCSEQ03     1A  P
+     A            A_SRCSEQ04     1A  P
+     A            A_SRCSEQ05     1A  P
+     A            A_SRCSEQ06     1A  P
+     A            A_SRCSEQ07     1A  P
+     A            A_SRCSEQ08     1A  P
+     A            A_SRCSEQ09     1A  P
+     A            A_SRCSEQ10     1A  P
+     A            A_SRCSEQ11     1A  P
+     A            A_SRCSEQ12     1A  P
+     A            A_SRCSEQ13     1A  P
+     A            A_SRCSEQ14     1A  P
+     A            A_SRCSEQ15     1A  P
+     A            A_SRCSEQ16     1A  P
+     A            A_SRCSEQ17     1A  P
+     A            A_SRCSEQ18     1A  P
+     A            A_SRCSEQ19     1A  P
+     A            A_SRCSEQ20     1A  P
+     A            SLFDN01H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN02H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN03H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN04H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN05H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN06H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN07H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN08H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN09H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN10H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN11H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN12H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN13H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN14H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN15H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN16H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN17H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN18H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN19H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SLFDN20H  R        H      REFFLD(DWLFDN APG/PCHKDRW)
+     A            SRCSEQ01H      6S 2H
+     A            SRCSEQ02H      6S 2H
+     A            SRCSEQ03H      6S 2H
+     A            SRCSEQ04H      6S 2H
+     A            SRCSEQ05H      6S 2H
+     A            SRCSEQ06H      6S 2H
+     A            SRCSEQ07H      6S 2H
+     A            SRCSEQ08H      6S 2H
+     A            SRCSEQ09H      6S 2H
+     A            SRCSEQ10H      6S 2H
+     A            SRCSEQ11H      6S 2H
+     A            SRCSEQ12H      6S 2H
+     A            SRCSEQ13H      6S 2H
+     A            SRCSEQ14H      6S 2H
+     A            SRCSEQ15H      6S 2H
+     A            SRCSEQ16H      6S 2H
+     A            SRCSEQ17H      6S 2H
+     A            SRCSEQ18H      6S 2H
+     A            SRCSEQ19H      6S 2H
+     A            SRCSEQ20H      6S 2H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         9Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A            LIBFILE       21A  O  3111
+     A                                  4  2'Befehl . . :'
+     A            SEUCMD        40A  B  4 15
+     A            CHGINF         1A  O  4 56
+     A  02                                  DSPATR(&A_CHGINF)
+     A                                  4 58'Modus:'
+     A            DRMODE        20A  O  4 65
+     A                                  4 86'Vorschau:'
+     A            MODPRE        11A  O  4 96
+     A            MBRNAME       21A  O  4111
+     A            HEADER       120A  O  5 12COLOR(BLU)
+     A            AUSW01         1A  B  6  2FLDCSRPRG(AUSW02)
+     A  02                                  DSPATR(&A_AUSW01)
+     A            SRCSEQ01       7A  B  6  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ01)
+     A                                      FLDCSRPRG(SRCDTA01)
+     A                                      CHANGE(70)
+     A            SRCDTA01     120A  B  6 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA01)
+     A                                      FLDCSRPRG(SRCDTA02)
+     A                                      CHANGE(50)
+     A            AUSW02         1A  B  7  2FLDCSRPRG(AUSW03)
+     A  02                                  DSPATR(&A_AUSW02)
+     A            SRCSEQ02       7A  B  7  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ02)
+     A                                      FLDCSRPRG(SRCDTA02)
+     A                                      CHANGE(71)
+     A            SRCDTA02     120A  B  7 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA02)
+     A                                      FLDCSRPRG(SRCDTA03)
+     A                                      CHANGE(51)
+     A            AUSW03         1A  B  8  2FLDCSRPRG(AUSW04)
+     A  02                                  DSPATR(&A_AUSW03)
+     A            SRCSEQ03       7A  B  8  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ03)
+     A                                      FLDCSRPRG(SRCDTA03)
+     A                                      CHANGE(72)
+     A            SRCDTA03     120A  B  8 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA03)
+     A                                      FLDCSRPRG(SRCDTA04)
+     A                                      CHANGE(52)
+     A            AUSW04         1A  B  9  2FLDCSRPRG(AUSW05)
+     A  02                                  DSPATR(&A_AUSW04)
+     A            SRCSEQ04       7A  B  9  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ04)
+     A                                      FLDCSRPRG(SRCDTA04)
+     A                                      CHANGE(73)
+     A            SRCDTA04     120A  B  9 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA04)
+     A                                      FLDCSRPRG(SRCDTA05)
+     A                                      CHANGE(53)
+     A            AUSW05         1A  B 10  2FLDCSRPRG(AUSW06)
+     A  02                                  DSPATR(&A_AUSW05)
+     A            SRCSEQ05       7A  B 10  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ05)
+     A                                      FLDCSRPRG(SRCDTA05)
+     A                                      CHANGE(74)
+     A            SRCDTA05     120A  B 10 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA05)
+     A                                      FLDCSRPRG(SRCDTA06)
+     A                                      CHANGE(54)
+     A            AUSW06         1A  B 11  2FLDCSRPRG(AUSW07)
+     A  02                                  DSPATR(&A_AUSW06)
+     A            SRCSEQ06       7A  B 11  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ06)
+     A                                      FLDCSRPRG(SRCDTA06)
+     A                                      CHANGE(75)
+     A            SRCDTA06     120A  B 11 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA06)
+     A                                      FLDCSRPRG(SRCDTA07)
+     A                                      CHANGE(55)
+     A            AUSW07         1A  B 12  2FLDCSRPRG(AUSW08)
+     A  02                                  DSPATR(&A_AUSW07)
+     A            SRCSEQ07       7A  B 12  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ07)
+     A                                      FLDCSRPRG(SRCDTA07)
+     A                                      CHANGE(76)
+     A            SRCDTA07     120A  B 12 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA07)
+     A                                      FLDCSRPRG(SRCDTA08)
+     A                                      CHANGE(56)
+     A            AUSW08         1A  B 13  2FLDCSRPRG(AUSW09)
+     A  02                                  DSPATR(&A_AUSW08)
+     A            SRCSEQ08       7A  B 13  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ08)
+     A                                      FLDCSRPRG(SRCDTA08)
+     A                                      CHANGE(77)
+     A            SRCDTA08     120A  B 13 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA08)
+     A                                      FLDCSRPRG(SRCDTA09)
+     A                                      CHANGE(57)
+     A            AUSW09         1A  B 14  2FLDCSRPRG(AUSW10)
+     A  02                                  DSPATR(&A_AUSW09)
+     A            SRCSEQ09       7A  B 14  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ09)
+     A                                      FLDCSRPRG(SRCDTA09)
+     A                                      CHANGE(78)
+     A            SRCDTA09     120A  B 14 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA09)
+     A                                      FLDCSRPRG(SRCDTA10)
+     A                                      CHANGE(58)
+     A            AUSW10         1A  B 15  2FLDCSRPRG(AUSW11)
+     A  02                                  DSPATR(&A_AUSW10)
+     A            SRCSEQ10       7A  B 15  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ10)
+     A                                      FLDCSRPRG(SRCDTA10)
+     A                                      CHANGE(79)
+     A            SRCDTA10     120A  B 15 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA10)
+     A                                      FLDCSRPRG(SRCDTA11)
+     A                                      CHANGE(59)
+     A            AUSW11         1A  B 16  2FLDCSRPRG(AUSW12)
+     A  02                                  DSPATR(&A_AUSW11)
+     A            SRCSEQ11       7A  B 16  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ11)
+     A                                      FLDCSRPRG(SRCDTA11)
+     A                                      CHANGE(80)
+     A            SRCDTA11     120A  B 16 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA11)
+     A                                      FLDCSRPRG(SRCDTA12)
+     A                                      CHANGE(60)
+     A            AUSW12         1A  B 17  2FLDCSRPRG(AUSW13)
+     A  02                                  DSPATR(&A_AUSW12)
+     A            SRCSEQ12       7A  B 17  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ12)
+     A                                      FLDCSRPRG(SRCDTA12)
+     A                                      CHANGE(81)
+     A            SRCDTA12     120A  B 17 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA12)
+     A                                      FLDCSRPRG(SRCDTA13)
+     A                                      CHANGE(61)
+     A            AUSW13         1A  B 18  2FLDCSRPRG(AUSW14)
+     A  02                                  DSPATR(&A_AUSW13)
+     A            SRCSEQ13       7A  B 18  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ13)
+     A                                      FLDCSRPRG(SRCDTA13)
+     A                                      CHANGE(82)
+     A            SRCDTA13     120A  B 18 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA13)
+     A                                      FLDCSRPRG(SRCDTA14)
+     A                                      CHANGE(62)
+     A            AUSW14         1A  B 19  2FLDCSRPRG(AUSW15)
+     A  02                                  DSPATR(&A_AUSW14)
+     A            SRCSEQ14       7A  B 19  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ14)
+     A                                      FLDCSRPRG(SRCDTA14)
+     A                                      CHANGE(83)
+     A            SRCDTA14     120A  B 19 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA14)
+     A                                      FLDCSRPRG(SRCDTA15)
+     A                                      CHANGE(63)
+     A            AUSW15         1A  B 20  2FLDCSRPRG(AUSW16)
+     A  02                                  DSPATR(&A_AUSW15)
+     A            SRCSEQ15       7A  B 20  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ15)
+     A                                      FLDCSRPRG(SRCDTA15)
+     A                                      CHANGE(84)
+     A            SRCDTA15     120A  B 20 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA15)
+     A                                      FLDCSRPRG(SRCDTA16)
+     A                                      CHANGE(64)
+     A            AUSW16         1A  B 21  2FLDCSRPRG(AUSW17)
+     A  02                                  DSPATR(&A_AUSW16)
+     A            SRCSEQ16       7A  B 21  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ16)
+     A                                      FLDCSRPRG(SRCDTA16)
+     A                                      CHANGE(85)
+     A            SRCDTA16     120A  B 21 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA16)
+     A                                      FLDCSRPRG(SRCDTA17)
+     A                                      CHANGE(65)
+     A            AUSW17         1A  B 22  2FLDCSRPRG(AUSW18)
+     A  02                                  DSPATR(&A_AUSW17)
+     A            SRCSEQ17       7A  B 22  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ17)
+     A                                      FLDCSRPRG(SRCDTA17)
+     A                                      CHANGE(86)
+     A            SRCDTA17     120A  B 22 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA17)
+     A                                      FLDCSRPRG(SRCDTA18)
+     A                                      CHANGE(66)
+     A            AUSW18         1A  B 23  2FLDCSRPRG(AUSW19)
+     A  02                                  DSPATR(&A_AUSW18)
+     A            SRCSEQ18       7A  B 23  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ18)
+     A                                      FLDCSRPRG(SRCDTA18)
+     A                                      CHANGE(87)
+     A            SRCDTA18     120A  B 23 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA18)
+     A                                      FLDCSRPRG(SRCDTA19)
+     A                                      CHANGE(67)
+     A            AUSW19         1A  B 24  2FLDCSRPRG(AUSW20)
+     A  02                                  DSPATR(&A_AUSW19)
+     A            SRCSEQ19       7A  B 24  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ19)
+     A                                      FLDCSRPRG(SRCDTA19)
+     A                                      CHANGE(88)
+     A            SRCDTA19     120A  B 24 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA19)
+     A                                      FLDCSRPRG(SRCDTA20)
+     A                                      CHANGE(68)
+     A            AUSW20         1A  B 25  2FLDCSRPRG(SRCDTA01)
+     A  02                                  DSPATR(&A_AUSW20)
+     A            SRCSEQ20       7A  B 25  4CHGINPDFT
+     A  02                                  DSPATR(&A_SRCSEQ20)
+     A                                      FLDCSRPRG(SRCDTA20)
+     A                                      CHANGE(89)
+     A            SRCDTA20     120A  B 25 12CHGINPDFT
+     A  02                                  DSPATR(&A_SRCDTA20)
+     A                                      CHANGE(69)
+     A*-------------------
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 49'F13=Standardwerte'
+     A                                      COLOR(BLU)
+     A                                 26 68'F16=Links'
+     A                                      COLOR(BLU)
+     A                                 26 79'F17=Rechts'
+     A                                      COLOR(BLU)
+     A                                 26 91'F20=Infos'
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A  40                                  DSPATR(BL)
+     A                                 26102'F21=Kommandozeile'
+     A                                      COLOR(BLU)

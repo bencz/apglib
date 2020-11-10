@@ -1,0 +1,21 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH VORGANG                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  09.08.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH VORGANG ==> CRP0001          *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCHKSRCF                  PFILE(PCHKSRC)
+     ‚*
+     A          K CRVORG
+     A          K CRSECN
+     A          K CRFID
+     ‚*€

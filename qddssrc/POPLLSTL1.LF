@@ -1,0 +1,23 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH PROJEKT                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  31.01.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH USER/KATEGORIE               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R POPLLSTF                  PFILE(POPLLST)
+     ‚*
+     A          K OPUSER
+     A          K OPTYPE
+     A          K OPDATE
+     ‚* DAMIT TERMINE AM GLEICHEN TAG IN ERSRELLUNGSREIHENFOLGE KOMMEN
+     A          K OPLFDN
+     ‚*€

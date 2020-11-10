@@ -1,0 +1,302 @@
+     A*%%TS  SD  20100225  112652  GGO         REL-V6R1M0  5761-WDS
+     A*-------------------------------------------------------------
+     A* ANZEIGE OFFENE TRANSPORTANWEISUNGEN ##SRN
+     A*-------------------------------------------------------------
+     A* COPYRIGHT BY  :  EHRHARDT + PARTNER GMBH & CO. KG
+     A*                  SOFTWARE-SYSTEME FÜR WAREHOUSE-LOGISTIK
+     A*                  56154 BOPPARD-BUCHHOLZ
+     A*                  +49 (0) 67 42 / 87 27 0
+     A*                  INFO@EHRHARDT-PARTNER.COM
+     A*--------------------------------------------------------------
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      HELP
+     A                                      HLPTITLE('LFS 400')
+     A                                      CA03(03 'Ende/Zurück')
+     A*                                     HELP(25 'DSPFIELD')
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20091201  163832  GGO         REL-V6R1M0  5761-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12 'ABBR')
+     A                                      CA05(05 'AKT')
+     A          H
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        LFSMSG       178   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            A_TPIDEN       1A  P
+     A            A_TPVART       1A  P
+     A            A_TPGRKO       1A  P
+     A            A_TPFIRM       1A  P
+     A            A_TPVORT       1A  P
+     A            A_TPVBER       1A  P
+     A            A_TPVSST       1A  P
+     A            A_ASLOCSE      1A  P
+     A            A_TXT1         1A  P
+     A            FLD           10A  H
+     A            RCD           10A  H
+     A            POS            4S 0H
+     A            LOTZ_SYS  R        H      REFFLD(UTLOTZ BFSREF)
+     A                                  1  2'LGDSP18'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            PGM0990       38A  O  1 48DSPATR(HI)
+     A                                  1117'Z00001'
+     A                                      COLOR(BLU)
+     A            NAME_SYS  R        O  1124REFFLD(RFSYSN BFSREF)
+     A                                      COLOR(BLU)
+     A            USR_SYS   R        O  2  2REFFLD(RFBUSR BFSREF)
+     A            LANG_SYS  R        O  2 13REFFLD(RFSPID BFSREF)
+     A                                      COLOR(BLU)
+     A                                  2 50'Anzeige offene Transportanweisunge-
+     A                                      n'
+     A            DT_SYS    R        O  2114REFFLD(RFDTTZ BFSREF)
+     A            TI_SYS    R        O  2124REFFLD(RFTITZ BFSREF)
+     A                                  3  2'Komm-Gruppe:'
+     A            FSGRKO    R        O  3 15REFFLD(FSGRKO PFISTAM)
+     A                                      DSPATR(HI)
+     A            KONZNR    R        O  3114REFFLD(FSKONZ PFISTAM)
+     A                                      DSPATR(HI)
+     A            KONZBZ    R        O  3118REFFLD(FSBEZ PFISTAM)
+     A            FIRMNR    R        O  4114REFFLD(FSFIRM PFISTAM)
+     A                                      DSPATR(HI)
+     A            FIRMBZ    R        O  4118REFFLD(FSBEZ PFISTAM)
+     A                                  6  2'Eine Selektion kann optional erfol-
+     A                                      gen.'
+     A                                      COLOR(BLU)
+     A                                 10  2'Firma/Komm-Gruppe  :'
+     A            TPFIRM    R        B 10 23REFFLD(TPFIRM PBESTTP)
+     A  02                                  DSPATR(&A_TPFIRM)
+     A                                 10 27'/'
+     A            TPGRKO    R        B 10 29REFFLD(TPGRKO PBESTTP)
+     A  02                                  DSPATR(&A_TPGRKO)
+     A                                      COMP(GT ' ')
+     A                                      DSPATR(MDT)
+     A                                 12  2'TPA-Typ  . . . . . :'
+     A            TPTTYP    R   -1   B 12 23REFFLD(TPTTYP PBESTTP)
+     A                                      VALUES(' ' '1' '2' '3')
+     A                                 12 27'(1=Einlagerung/2=Auslagerung/3=Uml-
+     A                                      agerung)'
+     A                                      COLOR(BLU)
+     A                                 13  2'Lagerort/Bereich .?:'
+     A            TPVORT    R        B 13 23REFFLD(TPVORT PBESTTP)
+     A  02                                  DSPATR(&A_TPVORT)
+     A            TPVBER    R        B 13 27REFFLD(TPVBER PBESTTP)
+     A  02                                  DSPATR(&A_TPVBER)
+     A                                 14  2'Schnittstelle  . .?:'
+     A            TPVSST    R     A  B 14 23REFFLD(TPVSST PBESTTP)
+     A  02                                  DSPATR(&A_TPVSST)
+     A                                 15  2'Artikel-Nr.  . . . :'
+     A            TPIDEN    R        B 15 23REFFLD(TPIDEN PBESTTP)
+     A  02                                  DSPATR(&A_TPIDEN)
+     A                                 16  2'Versandart . . . .?:'
+     A            TPVART    R        B 16 23REFFLD(TPVART PBESTTP)
+     A  02                                  DSPATR(&A_TPVART)
+     A                                 17  2'Auftragsnummer . . :'
+     A            TPANR1    R        B 17 23REFFLD(TPANR1 PBESTTP)
+     A                                 17 35'(mit Funktion *)'
+     A                                      COLOR(BLU)
+     A                                 18  2'Tour . . . . . . . :'
+     A            TPTOUR    R        B 18 23REFFLD(TPTOUR PBESTTP)
+     A                                 18 35'(mit Funktion *)'
+     A                                      COLOR(BLU)
+     A                                 19  2'Pufferplatz  . . . :'
+     A            TPPPLZ    R        B 19 23REFFLD(TPPPLZ PBESTTP)
+     A                                 19 35'(mit Funktion *)'
+     A                                      COLOR(BLU)
+     A                                 20  2'Location f. Anzeige:'
+     A  02                                  DSPATR(&A_TXT1)
+     A            ASLOCSE   R        B 20 23REFFLD(ASLOCSE PANMSTS)
+     A  02                                  DSPATR(&A_ASLOCSE)
+     A                                 21  2'Freitextselektion  :'
+     A            TXTSEL        30A  B 21 23
+     A                                 21107'Max. Anzahl Sätze  :'
+     A                                      COLOR(BLU)
+     A            SFLANZ         4Y 0B 21128EDTCDE(4)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02                     SFL
+     A*%%TS  SD  20100225  112652  GGO         REL-V6R1M0  5761-WDS
+     A  04                                  SFLNXTCHG
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            A_AUSW         1A  P
+     A            A_TPIDEN       1A  P
+     A            A_TPTTYP       1A  P
+     A            A_PALNR        1A  P
+     A            TPKONZ    R        H      REFFLD(TPKONZ PBESTTP)
+     A            TPGRKO    R        H      REFFLD(TPGRKO PBESTTP)
+     A            TPNRKS    R        H      REFFLD(TPNRKS PBESTTP)
+     A            TPMDE2    R        H      REFFLD(TPMDE2 PBESTTP)
+     A            TPVORT    R        H      REFFLD(TPVORT PBESTTP)
+     A            TPVBER    R        H      REFFLD(TPVBER PBESTTP)
+     A            TPVREG    R        H      REFFLD(TPVREG PBESTTP)
+     A            TPVHOR    R        H      REFFLD(TPVHOR PBESTTP)
+     A            TPVVER    R        H      REFFLD(TPVVER PBESTTP)
+     A            TPVSEG    R        H      REFFLD(TPVSEG PBESTTP)
+     A            TPNORT    R        H      REFFLD(TPNORT PBESTTP)
+     A            TPNBER    R        H      REFFLD(TPNBER PBESTTP)
+     A            TPNREG    R        H      REFFLD(TPNREG PBESTTP)
+     A            TPNHOR    R        H      REFFLD(TPNHOR PBESTTP)
+     A            TPNVER    R        H      REFFLD(TPNVER PBESTTP)
+     A            TPNSEG    R        H      REFFLD(TPNSEG PBESTTP)
+     A            TPKMEN    R        H      REFFLD(TPKMEN PBESTTP)
+     A            TPBMEN    R        H      REFFLD(TPBMEN PBESTTP)
+     A            VERDKZ         1A  H
+     A            TPPALN    R        H      REFFLD(TPPALN PBESTTP)
+     A            TPPALP    R        H      REFFLD(TPPALP PBESTTP)
+     A            TPIZSL    R        H      REFFLD(TPIZSL PBESTTP)
+     A            TPZUSL    R        H      REFFLD(TPZUSL PBESTTP)
+     A            TPTLGN    R        H      REFFLD(TPTLGN PBESTTP)
+     A            TPKZP     R        H      REFFLD(TPKZP PBESTTP)
+     A            LOTZ_SYS  R        H      REFFLD(UTLOTZ BFSREF)
+     A            AUSW           1A  B  9  2
+     A  02                                  DSPATR(&A_AUSW)
+     A                                      VALUES(' ' '6' '5' '7' '9' 'R' 'S' -
+     A                                      'T' 'N')
+     A            TPTTYP    R        O  9  4REFFLD(TPTTYP PBESTTP)
+     A  02                                  DSPATR(&A_TPTTYP)
+     A            TPMDE1    R        O  9  7REFFLD(TPMDE1 PBESTTP)
+     A                                      EDTCDE(4)
+     A            TPMDE7    R        O  9  9REFFLD(TPMDE7 PBESTTP)
+     A                                      COLOR(RED)
+     A            TPFIRM    R        O  9 11REFFLD(TPFIRM PBESTTP)
+     A            DT_A           8A  O  9 15
+     A            TI_A           8A  O  9 24
+     A            TPVON     R    5A  O  9 33REFFLD(TPVORT PBESTTP)
+     A            VPLATZ        11A  O  9 39
+     A            TPNACH    R    5A  O  9 51REFFLD(TPNORT PBESTTP)
+     A            NPLATZ        11A  O  9 57
+     A            TPPPLZ    R        O  9 69REFFLD(TPPPLZ PBESTTP)
+     A            PALNR          9A  O  9 80
+     A  02                                  DSPATR(&A_PALNR)
+     A            TPIDEN    R        O  9 90REFFLD(TPIDEN PBESTTP)
+     A  02                                  DSPATR(&A_TPIDEN)
+     A            TPIDV     R        O  9109REFFLD(TPIDV PBESTTP)
+     A                                 10 11'Bezeichnung:'
+     A                                      COLOR(BLU)
+     A            TZBEZ1    R        O 10 24REFFLD(TZBEZ1 PBFSTSS)
+     A                                      COLOR(BLU)
+     A                                 10 55'TZWGAK:'
+     A                                      COLOR(BLU)
+     A            TZWGAK    R        O 10 63REFFLD(TZWGAK PBFSTSS)
+     A                                      COLOR(BLU)
+     A                                 10 65'TZSRNR:'
+     A                                      COLOR(BLU)
+     A            TZSRNR    R        O 10 73REFFLD(TZSRNR PBFSTSS)
+     A                                      COLOR(BLU)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100225  112652  GGO         REL-V6R1M0  5761-WDS
+     A                                      SFLSIZ(0009)
+     A                                      SFLPAG(0008)
+     A                                      CA05(05 'aktualisieren')
+     A                                      CA12(12 'Zurück')
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        LFSMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A            LOTZ_SYS  R        H      REFFLD(UTLOTZ BFSREF)
+     A                                  1  2'LGDSP18'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT03'
+     A                                      COLOR(BLU)
+     A            PGM0990       38A  O  1 48DSPATR(HI)
+     A                                  1117'S05211'
+     A                                      COLOR(BLU)
+     A            NAME_SYS  R        O  1124REFFLD(RFSYSN BFSREF)
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A            USR_SYS   R        O  2  2REFFLD(RFBUSR BFSREF)
+     A            LANG_SYS  R        O  2 13REFFLD(RFSPID BFSREF)
+     A                                      COLOR(BLU)
+     A                                  2 50'Anzeige offene Transportanweisunge-
+     A                                      n'
+     A            DT_SYS    R        O  2114REFFLD(RFDTTZ BFSREF)
+     A            TI_SYS    R        O  2124REFFLD(RFTITZ BFSREF)
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A            PLUSKZ         1A  O  3 20DSPATR(BL)
+     A            KONZNR    R        O  3114REFFLD(FSKONZ PFISTAM)
+     A                                      DSPATR(HI)
+     A            KONZBZ    R        O  3118REFFLD(FSBEZ PFISTAM)
+     A            FIRMNR    R        O  4114REFFLD(FSFIRM PFISTAM)
+     A                                      DSPATR(HI)
+     A            FIRMBZ    R        O  4118REFFLD(FSBEZ PFISTAM)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'5=Detailanzeige'
+     A                                      COLOR(BLU)
+     A                                  6 21'6=Druck TP-Auftrag'
+     A                                      COLOR(BLU)
+     A                                  6 41'7=Bestandsanz. Platz'
+     A                                      COLOR(BLU)
+     A                                  6 63'9=Man.Freigabe Nachräumer'
+     A                                      COLOR(BLU)
+     A            SFT0474        2A  O  8  4DSPATR(HI)
+     A            SFT0469        3A  O  8  7DSPATR(HI)
+     A            SFT0027        3A  O  8 11DSPATR(HI)
+     A            SFT0338        8A  O  8 15DSPATR(HI)
+     A            SFT0355        8A  O  8 24DSPATR(HI)
+     A                                  8 33'<-----'
+     A                                      DSPATR(HI)
+     A            SFT0183        3A  O  8 40DSPATR(HI)
+     A                                  8 44'----->'
+     A                                      DSPATR(HI)
+     A                                  8 51'<-----'
+     A                                      DSPATR(HI)
+     A            SFT0337        4A  O  8 58DSPATR(HI)
+     A                                  8 63'---->'
+     A                                      DSPATR(HI)
+     A            SFT0483       10A  O  8 69DSPATR(HI)
+     A            SFT0250        9A  O  8 80DSPATR(HI)
+     A            SFT0101       15A  O  8 90DSPATR(HI)
+     A            SFT0160       15A  O  8109DSPATR(HI)
+     A*            17:14:43    QPGMR       REL-R07M00  5714-UT1
+     A*                                     OVERLAY
+     A          R FMT04
+     A*%%TS  SD  20091201  163832  GGO         REL-V6R1M0  5761-WDS
+     A          H                           HLPPNLGRP('LGDSP18/FMT04' LGPNL18)
+     A                                      HLPARA(01 001 27 132)
+     A            LOTZ_SYS  R        H      REFFLD(UTLOTZ BFSREF)
+     A                                 26  2'F1=Zweite Zeile'
+     A                                      COLOR(BLU)
+     A                                 26 19'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 33'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 51'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20091201  163832  GGO         REL-V6R1M0  5761-WDS
+     A                                      OVERLAY
+     A          H                           HLPPNLGRP('LGDSP18/FMT05' LGPNL18)
+     A                                      HLPARA(01 001 27 132)
+     A            LOTZ_SYS  R        H      REFFLD(UTLOTZ BFSREF)
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

@@ -1,0 +1,22 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH LÄNGE                                *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  12.02.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH LÄNGE                        *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCHKHGHF                  PFILE(PCHKHGH)
+     ‚*
+     A          K SYUSER
+     A          K SYTYP
+     A          K SYLEN
+     A          K SYCMD
+     ‚*€

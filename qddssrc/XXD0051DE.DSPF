@@ -1,0 +1,176 @@
+     A*%%TS  SD  20120323  065556  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ZUFÄLLIGE BESTELLUNG                                          *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  21.03.2012                                   *
+     A*                                                               *
+     A* FUNKTION      :  ZUFALLSBESTELLUNG                            *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      CF21(21)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20120323  065556  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A                                      INVITE
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            SYS_FMT        6A  O  1 12COLOR(BLU)
+     A            MAINUEB       37A  O  1 19DSPATR(HI)
+     A            PGMTYP         8A  O  1 57COLOR(BLU)
+     A                                  1 66SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  1
+     A            SYS_LANG       3A  O  2 12COLOR(BLU)
+     A            SUBUEB        37A  O  2 19DSPATR(HI)
+     A            DT_SYS         8A  O  2 57
+     A            TI_SYS         8A  O  2 66
+     A                                  4  1'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  4  4'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  4  7'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  4 11'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  4 19'Restaurant  . .?:'
+     A            RESTR         30A  B  4 37CHECK(LC)
+     A                                  5  1'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  5  4'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  5  7'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  5 11'   '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  5 19'Modus . . . . . :'
+     A            MODUS         20A  B  5 37
+     A                                  6  1'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  6  4'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  6  7'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  6 11'   '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  6 37'*ALLUSR'
+     A                                      COLOR(BLU)
+     A                                  6 45'='
+     A                                      COLOR(BLU)
+     A                                  6 47'Bestellungen aller User'
+     A                                      COLOR(BLU)
+     A                                  7  1'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  7  4'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  7  7'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  7 11'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  7 47'als Grundlage verwenden'
+     A                                      COLOR(BLU)
+     A                                  8  2'      '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  8 11'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  8 37'*USER'
+     A                                      COLOR(BLU)
+     A                                  8 45'='
+     A                                      COLOR(BLU)
+     A                                  8 47'Alle eigenen Bestellungen'
+     A                                      COLOR(BLU)
+     A                                  9  3'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  9 11'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                  9 37'*PLAN'
+     A                                      COLOR(BLU)
+     A                                  9 45'='
+     A                                      COLOR(BLU)
+     A                                  9 47'APG/CONFIG -> K200'
+     A                                      COLOR(BLU)
+     A                                 10  3'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 10 11'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 10 37'<user>'
+     A                                      COLOR(BLU)
+     A                                 10 45'='
+     A                                      COLOR(BLU)
+     A                                 10 47'Bestellungen von <user>'
+     A                                      COLOR(BLU)
+     A                                 11  3'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 11 11'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 12  3'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 12 11'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 12 19'Vorschlag . . . :'
+     A            RNDFOD        37A  O 12 37
+     A                                 13  3'    '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 13 11'  '
+     A                                      DSPATR(HI)
+     A                                      DSPATR(RI)
+     A                                 15  1'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 15 15'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 15 33'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(4 3 16 73)
+     A  *DS4                                WINDOW(4 3 16 73)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

@@ -1,0 +1,23 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG                                           *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  18.12.2012                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TEST MIT SELECT                              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PTSTLFF                   PFILE(PTSTLF)
+     ‚*
+     A          K LFDAT1
+     A
+     A          S LFDAT1                    COMP(EQ '1')
+     A          S LFDAT1                    COMP(EQ '4')
+     A          S LFDAT1                    COMP(EQ '6')
+     ‚*€

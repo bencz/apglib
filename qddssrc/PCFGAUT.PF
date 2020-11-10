@@ -1,0 +1,132 @@
+     ‚*---------------------------------------------------------------*
+     ‚* BERECHTIGUNGSEINTRÄGE                                         *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  09.09.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  BERECHTIGUNGSPRÜFUNGEN                       *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGAUTF                  TEXT('CONFIG')
+     A*
+     ‚* ID UND KEY BILDEN DEN SCHLÜSSEL
+     A            CFID          10A         COLHDG('ID')
+     A            CFKEY         20A         COLHDG('KEY1')
+     A            CFKEY2        20A         COLHDG('KEY2')
+     A            CFKEY3        20A         COLHDG('KEY3')
+     A            CFKEY4        20A         COLHDG('KEY4')
+     A
+     ‚* LAUFENDE NUMMER FÜR TABELLEN O.Ä.
+     A            CFLFDN         9S 0       COLHDG('LFD-NUMMER')
+     A
+     ‚* ANLAGEDATEN
+     A            CFAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            CFABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            CFAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            CFADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            CFATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            CFMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            CFMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            CFMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            CFMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            CFMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            CFFK01         1S 0       COLHDG('FUNKTION 1')
+     A            CFFK02         1S 0       COLHDG('FUNKTION 2')
+     A            CFFK03         1S 0       COLHDG('FUNKTION 3')
+     A            CFFK04         1S 0       COLHDG('FUNKTION 4')
+     A            CFFK05         1S 0       COLHDG('FUNKTION 5')
+     A            CFFK06         1S 0       COLHDG('FUNKTION 6')
+     A            CFFK07         1S 0       COLHDG('FUNKTION 7')
+     A            CFFK08         1S 0       COLHDG('FUNKTION 8')
+     A            CFFK09         1S 0       COLHDG('FUNKTION 9')
+     A            CFFK10         1S 0       COLHDG('FUNKTION 10')
+     A            CFFK11         1S 0       COLHDG('FUNKTION 11')
+     A            CFFK12         1S 0       COLHDG('FUNKTION 12')
+     A            CFFK13         1S 0       COLHDG('FUNKTION 13')
+     A            CFFK14         1S 0       COLHDG('FUNKTION 14')
+     A            CFFK15         1S 0       COLHDG('FUNKTION 15')
+     A            CFFK16         1S 0       COLHDG('FUNKTION 16')
+     A            CFFK17         1S 0       COLHDG('FUNKTION 17')
+     A            CFFK18         1S 0       COLHDG('FUNKTION 18')
+     A            CFFK19         1S 0       COLHDG('FUNKTION 19')
+     A            CFFK20         1S 0       COLHDG('FUNKTION 20')
+     A            CFFK21         1S 0       COLHDG('FUNKTION 21')
+     A            CFFK22         1S 0       COLHDG('FUNKTION 22')
+     A            CFFK23         1S 0       COLHDG('FUNKTION 23')
+     A            CFFK24         1S 0       COLHDG('FUNKTION 24')
+     A            CFFK25         1S 0       COLHDG('FUNKTION 25')
+     A            CFFK26         1S 0       COLHDG('FUNKTION 26')
+     A            CFFK27         1S 0       COLHDG('FUNKTION 27')
+     A            CFFK28         1S 0       COLHDG('FUNKTION 28')
+     A            CFFK29         1S 0       COLHDG('FUNKTION 29')
+     A            CFFK30         1S 0       COLHDG('FUNKTION 30')
+     A            CFFK31         1S 0       COLHDG('FUNKTION 31')
+     A            CFFK32         1S 0       COLHDG('FUNKTION 32')
+     A            CFFK33         1S 0       COLHDG('FUNKTION 33')
+     A            CFFK34         1S 0       COLHDG('FUNKTION 34')
+     A            CFFK35         1S 0       COLHDG('FUNKTION 35')
+     A            CFFK36         1S 0       COLHDG('FUNKTION 36')
+     A            CFFK37         1S 0       COLHDG('FUNKTION 37')
+     A            CFFK38         1S 0       COLHDG('FUNKTION 38')
+     A            CFFK39         1S 0       COLHDG('FUNKTION 39')
+     A            CFFK40         1S 0       COLHDG('FUNKTION 40')
+     A
+     ‚* DATENFELDER
+     A            CFDAT1        10A         COLHDG('DATEN/10-1')
+     A            CFDAT2        10A         COLHDG('DATEN/10-2')
+     A            CFDAT3        10A         COLHDG('DATEN/10-3')
+     A            CFDAT4        10A         COLHDG('DATEN/10-4')
+     A            CFDAT5        10A         COLHDG('DATEN/10-5')
+     A            CFDAT6        10A         COLHDG('DATEN/10-6')
+     A            CFDAT7        10A         COLHDG('DATEN/10-7')
+     A            CFDAT8        10A         COLHDG('DATEN/10-8')
+     A            CFDAT9        10A         COLHDG('DATEN/10-9')
+     A            CFDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* EINSTELLUNGEN
+     A            CFIN01        10A         COLHDG('INFO/10-1')
+     A            CFIN02        10A         COLHDG('INFO/10-2')
+     A            CFIN03        10A         COLHDG('INFO/10-3')
+     A            CFIN04        10A         COLHDG('INFO/10-4')
+     A            CFIN05        10A         COLHDG('INFO/10-5')
+     A            CFIN06        10A         COLHDG('INFO/10-6')
+     A            CFIN07        10A         COLHDG('INFO/10-7')
+     A            CFIN08        10A         COLHDG('INFO/10-8')
+     A            CFIN09        10A         COLHDG('INFO/10-9')
+     A            CFIN10        10A         COLHDG('INFO/10-10')
+     A            CFIN11        10A         COLHDG('INFO/10-11')
+     A            CFIN12        10A         COLHDG('INFO/10-12')
+     A            CFIN13        10A         COLHDG('INFO/10-13')
+     A            CFIN14        10A         COLHDG('INFO/10-14')
+     A            CFIN15        10A         COLHDG('INFO/10-15')
+     A            CFIN16        10A         COLHDG('INFO/10-16')
+     A            CFIN17        10A         COLHDG('INFO/10-17')
+     A            CFIN18        10A         COLHDG('INFO/10-18')
+     A            CFIN19        10A         COLHDG('INFO/10-19')
+     A            CFIN20        10A         COLHDG('INFO/10-20')
+     A
+     ‚* TEXTFELDER
+     A            CFTXT1        50A         COLHDG('TEXT 1')
+     A            CFTXT2        50A         COLHDG('TEXT 2')
+     A            CFTXT3        50A         COLHDG('TEXT 3')
+     A            CFTXT4        50A         COLHDG('TEXT 4')
+     A            CFTXT5        50A         COLHDG('TEXT 5')
+     A
+     ‚* KEY
+     A          K CFID
+     A          K CFKEY
+     A          K CFKEY2
+     A          K CFKEY3
+     A          K CFKEY4

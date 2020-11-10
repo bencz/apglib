@@ -1,0 +1,51 @@
+     ‚*---------------------------------------------------------------*
+     ‚* SEU-HISTORIE                                                  *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.02.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  HISTORIENSÄTZE                               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PSEUHSTF                  TEXT('SEU')
+     A*
+     ‚* LAUFENDE NUMMER
+     A            SHLFDN         9S 0       COLHDG('LFD-NUMMER')
+     A
+     ‚* SICHERUNGSNUMMER
+     A            SHHLFD        10A         COLHDG('SICHERUNGS' 'NUMMER')
+     A
+     ‚* VON-SOURCE
+     A            SHFLIB        10A         COLHDG('FROM' 'LIB')
+     A            SHFRCN        10A         COLHDG('FROM' 'SOURCE')
+     A            SHFMBR        10A         COLHDG('FROM' 'MEMBER')
+     A
+     ‚* NACH-SOURCE
+     A            SHTLIB        10A         COLHDG('TO' 'LIB')
+     A            SHTRCN        10A         COLHDG('TO' 'SOURCE')
+     A            SHTMBR        10A         COLHDG('TO' 'MEMBER')
+     A
+     ‚* ANLAGEDATEN
+     A            SHAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            SHABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            SHAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            SHADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            SHATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            SHMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            SHMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            SHMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            SHMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            SHMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K SHLFDN

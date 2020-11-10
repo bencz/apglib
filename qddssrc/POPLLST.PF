@@ -1,0 +1,58 @@
+     ‚*---------------------------------------------------------------*
+     ‚* PERSÖNLICHE OFFENE PUNKTE LISTE                               *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  28.01.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  OFFENE PUNKTE LISTE/TODO-LISTE               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R POPLLSTF                  TEXT('OPL LISTE')
+     A*
+     ‚* LAUFENDE NUMMER
+     A            OPLFDN         9S 0       COLHDG('LFDN')
+     A
+     A            OPDATE         8S 0       COLHDG('DATUM')
+     A            OPUSER        10A         COLHDG('USER')
+     A            OPTYPE        20A         COLHDG('OPL KATEGORIE')
+     ‚* TEXT
+     A            OPTEXT       100A         COLHDG('TEXT')
+     A            OPPRZT         3S 0       COLHDG('PROZENT' 'FERTIG')
+     A            OPPRIO         2S 0       COLHDG('PRIORITÄT')
+     A            OPIMPT         1S 0       COLHDG('IMPORTANT')
+     ‚* STATUS
+     A            OPSTAT         1A         COLHDG('STATUS')
+     ‚* SHARENUMBER + SHAREMANAGER (QUASI DER ADMIN)
+     A            OPSHRN         9S 0       COLHDG('SHARE' 'NUMBER')
+     A            OPSHRM        10A         COLHDG('SHARE' 'MANAGER')
+     ‚* VERSCHLÜSSELT
+     A            OPCRYP         1S 0       COLHDG('CRYPTED')
+     A            OPCRYT        10A         COLHDG('CRYPTED' 'TYPE')
+     ‚* TEXT-TYP UND ID
+     A            OPTTYP        10A         COLHDG('TEXT-TYP')
+     A            OPTID         10A         COLHDG('TEXT-ID')
+     A
+     ‚* ANLAGEDATEN
+     A            OPAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            OPABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            OPAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            OPADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            OPATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            OPMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            OPMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            OPMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            OPMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            OPMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K OPLFDN

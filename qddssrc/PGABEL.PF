@@ -1,0 +1,41 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ZEITEN FESTHALTEN                                             *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.06.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  GABELZEIT ;-)                                *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PGABELF                   TEXT('TEST GABELZEIT')
+     A*
+     ‚* KEY
+     A            GBUSER        10A         COLHDG('USER')
+     A
+     A            GBSEC          9S 0       COLHDG('SEKUNDEN')
+     A            GBCALL         9S 0       COLHDG('AUFRUFE')
+     A
+     ‚* ANLAGEDATEN
+     A            GBAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            GBABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            GBAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            GBADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            GBATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            GBMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            GBMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            GBMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            GBMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            GBMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K GBUSER

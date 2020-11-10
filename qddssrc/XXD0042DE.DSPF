@@ -1,0 +1,54 @@
+     A*%%TS  SD  20110609  073354  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* STARTZEIT FESTHALTEN                                          *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  09.06.2011                                   *
+     A*                                                               *
+     A* FUNKTION      :  STARTZEIT FESTHALTEN                         *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      CF21(21)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20110609  073354  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       19A  O  1 12DSPATR(HI)
+     A                                  3  1'Start  . . :'
+     A            TI_S           8A  O  3 14
+     A            DT_S          10A  O  4 14
+     A                                  5  1'Text . . . :'
+     A            TEXT1         25A  B  5 14CHECK(LC)
+     A            TEXT2         25A  B  6 14CHECK(LC)
+     A                                  8  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                  8 16'F21=Kommandozeile'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(3 37 9 40)
+     A  *DS4                                WINDOW(3 37 9 40)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

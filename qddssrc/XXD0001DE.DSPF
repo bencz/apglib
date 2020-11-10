@@ -1,0 +1,387 @@
+     A*%%TS  SD  20101117  164504  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* xxx                                                           *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  11.05.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  DETAILANZEIGE LED-TELEGRAMM                  *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20101117  164504  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                 17  2'LED-Telegramm  . . :'
+     A            LEDTLG        35A  B 17 23
+     A                                 18 23'+++LEDXZZZZAZZZZZZZZZZZZZZZZZZZX---
+     A                                      -'
+     A                                      COLOR(RED)
+     A                                 20  2'Aufbereitung . . . :'
+     A            MODUS          1Y 0B 20 23EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                 20 26'(0=Subfileauflistung/1=Standard-TP-
+     A                                      G mit 8 LEDs/'
+     A                                      COLOR(BLU)
+     A                                 21 27'2=Standard-NEC Sortierregal)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20090511  195353  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            AUSW           1A  B 11  2VALUES(' ' '1' '4' '6')
+     A            LEDNR          3Y 0O 11  4EDTCDE(3)
+     A            KURZSTS        1   O 11  8
+     A  41                                  DSPATR(BL)
+     A                                      COLOR(RED)
+     A            LANGSTS       20A  O 11 10
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20090511  185534  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0016)
+     A                                      SFLPAG(0015)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      CA13(13)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Telegramm  :'
+     A            LEDTLG        35A  B  5 15
+     A                                  7  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A            SFT0005        3A  O 10  4DSPATR(HI)
+     A            SFTLEER        1A  O 10  8DSPATR(HI)
+     A            SFT0006       20A  O 10 10DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20090511  204747  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)
+     A          R FMT06
+     A*%%TS  SD  20101117  164504  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A  01        ERRMSG        78   M
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  5  2'Telegramm  :'
+     A            LEDTLG        35A  B  5 15
+     A                                  6 15'+++LEDXZZZAZZZZZZZZZZZZZZZZZZZZX---
+     A                                      -'
+     A                                      COLOR(RED)
+     A                                  7 25'^ = Letztes anzeigbares Fach'
+     A                                 10  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 11  2'|'
+     A  51                             11  4'##############'
+     A                                      COLOR(RED)
+     A  63                                  DSPATR(BL)
+     A                                 11 19'|'
+     A  52                             11 21'##############'
+     A                                      COLOR(RED)
+     A  64                                  DSPATR(BL)
+     A                                 11 36'|'
+     A  53                             11 38'##############'
+     A                                      COLOR(RED)
+     A  65                                  DSPATR(BL)
+     A                                 11 53'|'
+     A  54                             11 55'##############'
+     A                                      COLOR(RED)
+     A  66                                  DSPATR(BL)
+     A                                 11 70'|'
+     A                                 12  2'|'
+     A  51                             12  4'##############'
+     A                                      COLOR(RED)
+     A  63                                  DSPATR(BL)
+     A                                 12 19'|'
+     A  52                             12 21'##############'
+     A                                      COLOR(RED)
+     A  64                                  DSPATR(BL)
+     A                                 12 36'|'
+     A  53                             12 38'##############'
+     A                                      COLOR(RED)
+     A  65                                  DSPATR(BL)
+     A                                 12 53'|'
+     A  54                             12 55'##############'
+     A                                      COLOR(RED)
+     A  66                                  DSPATR(BL)
+     A                                 12 70'|'
+     A                                 13  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 14  2'|'
+     A  55                             14  4'##############'
+     A                                      COLOR(RED)
+     A  67                                  DSPATR(BL)
+     A                                 14 19'|'
+     A  56                             14 21'##############'
+     A                                      COLOR(RED)
+     A  68                                  DSPATR(BL)
+     A                                 14 36'|'
+     A  57                             14 38'##############'
+     A                                      COLOR(RED)
+     A  69                                  DSPATR(BL)
+     A                                 14 53'|'
+     A  58                             14 55'##############'
+     A                                      COLOR(RED)
+     A  70                                  DSPATR(BL)
+     A                                 14 70'|'
+     A                                 15  2'|'
+     A  55                             15  4'##############'
+     A                                      COLOR(RED)
+     A  67                                  DSPATR(BL)
+     A                                 15 19'|'
+     A  56                             15 21'##############'
+     A                                      COLOR(RED)
+     A  68                                  DSPATR(BL)
+     A                                 15 36'|'
+     A  57                             15 38'##############'
+     A                                      COLOR(RED)
+     A  69                                  DSPATR(BL)
+     A                                 15 53'|'
+     A  58                             15 55'##############'
+     A                                      COLOR(RED)
+     A  70                                  DSPATR(BL)
+     A                                 15 70'|'
+     A                                 16  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A*         R FMT01
+     A          R FMT07
+     A*%%TS  SD  20090511  210106  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A  01        ERRMSG        78   M
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  5  2'Telegramm  :'
+     A            LEDTLG        35A  B  5 15
+     A                                  6 15'+++LEDXZZZZZAZZZZZZZZZZZZZZZZZZX---
+     A                                      -'
+     A                                      COLOR(RED)
+     A                                  7 27'^ = Letztes anzeigbares Fach'
+     A                                 10  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 11  2'|'
+     A  51                             11  4'##############'
+     A                                      COLOR(RED)
+     A  63                                  DSPATR(BL)
+     A                                 11 19'|'
+     A  52                             11 21'##############'
+     A                                      COLOR(RED)
+     A  64                                  DSPATR(BL)
+     A                                 11 36'|'
+     A  53                             11 38'##############'
+     A                                      COLOR(RED)
+     A  65                                  DSPATR(BL)
+     A                                 11 53'|'
+     A  54                             11 55'##############'
+     A                                      COLOR(RED)
+     A  66                                  DSPATR(BL)
+     A                                 11 70'|'
+     A                                 12  2'|'
+     A  51                             12  4'##############'
+     A                                      COLOR(RED)
+     A  63                                  DSPATR(BL)
+     A                                 12 19'|'
+     A  52                             12 21'##############'
+     A                                      COLOR(RED)
+     A  64                                  DSPATR(BL)
+     A                                 12 36'|'
+     A  53                             12 38'##############'
+     A                                      COLOR(RED)
+     A  65                                  DSPATR(BL)
+     A                                 12 53'|'
+     A  54                             12 55'##############'
+     A                                      COLOR(RED)
+     A  66                                  DSPATR(BL)
+     A                                 12 70'|'
+     A                                 13  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 14  2'|'
+     A  55                             14  4'##############'
+     A                                      COLOR(RED)
+     A  67                                  DSPATR(BL)
+     A                                 14 19'|'
+     A  56                             14 21'##############'
+     A                                      COLOR(RED)
+     A  68                                  DSPATR(BL)
+     A                                 14 36'|'
+     A  57                             14 38'##############'
+     A                                      COLOR(RED)
+     A  69                                  DSPATR(BL)
+     A                                 14 53'|'
+     A  58                             14 55'##############'
+     A                                      COLOR(RED)
+     A  70                                  DSPATR(BL)
+     A                                 14 70'|'
+     A                                 15  2'|'
+     A  55                             15  4'##############'
+     A                                      COLOR(RED)
+     A  67                                  DSPATR(BL)
+     A                                 15 19'|'
+     A  56                             15 21'##############'
+     A                                      COLOR(RED)
+     A  68                                  DSPATR(BL)
+     A                                 15 36'|'
+     A  57                             15 38'##############'
+     A                                      COLOR(RED)
+     A  69                                  DSPATR(BL)
+     A                                 15 53'|'
+     A  58                             15 55'##############'
+     A                                      COLOR(RED)
+     A  70                                  DSPATR(BL)
+     A                                 15 70'|'
+     A                                 16  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 17  2'|'
+     A  59                             17  4'##############'
+     A                                      COLOR(RED)
+     A  71                                  DSPATR(BL)
+     A                                 17 19'|'
+     A  60                             17 21'##############'
+     A                                      COLOR(RED)
+     A  72                                  DSPATR(BL)
+     A                                 17 36'|'
+     A  61                             17 38'##############'
+     A                                      COLOR(RED)
+     A  73                                  DSPATR(BL)
+     A                                 17 53'|'
+     A  62                             17 55'##############'
+     A                                      COLOR(RED)
+     A  74                                  DSPATR(BL)
+     A                                 17 70'|'
+     A                                 18  2'|'
+     A  59                             18  4'##############'
+     A                                      COLOR(RED)
+     A  71                                  DSPATR(BL)
+     A                                 18 19'|'
+     A  60                             18 21'##############'
+     A                                      COLOR(RED)
+     A  72                                  DSPATR(BL)
+     A                                 18 36'|'
+     A  61                             18 38'##############'
+     A                                      COLOR(RED)
+     A  73                                  DSPATR(BL)
+     A                                 18 53'|'
+     A  62                             18 55'##############'
+     A                                      COLOR(RED)
+     A  74                                  DSPATR(BL)
+     A                                 18 70'|'
+     A                                 19  2'-----------------------------------
+     A                                      -----------------------------------'
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)

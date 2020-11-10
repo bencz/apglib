@@ -1,0 +1,85 @@
+     ‚*---------------------------------------------------------------*
+     ‚* CR-MELDUNGEN                                                  *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  22.06.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  ALLE CR-SÄTZE (KOPF + MELDUNG)               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCHKSRCF                  TEXT('CHKSRC')
+     A*
+     ‚* LAUFENDE NUMMER
+     A            CRLFDN         9S 0       COLHDG('LFD-NUMMER')
+     A
+     ‚* VORGANGSNUMMER
+     A            CRVORG         9S 0       COLHDG('VORGANG')
+     A
+     ‚* DATEINAME/LIB/ETC
+     A            CRLIB         10A         COLHDG('BIBLIOTHEK')
+     A            CRFILE        10A         COLHDG('DATEI')
+     A            CRMBR         10A         COLHDG('TEILDATEI')
+     A
+     ‚* P3/AUTOR/PRÜFEN AB DATUM/...
+     A            CRPGMA         9S 0       COLHDG('P3-NUMMER')
+     A            CRCUSR        10A         COLHDG('AUTOR')
+     A            CRCDTA         8S 0       COLHDG('PRÜFDATUM')
+     A
+     ‚* FEHLERZEILE/MELDUNG
+     A            CRSECN         6S 2       COLHDG('ZEILE')
+     A            CRSDTA         8S 0       COLHDG('ZEILENDATUM')
+     A            CRFID         10A         COLHDG('FEHLER-ID')
+     A            CRFTYP         9S 0       COLHDG('FEHLERTYP')
+     A            CRFTXT        80A         COLHDG('MELDUNG')
+     A            CRFTX2        80A         COLHDG('ZUSATZMELDUNG')
+     A
+     A            CRLINE       200A         COLHDG('SOURCE' 'ZEILE')
+     A
+     ‚* ANLAGEDATEN
+     A            CRAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            CRABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            CRAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            CRADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            CRATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            CRMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            CRMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            CRMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            CRMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            CRMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            CRFK01         1S 0       COLHDG('FUNKTION 1')
+     A            CRFK02         1S 0       COLHDG('FUNKTION 2')
+     A            CRFK03         1S 0       COLHDG('FUNKTION 3')
+     A            CRFK04         1S 0       COLHDG('FUNKTION 4')
+     A            CRFK05         1S 0       COLHDG('FUNKTION 5')
+     A            CRFK06         1S 0       COLHDG('FUNKTION 6')
+     A            CRFK07         1S 0       COLHDG('FUNKTION 7')
+     A            CRFK08         1S 0       COLHDG('FUNKTION 8')
+     A            CRFK09         1S 0       COLHDG('FUNKTION 9')
+     A            CRFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            CRDAT1        10A         COLHDG('DATEN/10-1')
+     A            CRDAT2        10A         COLHDG('DATEN/10-2')
+     A            CRDAT3        10A         COLHDG('DATEN/10-3')
+     A            CRDAT4        10A         COLHDG('DATEN/10-4')
+     A            CRDAT5        10A         COLHDG('DATEN/10-5')
+     A            CRDAT6        10A         COLHDG('DATEN/10-6')
+     A            CRDAT7        10A         COLHDG('DATEN/10-7')
+     A            CRDAT8        10A         COLHDG('DATEN/10-8')
+     A            CRDAT9        10A         COLHDG('DATEN/10-9')
+     A            CRDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K CRLFDN

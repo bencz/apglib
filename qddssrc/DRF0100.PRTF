@@ -1,0 +1,94 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TIPPÜBERSICHT DRUCKEN                                         *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  22.03.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  DRUCKEN ALLER TIPPS                          *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R FMT01                     SKIPB(1)
+     ‚* DRUCKDATEN
+     A                                     1'DRF0100'
+     A                                      SPACEA(1)
+     ‚* ZEILE-2
+     A            DUMMY          1A        1
+     A                                    62DATE
+     A                                      EDTCDE(Y)
+     A                                    71TIME
+     A                                      SPACEA(2)
+     ‚*---
+     A          R FMT02
+     ‚* TIPPDATEN
+     A            MSTUSR    R        O 12  4REFFLD(MSTUSR AMU/PMITSPL)
+     A            TIP1H     R        O 12 15REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 18':'
+     A            TIP1A     R        O 12 20REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP2H     R        O 12 25REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 28':'
+     A            TIP2A     R        O 12 30REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP3H     R        O 12 35REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 38':'
+     A            TIP3A     R        O 12 40REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP4H     R        O 12 45REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 48':'
+     A            TIP4A     R        O 12 50REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP5H     R        O 12 55REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 58':'
+     A            TIP5A     R        O 12 60REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP6H     R        O 12 65REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 68':'
+     A            TIP6A     R        O 12 70REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP7H     R        O 12 75REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 78':'
+     A            TIP7A     R        O 12 80REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP8H     R        O 12 85REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 88':'
+     A            TIP8A     R        O 12 90REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP9H     R        O 12 95REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 98':'
+     A            TIP9A     R        O 12100REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                      SPACEA(1)
+     A          R FMT03
+     ‚* ÜBERSCHRIFTEN
+     A            SFT0009       10A  O     4
+     A            TIP1           7A  O    15
+     A            TIP2           7A  O    25
+     A            TIP3           7A  O    35
+     A            TIP4           7A  O    45
+     A            TIP5           7A  O    55
+     A            TIP6           7A  O    65
+     A            TIP7           7A  O    75
+     A            TIP8           7A  O    85
+     A            TIP9           7A  O    95
+     A                                      SPACEA(1)
+     A          R FMT04
+     A                                    01'--------------------------------'
+     A                                    33'--------------------------------'
+     A                                    65'--------------'
+     A                                      SPACEA(1)
+     ‚*

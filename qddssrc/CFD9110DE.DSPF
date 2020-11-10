@@ -1,0 +1,155 @@
+     A*%%TS  SD  20110614  070743  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE EINES ABSTURZ                                         *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  30.07.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ABSTURZ ANZEIGEN                             *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA24(24)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20110614  070743  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       32A  O  1 12DSPATR(HI)
+     A                                  3  1'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  3  7'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  3 13'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  3 19'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  3 25'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  3 32'Es trat ein'
+     A                                  4  1'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4  7'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 10'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 13'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 16'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 19'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 22'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 25'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 28'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  4 32'unerwarteter'
+     A                                  5  1'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  5  7'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  5 13'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  5 19'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  5 22'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  5 25'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  5 32'Fehler auf.'
+     A                                  6  1'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  6  7'    '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  6 13'    '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  6 19'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  6 22'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  6 25'    '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7  1'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  7  7'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7 10'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7 13'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7 16'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7 19'     '
+     A                                      COLOR(RED)
+     A                                      DSPATR(RI)
+     A                                  7 25'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7 28'  '
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                  7 32'Das Programm'
+     A                                  8 32'wird nun'
+     A                                  9  1'Fehler:'
+     A            FEHLER        10   O  9  9
+     A                                  9 32'beendet.'
+     A                                 11  1'F24=Dennoch fortsetzen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02
+     A*%%TS  SD  20010214  094701  JPF         REL-V4R2M0  5769-PW1
+     A                                      OVERLAY
+     A  *DS3                                WINDOW(8 17 12 43)
+     A  *DS4                                WINDOW(8 73 12 43)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  20000821  124406  KAB         REL-V4R2M0  5769-PW1
+     A                                      ASSUME
+     A                                  1  2' '
+     A                                      DSPATR(ND)

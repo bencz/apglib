@@ -1,0 +1,115 @@
+     A*%%TS  SD  20110805  093906  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ZUWEISEN VON SOURCEN                                          *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  09.06.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  EINER ÜBUNG SOURCEN ZUWEISEN                 *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20110805  093906  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            ASUSER    R        H      REFFLD(ASUSER APG/PAZUSRC)
+     A            ASLFDN    R        H      REFFLD(ASLFDN APG/PAZUSRC)
+     A            AUSW           1A  B 20  2VALUES(' ' '4' '5')
+     A            ASSMBR    R        O 20  4REFFLD(ASSMBR APG/PAZUSRC)
+     A            ASSRCN    R        O 20 15REFFLD(ASSRCN APG/PAZUSRC)
+     A            ASSLIB    R        O 20 26REFFLD(ASSLIB APG/PAZUSRC)
+     A            ASMTXT    R     A  O 20 37REFFLD(ASMTXT APG/PAZUSRC)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20110805  093906  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0007)
+     A                                      SFLPAG(0006)
+     A                                      CA05(05)
+     A                                      CF08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            AULFDN    R        H      REFFLD(AULFDN APG/PAZUUEB)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'Projektnummer . :'
+     A            PROJEKT       15A  B  4 20
+     A            AUPRN2    R     Y  B  4 36REFFLD(AUPRN2 APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A            AUPRN3    R     Y  B  4 41REFFLD(AUPRN3 APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A  41                              4 93'Neuanlage'
+     A                                      COLOR(RED)
+     A                                  5  2'Angebot/-pos  . :'
+     A            AUANG     R     Y  B  5 20REFFLD(AUANG APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A            AUANGP    R     Y  B  5 30REFFLD(AUANGP APG/PAZUUEB)
+     A                                      EDTCDE(4)
+     A                                  6  2'Kundenkürzel  . :'
+     A            AUKDK     R        B  6 20REFFLD(AUKDK APG/PAZUUEB)
+     A                                  8  2'Beschreibung  . :'
+     A            AUTEXT    R        B  8 20REFFLD(AUTEXT APG/PAZUUEB)
+     A                                      CHECK(LC)
+     A                                 15  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                 16  4'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                 16 15'5=Anzeigen'
+     A                                      COLOR(BLU)
+     A            SFT0034       10A  O 18  4DSPATR(HI)
+     A            SFT0019       10A  O 18 15DSPATR(HI)
+     A            SFT0001       10A  O 18 26DSPATR(HI)
+     A            SFT0003       80A  O 18 37DSPATR(HI)
+     A            EINMBR        10A  B 19  4
+     A            EINRCN        10A  B 19 15
+     A            EINLIB        10A  B 19 26
+     A*            17:14:43    QPGMR       REL-R07M00  5714-UT1
+     A*                                     OVERLAY
+     A          R FMT04
+     A*%%TS  SD  20110722  070608  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20110722  070608  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 22 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

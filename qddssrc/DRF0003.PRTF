@@ -1,0 +1,25 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LAGERFÜHRUNGSSYSTEM  LFS 400                                  *
+     ‚*---------------------------------------------------------------*
+     ‚* COPYRIGHT BY  :  EHRHARDT + PARTNER GMBH & CO. KG             *
+     ‚*                  SOFTWARE-SYSTEME FÜR WAREHOUSE-LOGISTIK      *
+     ‚*                  56154 BOPPARD-BUCHHOLZ                       *
+     ‚*                  +49 (0) 67 42 / 87 27 0                      *
+     ‚*                  INFO@EHRHARDT-PARTNER.COM                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  XXXXXXXXXX                                   *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  XXXXX JJJJ                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R FMT01
+     A*------ZEILE-1-----
+     A            AUSTEXT      130A       01
+     A                                       SPACEA(1)

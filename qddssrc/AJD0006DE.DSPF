@@ -1,0 +1,99 @@
+     A*%%TS  SD  20090604  173201  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* WARTUNG TEXTE PRO THEMA                                       *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  04.06.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  WARTUNG TEXTE ZU EINEM THEMA                 *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20090604  172431  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLNXTCHG
+     A            PSID      R        H      REFFLD(PSID APG/PAJXTXT)
+     A            PSKEY     R        H      REFFLD(PSKEY APG/PAJXTXT)
+     A            PSLFPO    R        H      REFFLD(PSLFPO APG/PAJXTXT)
+     A            LEERZ          1A  H
+     A            PSTEXT    R   -3   B 12  2REFFLD(PSTEXT APG/PAJXTXT)
+     A                                      CHECK(LC)
+     A  70                                  DSPATR(PC)
+     A  50                                  DSPATR(PR)
+     A            AUSW           1A  B 12 80VALUES(' ' '1' '4')
+     A  50                                  DSPATR(PR)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20090604  173201  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0011)
+     A                                      SFLPAG(0010)
+     A                                      CA05(05)
+     A                                      BLINK
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                  1  2'AJD0006DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT03'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(3)
+     A                                  5  2'Thema . . . . . :'
+     A            AXID      R        O  5 20REFFLD(AXID APG/PAJXTHM)
+     A                                      COLOR(BLU)
+     A                                  6  2'Unterthema  . . :'
+     A            AXKEY     R        O  6 20REFFLD(AXKEY APG/PAJXTHM)
+     A                                  8  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken'
+     A                                      COLOR(BLU)
+     A                                  9  4'1=Zeile einfügen'
+     A                                      COLOR(BLU)
+     A  50                                  DSPATR(ND)
+     A                                  9 22'4=Zeile löschen'
+     A                                      COLOR(BLU)
+     A  50                                  DSPATR(ND)
+     A            SFT0003       77A  O 11  2DSPATR(HI)
+     A*--------------------------------------------------------------
+     A          R FMT04
+     A*%%TS  SD  20050915  092401  GGO         REL-V5R3M0  5722-WDS
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 23 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 13'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

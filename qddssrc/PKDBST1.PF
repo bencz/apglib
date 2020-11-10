@@ -1,0 +1,63 @@
+     ‚*---------------------------------------------------------------*
+     ‚* BESTELLUNGEN FÜR DEN KÜCHENDIENST                             *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  11.03.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  BESTELLUNGEN (MILCH, KAFFEE, ...)            *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PKDBST1F                  TEXT('TEST PKDBST1')
+     A*
+     ‚* KEY - LAUFENDE NUMMER
+     A            KBLFDN         9S 0       COLHDG('LFDN')
+     A
+     A            KBTYP         10A         COLHDG('BESTELL' 'TYP')
+     A            KBBST1        10A         COLHDG('BESTELL' 'NUMMER')
+     A            KBIDEN        20A         COLHDG('ARTIKEL' 'NR')
+     A
+     ‚* MENGENFELDER
+     A            KBBMEN        11S 3       COLHDG('BESTELL' 'MENGE')
+     A            KBLMEN        11S 3       COLHDG('LIEFER' 'MENGE')
+     A
+     ‚* BESTELLSTATUS
+     A            KBVSTS         1A         COLHDG('STATUS')
+     A
+     ‚* USER DER DIE BESTELLUNG ERSTELLT HAT
+     A            KBBUSR        10A         COLHDG('BESTELL' 'USER')
+     A            KBBBS         10A         COLHDG('BESTELL' 'TERMINAL')
+     A            KBBPGM        10A         COLHDG('BESTELL' 'PGM')
+     A            KBDTB          8S 0       COLHDG('BESTELL' 'DATUM')
+     A            KBTIB          6S 0       COLHDG('BESTELL' 'ZEIT')
+     A
+     ‚* USER DER DIE BESTELLUNG ERLEDIGT HAT
+     A            KBEUSR        10A         COLHDG('ERLEDIGT' 'USER')
+     A            KBEBS         10A         COLHDG('ERLEDIGT' 'TERMINAL')
+     A            KBEPGM        10A         COLHDG('ERLEDIGT' 'PGM')
+     A            KBDTE          8S 0       COLHDG('ERLEDIGT' 'DATUM')
+     A            KBTIE          6S 0       COLHDG('ERLEDIGT' 'ZEIT')
+     A
+     ‚* ANLAGEDATEN
+     A            KBAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            KBABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            KBAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            KBADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            KBATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            KBMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            KBMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            KBMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            KBMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            KBMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K KBLFDN

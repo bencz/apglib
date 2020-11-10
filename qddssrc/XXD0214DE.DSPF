@@ -1,0 +1,50 @@
+     A*%%TS  SD  20101004  075106  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* SCHULDSCHEIN-ERINNUNG                                         *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  01.10.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE WINDOW                               *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20101004  075106  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       19A  O  1 12DSPATR(HI)
+     A                                  3  1'User . . . :'
+     A            TUSER         10A  B  3 14
+     A                                  4  1'Betrag . . :'
+     A            BETRAG         4Y 2B  4 14EDTCDE(3)
+     A                                  4 20'EUR'
+     A                                      COLOR(BLU)
+     A                                  7  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(8 20 8 30)
+     A  *DS4                                WINDOW(8 20 8 30)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

@@ -1,0 +1,45 @@
+     ‚*---------------------------------------------------------------*
+     ‚* STATUSDATEI                                                   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.10.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  GENERELLE PROTOKOLLIERUNG                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGSTSF                  TEXT('CONFIG PCFGSTS')
+     A*
+     ‚* ID UND KEY BILDEN DEN SCHLÜSSEL
+     A            STLFDN         9S 0       COLHDG('LFD-NUMMER')
+     A
+     A            STKEY         50A         COLHDG('KEY')
+     A            STFILE        10A         COLHDG('DATEI')
+     A            STSTS         50A         COLHDG('STATUS')
+     A            STDATA        50A         COLHDG('DATEN')
+     A
+     A            STTID         10A         COLHDG('TEXT-ID')
+     A
+     ‚* LOGDATEN
+     A            STLUSR        10A         COLHDG('USER    ' 'LOG')
+     A            STLBS         10A         COLHDG('TERMINAL' 'LOG')
+     A            STLPGM        10A         COLHDG('PROGRAMM' 'LOG')
+     A            STLDTA         8S 0       COLHDG('DATUM   ' 'LOG')
+     A            STLTIA         6S 0       COLHDG('ZEIT    ' 'LOG')
+     A
+     ‚* ANLAGEDATEN
+     A            STAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            STABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            STAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            STADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            STATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* KEY
+     A          K STLFDN

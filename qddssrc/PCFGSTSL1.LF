@@ -1,0 +1,22 @@
+     ‚*---------------------------------------------------------------*
+     ‚* SORTIERUNG NACH KEY/DATEI/LETZTE ANLAGE                       *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.10.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH DATUM (DESCEND)              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCFGSTSF                  PFILE(PCFGSTS)
+     ‚*
+     A          K STFILE
+     A          K STKEY
+     A          K STADTA                    DESCEND
+     A          K STATIA                    DESCEND
+     ‚*€

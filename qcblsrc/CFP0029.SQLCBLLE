@@ -1,0 +1,311 @@
+       IDENTIFICATION DIVISION.
+     ‚*
+         PROGRAM-ID.              CFP0029.
+           COPY COPYRIGHT  OF APG-QCPYSRC.
+     ‚*
+     ‚*---------------------------------------------------------------*
+     ‚* DATEN IN PCRYPTD ABLEGEN/AUSLESEN                             *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  22.01.2013                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  DATEN VERSCHLÜSSELN/ENTSCHLÜSSELN AUS PCRYPTD*
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+       ENVIRONMENT DIVISION.
+        CONFIGURATION SECTION.
+         SOURCE-COMPUTER.         IBM-AS400.
+         OBJECT-COMPUTER.         IBM-AS400.
+        SPECIAL-NAMES. , DECIMAL-POINT IS COMMA.
+      /
+
+       INPUT-OUTPUT SECTION.
+         FILE-CONTROL.
+
+     ‚*-------------------------------------------------------------
+     ‚* PCRYPTD: PCID, PCFILE
+     ‚*-------------------------------------------------------------
+           SELECT PCRYPTD-DP
+                  ASSIGN       TO  DATABASE-PCRYPTD
+                  ORGANIZATION IS  INDEXED
+                  RECORD KEY   IS  EXTERNALLY-DESCRIBED-KEY
+                  ACCESS       IS  DYNAMIC
+                  FILE STATUS  IS  FILE-STATUS.
+
+       DATA DIVISION.
+       FILE SECTION.
+     ‚*--- PCRYPTD: PCID, PCFILE
+       FD  PCRYPTD-DP
+           LABEL RECORDS ARE STANDARD.
+       01  PCRYPTD-P.
+           COPY DDS-ALL-FORMATS OF PCRYPTD.
+      /
+       WORKING-STORAGE SECTION.
+
+     ‚* STANDARDFELDER
+           COPY WRKSTD      OF APG-QCPYSRC.
+
+           EXEC SQL
+               INCLUDE SQLCA
+           END-EXEC.
+
+       01  PGM-WRK                        PIC X(10) VALUE "CFP0028".
+       01  PGM-TYP                        PIC X(8)  VALUE "CONFIG".
+
+       01  PCRYPTD-WRK.
+           COPY DDS-ALL-FORMATS OF PCRYPTD.
+
+       01  PWD-VAR                        PIC X(10).
+       01  WRK-VAR                        PIC X(20).
+       01  ANZEIGEN                       PIC 9(1).
+       01  SQL-STMT                       PIC X(512).
+       01  TEST-REC                       PIC X(512).
+       01  VAR-SALT                       PIC X(10) VALUE "GEHEIMEUP".
+       01  CHECK-VAR                      PIC X(10).
+       01  REC-WRK                        PIC X(50).
+       01  STRING-WRK                     PIC X(20).
+       01  WRK-CHAR                       PIC X(1).
+       01  RECH-FELD                      PIC S9(1).
+       01  FAKTOR                         PIC 9(1).
+       01  POS                            PIC 9(2).
+
+     ‚*-------------------------------------------------------
+       LINKAGE SECTION.
+     ‚*-------------------------------------------------------
+       01  X-PCID                    LIKE PCID   OF PCRYPTD-WRK.
+       01  X-PCFILE                  LIKE PCFILE OF PCRYPTD-WRK.
+       01  X-PCCRYP                  LIKE PCCRYP OF PCRYPTD-WRK.
+       01  X-PASSWORD                     PIC X(20).
+       01  X-ACTION                       PIC X(20).
+       01  X-RETCODE                 LIKE RET-CODE.
+     ‚*-------------------------------------------------------
+       PROCEDURE DIVISION USING X-PCID
+                                X-PCFILE
+                                X-PCCRYP
+                                X-PASSWORD
+                                X-ACTION
+                                X-RETCODE.
+     ‚*-------------------------------------------------------
+       STEUER SECTION.
+       ANFANG.
+
+     ‚* FÜLLEN PGM-WRK UND AUSFÜHREN STANDARDROUTINEN
+           MOVE     "CFP0029" TO PGM-WRK.
+           PERFORM  COPY-PGM-INIT.
+
+     ‚* ALLE DATEIEN ÖFFNEN
+           IF       FIRST-CALL NOT = "1"
+                    MOVE "1" TO FIRST-CALL
+                    OPEN INPUT PCRYPTD-DP
+           END-IF.
+
+           INITIALIZE X-RETCODE.
+     ‚* DARF DIESES PROGRAMM BENUTZT WERDEN?
+           PERFORM  COPY-PERMISSION.
+           IF       RET-CODE NOT = SPACES
+                    GO TO ENDE
+           END-IF.
+
+           PERFORM  OPEN-SQL-FILE.
+
+           EVALUATE X-ACTION
+     ‚*        DATEN VERSCHLÜSSELT ABSPEICHERN
+               WHEN "ENCRYPT" PERFORM ENCRYPT-DATA
+     ‚*        DATEN ENTSCHLÜSSELN
+               WHEN "DECRYPT" PERFORM DECRYPT-DATA
+           END-EVALUATE.
+
+           PERFORM  CLOSE-SQL-FILE.
+
+           MOVE     "GEHEIM" TO PWD-VAR.
+
+           STRING   VAR-SALT DELIMITED BY SIZE
+                    PWD-VAR  DELIMITED BY SIZE
+           INTO     WRK-VAR.
+           INITIALIZE SQLCODE.
+           EXEC SQL
+                    SET ENCRYPTION PASSWORD =
+                        :WRK-VAR
+           END-EXEC.
+           IF       SQLCODE < ZEROES
+                    GO TO ENDE
+           END-IF.
+           MOVE     X-STRING TO STRING-WRK.
+
+           PERFORM  CHANGE-STRING.
+           INITIALIZE FAKTOR.
+
+           EXEC SQL
+                    DECLARE LFSCURSOR01 CURSOR FOR
+                    SELECT DECRYPT_CHAR(FIELDVAL)
+                           FROM PSRCCHK
+           END-EXEC.
+           IF       SQLCODE < ZEROES
+                    GO TO ENDE
+           END-IF.
+           EXEC SQL
+                    OPEN LFSCURSOR01
+           END-EXEC.
+           IF       SQLCODE < ZEROES
+                    GO TO ENDE
+           END-IF.
+       ANF010.
+           EXEC SQL
+                    FETCH LFSCURSOR01 INTO :REC-WRK
+           END-EXEC.
+           IF       SQLCODE NOT = ZEROES
+                    GO TO ANF020
+           END-IF.
+           IF       REC-WRK = STRING-WRK
+                    MOVE 1 TO FAKTOR
+                    MOVE SPACES TO X-RETCODE
+                    GO TO ANF020
+           END-IF.
+           GO TO    ANF010.
+       ANF020.
+           EXEC SQL
+                    CLOSE LFSCURSOR01
+           END-EXEC.
+           IF       SQLCODE < ZEROES
+                    GO TO ENDE
+           END-IF.
+
+       ENDE.
+           PERFORM  COPY-PGM-EXIT.
+
+           GOBACK.
+      /
+     ‚*--------------------------------------------------------------
+     ‚* DATEN VERSCHLÜSSELT ANLEGEN ODER AKTUALISIEREN
+     ‚*--------------------------------------------------------------
+       ENCRYPT-DATA SECTION.
+       ENC-DTA-00.
+
+           INITIALIZE PCRYPTDF OF PCRYPTD-P.
+           MOVE     X-PCID        TO PCID   OF PCRYPTD-P.
+           MOVE     X-PCFILE      TO PCFILE OF PCRYPTD-P.
+           READ     PCRYPTD-DP.
+           IF       FILE-STATUS = ZEROES
+                    PERFORM ENCRYPT-UPDATE
+           ELSE
+                    PERFORM ENCRYPT-INSERT
+           END-IF.
+
+       ENC-DTA-90.
+           EXIT.
+      /
+     ‚*--------------------------------------------------------------
+     ‚* NEUE DATEN IN DIE PCRYPTD EINTRAGEN
+     ‚*--------------------------------------------------------------
+       ENCRYPT-INSERT SECTION.
+       ENC-INS-00.
+
+           EXEC SQL
+                    INSERT INTO PCRYPTD (PCID, PCFILE, PCCRYP)
+                    VALUES (':X-PCID',
+                            ':X-PCFILE',
+                            encrypt(:X-PCCRYP, ':PASSWORT-WRK')
+                            )
+           END-EXEC.
+
+       ENC-INS-90.
+           EXIT.
+      /
+     ‚*--------------------------------------------------------------
+     ‚* NEUE DATEN IN DIE PCRYPTD EINTRAGEN
+     ‚*--------------------------------------------------------------
+       ENCRYPT-UPDATE SECTION.
+       ENC-UPD-00.
+
+           EXEC SQL
+                    UPDATE PCRYPTD
+                    SET    PCCRYP=encrypt(:X-PCCRYP, ':PASSWORT-WRK')
+                    WHERE  PCID=:X-PCID AND PCFILE=:X-PCFILE
+           END-EXEC.
+
+       ENC-UPD-90.
+           EXIT.
+      /
+     ‚*--------------------------------------------------------------
+     ‚* <bitte Kommentar eingeben>
+     ‚*--------------------------------------------------------------
+       CHANGE-STRING SECTION.
+       CHG-STR-00.
+           MOVE     STRING-WRK(1:10)  TO STRING-WRK(11:10).
+           MOVE     STRING-WRK(2:1)  TO WRK-CHAR.
+           MOVE     STRING-WRK(19:1) TO STRING-WRK(2:1).
+           MOVE     WRK-CHAR         TO STRING-WRK(19:1).
+
+           MOVE     STRING-WRK(4:1)  TO WRK-CHAR.
+           MOVE     STRING-WRK(17:1) TO STRING-WRK(4:1).
+           MOVE     WRK-CHAR         TO STRING-WRK(17:1).
+
+           MOVE     STRING-WRK(6:1)  TO WRK-CHAR.
+           MOVE     STRING-WRK(15:1) TO STRING-WRK(6:1).
+           MOVE     WRK-CHAR         TO STRING-WRK(15:1).
+
+           MOVE     STRING-WRK(8:1)  TO WRK-CHAR.
+           MOVE     STRING-WRK(13:1) TO STRING-WRK(8:1).
+           MOVE     WRK-CHAR         TO STRING-WRK(13:1).
+
+           MOVE     STRING-WRK(10:1)  TO WRK-CHAR.
+           MOVE     STRING-WRK(11:1) TO STRING-WRK(10:1).
+           MOVE     WRK-CHAR         TO STRING-WRK(11:1).
+
+           EVALUATE STRING-WRK(1:1)
+                    WHEN "1"
+                      MOVE 3 TO FAKTOR
+                    WHEN "2"
+                      MOVE 7 TO FAKTOR
+                    WHEN "3"
+                      MOVE 1 TO FAKTOR
+                    WHEN "4"
+                      MOVE 9 TO FAKTOR
+                    WHEN "5"
+                      MOVE 2 TO FAKTOR
+                    WHEN "6"
+                      MOVE 6 TO FAKTOR
+                    WHEN "7"
+                      MOVE 4 TO FAKTOR
+                    WHEN "8"
+                      MOVE 8 TO FAKTOR
+                    WHEN "9"
+                      MOVE 0 TO FAKTOR
+                    WHEN "0"
+                      MOVE 5 TO FAKTOR
+                    WHEN OTHER
+                      MOVE 1 TO FAKTOR
+           END-EVALUATE.
+           INITIALIZE POS.
+           PERFORM  VARYING POS FROM 2 BY 1 UNTIL POS > 20
+                    IF STRING-WRK(POS:1) IS NUMERIC
+                       MOVE STRING-WRK(POS:1) TO RECH-FELD
+                       COMPUTE RECH-FELD = RECH-FELD - FAKTOR
+                       IF RECH-FELD < ZEROES
+                          COMPUTE RECH-FELD = RECH-FELD + 10
+                       END-IF
+                       MOVE RECH-FELD TO STRING-WRK(POS:1)
+                    END-IF
+           END-PERFORM.
+
+       CHG-STR-90.
+           EXIT.
+      /
+     ‚*---------------------------------------------------------------
+     ‚* COPY-PERMISSION: BERECHTIGUNGSPRÜFUNG
+     ‚*---------------------------------------------------------------
+
+           COPY     PERMISSION OF APG-QCPYSRC.
+      /
+     ‚*---------------------------------------------------------------
+     ‚* COPY-PGM-INIT/COPY-PGM-EXIT: STANDARDROUTINEN START UND ENDE
+     ‚*---------------------------------------------------------------
+
+           COPY     PGMWRK     OF APG-QCPYSRC.
+      /

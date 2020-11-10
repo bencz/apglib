@@ -1,0 +1,47 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TICKET DATEI                                                  *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  20.07.2015                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TSC TICKET DATEI ALS ÜBERSICHT               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PTICKETF                  TEXT('TEST PTICKET')
+     A*
+     ‚* ID UND KEY BILDEN DEN SCHLÜSSEL
+     A            TIID          16A         COLHDG('TICKET')
+     A
+     A            TISTS          1A         COLHDG('STATUS')
+     A
+     ‚* STARTDATUM TICKET
+     A            TISDTA         8S 0       COLHDG('DATUM   ' 'TICKET S')
+     A            TISTIA         6S 0       COLHDG('ZEIT    ' 'TICKET S')
+     ‚* ABSCHLUSSDATUM TICKET
+     A            TIEDTA         8S 0       COLHDG('DATUM   ' 'TICKET E')
+     A            TIETIA         6S 0       COLHDG('ZEIT    ' 'TICKET E')
+     A
+     ‚* ANLAGEDATEN
+     A            TIAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            TIABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            TIAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            TIADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            TIATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            TIMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            TIMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            TIMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            TIMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            TIMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K TIID

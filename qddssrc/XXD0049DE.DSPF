@@ -1,0 +1,140 @@
+     A*%%TS  SD  20111129  071731  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* EDITIERCODE-ANZEIGE                                           *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  25.11.2011                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE ALLER EDITIERCODES                   *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20111129  071731  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A* ALLE WEITEREN FELDER
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯-
+     A                                      ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯-
+     A                                      ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯-
+     A                                      ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯'
+     A                                      COLOR(BLU)
+     A                                  5  2'Eingabe . . . . . :'
+     A            EINGABE       20Y 5B  5 22EDTCDE(L)
+     A                                  6  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      ___________________________________-
+     A                                      __________________________'
+     A                                      COLOR(BLU)
+     A                                  7  2'Trennzeichen und Nullinhalt'
+     A                                      COLOR(BLU)
+     A                                  7 69'Trennzeichen'
+     A                                      COLOR(BLU)
+     A                                  8  4'EDTCDE(1) . . . :'
+     A            EDTCDE1       20Y 5O  8 23EDTCDE(1)
+     A                                  8 71'EDTCDE(2) . . . :'
+     A            EDTCDE2       20Y 5O  8 90EDTCDE(2)
+     A                                  9  4'EDTCDE(A) . . . :'
+     A            EDTCDEA       20Y 5O  9 23EDTCDE(A)
+     A                                  9 71'EDTCDE(B) . . . :'
+     A            EDTCDEB       20Y 5O  9 90EDTCDE(B)
+     A                                 10  4'EDTCDE(J) . . . :'
+     A            EDTCDEJ       20Y 5O 10 23EDTCDE(J)
+     A                                 10 71'EDTCDE(K) . . . :'
+     A            EDTCDEK       20Y 5O 10 90EDTCDE(K)
+     A                                 11  4'EDTCDE(N) . . . :'
+     A            EDTCDEN       20Y 5O 11 22EDTCDE(N)
+     A                                 11 71'EDTCDE(O) . . . :'
+     A            EDTCDEO       20Y 5O 11 89EDTCDE(O)
+     A                                 12  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      ___________________________________-
+     A                                      __________________________'
+     A                                      COLOR(BLU)
+     A                                 13  2'Nullinhalt'
+     A                                      COLOR(BLU)
+     A                                 13 69'Keine Trennz./Kein Nullinhalt'
+     A                                      COLOR(BLU)
+     A                                 14  4'EDTCDE(3) . . . :'
+     A            EDTCDE3       20Y 5O 14 23EDTCDE(3)
+     A                                 14 71'EDTCDE(4) . . . :'
+     A            EDTCDE4       20Y 5O 14 90EDTCDE(4)
+     A                                 15  4'EDTCDE(C) . . . :'
+     A            EDTCDEC       20Y 5O 15 23EDTCDE(C)
+     A                                 15 71'EDTCDE(D) . . . :'
+     A            EDTCDED       20Y 5O 15 90EDTCDE(D)
+     A                                 16  4'EDTCDE(L) . . . :'
+     A            EDTCDEL       20Y 5O 16 23EDTCDE(L)
+     A                                 16 71'EDTCDE(M) . . . :'
+     A            EDTCDEM       20Y 5O 16 90EDTCDE(M)
+     A                                 17  4'EDTCDE(P) . . . :'
+     A            EDTCDEP       20Y 5O 17 22EDTCDE(P)
+     A                                 17 71'EDTCDE(Q) . . . :'
+     A            EDTCDEQ       20Y 5O 17 89EDTCDE(Q)
+     A                                 18  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      ___________________________________-
+     A                                      __________________________'
+     A                                      COLOR(BLU)
+     A                                 19  2'Benutzerdefinierte Editiercodes'
+     A                                      COLOR(BLU)
+     A                                 19 69'Sonstige Editiercodes'
+     A                                      COLOR(BLU)
+     A                                 20  4'EDTCDE(5) . . . :'
+     A            EDTCDE5       20Y 5O 20 23EDTCDE(5)
+     A                                 20 71'EDTCDE(Z) . . . :'
+     A            EDTCDEZ       20Y 5O 20 90EDTCDE(Z)
+     A                                 21  4'EDTCDE(6) . . . :'
+     A            EDTCDE6       20Y 5O 21 23EDTCDE(6)
+     A                                 21 71'Kein EDTCDE . . :'
+     A            EDTCDE        20Y 5O 21 90
+     A                                 22  4'EDTCDE(7) . . . :'
+     A            EDTCDE7       20Y 5O 22 22EDTCDE(7)
+     A                                 23  4'EDTCDE(8) . . . :'
+     A            EDTCDE8       20Y 5O 23 22EDTCDE(8)
+     A                                 24  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      ___________________________________-
+     A                                      __________________________'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 31'F20=Infos'
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)

@@ -1,0 +1,241 @@
+     A*%%TS  SD  20100819  193454  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* SOURCEANZEIGEPROGRAMM                                         *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  11.11.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  SOURCE ANZEIGEN                              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS3)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      HELP
+     A                                      HLPTITLE('CRD0010DE')
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20100819  193454  APG         REL-V5R4M0  5722-WDS
+     A                                      CA05(05)
+     A                                      CA09(09)
+     A                                      CA10(10)
+     A                                      CA12(12)
+     A                                      CA13(13)
+     A                                      CF16(16)
+     A                                      CA18(18)
+     A                                      CA20(20)
+     A                                      CA21(21)
+     A                                      CA22(22)
+     A                                      PAGEDOWN(98)
+     A                                      PAGEUP(99)
+     A                                      RTNCSRLOC(&CURFMT &CURFLD &CURPOS)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A          H                           HLPPNLGRP('CRH0010DE/FMT01' CRH0010-
+     A                                      DE)
+     A                                      HLPARA(01 001 27 132)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            CURFMT        10A  H
+     A            CURFLD        10A  H
+     A            CURPOS         4S 0H
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            A_AUSW01       1A  P
+     A            A_AUSW02       1A  P
+     A            A_AUSW03       1A  P
+     A            A_AUSW04       1A  P
+     A            A_AUSW05       1A  P
+     A            A_AUSW06       1A  P
+     A            A_AUSW07       1A  P
+     A            A_AUSW08       1A  P
+     A            A_AUSW09       1A  P
+     A            A_AUSW10       1A  P
+     A            A_AUSW11       1A  P
+     A            A_AUSW12       1A  P
+     A            A_AUSW13       1A  P
+     A            A_AUSW14       1A  P
+     A            A_AUSW15       1A  P
+     A            A_AUSW16       1A  P
+     A            A_AUSW17       1A  P
+     A            A_AUSW18       1A  P
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       77A  O  1 20DSPATR(HI)
+     A            SRCVIEW       15A  O  1 98
+     A            PGMTYP         8A  O  1114COLOR(BLU)
+     A                                  1123SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        77A  O  2 20DSPATR(HI)
+     A  41        SRCCHG        15A  O  2 98DSPATR(RI)
+     A                                      COLOR(PNK)
+     A            DT_SYS         8A  O  2114
+     A            TI_SYS         8A  O  2123
+     A                                  3  2'Befehl . . :'
+     A            SEUCMD        50A  B  3 15
+     A            AUSW01         2A  B  6  2
+     A  02                                  DSPATR(&A_AUSW01)
+     A            FLD001        60A  O  6  5
+     A                                  6 66'|'
+     A                                      COLOR(BLU)
+     A            FLD002        60A  O  6 68
+     A            FLD003         2A  B  6129
+     A            AUSW02         2A  B  7  2
+     A  02                                  DSPATR(&A_AUSW02)
+     A            FLD021        60A  O  7  5
+     A                                  7 66'|'
+     A                                      COLOR(BLU)
+     A            FLD004        60A  O  7 68
+     A            AUSW03         2A  B  8  2
+     A  02                                  DSPATR(&A_AUSW03)
+     A            FLD022        60A  O  8  5
+     A                                  8 66'|'
+     A                                      COLOR(BLU)
+     A            FLD005        60A  O  8 68
+     A            AUSW04         2A  B  9  2
+     A  02                                  DSPATR(&A_AUSW04)
+     A            FLD023        60A  O  9  5
+     A                                  9 66'|'
+     A                                      COLOR(BLU)
+     A            FLD006        60A  O  9 68
+     A            AUSW05         2A  B 10  2
+     A  02                                  DSPATR(&A_AUSW05)
+     A            FLD024        60A  O 10  5
+     A                                 10 66'|'
+     A                                      COLOR(BLU)
+     A            FLD007        60A  O 10 68
+     A            AUSW06         2A  B 11  2
+     A  02                                  DSPATR(&A_AUSW06)
+     A            FLD025        60A  O 11  5
+     A                                 11 66'|'
+     A                                      COLOR(BLU)
+     A            FLD008        60A  O 11 68
+     A            AUSW07         2A  B 12  2
+     A  02                                  DSPATR(&A_AUSW07)
+     A            FLD026        60A  O 12  5
+     A                                 12 66'|'
+     A                                      COLOR(BLU)
+     A            FLD009        60A  O 12 68
+     A            AUSW08         2A  B 13  2
+     A  02                                  DSPATR(&A_AUSW08)
+     A            FLD027        60A  O 13  5
+     A                                 13 66'|'
+     A                                      COLOR(BLU)
+     A            FLD010        60A  O 13 68
+     A            AUSW09         2A  B 14  2
+     A  02                                  DSPATR(&A_AUSW09)
+     A            FLD028        60A  O 14  5
+     A                                 14 66'|'
+     A                                      COLOR(BLU)
+     A            FLD011        60A  O 14 68
+     A            AUSW10         2A  B 15  2
+     A  02                                  DSPATR(&A_AUSW10)
+     A            FLD029        60A  O 15  5
+     A                                 15 66'|'
+     A                                      COLOR(BLU)
+     A            FLD012        60A  O 15 68
+     A            AUSW11         2A  B 16  2
+     A  02                                  DSPATR(&A_AUSW11)
+     A            FLD030        60A  O 16  5
+     A                                 16 66'|'
+     A                                      COLOR(BLU)
+     A            FLD013        60A  O 16 68
+     A            AUSW12         2A  B 17  2
+     A  02                                  DSPATR(&A_AUSW12)
+     A            FLD031        60A  O 17  5
+     A                                 17 66'|'
+     A                                      COLOR(BLU)
+     A            FLD014        60A  O 17 68
+     A            AUSW13         2A  B 18  2
+     A  02                                  DSPATR(&A_AUSW13)
+     A            FLD032        60A  O 18  5
+     A                                 18 66'|'
+     A                                      COLOR(BLU)
+     A            FLD015        60A  O 18 68
+     A            AUSW14         2A  B 19  2
+     A  02                                  DSPATR(&A_AUSW14)
+     A            FLD033        60A  O 19  5
+     A                                 19 66'|'
+     A                                      COLOR(BLU)
+     A            FLD016        60A  O 19 68
+     A            AUSW15         2A  B 20  2
+     A  02                                  DSPATR(&A_AUSW15)
+     A            FLD034        60A  O 20  5
+     A                                 20 66'|'
+     A                                      COLOR(BLU)
+     A            FLD017        60A  O 20 68
+     A            AUSW16         2A  B 21  2
+     A  02                                  DSPATR(&A_AUSW16)
+     A            FLD035        60A  O 21  5
+     A                                 21 66'|'
+     A                                      COLOR(BLU)
+     A            FLD018        60A  O 21 68
+     A            AUSW17         2A  B 22  2
+     A  02                                  DSPATR(&A_AUSW17)
+     A            FLD036        60A  O 22  5
+     A                                 22 66'|'
+     A                                      COLOR(BLU)
+     A            FLD019        60A  O 22 68
+     A            AUSW18         2A  B 23  2
+     A  02                                  DSPATR(&A_AUSW18)
+     A            FLD037        60A  O 23  5
+     A                                 23 66'|'
+     A                                      COLOR(BLU)
+     A            FLD020        60A  O 23 68
+     A*-------------------
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 49'F13=Standardwerte'
+     A                                      COLOR(BLU)
+     A                                 26 68'F20=Infos'
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A  40                                  DSPATR(BL)
+     A                                 26 79'F21=Kommandozeile'
+     A                                      COLOR(BLU)
+     A            FLD038         2A  B  7129
+     A            FLD039         2A  B  8129
+     A            FLD040         2A  B  9129
+     A            FLD041         2A  B 10129
+     A            FLD042         2A  B 11129
+     A            FLD043         2A  B 12129
+     A            FLD044         2A  B 13129
+     A            FLD045         2A  B 14129
+     A            FLD046         2A  B 15129
+     A            FLD047         2A  B 16129
+     A            FLD048         2A  B 17129
+     A            FLD049         2A  B 18129
+     A            FLD050         2A  B 19129
+     A            FLD051         2A  B 20129
+     A            FLD052         2A  B 21129
+     A            FLD053         2A  B 22129
+     A            FLD054         2A  B 23129
+     A            FLD055        10   O 24118
+     A            FLD056        10   O 24 55
+     A            FLD057        60   O  5  5DSPATR(HI)
+     A            FLD058        60   O  5 68DSPATR(HI)
+     A                                  3 68'Übertragungsmodus:'
+     A            FLD060         6   O  3 87
+     A                                  3 95'Namefmt:'
+     A            FLD061         3   O  3104
+     A                                 26 98'F22=Output anzeigen'
+     A                                      COLOR(BLU)

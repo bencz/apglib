@@ -1,0 +1,219 @@
+     A*%%TS  SD  20100902  072218  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE SYNTAX-HIGHLIGHTBEFEHLE                               *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  02.02.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE SYNTAX-BEFEHLE                       *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20100202  202129  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A  03                                  CSRLOC(CURY       CURX)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  2'CRD0021DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                 17  2'User . . . . . . . :'
+     A            SYUSER    R        O 17 23REFFLD(SYUSER APG/PCHKHGH)
+     A                                 19  2'Sourcetyp  . . . . :'
+     A            SYTYP     R        B 19 23REFFLD(SYTYP APG/PCHKHGH)
+     A                                 20  2'Befehl . . . . . . :'
+     A            SYCMD     R     A  B 20 23REFFLD(SYCMD APG/PCHKHGH)
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 23 31'F20=Infos'
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A  40                                  DSPATR(BL)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20100202  210445  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A* ATTRIBUTFELDER FÜR ALLE FELDER MIT FEHLERAUSGABE
+     A            SYUSER    R        H      REFFLD(SYUSER APG/PCHKHGH)
+     A            AUSW           1A  B  9  2VALUES(' ' '1' '4')
+     A            SYTYP     R        O  9  4REFFLD(SYTYP APG/PCHKHGH)
+     A            SYCMD     R        O  9 15REFFLD(SYCMD APG/PCHKHGH)
+     A            VORSCHAU  R   +1   O  9 46REFFLD(SYCMD APG/PCHKHGH)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100202  210445  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0015)
+     A                                      SFLPAG(0014)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A                                  1  2'CRD0021DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT03'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  6 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A            SFT0024       10A  O  8  4DSPATR(HI)
+     A            SFT0025       30A  O  8 15DSPATR(HI)
+     A            SFT0026       31A  O  8 46DSPATR(HI)
+     A*            17:14:43    QPGMR       REL-R07M00  5714-UT1
+     A*                                     OVERLAY
+     A*                                     OVERLAY
+     A*                                     OVERLAY
+     A*                                     OVERLAY
+     A          R FMT04
+     A*%%TS  SD  20100202  205949  APG         REL-V5R4M0  5722-WDS
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 23 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 23 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 13'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A*         R FMT01
+     A          R FMT06
+     A*%%TS  SD  20100902  072218  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A  03                                  CSRLOC(CURY       CURX)
+     A  01        ERRMSG        78   M
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A                                  1  2'CRD0021DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT06'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  5  2'Sourcentyp . . . . :'
+     A            SYTYP     R        B  5 23REFFLD(SYTYP APG/PCHKHGH)
+     A  41                                  DSPATR(HI)
+     A  41                                  DSPATR(PR)
+     A                                  5 56'Farben:'
+     A                                  6  2'Befehl . . . . . . :'
+     A            SYCMD     R        B  6 23REFFLD(SYCMD APG/PCHKHGH)
+     A  41                                  DSPATR(HI)
+     A  41                                  DSPATR(PR)
+     A                                  6 58'GREEN'
+     A                                  7  2'Farbe  . . . . . . :'
+     A            SYCOLR    R        B  7 23REFFLD(SYCOLR APG/PCHKHGH)
+     A                                  7 58'BLUE'
+     A                                      COLOR(BLU)
+     A                                  8 58'RED'
+     A                                      COLOR(RED)
+     A                                  9 58'PINK'
+     A                                      COLOR(PNK)
+     A                                 10  2'Invers . . . . . . :'
+     A            SYINVS    R     Y  B 10 23REFFLD(SYINVS APG/PCHKHGH)
+     A                                      EDTCDE(3)
+     A                                 10 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 10 58'WHITE'
+     A                                      COLOR(WHT)
+     A                                 11  2'Unterstrichen  . . :'
+     A            SYUNDR    R     Y  B 11 23REFFLD(SYUNDR APG/PCHKHGH)
+     A                                      EDTCDE(3)
+     A                                 11 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 11 58'YELLOW'
+     A                                      COLOR(YLW)
+     A                                 12  2'Blinken  . . . . . :'
+     A            SYBLNK    R     Y  B 12 23REFFLD(SYBLNK APG/PCHKHGH)
+     A                                      EDTCDE(3)
+     A                                 12 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 12 58'LIGHTBLUE'
+     A                                      COLOR(TRQ)
+     A                                 19  2'Aktiv  . . . . . . :'
+     A            SYAKT     R     Y  B 19 23REFFLD(SYAKT APG/PCHKHGH)
+     A                                      EDTCDE(3)
+     A                                 19 26'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 20  2'Vorschau . . . . . :'
+     A            VORSCHAU  R   +1   O 20 23REFFLD(SYCMD APG/PCHKHGH)
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

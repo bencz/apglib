@@ -1,0 +1,148 @@
+     A*%%TS  SD  20100322  070921  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* TIPPÜBERSICHT                                                 *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  18.03.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  TIPP-ÜBERSICHT                               *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20100322  070921  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            AUSW           1A  B 12  2VALUES(' ')
+     A            MSTUSR    R        O 12  4REFFLD(MSTUSR AMU/PMITSPL)
+     A            TIP1H     R        O 12 15REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 18':'
+     A            TIP1A     R        O 12 20REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP2H     R        O 12 25REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 28':'
+     A            TIP2A     R        O 12 30REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP3H     R        O 12 35REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 38':'
+     A            TIP3A     R        O 12 40REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP4H     R        O 12 45REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 48':'
+     A            TIP4A     R        O 12 50REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP5H     R        O 12 55REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 58':'
+     A            TIP5A     R        O 12 60REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP6H     R        O 12 65REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 68':'
+     A            TIP6A     R        O 12 70REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP7H     R        O 12 75REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 78':'
+     A            TIP7A     R        O 12 80REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP8H     R        O 12 85REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 88':'
+     A            TIP8A     R        O 12 90REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A            TIP9H     R        O 12 95REFFLD(TPTORH AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A                                 12 98':'
+     A            TIP9A     R        O 12100REFFLD(TPTORA AMU/PTIPPEN)
+     A                                      EDTCDE(3)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100322  070921  APG         REL-V5R4M0  5722-WDS
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLSIZ(0015)
+     A                                      SFLPAG(0014)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A                                  1  2'XXD0100DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT03'
+     A                                      COLOR(BLU)
+     A            MAINUEB       77A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1114COLOR(BLU)
+     A                                  1123SYSNAME
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        77A  O  2 20DSPATR(HI)
+     A                                  2114DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2123TIME
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Saison . . :'
+     A            STJAHR    R        O  5 15REFFLD(STJAHR AMU/PSPITAG)
+     A                                  5 20'Spieltag . :'
+     A            STTAG     R        O  5 33REFFLD(STTAG AMU/PSPITAG)
+     A                                  5 36'Liga . . . :'
+     A            STLIGA    R        O  5 49REFFLD(STLIGA AMU/PSPITAG)
+     A                                  6  2'User . . . :'
+     A            TUSER         10   O  6 15
+     A                                  8  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  9  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A            SFT0009       10A  O 11  4DSPATR(HI)
+     A            TIP1           7A  O 11 15DSPATR(HI)
+     A            TIP2           7A  O 11 25DSPATR(HI)
+     A            TIP3           7A  O 11 35DSPATR(HI)
+     A            TIP4           7A  O 11 45DSPATR(HI)
+     A            TIP5           7A  O 11 55DSPATR(HI)
+     A            TIP6           7A  O 11 65DSPATR(HI)
+     A            TIP7           7A  O 11 75DSPATR(HI)
+     A            TIP8           7A  O 11 85DSPATR(HI)
+     A            TIP9           7A  O 11 95DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20100318  070349  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 13'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

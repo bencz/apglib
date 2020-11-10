@@ -1,0 +1,177 @@
+     A*%%TS  SD  20170907  115624  CFR         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* BERICHTSHEFTDATEN                                             *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  CARSTEN FRERICHS                             *
+     A*                                                               *
+     A* ERSTELLT AM   :  16.03.2016                                   *
+     A*                                                               *
+     A* FUNKTION      :  ÜBERSICHT ÜBER DIE PAZUBER                   *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20160316  113813  CFR         REL-V7R1M0  5770-WDS
+     A                                      CA12(12)
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  01        ERRMSG        78   M
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A            A_ABUSER       1A  P
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                 20  2'Zeitraum . . . . . :'
+     A                                 21 17'von'
+     A            ABJAHR    R    4Y00B 21 23REFFLD(ABJAHR APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A                                 21 28'(JJJJ)'
+     A                                      COLOR(BLU)
+     A            ABKW      R    2Y00B 21 36REFFLD(ABKW APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A                                 21 39'(KW)'
+     A                                      COLOR(BLU)
+     A                                 22 17'bis'
+     A            ABJAHRB   R    4Y00B 22 23REFFLD(ABJAHR APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A                                 22 28'(JJJJ)'
+     A                                      COLOR(BLU)
+     A            ABKWB     R    2Y00B 22 36REFFLD(ABKW APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A                                 22 39'(KW)'
+     A                                      COLOR(BLU)
+     A                                 24  2'Verantwortlicher . :'
+     A            CFDAT1    R        B 24 23REFFLD(CFDAT1 APG/PCONFIG)
+     A                                      DSPATR(&A_ABUSER)
+     A                                 24 36'(optional)'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20110712  070758  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            ABMDTA    R        H      REFFLD(ABMDTA APG/PAZUBER)
+     A            ABMTIA    R        H      REFFLD(ABMTIA APG/PAZUBER)
+     A            AUSW           1A  B 10  2VALUES(' ' '1' '2' '4' '5' '6' '7')
+     A            ABUSER    R        O 10  4REFFLD(ABUSER APG/PAZUBER)
+     A            ABJAHR    R        O 10 15REFFLD(ABJAHR APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A            ABKW      R        O 10 20REFFLD(ABKW APG/PAZUBER)
+     A                                      EDTCDE(3)
+     A            ABERR     R        O 10 23REFFLD(ABERR APG/PAZUBER)
+     A                                      EDTCDE(4)
+     A                                      COLOR(PNK)
+     A            ABSTAT    R        O 10 33REFFLD(ABSTAT APG/PAZUBER)
+     A                                      COLOR(RED)
+     A            ABMSER    R        O 10 35REFFLD(ABMSER APG/PAZUBER)
+     A            ABMBS     R        O 10 46REFFLD(ABMBS APG/PAZUBER)
+     A            DT_M          10A  O 10 57
+     A            TI_M           8A  O 10 68
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20170907  115624  CFR         REL-V7R1M0  5770-WDS
+     A                                      SFLSIZ(0017)
+     A                                      SFLPAG(0016)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Abschließen mit Email'
+     A                                      COLOR(BLU)
+     A                                  6 29'2=Abschließen ohne Email'
+     A                                      COLOR(BLU)
+     A                                  6 55'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  6 66'5=Fehlerhaft mit Email'
+     A                                      COLOR(BLU)
+     A                                  7  4'6=Fehlerhaft ohne Email'
+     A                                      COLOR(BLU)
+     A                                  7 29'7=Erinnerungs-Email'
+     A                                      COLOR(BLU)
+     A                                  7 50'8=Prüfen-Email'
+     A                                      COLOR(BLU)
+     A                                  7 66'9=Abhol-Erinnerung'
+     A                                      COLOR(BLU)
+     A            SFT0009       10A  O  9  4DSPATR(HI)
+     A            SFT0049        4A  O  9 15DSPATR(HI)
+     A            SFT0048        2A  O  9 20DSPATR(HI)
+     A            SFT0043        9A  O  9 23DSPATR(HI)
+     A            SFT0033        1A  O  9 33DSPATR(HI)
+     A                                  9 35'<-----------'
+     A                                      DSPATR(HI)
+     A            SFT0042       15A  O  9 48DSPATR(HI)
+     A                                  9 64'----------->'
+     A                                      DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20160315  105708  CFR         REL-V7R1M0  5770-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

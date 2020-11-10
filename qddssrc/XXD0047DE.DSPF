@@ -1,0 +1,183 @@
+     A*%%TS  SD  20120904  145537  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* STRINGANZEIGE                                                 *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  08.09.2011                                   *
+     A*                                                               *
+     A* FUNKTION      :  INFORMATIONEN ÜBER EINEN STRING              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20120904  145537  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A* ATTRIBUTFELDER
+     A            A_SUBPOS       1A  P
+     A            A_SUBLEN       1A  P
+     A* ALLE WEITEREN FELDER
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  4  2'¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯-
+     A                                      ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯-
+     A                                      ¯'
+     A                                      COLOR(BLU)
+     A                                  4 76'Leerzeichen vorne :'
+     A            LSINP          2Y 0O  4 96EDTCDE(3)
+     A                                  4 99'(INSPECT ... FOR LEADING SPACES)'
+     A                                      COLOR(BLU)
+     A                                  5 22'....5...10....5...20....5...30....-
+     A                                      5...40....5...50'
+     A                                      COLOR(BLU)
+     A                                  5 76'Leerzeichen hinten:'
+     A            TSINP          2Y 0O  5 96EDTCDE(3)
+     A                                  6  2'Eingabe . . . . . :'
+     A            INPSTR        50A  B  6 22CHECK(LC)
+     A                                  6 76'Gesamtlänge Inhalt:'
+     A            LENINP         2Y 0O  6 96EDTCDE(3)
+     A                                  6 99'('
+     A                                      COLOR(BLU)
+     A            CALC11         2Y 0O  6101EDTCDE(3)
+     A                                      COLOR(BLU)
+     A                                  6104'-'
+     A                                      COLOR(BLU)
+     A            CALC12         2Y 0O  6106EDTCDE(3)
+     A                                      COLOR(BLU)
+     A                                  6109'-'
+     A                                      COLOR(BLU)
+     A            CALC13         2Y 0O  6111EDTCDE(3)
+     A                                      COLOR(BLU)
+     A                                  6114')'
+     A                                      COLOR(BLU)
+     A                                  7  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      _'
+     A                                      COLOR(BLU)
+     A                                  8 76'Leerzeichen vorne :'
+     A            LSREV          2Y 0O  8 96EDTCDE(3)
+     A                                  8 99'(INSPECT ... FOR LEADING SPACES)'
+     A                                      COLOR(BLU)
+     A                                  9 22'....5...10....5...20....5...30....-
+     A                                      5...40....5...50'
+     A                                      COLOR(BLU)
+     A                                  9 76'Leerzeichen hinten:'
+     A            TSREV          2Y 0O  9 96EDTCDE(3)
+     A                                 10  2'Reverse . . . . . :'
+     A            REVSTR        50A  O 10 22
+     A                                 10 76'Gesamtlänge Inhalt:'
+     A            LENREV         2Y 0O 10 96EDTCDE(3)
+     A                                 10 99'('
+     A                                      COLOR(BLU)
+     A            CALC21         2Y 0O 10101EDTCDE(3)
+     A                                      COLOR(BLU)
+     A                                 10104'-'
+     A                                      COLOR(BLU)
+     A            CALC22         2Y 0O 10106EDTCDE(3)
+     A                                      COLOR(BLU)
+     A                                 10109'-'
+     A                                      COLOR(BLU)
+     A            CALC23         2Y 0O 10111EDTCDE(3)
+     A                                      COLOR(BLU)
+     A                                 10114')'
+     A                                      COLOR(BLU)
+     A                                 11  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      ___________________________________-
+     A                                      __________________________'
+     A                                      COLOR(BLU)
+     A                                 13  2'Substring . . . . :'
+     A            SUBPOS         2Y 0B 13 22EDTCDE(3)
+     A  02                                  DSPATR(&A_SUBPOS)
+     A            SUBLEN         2Y 0B 13 25EDTCDE(3)
+     A  02                                  DSPATR(&A_SUBLEN)
+     A            SUBSTR        50A  O 13 28
+     A                                 13 79'='
+     A                                      COLOR(BLU)
+     A                                 13 81'VAR('
+     A                                      COLOR(BLU)
+     A            SUB1           2S 0O 13 86COLOR(BLU)
+     A                                 13 89':'
+     A                                      COLOR(BLU)
+     A            SUB2           2Y 0O 13 91COLOR(BLU)
+     A                                      EDTCDE(4)
+     A                                 13 94')'
+     A                                      COLOR(BLU)
+     A                                 14  2'TRIM()  . . . . . :'
+     A            STRIM         50A  O 14 28
+     A                                 14 79'Achtung:'
+     A                                      COLOR(BLU)
+     A                                 14 88'Die Funktionen TRIM*() sind nicht -
+     A                                      Windows-'
+     A                                      COLOR(BLU)
+     A                                 15  2'TRIML() . . . . . :'
+     A            STRIML        50A  O 15 28
+     A                                 15 88'und Linuxkompatibel. Daher dürfen -
+     A                                      diese'
+     A                                      COLOR(BLU)
+     A                                 16  2'TRIMR() . . . . . :'
+     A            STRIMR        50A  O 16 28
+     A                                 16 88'nicht verwendet werden!'
+     A                                      COLOR(BLU)
+     A                                 17  2'UPPER-CASE()  . . :'
+     A            STRUC         50A  O 17 28
+     A                                 17 79'Achtung:'
+     A                                      COLOR(BLU)
+     A                                 17 88'Sonderzeichen werden von UPPER-CAS-
+     A                                      E() und'
+     A                                      COLOR(BLU)
+     A                                 18  2'LOWER-CASE()  . . :'
+     A            STRLC         50A  O 18 28
+     A                                 18 88'LOWER-CASE() nicht umgesetzt!'
+     A                                      COLOR(BLU)
+     A                                 19  2'__________________________________-
+     A                                      ___________________________________-
+     A                                      ___________________________________-
+     A                                      __________________________'
+     A                                      COLOR(BLU)
+     A                                 21  3'INSPECT  . . . . :'
+     A            INSLSP         2  0O 21 22
+     A                                 21 28'FOR LEADING SPACES'
+     A                                      COLOR(BLU)
+     A            INSCBI         2  0O 22 22
+     A                                 22 28'FOR CHARACTERS BEFORE INITIAL *'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 31'F20=Infos'
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)

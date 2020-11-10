@@ -1,0 +1,191 @@
+     A*%%TS  SD  20190220  072647  APG         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* DISPLAYTESTS                                                  *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  13.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  DISPLAYTESTS                                 *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20190220  072647  APG         REL-V7R1M0  5770-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            C_TEST         5A  P
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A            WAHL           2Y 0B  4  2SNGCHCFLD(*AUTOSLT (*NUMCOL 1))
+     A                                      CHOICE(1 'TEST 1')
+     A                                      CHOICE(2 'TEST 2')
+     A                                      CHOICE(3 'SUBFILE')
+     A                                      CHOICE(99 'ENDE')
+     A                                  4 40'Zeitfeld Stunde ohne Editiercode m-
+     A                                      it Ref:'
+     A            FLD004    R     Y  B  4 82REFFLD(AKBSTD NPLDATV6/PANFKOP)
+     A                                  4116'0123456789ABCDEF'
+     A                                      COLOR(BLU)
+     A                                  5 40'Tastaturumschaltung auf Y!'
+     A                                  5114'4'
+     A                                      COLOR(BLU)
+     A            HEX4          16A  O  5116
+     A            WAHL2          2Y 0B  6 41SNGCHCFLD
+     A                                      CHOICE(1 &C_TEST)
+     A                                  6114'5'
+     A                                      COLOR(BLU)
+     A            HEX5          16A  O  6116
+     A                                  7114'6'
+     A                                      COLOR(BLU)
+     A            HEX6          16A  O  7116
+     A                                  8 40'Numerisch mit Range . . . . . . . -
+     A                                      . . . :'
+     A            RNGNUM        11Y 3B  8 82EDTCDE(3)
+     A                                      RANGE(,314 3,140)
+     A                                  8114'7'
+     A                                      COLOR(BLU)
+     A            HEX7          16A  O  8116
+     A                                  9 40'Alphanumerische Values  . . . . . -
+     A                                      . . . :'
+     A            VALALP         2A  B  9 82VALUES('A' 'B' 'C ')
+     A                                  9114'8'
+     A                                      COLOR(BLU)
+     A            HEX8          16A  O  9116
+     A                                 10114'9'
+     A                                      COLOR(BLU)
+     A            HEX9          16A  O 10116
+     A                                 11114'A'
+     A                                      COLOR(BLU)
+     A            HEXA          16A  O 11116
+     A                                 12114'B'
+     A                                      COLOR(BLU)
+     A            HEXB          16A  O 12116
+     A                                 13114'C'
+     A                                      COLOR(BLU)
+     A            HEXC          16A  O 13116
+     A                                 14114'D'
+     A                                      COLOR(BLU)
+     A            HEXD          16A  O 14116
+     A                                 15114'E'
+     A                                      COLOR(BLU)
+     A            HEXE          16A  O 15116
+     A                                 16114'F'
+     A                                      COLOR(BLU)
+     A            HEXF          16A  O 16116
+     A                                 20  2'Umbrechendes Textfeld:'
+     A                                 20 64'Unterstrichen . :'
+     A            UNTERSTRI     36A  B 20 82CHGINPDFT
+     A                                      CHECK(LC)
+     A            UMBRUCH      240A  B 21  2CNTFLD(060)
+     A                                      WRDWRAP
+     A                                      CHECK(LC)
+     A                                 21 64'E-Mail falsch . :'
+     A            FLD001         9A  B 21 82
+     A                                 21 92'@'
+     A            FLD002         9A  B 21 94
+     A                                 21104'.'
+     A            FLD003         4A  B 21106
+     A                                 22 64'Nicht Ändern  . :'
+     A            CHGTEST        3A  B 22 82CHANGE(51)
+     A            AENDERN        3A  O 22 86
+     A                                 23 64'Gültig bei >0 . :'
+     A            GT0FLD         2Y 0B 23 82COMP(GT 0)
+     A                                      EDTCDE(3)
+     A                                 24 64'Gültig bei >0 . :'
+     A            GT0FLDMDT      2Y 0B 24 82COMP(GT 0)
+     A                                      EDTCDE(3)
+     A                                      DSPATR(MDT)
+     A                                 24 86'mit MDT'
+     A                                      COLOR(BLU)
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 11 40'https://support.epg.com/browse/LFS-
+     A                                      STDLOG-13051'
+     A            URLVAR        46   O 12 40
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20111025  101302  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            AUSW           1A  B  9  2VALUES(' ' '1')
+     A            TESTFELD      10A  O  9  4
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20111025  101302  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0017)
+     A                                      SFLPAG(0016)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A  75                                  SFLMSGID(LFS1040 *LIBL/LFSMSGF)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A            SFT0001        6A  O  8  4DSPATR(HI)
+     A          R FMT10
+     A*%%TS  SD  20090903  152826  APG         REL-V5R4M0  5722-WDS
+     A                                      PULLDOWN(*SLTIND)
+     A                                      WDWBORDER((*COLOR RED))

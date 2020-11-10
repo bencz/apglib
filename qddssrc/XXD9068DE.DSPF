@@ -1,0 +1,83 @@
+     A*%%TS  SD  20140219  072234  APG         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* SUBFILE TEST                                                  *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  19.02.2014                                   *
+     A*                                                               *
+     A* FUNKTION      :  SUBFILE-TEST FÜR CURSOR IN FMT04             *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)                 -
+     A                                      MSGLOC(24)
+     A                                      PRINT
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20140219  072234  APG         REL-V7R1M0  5770-WDS
+     A  04                                  SFLNXTCHG
+     A            AUSW           1A  B  6  2VALUES(' ' '1' '2' '4' '8' '9' 'S' -
+     A                                      'C' 'M' 'P' 'Y' 'I' 'E' 'D')
+     A            OPTEXT    R   57   O  6 13REFFLD(OPTEXT APG/POPLLST)
+     A*--------------------------------------------------------------
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20140219  072234  APG         REL-V7R1M0  5770-WDS
+     A                                      SFLSIZ(0008)
+     A                                      SFLPAG(0007)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA03(03)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            MAINUEB       40A  O  1 15DSPATR(HI)
+     A  41        SYS_CMP       21A  O  1 59COLOR(BLU)
+     A*€          SYS_CMP       21A  O  1 93COLOR(BLU)
+     A N41        SYS_PGMTYP     8A  O  1 62COLOR(BLU)
+     A N41                              1 72SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_FMT       10A  O  2  2COLOR(BLU)
+     A*€          SYS_USER      10A  O  2  2
+     A*€          SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        40A  O  2 15
+     A  41        SYS_CMT       21A  O  2 59COLOR(BLU)
+     A*€          SYS_CMT       21A  O  2 93COLOR(BLU)
+     A N41        DT_SYS         8A  O  2 62
+     A N41        TI_SYS         8A  O  2 72
+     A                                  3  2'Anzahl:'
+     A            ANZREC         4Y 0O  3 10COLOR(RED)
+     A                                      EDTCDE(4)
+     A            SFT0011        8A  O  5  4DSPATR(HI)
+     A            SFT0006       57A  O  5 13DSPATR(HI)
+     A            SFT0047        3A  O  5 71DSPATR(HI)
+     A*--------------------------------------------------------------
+     A*€                                    OVERLAY
+     A          R FMT04
+     A*%%TS  SD  20140219  072234  APG         REL-V7R1M0  5770-WDS
+     A            DT_CRT        10A  B 22  2
+     A                                 23  2'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT05
+     A*%%TS  SD  20110224  130802  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 14'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden'
+     A                                      DSPATR(HI)

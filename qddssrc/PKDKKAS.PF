@@ -1,0 +1,51 @@
+     ‚*---------------------------------------------------------------*
+     ‚* KAFFEEKASSE (ZÄHLERSTÄNDE)                                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  06.01.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  ZÄHLERSTÄNDE FÜR KAFFEE, KAKAO ETC           *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PKDKKASF                  TEXT('TEST PKDKKAS')
+     A*
+     ‚* KEY - MASCHINE, DATUM, ARTIKEL
+     A            KKTYP         10A         COLHDG('MASCHINE')
+     A            KKDTE         10A         COLHDG('DATUM' 'ERFASSUNG')
+     A            KKIDEN        20A         COLHDG('ARTIKELNUMMER')
+     A
+     ‚* ERFASSTE ZÄHLERMENGE
+     A            KKBMEN        11S 3       COLHDG('ZÄHLERSTAND')
+     A            KKEPR         11S 3       COLHDG('EINZELPREIS')
+     A
+     ‚* VORTAGSDATEN
+     A            KKDTV          8S 0       COLHDG('VORTAGS' 'DATUM')
+     A            KKVMEN        11S 3       COLHDG('VORTAGS' 'STAND')
+     A            KKVEPR        11S 3       COLHDG('VORTAGS' 'PREIS')
+     A
+     ‚* ANLAGEDATEN
+     A            KKAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            KKABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            KKAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            KKADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            KKATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            KKMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            KKMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            KKMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            KKMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            KKMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K KKTYP
+     A          K KKDTE
+     A          K KKIDEN

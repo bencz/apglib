@@ -1,0 +1,71 @@
+     A*%%TS  SD  20100312  071614  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* BUCHEN EINER BESTELLUNG                                       *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  13.03.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  BUCHEN EINER BESTELLMENGE                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A          R FMT01
+     A*%%TS  SD  20100312  071614  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A                                  1  2'XXD0209DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  5  2'Datum . . . . . :'
+     A            DT_A          10A  O  5 20
+     A  41                              5 62'Neuanlage'
+     A                                      COLOR(RED)
+     A                                  6  2'Typ . . . . . . :'
+     A            KBTYP     R     A  O  6 20REFFLD(KBTYP APG/PKDBST1)
+     A                                      DSPATR(HI)
+     A            TYPBEZ        50A  O  6 31COLOR(BLU)
+     A                                  8  2'Artikelnummer . :'
+     A            KBIDEN    R        O  8 20REFFLD(KBIDEN APG/PKDBST1)
+     A            ARTBEZ        40A  O  8 41COLOR(BLU)
+     A                                  9  2'Bestellmenge  . :'
+     A            KBBMEN    R        O  9 20REFFLD(KBBMEN APG/PKDBST1)
+     A                                      EDTCDE(3)
+     A                                 11  2'Gelieferte Menge:'
+     A            KBLMEN    R        B 11 20REFFLD(KBLMEN APG/PKDBST1)
+     A                                      EDTCDE(3)
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

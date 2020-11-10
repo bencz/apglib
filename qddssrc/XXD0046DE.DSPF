@@ -1,0 +1,159 @@
+     A*%%TS  SD  20110810  131057  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* BERICHTSHEFTDATEN                                             *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  10.08.2011                                   *
+     A*                                                               *
+     A* FUNKTION      :  VERGLEICH VON 2 DATEIEN                      *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20110810  130709  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      CA20(20)
+     A                                      CA21(21)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                 20  2'Datei 1 . . . . . :'
+     A            FILE1         10   B 20 22
+     A                                 21  4'Bibliothek  . . :'
+     A            LIB1          10   B 21 22
+     A                                 23  2'Datei 2 . . . . . :'
+     A            FILE2         10   B 23 22
+     A                                 24  4'Bibliothek  . . :'
+     A            LIB2          10   B 24 22
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 31'F20=Infos'
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20110810  131057  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            WHLFDN    R        H      REFFLD(WHLFDN APG/PCFGFFD)
+     A            AUSW           1A  B 10  2VALUES(' ' '1' '2' '4' '6')
+     A            WHFLDE1   R        O 10  4REFFLD(WHFLDE APG/PCFGFFD)
+     A            WHFLDT1   R        O 10 15REFFLD(WHFLDT APG/PCFGFFD)
+     A            WHFLDB1   R        O 10 17REFFLD(WHFLDB APG/PCFGFFD)
+     A                                      EDTCDE(4)
+     A            WHFLDD1   R        O 10 23REFFLD(WHFLDD APG/PCFGFFD)
+     A            WHFLDP1   R        O 10 26REFFLD(WHFLDP APG/PCFGFFD)
+     A                                 10 29'|'
+     A                                      COLOR(BLU)
+     A            WHFLDE2   R        O 10 31REFFLD(WHFLDE APG/PCFGFFD)
+     A            WHFLDT2   R        O 10 42REFFLD(WHFLDT APG/PCFGFFD)
+     A            WHFLDB2   R        O 10 44REFFLD(WHFLDB APG/PCFGFFD)
+     A                                      EDTCDE(4)
+     A            WHFLDD2   R        O 10 50REFFLD(WHFLDD APG/PCFGFFD)
+     A            WHFLDP2   R        O 10 53REFFLD(WHFLDP APG/PCFGFFD)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20110810  131057  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0017)
+     A                                      SFLPAG(0016)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  8  4'<----'
+     A                                      DSPATR(HI)
+     A            FLD001        10   O  8 11DSPATR(HI)
+     A                                  8 23'---->'
+     A                                      DSPATR(HI)
+     A                                  8 31'<----'
+     A                                      DSPATR(HI)
+     A            FLD007        10   O  8 38DSPATR(HI)
+     A                                  8 50'---->'
+     A                                      DSPATR(HI)
+     A            SFT00511      10   O  9  4DSPATR(HI)
+     A            SFT00521       1   O  9 15DSPATR(HI)
+     A            SFT00531       5   O  9 17DSPATR(HI)
+     A            SFT00541       2   O  9 23DSPATR(HI)
+     A            SFT00551       2   O  9 26DSPATR(HI)
+     A            SFT00512      10   O  9 31DSPATR(HI)
+     A            SFT00522       1   O  9 42DSPATR(HI)
+     A            SFT00532       5   O  9 44DSPATR(HI)
+     A            SFT00542       2   O  9 50DSPATR(HI)
+     A            SFT00552       2   O  9 53DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden'
+     A                                      DSPATR(HI)

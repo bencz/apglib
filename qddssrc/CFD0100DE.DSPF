@@ -1,0 +1,96 @@
+     A*%%TS  SD  20100616  072153  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* HAUPTMENÜ                                                     *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  15.06.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  HAUPTMENÜ                                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20100616  072153  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            MNLIB     R        H      REFFLD(MNLIB APG/PCFGMNU)
+     A            MNPARM    R        H      REFFLD(MNPARM APG/PCFGMNU)
+     A            AUSW           1A  B 11  2VALUES(' ' '1')
+     A            MNMENU    R        O 11  4REFFLD(MNMENU APG/PCFGMNU)
+     A            MNTEXT        50A  O 11 15
+     A            MNPGM     R   10A  O 11 66REFFLD(MNPGM APG/PCFGMNU)
+     A  41                                  COLOR(PNK)
+     A  42                                  DSPATR(RI)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100615  214319  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0016)
+     A                                      SFLPAG(0015)
+     A                                      CA05(05)
+     A                                      CA12(12)
+     A                                      CA21(21)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl  . :'
+     A            SELEKT    R        B  5 15REFFLD(MNMENU APG/PCFGMNU)
+     A                                  7  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  8  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A            SFT0035       10A  O 10  4DSPATR(HI)
+     A            SFT0003       50A  O 10 15DSPATR(HI)
+     A            SFT0002       10A  O 10 66DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20100615  212804  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 49'F21=Kommandozeile'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

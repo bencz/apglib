@@ -1,0 +1,22 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH USER                                 *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  08.06.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH ANGEBOT                      *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PAZUBERF                  PFILE(PAZUBER)
+     ‚*
+     A          K ABJAHR
+     A          K ABKW
+     A
+     A          O ABSTAT                    COMP(EQ 'V')
+     ‚*€

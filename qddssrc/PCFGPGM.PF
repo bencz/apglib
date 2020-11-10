@@ -1,0 +1,43 @@
+     ‚*---------------------------------------------------------------*
+     ‚* BERECHTIGUNGSEINTRÄGE                                         *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  04.01.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  GÜLTIGE PROGRAMMTYPEN UND NAMEN              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGPGMF                  TEXT('CONFIG')
+     A*
+     ‚* ID UND KEY BILDEN DEN SCHLÜSSEL
+     A            VTTYP          8A         COLHDG('PGM-TYP')
+     A            VTKEY          2A         COLHDG('PGM-KUERZEL')
+     A
+     ‚* AKTIV JA/NEIN
+     A            VTAKT          1S 0       COLHDG('AKTIV')
+     A
+     ‚* ANLAGEDATEN
+     A            VTAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            VTABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            VTAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            VTADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            VTATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            VTMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            VTMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            VTMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            VTMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            VTMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K VTTYP
+     A          K VTKEY

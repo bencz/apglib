@@ -1,0 +1,54 @@
+     A*%%TS  SD  20100707  190720  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* BEFEHL EINGEBEN                                               *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  07.07.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  BEFEHL EINGEBEN                              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20100707  190720  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      CA12(12)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A     2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A            DT_SYS         8A     2 62
+     A            TI_SYS         8A     2 72
+     A                                 19  2'Namensraum . . . . :'
+     A            NAMESPACE R        B 19 23REFFLD(CMNSPC APG/PCFGCMD)
+     A                                      CHECK(LC)
+     A                                 20  2'Befehl . . . . . . :'
+     A            TXT           50A  B 20 23CHECK(LC)
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

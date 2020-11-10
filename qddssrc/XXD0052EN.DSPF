@@ -1,0 +1,127 @@
+     A*%%TS  SD  20140220  131033  APG         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* START/READ-NEXT BEISPIEL                                      *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  29.05.2013                                   *
+     A*                                                               *
+     A* FUNKTION      :  START/READ-NEXT BEISPIEL                     *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20130529  152752  APG         REL-V6R1M0  5761-WDS
+     A  04                                  SFLNXTCHG
+     A            STDENT         1S 0H
+     A            AUSW           1A  B  9  2VALUES(' ' '1' '4')
+     A            KEYVAL        20A  O  9  4TEXT('DIENST')
+     A  40                                  DSPATR(RI)
+     A  41                                  COLOR(RED)
+     A            OPTVAL        20A  O  9 25TEXT('DIENST')
+     A  40                                  DSPATR(RI)
+     A  41                                  COLOR(RED)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20140220  131033  APG         REL-V7R1M0  5770-WDS
+     A                                      SFLSIZ(0018)
+     A                                      SFLPAG(0017)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CF20(20)
+     A                                      CF21(21)
+     A                                      CA24(24)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Quantity . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Starting value . . :'
+     A            KEYVAL        10A  B  5 23
+     A                                  5 35'Key length . . :'
+     A            KEYLEN         2Y 0B  5 52EDTCDE(4)
+     A                                      RANGE(0 20)
+     A                                  5 56'Key check  . . . :'
+     A            KEYCHK         1Y 0B  5 75EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  5 77'(0=no/1=yes)'
+     A                                      COLOR(BLU)
+     A                                  5 92'Type :'
+     A            CDEOUT         1Y 0B  5 99EDTCDE(3)
+     A                                      VALUES(0 1 2)
+     A                                  5101'(0=COBOL/1=DBMAIN/2=Extended)'
+     A                                      COLOR(BLU)
+     A                                  6  2'Optional value . . :'
+     A            OPTVAL        10A  B  6 23
+     A                                  6 35'Optional length:'
+     A            OPTLEN         2Y 0B  6 52EDTCDE(4)
+     A                                      RANGE(0 20)
+     A                                  6 56'Optional check . :'
+     A            OPTCHK         1Y 0B  6 75EDTCDE(3)
+     A                                      VALUES(0 1)
+     A                                  6 77'(0=no/1=yes)'
+     A                                      COLOR(BLU)
+     A                                  6 92'Color:'
+     A                                  6 99'READ'
+     A                                  6104'PROCESSED'
+     A                                      DSPATR(RI)
+     A                                  6114'NOT READ'
+     A                                      COLOR(RED)
+     A            SFT0059       20A  O  8  4DSPATR(HI)
+     A            SFT0060       20A  O  8 25DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20140220  131033  APG         REL-V7R1M0  5770-WDS
+     A                                 26  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 26 11'F5=Refresh'
+     A                                      COLOR(BLU)
+     A                                 26 23'F8=New definition'
+     A                                      COLOR(BLU)
+     A                                 26 42'F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 26 54'F20=Display code'
+     A                                      COLOR(BLU)
+     A                                 26 72'F21=Switch values'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 39'There are no data records avai-
+     A                                      lable for display'
+     A                                      DSPATR(HI)

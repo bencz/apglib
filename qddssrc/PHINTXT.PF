@@ -1,0 +1,71 @@
+     ‚*---------------------------------------------------------------*
+     ‚* INFORMATIONSTEXTE ZUR ANZEIGE FÜR PROGRAMME                   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  09.10.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  HINWEISTEXTE FÜR PROGRAMME                   *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PHINTXTF                  TEXT('CONFIG HINTXT')
+     A*
+     ‚* PROGRAMM, USER, LAUFENDE POSITION
+     A            HWPGM         10A         COLHDG('PROGRAMM')
+     A            HWUSER        10A         COLHDG('INFO-USER')
+     A            HWLFPO         9S 0       COLHDG('POSITION')
+     ‚* BESCHREIBUNGSTEXT
+     A            HWTEXT        80A         COLHDG('TEXT')
+     A            HWZUNR         9S 0       COLHDG('ZUGRIFFSNUMMER')
+     A
+     ‚* ANLAGEDATEN
+     A            HWAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            HWABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            HWAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            HWADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            HWATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            HWMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            HWMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            HWMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            HWMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            HWMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A
+     ‚* HWFK01: 0=NICHT GELESEN, 1=GELESEN
+     A            HWFK01         1S 0       COLHDG('FUNKTION 1')
+     A            HWFK02         1S 0       COLHDG('FUNKTION 2')
+     A            HWFK03         1S 0       COLHDG('FUNKTION 3')
+     A            HWFK04         1S 0       COLHDG('FUNKTION 4')
+     A            HWFK05         1S 0       COLHDG('FUNKTION 5')
+     A            HWFK06         1S 0       COLHDG('FUNKTION 6')
+     A            HWFK07         1S 0       COLHDG('FUNKTION 7')
+     A            HWFK08         1S 0       COLHDG('FUNKTION 8')
+     A            HWFK09         1S 0       COLHDG('FUNKTION 9')
+     A            HWFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            HWDAT1        10A         COLHDG('DATEN/10-1')
+     A            HWDAT2        10A         COLHDG('DATEN/10-2')
+     A            HWDAT3        10A         COLHDG('DATEN/10-3')
+     A            HWDAT4        10A         COLHDG('DATEN/10-4')
+     A            HWDAT5        10A         COLHDG('DATEN/10-5')
+     A            HWDAT6        10A         COLHDG('DATEN/10-6')
+     A            HWDAT7        10A         COLHDG('DATEN/10-7')
+     A            HWDAT8        10A         COLHDG('DATEN/10-8')
+     A            HWDAT9        10A         COLHDG('DATEN/10-9')
+     A            HWDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K HWPGM
+     A          K HWUSER
+     A          K HWLFPO

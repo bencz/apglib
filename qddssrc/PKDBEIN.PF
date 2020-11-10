@@ -1,0 +1,49 @@
+     ‚*---------------------------------------------------------------*
+     ‚* WARENEINGÄNGE FÜR BESTELLUNGEN (TEILSATZ FÜR JEDEN EINGANG)   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  12.03.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  WARENEINGÄNGE                                *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PKDBEINF                  TEXT('TEST PKDBEIN')
+     A*
+     ‚* KEY - LAUFENDE NUMMER
+     A            BELFDN         9S 0       COLHDG('LFDN')
+     A
+     A            BETYP         10A         COLHDG('BESTELL' 'TYP')
+     A            BEBST1        10A         COLHDG('BESTELL' 'NUMMER')
+     A            BEWENR        10A         COLHDG('EINGANGS' 'NUMMER')
+     A            BEIDEN        20A         COLHDG('ARTIKEL' 'NR')
+     A
+     ‚* MENGENFELDBE
+     A            BELMEN        11S 3       COLHDG('LIEFER' 'MENGE')
+     A
+     ‚* BESTELLSTATUS
+     A            BEVSTS         1A         COLHDG('STATUS')
+     A
+     ‚* ANLAGEDATEN
+     A            BEAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            BEABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            BEAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            BEADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            BEATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            BEMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            BEMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            BEMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            BEMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            BEMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K BELFDN

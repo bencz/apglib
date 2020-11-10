@@ -1,0 +1,51 @@
+     ‚*---------------------------------------------------------------*
+     ‚* MAIL-HISTORY                                                  *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  30.08.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  GESPEICHERTE E-MAILS                         *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGMAIF                  TEXT('CONFIG PCFGMAI')
+     A*
+     ‚* LAUFENDE NUMMER - IN DIESEM FALL DAS DATUM
+     A            MILFDN         9S 0       COLHDG('LFDN')
+     ‚* BETREFF
+     A            MITOPC        96A         COLHDG('BETREFF')
+     ‚* EMPFÄNGER
+     A            MITO         740A         COLHDG('EMPFÄNGER')
+     A            MICC         740A         COLHDG('KOPIE')
+     A            MIBCC        740A         COLHDG('BLINDKOPIE')
+     ‚* TEXT UND DATEI
+     A            MIDATA      5120A         COLHDG('DATEN')
+     A            MIFILE       256A         COLHDG('FILE')
+     ‚* SENDER
+     A            MIHOST        15A         COLHDG('HOST')
+     A            MIPORT         5A         COLHDG('PORT')
+     A            MISNDR        30A         COLHDG('SENDER')
+     A
+     ‚* ANLAGEDATEN
+     A            MIAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            MIABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            MIAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            MIADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            MIATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            MIMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            MIMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            MIMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            MIMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            MIMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K MILFDN

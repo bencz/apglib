@@ -1,0 +1,426 @@
+‚*
+‚* Entnommen aus Cobol-Referenz Anhang F
+‚* In der Farbe˜PINK‚wurden die Filestati hinzugefügt, damit ein             ¦
+‚* direktes suchen nach dem Filestatus in diesem dokument möglich ist
+
+F.1 Werte für Statusschlüssel und Bedeutung
+
+Informationen über die Fehlerbearbeitung enthält der Abschnitt
+"COBOL/400-Fehlerbearbeitung" im IBM AS/400 COBOL/400 Benutzerhandbuch.
+
++----------------------------------------------------------------------------+
+¦Tabelle 57. Werte für den Dateistatusschlüssel                              ¦
++----------------------------------------------------------------------------¦
+¦Zeichen¦Bedeutung       ¦Zeichen¦ Bedeutung                                 ¦
+¦ganz   ¦                ¦ganz   ¦                                           ¦
+¦links  ¦                ¦rechts ¦                                           ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 0..                                                        ¦
++-------+----------------+-------+-------------------------------------------¦
+¦ 0     ¦Erfolgreiche    ¦ 0 ˜00€¦ Keine weiteren Informationen              ¦
+¦       ¦Ausführung      +-------+-------------------------------------------¦
+¦       ¦                ¦ 2 ˜02€¦ Die Anweisung READ wurde erfolgreich      ¦
+¦       ¦                ¦       ¦ ausgeführt; es wurde jedoch ein doppelter ¦
+¦       ¦                ¦       ¦ Schlüssel gefunden. Das heißt, der        ¦
+¦       ¦                ¦       ¦ Schlüsselwert für den aktuellen           ¦
+¦       ¦                ¦       ¦ Referenzschlüssel entspricht dem Wert des ¦
+¦       ¦                ¦       ¦ Schlüssels im nächsten Satz.              ¦
+¦       ¦                ¦       ¦ Informationen über die Aktivierung des    ¦
+¦       ¦                ¦       ¦ Dateistatus 02 enthalten Tabelle          ¦
+¦       ¦                ¦       ¦ Tabelle 43 in Abschnitt 8.29.6 und die    ¦
+¦       ¦                ¦       ¦ Anmerkungen zur Anweisung READ.           ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 4 ˜04€¦ Eine Anweisung READ wurde erfolgreich     ¦
+¦       ¦                ¦       ¦ ausgeführt, die Länge des verarbeiteten   ¦
+¦       ¦                ¦       ¦ Satzes entsprach jedoch nicht den festen  ¦
+¦       ¦                ¦       ¦ Dateiattributen für diese Datei.          ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 5 ˜05€¦ Eine Anweisung OPEN wurde erfolgreich     ¦
+¦       ¦                ¦       ¦ ausgeführt, die wahlweise zu verwendende  ¦
+¦       ¦                ¦       ¦ Datei, auf die Bezug genommen wird, ist   ¦
+¦       ¦                ¦       ¦ jedoch zum Zeitpunkt der Ausführung der   ¦
+¦       ¦                ¦       ¦ Anweisung OPEN nicht vorhanden.           ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 7 ˜07€¦ Bei einer Anweisung CLOSE mit der Phrase  ¦
+¦       ¦                ¦       ¦ NO REWIND, REEL/UNIT oder FOR REMOVAL     ¦
+¦       ¦                ¦       ¦ oder einer Anweisung OPEN mit der Phrase  ¦
+¦       ¦                ¦       ¦ NO REWIND wurde auf eine Datei Bezug      ¦
+¦       ¦                ¦       ¦ genommen, die nicht auf einer Bandeinheit ¦
+¦       ¦                ¦       ¦ besteht.                                  ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ M ˜0M€¦ Letzter Satz, der in eine Subdatei        ¦
+¦       ¦                ¦       ¦ geschrieben wird.                         ¦
+¦       ¦                ¦       ¦ CPF5003                                   ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ P ˜0P€¦ Die Datei wurde erfolgreich geöffnet, sie ¦
+¦       ¦                ¦       ¦ enthält jedoch Felder, die Nullwerte      ¦
+¦       ¦                ¦       ¦ enthalten können.                         ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ Q ˜0Q€¦ Für eine sequentiell verarbeitete         ¦
+¦       ¦                ¦       ¦ relative Datei wurde eine Anweisung CLOSE ¦
+¦       ¦                ¦       ¦ erfolgreich ausgeführt. Die Datei wurde   ¦
+¦       ¦                ¦       ¦ mit den Auswahlmöglichkeiten *INZDLT und  ¦
+¦       ¦                ¦       ¦ *NOMAX erstellt, d. h., ihre Satzgrenze   ¦
+¦       ¦                ¦       ¦ wurde auf die Anzahl der geschriebenen    ¦
+¦       ¦                ¦       ¦ Sätze gesetzt.                            ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 1..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 1     ¦AT              ¦ 0 ˜10€¦ Es wurde versucht, eine Anweisung READ    ¦
+¦       ¦END-Bedingungen ¦       ¦ für sequentielles Lesen auszuführen, in   ¦
+¦       ¦                ¦       ¦ der Datei bestand jedoch kein nächster    ¦
+¦       ¦                ¦       ¦ logischer Satz, da das Dateiende erreicht ¦
+¦       ¦                ¦       ¦ wurde (es stehen keine Anforderungen an). ¦
+¦       ¦                ¦       ¦ CPF4740, CPF5001, CPF5025.                ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 2 ˜12€¦ +---------- IBM Erweiterung ------------+ ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ Kein geänderter Subdateisatz gefunden.    ¦
+¦       ¦                ¦       ¦ CPF5037                                   ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ +------ Ende von IBM Erweiterung -------+ ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 4 ˜14€¦ Es wurde versucht, eine Anweisung READ    ¦
+¦       ¦                ¦       ¦ für sequentielles Lesen für eine relative ¦
+¦       ¦                ¦       ¦ Datei auszuführen, die Anzahl der         ¦
+¦       ¦                ¦       ¦ signifikanten Ziffern in der relativen    ¦
+¦       ¦                ¦       ¦ Satznummer war jedoch größer als die      ¦
+¦       ¦                ¦       ¦ Länge des Datenelements für den relativen ¦
+¦       ¦                ¦       ¦ Schlüssel, das für die Datei definiert    ¦
+¦       ¦                ¦       ¦ wurde.                                    ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 2..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 2     ¦Ungültiger      ¦ 1 ˜21€¦ Für eine indexierte Datei mit             ¦
+¦       ¦Schlüssel       ¦       ¦ sequentiellem Zugriff besteht ein         ¦
+¦       ¦                ¦       ¦ Reihenfolgefehler. Der Wert für den       ¦
+¦       ¦                ¦       ¦ primären Satzschlüssel wurde vom Programm ¦
+¦       ¦                ¦       ¦ zwischen der erfolgreichen Ausführung     ¦
+¦       ¦                ¦       ¦ einer Anweisung READ und der Ausführung   ¦
+¦       ¦                ¦       ¦ der nächsten Anweisung REWRITE für diese  ¦
+¦       ¦                ¦       ¦ Datei geändert; oder es wurde nicht die   ¦
+¦       ¦                ¦       ¦ Regel eingehalten, daß die Werte für      ¦
+¦       ¦                ¦       ¦ nachfolgende Satzschlüssel aufsteigend    ¦
+¦       ¦                ¦       ¦ sein müssen.                              ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 2 ˜22€¦ Es wurde versucht, einen Satz zu          ¦
+¦       ¦                ¦       ¦ schreiben, der einen doppelten Schlüssel  ¦
+¦       ¦                ¦       ¦ in einer relativen Datei zur Folge hätte; ¦
+¦       ¦                ¦       ¦ oder es wurde versucht, einen Satz zu     ¦
+¦       ¦                ¦       ¦ schreiben oder erneut zu schreiben, der   ¦
+¦       ¦                ¦       ¦ einen doppelten primären Satzschlüssel in ¦
+¦       ¦                ¦       ¦ einer indexierten Datei zur Folge hätte.  ¦
+¦       ¦                ¦       ¦ CPF4759, CPF5008, CPF5026, CPF5034,       ¦
+¦       ¦                ¦       ¦ CPF5084, CPF5085.                         ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 3 ˜23€¦ Es wurde versucht, wahlfrei auf einen     ¦
+¦       ¦                ¦       ¦ Satz zuzugreifen, der in der Datei nicht  ¦
+¦       ¦                ¦       ¦ besteht.                                  ¦
+¦       ¦                ¦       ¦ CPF5001, CPF5006, CPF5013, CPF5020,       ¦
+¦       ¦                ¦       ¦ CPF5025.                                  ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 4 ˜24€¦ Es wurde versucht, über die extern        ¦
+¦       ¦                ¦       ¦ definierten Satzgrenzen einer relativen   ¦
+¦       ¦                ¦       ¦ oder indexierten Datei hinaus zu          ¦
+¦       ¦                ¦       ¦ schreiben; oder es wurde versucht, eine   ¦
+¦       ¦                ¦       ¦ Anweisung WRITE für sequentielles         ¦
+¦       ¦                ¦       ¦ Schreiben für eine relative Datei         ¦
+¦       ¦                ¦       ¦ auszuführen, die Anzahl der signifikanten ¦
+¦       ¦                ¦       ¦ Ziffern in der relativen Satznummer war   ¦
+¦       ¦                ¦       ¦ jedoch größer als die Länge des           ¦
+¦       ¦                ¦       ¦ Datenelements für den relativen           ¦
+¦       ¦                ¦       ¦ Satzschlüssel, das für die Datei          ¦
+¦       ¦                ¦       ¦ definiert wurde.                          ¦
+¦       ¦                ¦       ¦ CPF5006, CPF5018, CPF5021, CPF5043,       ¦
+¦       ¦                ¦       ¦ CPF5272.                                  ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 3..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 3     ¦ Permanenter    ¦ 0 ˜30€¦ Keine weiteren Informationen              ¦
+¦       ¦ Fehler         ¦       ¦ Displaygröße ungültig, ggf. auf 27x132    ¦
+¦       ¦                ¦       ¦ setzen                                    ¦
+¦       ¦                ¦       ¦ CPF4192, CPF5101, CPF5102, CPF5129,       ¦
+¦       ¦                ¦       ¦ CPF5030, CPF5143.                         ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 4 ˜34€¦ Es besteht ein permanenter Fehler wegen   ¦
+¦       ¦                ¦       ¦ Überschreitung von Satzgrenzen. Es wurde  ¦
+¦       ¦                ¦       ¦ versucht, über die extern definerten      ¦
+¦       ¦                ¦       ¦ Grenzen einer sequentiellen Datei hinaus  ¦
+¦       ¦                ¦       ¦ zu schreiben.                             ¦
+¦       ¦                ¦       ¦ CPF5116, CPF5018, CPF5272. bei            ¦
+¦       ¦                ¦       ¦ sequentieller Organisation.               ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 5 ˜35€¦ Es wurde versucht, eine Anweisung OPEN    ¦
+¦       ¦                ¦       ¦ mit der Phrase INPUT, I-O, oder EXTEND    ¦
+¦       ¦                ¦       ¦ für eine erforderliche Datei auszuführen, ¦
+¦       ¦                ¦       ¦ die nicht vorhanden war.                  ¦
+¦       ¦                ¦       ¦ CPF4101, CPF4102, CPF4103, CPF4207,       ¦
+¦       ¦                ¦       ¦ CPF9812.                                  ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 7 ˜37€¦ Es wurde versucht, eine Anweisung OPEN    ¦
+¦       ¦                ¦       ¦ für eine Datei auszuführen, die den in    ¦
+¦       ¦                ¦       ¦ der Anweisung OPEN angegebenen            ¦
+¦       ¦                ¦       ¦ Eröffnungsmodus nicht unterstüzt.         ¦
+¦       ¦                ¦       ¦ Mögliche Gründe für den Fehler sind:      ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ 1.  Die Phrase EXTEND oder OUTPUT wurde   ¦
+¦       ¦                ¦       ¦     angegeben, die Datei unterstützt aber ¦
+¦       ¦                ¦       ¦     keine Schreiboperationen.             ¦
+¦       ¦                ¦       ¦ 2.  Die Phrase I-O wurde angegeben, die   ¦
+¦       ¦                ¦       ¦     Datei unterstützt aber die zulässigen ¦
+¦       ¦                ¦       ¦     Ein- und Ausgabeoperationen nicht.    ¦
+¦       ¦                ¦       ¦ 3.  Die Phrase INPUT wurde angegeben, die ¦
+¦       ¦                ¦       ¦     Datei unterstützt aber keine          ¦
+¦       ¦                ¦       ¦     Leseoperationen.                      ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ CPF4194.                                  ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 8 ˜38€¦ Es wurde versucht, eine Anweisung OPEN    ¦
+¦       ¦                ¦       ¦ für eine Datei auszuführen, die zuvor mit ¦
+¦       ¦                ¦       ¦ einem Sperrstatus (WITH LOCK) geschlossen ¦
+¦       ¦                ¦       ¦ wurde.                                    ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 9 ˜39€¦ Die Anweisung OPEN wurde nicht            ¦
+¦       ¦                ¦       ¦ erfolgreich ausgeführt, da die festen     ¦
+¦       ¦                ¦       ¦ Datenattribute und die Attribute, die für ¦
+¦       ¦                ¦       ¦ diese Datei im Programm angegeben wurden, ¦
+¦       ¦                ¦       ¦ nicht übereinstimmen.                     ¦
+¦       ¦                ¦       ¦ Fehler bei der Aktualitätsprüfung.        ¦
+¦       ¦                ¦       ¦ CPF4131.                                  ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 4..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 4     ¦Logikfehler     ¦ 1 ˜41€¦ Es wurde versucht, eine Anweisung OPEN    ¦
+¦       ¦                ¦       ¦ für eine Datei auszuführen, die sich      ¦
+¦       ¦                ¦       ¦ bereits im Eröffnungsmodus befindet.      ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 2 ˜42€¦ Es wurde versucht, eine Anweisung CLOSE   ¦
+¦       ¦                ¦       ¦ für eine Datei auszuführen, die sich      ¦
+¦       ¦                ¦       ¦ nicht im Eröffnunsmodus befindet.         ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 3 ˜43€¦ Bei der letzten Ein-/Ausgabeanweisung,    ¦
+¦       ¦                ¦       ¦ die für eine sequentielle Datei im        ¦
+¦       ¦                ¦       ¦ sequentiellen Zugriffsmodus vor           ¦
+¦       ¦                ¦       ¦ Ausführung einer Anweisung WRITE          ¦
+¦       ¦                ¦       ¦ ausgeführt wurde, handelt es sich nicht   ¦
+¦       ¦                ¦       ¦ um eine erfolgreich ausgeführte Anweisung ¦
+¦       ¦                ¦       ¦ READ.                                     ¦
+¦       ¦                ¦       ¦ Bei der letzten Ein-/Ausgabeanweisung,    ¦
+¦       ¦                ¦       ¦ die für eine relative oder indexierte     ¦
+¦       ¦                ¦       ¦ Datei im sequentiellen Zugriffsmodus vor  ¦
+¦       ¦                ¦       ¦ Ausführung einer Anweisung DELETE oder    ¦
+¦       ¦                ¦       ¦ REWRITE ausgeführt wurde, handelt es      ¦
+¦       ¦                ¦       ¦ sicht nicht um eine erfolgreich           ¦
+¦       ¦                ¦       ¦ ausgeführte Anweisung READ.               ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 4 ˜44€¦ Die Satzgrenze wurde überschritten, als   ¦
+¦       ¦                ¦       ¦ versucht wurde, einen Satz erneut in eine ¦
+¦       ¦                ¦       ¦ Datei zu schreiben, der nicht dieselbe    ¦
+¦       ¦                ¦       ¦ Länge hatte wie der Satz, der ersetzt     ¦
+¦       ¦                ¦       ¦ wurde.                                    ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 6 ˜46€¦ Es wurde versucht, eine Anweisung READ    ¦
+¦       ¦                ¦       ¦ für sequentielles Lesen für eine Datei    ¦
+¦       ¦                ¦       ¦ auszuführen, die im Eingabe- oder         ¦
+¦       ¦                ¦       ¦ Ein-/Ausgabemodus eröffnet ist; es wurde  ¦
+¦       ¦                ¦       ¦ jedoch kein gültger nächster Satz         ¦
+¦       ¦                ¦       ¦ gefunden, da die vorhergehende Anweisung  ¦
+¦       ¦                ¦       ¦ or READ nicht erfolgreich war oder eine   ¦
+¦       ¦                ¦       ¦ AT END-Bedingung zur Folge hatte.         ¦
+¦       ¦                ¦       ¦ CPF5001, CPF5025, CPF5183.                ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 7 ˜47€¦ Es wurde versucht, eine Anweisung READ    ¦
+¦       ¦                ¦       ¦ oder START für eine Datei auszuführen,    ¦
+¦       ¦                ¦       ¦ die nicht im Eingabe- oder                ¦
+¦       ¦                ¦       ¦ Ein-/Ausgabemodus eröffnet war.           ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 8 ˜48€¦ Es wurde versucht, eine Anweisung WRITE   ¦
+¦       ¦                ¦       ¦ für eine sequentielle Datei auszuführen,  ¦
+¦       ¦                ¦       ¦ die nicht im Ausgabe- oder im erweiterten ¦
+¦       ¦                ¦       ¦ Modus eröffnet war.                       ¦
+¦       ¦                ¦       ¦ Es wurde versucht, eine Anweisung WRITE   ¦
+¦       ¦                ¦       ¦ für eine indexierte oder relative Datei   ¦
+¦       ¦                ¦       ¦ auszuführen, die nicht im Ein-/Ausgabe-,  ¦
+¦       ¦                ¦       ¦ im Ausgabecode oder im erweiterten Modus  ¦
+¦       ¦                ¦       ¦ eröffnet war.                             ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 9 ˜49€¦ Es wurde versucht, eine Anweisung DELETE  ¦
+¦       ¦                ¦       ¦ oder REWRITE für eine Datei auszuführen,  ¦
+¦       ¦                ¦       ¦ die nicht im Ein-/Ausgabemodus eröffnet   ¦
+¦       ¦                ¦       ¦ war.                                      ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 9..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 9     ¦Sonstige Fehler ¦ 0 ˜90€¦ Andere Fehler:                            ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ -   Datei nicht gefunden                  ¦
+¦       ¦                ¦       ¦ -   Teildatei nicht gefunden              ¦
+¦       ¦                ¦       ¦ -   Unerwartete I-O-Ausnahmebedingungen   ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦     CPF4101, CPF4102, CPF4103 wenn eine   ¦
+¦       ¦                ¦       ¦     USE-Prozedur für die Datei (mit OPEN  ¦
+¦       ¦                ¦       ¦     OUTPUT, erforderliche Datei)          ¦
+¦       ¦                ¦       ¦     ausgeführt werden kann.               ¦
+¦       ¦                ¦       ¦     Die folgenden Ausnahmebedingungen     ¦
+¦       ¦                ¦       ¦     werden allgemein überwacht:           ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦     CPF4101 bis CPF4399                   ¦
+¦       ¦                ¦       ¦     CPF4501 bis CPF4699                   ¦
+¦       ¦                ¦       ¦     CPF4701 bis CPF4899                   ¦
+¦       ¦                ¦       ¦     CPF4901 bis CPF4999                   ¦
+¦       ¦                ¦       ¦     CPF5001 bis CPF5099                   ¦
+¦       ¦                ¦       ¦     CPF5101 bis CPF5399                   ¦
+¦       ¦                ¦       ¦     CPF5501 bis CPF5699                   ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦     Diese Ausnahmenbedingungen werden     ¦
+¦       ¦                ¦       ¦     erkannt und der Dateistatus auf 90    ¦
+¦       ¦                ¦       ¦     gesetzt.                              ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦     Mit Standardfehlerbearbeitung: Ist    ¦
+¦       ¦                ¦       ¦     eine Klausel FILE STATUS vorhanden    ¦
+¦       ¦                ¦       ¦     (aber keine USE-Prozedur), wird der   ¦
+¦       ¦                ¦       ¦     Dateistatus aktualisiert und die      ¦
+¦       ¦                ¦       ¦     Steuerung an das Programm             ¦
+¦       ¦                ¦       ¦     zurückgegeben. Ist keine Klausel FILE ¦
+¦       ¦                ¦       ¦     STATUS, USE-Prozedur, Klausel AT END  ¦
+¦       ¦                ¦       ¦     oder Phrase INVALID KEY zur           ¦
+¦       ¦                ¦       ¦     Bearbeitung des Fehlers codiert, wird ¦
+¦       ¦                ¦       ¦     zur Ausführungszeit eine Nachricht    ¦
+¦       ¦                ¦       ¦     ausgegeben, die dem Benutzer das      ¦
+¦       ¦                ¦       ¦     Abbrechen oder Fortsetzen des         ¦
+¦       ¦                ¦       ¦     Programms ermöglicht.                 ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦     Ohne Standardfehlerbearbeitung: Falls ¦
+¦       ¦                ¦       ¦     eine USE-Prozedur angegeben ist, wird ¦
+¦       ¦                ¦       ¦     diese ausgeführt. Andernfalls wird    ¦
+¦       ¦                ¦       ¦     das Programm beendet und eine         ¦
+¦       ¦                ¦       ¦     Ausnahmenachricht ausgegeben. Der     ¦
+¦       ¦                ¦       ¦     Bediener hat die Möglichkeit, den Job ¦
+¦       ¦                ¦       ¦     abzubrechen, einen Speicherauszug zu  ¦
+¦       ¦                ¦       ¦     erstellen, der nur bestimmte Teile    ¦
+¦       ¦                ¦       ¦     umfaßt, oder einen vollständigen      ¦
+¦       ¦                ¦       ¦     Speicherauszug zu erstellen.          ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 1 ˜91€¦ Nicht definierter oder unzulässiger       ¦
+¦       ¦                ¦       ¦ Zugriff                                   ¦
+¦       ¦                ¦       ¦ CPF2207, CPF4104, CPF4236, CPF5057,       ¦
+¦       ¦                ¦       ¦ CPF5109, CPF5134, CPF5279.                ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 9..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 9     ¦Sonstige Fehler ¦ 2 ˜92€¦ Logikfehler:                              ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦      Datei gesperrt                       ¦
+¦       ¦                ¦       ¦      Datei bereits eröffnet               ¦
+¦       ¦                ¦       ¦      I-O für geschlossene Datei           ¦
+¦       ¦                ¦       ¦      READ nach Dateiende                  ¦
+¦       ¦                ¦       ¦      CLOSE für nicht eröffnete Datei      ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ CPF4106, CPF4132, CPF4740, CPF5013,       ¦
+¦       ¦                ¦       ¦ CPF5067, CPF5070, CPF5119, CPF5145,       ¦
+¦       ¦                ¦       ¦ CPF5146, CPF5149, CPF5176, CPF5209.       ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 4 ˜94€¦ Kein Dateipositionszeiger REWRITE/DELETE, ¦
+¦       ¦                ¦       ¦ wenn der Zugriff nicht sequentiell ist    ¦
+¦       ¦                ¦       ¦ und es sich bei der letzten Operation     ¦
+¦       ¦                ¦       ¦ nicht um eine erfolgreich ausgeführte     ¦
+¦       ¦                ¦       ¦ Anweisung READ handelt.                   ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 5 ˜95€¦ Ungültige oder unvollständige Datei-      ¦
+¦       ¦                ¦       ¦ informationen: (1) Im COBOL-Programm sind ¦
+¦       ¦                ¦       ¦ doppelte Schlüssel angegeben. Die Datei   ¦
+¦       ¦                ¦       ¦ wurde erfolgreich eröffnet, es wurde      ¦
+¦       ¦                ¦       ¦ jedoch eine indexierte Datenbankdatei mit ¦
+¦       ¦                ¦       ¦ eindeutigem Schlüssel erstellt; oder (2)  ¦
+¦       ¦                ¦       ¦ im COBOL-Programm sind keine doppelten    ¦
+¦       ¦                ¦       ¦ Schlüssel angegeben und es wurde eine     ¦
+¦       ¦                ¦       ¦ indexierte Datenbankdatei erstellt, für   ¦
+¦       ¦                ¦       ¦ die doppelte Schlüssel zulässig sind.     ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ 9 ˜96€¦ Nicht definiert (Bildschirm- oder         ¦
+¦       ¦                ¦       ¦ ICF-Datei)                                ¦
++-------+----------------+-------+-------------------------------------------¦
+¦    ˜FILE-STATUS 9..                                                    ¦
++---------+---------------+----------+-----------------------------------¦
+¦ 9     ¦Sonstige Fehler ¦ A ˜9A€¦ Der Job wurde mit dem CL-Befehl ENDJOB,   ¦
+¦       ¦                ¦       ¦ PWRDWNSYS, ENDSYS oder ENDSBS             ¦
+¦       ¦                ¦       ¦ abgebrochen.                              ¦
+¦       ¦                ¦       ¦ CPF4741.                                  ¦
+¦       ¦                ¦       ¦ Es wurde eine Abbruchnachricht während    ¦
+¦       ¦                ¦       ¦ einer Operation 'Eingabe akzeptieren'     ¦
+¦       ¦                ¦       ¦ oder 'Lesen von angeforderter             ¦
+¦       ¦                ¦       ¦ Programmeinheit' ausgegeben (nur Listen   ¦
+¦       ¦                ¦       ¦ für Mehrfacheinheiten).                   ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ C ˜9C€¦ ACQUIRE-Operation fehlgeschlagen; Sitzung ¦
+¦       ¦                ¦       ¦ wurde nicht gestartet.                    ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ D ˜9D€¦ Satz ist gesperrt.                        ¦
+¦       ¦                ¦       ¦ CPF5027, CPF5032.                         ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ G ˜9G€¦ Ausgabe-Ausnahmebedingung für Einheit     ¦
+¦       ¦                ¦       ¦ oder Sitzung.                             ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ H ˜9H€¦ ACQUIRE-Operation fehlgeschlagen. Ein     ¦
+¦       ¦                ¦       ¦ anderes Programm ist Eigner der           ¦
+¦       ¦                ¦       ¦ Ressourcen oder die Ressourcen stehen     ¦
+¦       ¦                ¦       ¦ nicht zur Verfügung. (Das Ergebnis lautet ¦
+¦       ¦                ¦       ¦ 9H, wenn die ACQUIRE-Operation eine der   ¦
+¦       ¦                ¦       ¦ OS/400-Ausnahmebedingungen für den        ¦
+¦       ¦                ¦       ¦ Dateistatus 90 zur Folge hat oder den     ¦
+¦       ¦                ¦       ¦ Dateistatus 9N.)                          ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ I ˜9I€¦ WRITE-Operation fehlgeschlagen            ¦
+¦       ¦                ¦       ¦ CPF4702, CPF4737, CPF5052, CPF5076.       ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ K ˜9K€¦ Ungültiger Formatname; Formate nicht      ¦
+¦       ¦                ¦       ¦ gefunden CPF5022, CPF5023, CPF5053,       ¦
+¦       ¦                ¦       ¦ CPF5054, CPF5121, CPF5152, CPF5153,       ¦
+¦       ¦                ¦       ¦ CPF5186, CPF5187.                         ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ M ˜9M€¦ Letzter Satz in die Subdatei geschrieben  ¦
+¦       ¦                ¦       ¦ CPF5003.                                  ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ N ˜9N€¦ Temporärer Hardware Ein-/Ausgabefehler    ¦
+¦       ¦                ¦       ¦ (kann möglicherweise nicht behoben        ¦
+¦       ¦                ¦       ¦ werden). (Fehler während der DFV-         ¦
+¦       ¦                ¦       ¦ Sitzung.)                                 ¦
+¦       ¦                ¦       ¦ CPF4145, CPF4146, CPF4193, CPF4229,       ¦
+¦       ¦                ¦       ¦ CPF4291, CPF4299, CPF4354, CPF4526,       ¦
+¦       ¦                ¦       ¦ CPF4542, CPF4577, CPF4592, CPF4602,       ¦
+¦       ¦                ¦       ¦ CPF4603, CPF4611, CPF4612, CPF4616,       ¦
+¦       ¦                ¦       ¦ CPF4617, CPF4622, CPF4623, CPF4624,       ¦
+¦       ¦                ¦       ¦ CPF4625, CPF4628, CPF4629, CPF4630,       ¦
+¦       ¦                ¦       ¦ CPF4631, CPF4632, CPF4705, CPF5107,       ¦
+¦       ¦                ¦       ¦ CPF5128, CPF5166, CPF5198, CPF5280,       ¦
+¦       ¦                ¦       ¦ CPF5282, CPF5287, CPF5293, CPF5352,       ¦
+¦       ¦                ¦       ¦ CPF5353, CPF5517, CPF5524, CPF5529,       ¦
+¦       ¦                ¦       ¦ CPF5530, CPF5532, CPF5533.                ¦
++-------+----------------+-------+-------------------------------------------¦
+¦       ¦                ¦ P ˜9P€¦ OPEN-Operation fehlgeschlagen, da Datei   ¦
+¦       ¦                ¦       ¦ nicht unter COMMIT-Steuerung gestellt     ¦
+¦       ¦                ¦       ¦ werden kann.                              ¦
+¦       ¦                ¦       ¦ CPF4293, CPF4326, CPF4327, CPF4328,       ¦
+¦       ¦                ¦       ¦ CPF4329.                                  ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ Q ˜9Q€¦ Eine Anweisung OPEN für eine relative     ¦
+¦       ¦                ¦       ¦ Datei, auf die wahlfrei oder dynamisch    ¦
+¦       ¦                ¦       ¦ zugegriffen wird, ist fehlgeschlagen,     ¦
+¦       ¦                ¦       ¦ weil sie als Größenangabe *NOMAX          ¦
+¦       ¦                ¦       ¦ enthielt. Die Angabe für die Dateigröße   ¦
+¦       ¦                ¦       ¦ so ändern (z. B. mit CHGPF), daß sie der  ¦
+¦       ¦                ¦       ¦ erwarteten Größe entspricht, und das      ¦
+¦       ¦                ¦       ¦ Programm erneut übergeben.                ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ S ˜9S€¦ REWRITE- oder DELETE-Operation            ¦
+¦       ¦                ¦       ¦ fehlgeschlagen, da bei der letzten        ¦
+¦       ¦                ¦       ¦ READ-Operation NO LOCK angegeben war.     ¦
+¦       ¦                +-------+-------------------------------------------¦
+¦       ¦                ¦ U ˜9U€¦ READ PRIOR kann nicht ausgeführt werden,  ¦
+¦       ¦                ¦       ¦ weil sich im Block noch Sätze von READ    ¦
+¦       ¦                ¦       ¦ NEXT befinden, oder umgekehrt.            ¦
+¦       ¦                ¦       ¦ CPF5184.                                  ¦
+¦       ¦                ¦       ¦                                           ¦
+¦       ¦                ¦       ¦ Die Datei schließen und danach wieder     ¦
+¦       ¦                ¦       ¦ öffnen.                                   ¦
++-------+----------------+-------+-------------------------------------------¦

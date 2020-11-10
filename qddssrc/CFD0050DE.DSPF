@@ -1,0 +1,97 @@
+     A*%%TS  SD  20100707  114216  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* MAPDTA-ANZEIGE                                                *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  07.07.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE MAPDTA                               *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20100707  114216  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            HIDKEY       100A  H
+     A            AUSW           1A  B  9  2VALUES(' ' '2' '4' '8')
+     A            LFDN           9S 0O  9  4
+     A            MAPKEY        20A  O  9 14
+     A            REC           97   O  9 35
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20100707  114216  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0018)
+     A                                      SFLPAG(0017)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2115DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2124TIME
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  6 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  6 28'6=Beschreibung'
+     A                                      COLOR(BLU)
+     A            SFT0036        9A  O  8  4DSPATR(HI)
+     A            SFT0020       20A  O  8 14DSPATR(HI)
+     A            SFT0023       97A  O  8 35DSPATR(HI)
+     A*            17:14:43    QPGMR       REL-R07M00  5714-UT1
+     A*                                     OVERLAY
+     A          R FMT04
+     A*%%TS  SD  20100707  114216  APG         REL-V5R4M0  5722-WDS
+     A*                                     OVERLAY
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  19931217  173127  HEH         REL-V2R2M0  5738-PW1
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

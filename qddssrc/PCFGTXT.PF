@@ -1,0 +1,67 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ALLE DOKUMENTIERTEN PROGRAMME                                 *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  08.01.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  PROGRAMM- UND FEHLERTEXTE                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGTXTF                  TEXT('CONFIG PGMTXT')
+     A*
+     ‚* TEXT-ID + SPRACHE
+     A            TXID          10A         COLHDG('ID')
+     A            TXSPR          3A         COLHDG('SPRACHE')
+     ‚* TEXT + KOMMENTAR
+     A            TXTEXT        50A         COLHDG('BESCHREIBUNG')
+     A            TXKOML        50A         COLHDG('LANG KOMMENTAR')
+     A
+     ‚* ANLAGEDATEN
+     A            TXAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            TXABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            TXAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            TXADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            TXATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            TXMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            TXMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            TXMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            TXMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            TXMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            TXFK01         1S 0       COLHDG('FUNKTION 1')
+     A            TXFK02         1S 0       COLHDG('FUNKTION 2')
+     A            TXFK03         1S 0       COLHDG('FUNKTION 3')
+     A            TXFK04         1S 0       COLHDG('FUNKTION 4')
+     A            TXFK05         1S 0       COLHDG('FUNKTION 5')
+     A            TXFK06         1S 0       COLHDG('FUNKTION 6')
+     A            TXFK07         1S 0       COLHDG('FUNKTION 7')
+     A            TXFK08         1S 0       COLHDG('FUNKTION 8')
+     A            TXFK09         1S 0       COLHDG('FUNKTION 9')
+     A            TXFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            TXDAT1        10A         COLHDG('DATEN/10-1')
+     A            TXDAT2        10A         COLHDG('DATEN/10-2')
+     A            TXDAT3        10A         COLHDG('DATEN/10-3')
+     A            TXDAT4        10A         COLHDG('DATEN/10-4')
+     A            TXDAT5        10A         COLHDG('DATEN/10-5')
+     A            TXDAT6        10A         COLHDG('DATEN/10-6')
+     A            TXDAT7        10A         COLHDG('DATEN/10-7')
+     A            TXDAT8        10A         COLHDG('DATEN/10-8')
+     A            TXDAT9        10A         COLHDG('DATEN/10-9')
+     A            TXDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K TXSPR
+     A          K TXID

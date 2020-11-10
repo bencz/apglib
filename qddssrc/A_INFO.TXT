@@ -1,0 +1,97 @@
+
+‚*---------------------------------------------------------------------
+‚* SYSTABLES:
+‚*  ˜SELECT * FROM QSYS2/SYSTABLES
+‚*  ˜SELECT * FROM QPDA/QASUPMT
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Beinhaltet eine Auflistung alle Datenbankdateien
+‚*
+‚*                                                     APG, 08.10.2009
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* BERECHTIGUNGEN ÄNDERN:
+‚*˜  GRTOBJAUT OBJ(QSYS/xxx) OBJTYPE(*LIB) USER(xxx) AUT(*CHANGE)
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Berechtigung auf *CHANGE oder *ALL etc. setzen.
+‚* Solange der Eigner QPGMR ist, kann man sich ganz einfach die
+‚* Berechtigung setzen, solange man weiß wie das Objekt heißt.
+‚*
+‚*                                                     APG, 04.11.2009
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* HEX-WERTE
+‚*˜  Q:\Dokumentation Extern\IBM\IBM Infos\AS400_DDS_DSPF_rzakcmst.pdf
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Ab Seite 86 (PDF: 98) stehen alle HEX-Werte
+‚*
+‚*                                                     APG, 17.12.2009
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* SEU-Handbuch
+‚*˜  Q:\Dokumentation Extern\IBM\IBM Infos\SEU User Guide\
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Ab Seite 143 stehen die benutzerdefinierten Zeilenbefehle
+‚*
+‚*                                                     APG, 03.03.2010
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* KONTIERUNGEN
+‚*  ˜Berufsschule   B11     010.00
+‚*  ˜Küchendienst   B06     016.00
+‚*  ˜Essen400       B06     016.00
+‚*  ˜Lagerdienst    S06     030.00
+‚*  ˜Einweisung PKW B03     010.00 (meistens nur einmalig)
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Erste Spalte = Tätigkeitsschlüssel, Zweite Spalte = Projektnummer
+‚* Mail von SRA, 28.12.2009 um 17:02 Uhr.
+‚*
+‚*                                                     APG, 29.12.2009
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* BARCODE-Informationen
+‚* ˜M&N:
+‚*˜  Q:\Dokumentation Extern\Drucker\M&N - DATAMAX
+‚*˜     DATAMAX-Programmersguide.pdf -> Seite 177 (PDF: 193)
+‚*˜     Aufbau Layoutdatei.pdf       -> Seite 9   (PDF: 9)
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Informationen zu Barcodetypen beim Labeldruck
+‚*
+‚*                                                     APG, 23.11.2010
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* Aufbau und Struktur Labels
+‚* ˜M&N:
+‚*˜  Q:\Dokumentation Extern\Drucker\M&N - DATAMAX
+‚*˜     DATAMAX-Programmersguide.pdf -> Seite 132 (PDF: 148)
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Informationen zu Labelaufbau
+‚*
+‚*                                                     APG, 08.04.2011
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* Videopräsentationen E+P
+‚*˜  Q:\E+P Bildmaterial\IAW\Präsentationen\Präsentationen\
+‚*˜     2010\GER\Schulungsunterlagen\Videos zur paraktischen Darstellung
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Videopräsentationen vom Marketing/Vertrieb
+‚*
+‚*                                                     APG, 30.11.2010
+‚*---------------------------------------------------------------------
+
+‚*---------------------------------------------------------------------
+‚* Installation anderer FOP für XSLFast
+‚* ˜M&N:
+‚*˜  Q:\Dokumentation Extern\XSL Fast\
+‚*˜     2011-09-02 XSLfast-4.0-Help-Guide.pdf -> Seite 542 (PDF: 542)
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Installation anderer FOP z.B. Downloadbar von http://xml.apache.org
+‚*
+‚*                                                     APG, 29.09.2011
+‚*---------------------------------------------------------------------

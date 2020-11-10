@@ -1,0 +1,100 @@
+     A*%%TS  SD  20091110  204440  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* KÜCHEN UND LAGERDIENST                                        *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  28.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  PLANUNG KÜCHENDIENST                         *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20091110  204440  APG         REL-V5R4M0  5722-WDS
+     A                                      CA12(12)
+     A                                      CA14(14)
+     A                                      CA20(20)
+     A                                      CA21(21)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A                                  1  2'XXD0003DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 23 31'F20=Infos'
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A                                 23 42'F21=Kommandozeile'
+     A                                      COLOR(BLU)
+     A                                  4  2'##################################-
+     A                                      ###################################-
+     A                                      #########'
+     A                                      COLOR(BLU)
+     A                                  8  2'##################################-
+     A                                      ###################################-
+     A                                      #########'
+     A                                      COLOR(BLU)
+     A                                 12  2'##################################-
+     A                                      ###################################-
+     A                                      #########'
+     A                                      COLOR(BLU)
+     A                                 16  2'##################################-
+     A                                      ###################################-
+     A                                      #########'
+     A                                      COLOR(BLU)
+     A                                 20  2'##################################-
+     A                                      ###################################-
+     A                                      #########'
+     A                                      COLOR(BLU)
+     A                                  5  2'#'
+     A                                  6  2'#'
+     A                                  7  2'#'
+     A                                  5 79'#'
+     A                                  6 79'#'
+     A                                  7 79'#'
+     A            FLD001        10   O  5  4
+     A            FLD002        10   O  5 17
+     A                                  5 15'#'
+     A                                  6 15'#'
+     A                                  7 15'#'
+     A            FLD003        10   O  5 30
+     A            FLD004        10   O  5 43
+     A            FLD005        10   O  5 56

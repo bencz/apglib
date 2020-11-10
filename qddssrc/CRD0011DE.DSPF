@@ -1,0 +1,54 @@
+     A*%%TS  SD  20091120  073323  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* ANZEIGE WINDIW ZUR EINGABE TEILDATEI                          *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  19.11.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE WINDOW                               *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4                 -
+     A                                             24 80 *DS3)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20091120  073323  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                  1  1'CRD0011DE'
+     A                                      COLOR(BLU)
+     A            MAINUEB       20A  O  1 11DSPATR(HI)
+     A                                  3  1'Bibliothek :'
+     A            SRCLIB        10A  B  3 14
+     A  41                                  DSPATR(PC)
+     A                                  4  1'Datei  . . :'
+     A            SRCRCN        10A  B  4 14
+     A  42                                  DSPATR(PC)
+     A                                  5  1'Teildatei  :'
+     A            SRCMBR        10A  B  5 14
+     A  43                                  DSPATR(PC)
+     A                                  7  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(8 20 8 30)
+     A  *DS4                                WINDOW(8 20 8 30)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

@@ -1,0 +1,42 @@
+     ‚*---------------------------------------------------------------*
+     ‚* STEUERUNG DES SYNTAXHIGHLIGTING                               *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  13.11.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SYNTAXHIGHLIGHTING                           *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PTYPHGHF                  TEXT('TYPHGH')
+     A*
+     ‚* USER/SOURCE-TYP (KEY)
+     A            TYUSER        10A         COLHDG('USER')
+     A            TYTYP         10A         COLHDG('SOURCE' 'TYP')
+     A
+     A            TYOVR         10A         COLHDG('SOURCE' 'OVR')
+     A
+     ‚* ANLAGEDATEN
+     A            TYAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            TYABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            TYAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            TYADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            TYATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            TYMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            TYMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            TYMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            TYMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            TYMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K TYUSER
+     A          K TYTYP

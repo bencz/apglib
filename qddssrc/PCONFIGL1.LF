@@ -1,0 +1,24 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH ID                                   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.09.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  NUR SCHLÜSSEL-KOPFSÄTZE                      *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCONFIGF                  PFILE(PCONFIG)
+     ‚*
+     A          K CFID
+     A          K CFKEY
+     A          K CFKEY2
+     A          K CFKEY3
+     A          K CFKEY4
+     ‚*€
+     A          O CFKOPF                    COMP(NE 1)

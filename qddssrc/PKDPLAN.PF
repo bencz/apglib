@@ -1,0 +1,77 @@
+     ‚*---------------------------------------------------------------*
+     ‚* KÜCHENDIENST-PLAN                                             *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  28.08.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  KÜCHENDIENSTPLAN                             *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PKDPLANF                  TEXT('TEST PKDPLAN')
+     A*
+     ‚* KEY - DATUM/WOCHENTAG/DIENST
+     A            KDDATE         8S 0       COLHDG('DIENST' 'DATUM')
+     A            KDTYP         10A         COLHDG('DIENST')
+     ‚* USER DER DEN DIENST ZU ERLEDIGEN HAT
+     A            KDKW           2S 0       COLHDG('KW')
+     A            KDWOTA         1S 0       COLHDG('WOCHENTAG')
+     A            KDUSER        10A         COLHDG('DIENST' 'USER')
+     A            KDGUSR        10A         COLHDG('TAUSCH' 'USER')
+     A            KDGRND        30A         COLHDG('TAUSCH' 'GRUND')
+     A
+     ‚* KOMMENTARE
+     A            KDKOM1        80A         COLHDG('KOMMENTAR 1')
+     A            KDKOM2        80A         COLHDG('KOMMENTAR 2')
+     A            KDKOM3        80A         COLHDG('KOMMENTAR 3')
+     A
+     ‚* ANLAGEDATEN
+     A            KDAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            KDABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            KDAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            KDADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            KDATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            KDMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            KDMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            KDMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            KDMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            KDMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     ‚* KDFK01: BEI LAGERDIENST, DAS LAGER IST ZU PUTZEN
+     A            KDFK01         1S 0       COLHDG('FUNKTION 1')
+     A            KDFK02         1S 0       COLHDG('FUNKTION 2')
+     A            KDFK03         1S 0       COLHDG('FUNKTION 3')
+     A            KDFK04         1S 0       COLHDG('FUNKTION 4')
+     A            KDFK05         1S 0       COLHDG('FUNKTION 5')
+     A            KDFK06         1S 0       COLHDG('FUNKTION 6')
+     A            KDFK07         1S 0       COLHDG('FUNKTION 7')
+     A            KDFK08         1S 0       COLHDG('FUNKTION 8')
+     A            KDFK09         1S 0       COLHDG('FUNKTION 9')
+     A            KDFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            KDDAT1        10A         COLHDG('DATEN/10-1')
+     A            KDDAT2        10A         COLHDG('DATEN/10-2')
+     A            KDDAT3        10A         COLHDG('DATEN/10-3')
+     A            KDDAT4        10A         COLHDG('DATEN/10-4')
+     A            KDDAT5        10A         COLHDG('DATEN/10-5')
+     A            KDDAT6        10A         COLHDG('DATEN/10-6')
+     A            KDDAT7        10A         COLHDG('DATEN/10-7')
+     A            KDDAT8        10A         COLHDG('DATEN/10-8')
+     A            KDDAT9        10A         COLHDG('DATEN/10-9')
+     A            KDDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K KDDATE
+     A          K KDTYP
+     A          K KDUSER

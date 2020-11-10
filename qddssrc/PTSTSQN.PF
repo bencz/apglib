@@ -1,0 +1,23 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TESTDATEI FÜR LF                                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  18.12.2012                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TESTDATEI FÜR SELECT/OMIT                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A          R PTSTLFF                   TEXT('TEST FILE')
+     A*
+     ‚* KW UND USERNAME
+     A            LFLFDN         9S 0       COLHDG('LFDN')
+     A            LFDAT2        10A         COLHDG('TEST 2')
+     A            LFDAT3        10A         COLHDG('TEST 3')
+     A

@@ -1,0 +1,24 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH PROJEKTNUMMER/ANGEBOT                *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  12.08.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH ANGEBOT                      *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PAZUUEBF                  PFILE(PAZUUEB)
+     ‚*
+     A          K AUPRN1
+     A          K AUPRN2
+     A          K AUPRN3
+     A
+     A          K AUANG
+     A          K AUANGP
+     ‚*€

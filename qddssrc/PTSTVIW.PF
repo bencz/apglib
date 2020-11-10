@@ -1,0 +1,22 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TESTDATEI FÜR LF                                              *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  18.12.2012                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  TESTDATEI FÜR SELECT/OMIT                    *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A          R PTSTVIWF                  TEXT('TEST FILE')
+     A*
+     A            VWDAT1        10A         COLHDG('TEST 1')
+     A            VWDAT2        10A         COLHDG('TEST 2')
+     A            VWDAT3        10A         COLHDG('TEST 3')
+     A

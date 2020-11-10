@@ -1,0 +1,76 @@
+     ‚*---------------------------------------------------------------*
+     ‚* PROJEKTSOURCEN                                                *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  14.09.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  PROJEKTSOURCEN (ÄHNLICH PDEMMBR)             *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     A*
+     A                                      UNIQUE
+     A
+     A          R PPRJMBRF                  TEXT('PROJEKT SOURCEN')
+     A
+     ‚* SOURCENAME (KEY)
+     A            COSLIB        10A         COLHDG('BIBLIOTHEK')
+     A            COSRCN        10A         COLHDG('DATEI')
+     A            COSMBR        10A         COLHDG('MEMBER')
+     A*
+     ‚* LANGER SOURCENAME + BESCHREIBUNG
+     A            COLMBR        20A         COLHDG('MEMBER NAME')
+     A            COTEXT        50A         COLHDG('BESCHREIBUNG')
+     A*
+     ‚* TEILDATEI-TYP, DATUM, SPRACHE
+     A            COTYP         10A         COLHDG('MEMBER TYP')
+     A            CODTS          8S 0       COLHDG('SOURCE-DATUM')
+     A            COLANG         3A         COLHDG('SPRACHE')
+     A*
+     ‚* PROJEKT UND UNTERPROJEKT
+     A            COPROJ        10A         COLHDG('PROJEKT')
+     A            COTPRJ        10A         COLHDG('TEILPROJEKT')
+     A*
+     ‚* AKTUELLE VERSION
+     A            COVERS         2S 0       COLHDG('VERSION')
+     A            CORRLS         2S 0       COLHDG('RELEASE')
+     A            COMRLS         2S 0       COLHDG('MIN. RELEASE')
+     A*
+     A*
+     ‚* DATUM ERSTELLUNG, ÄNDERUNG, SICHERUNG, WIEDERHERSTELLUNG
+     A            CODTE          8S 0       COLHDG('DATUM' 'ERSTELLUNG')
+     A            COTIE          6S 0       COLHDG('ZEIT' 'ERSTELLUNG')
+     A            CODTM          8S 0       COLHDG('DATUM' 'ÄNDERUNG')
+     A            COTIM          6S 0       COLHDG('ZEIT' 'ÄNDERUNG')
+     A            CODTS          8S 0       COLHDG('DATUM' 'SICHERUNG')
+     A            COTIS          6S 0       COLHDG('ZEIT' 'SICHERUNG')
+     A            CODTR          8S 0       COLHDG('DATUM' 'WIEDERHER.')
+     A            COTIR          6S 0       COLHDG('ZEIT' 'WIEDERHER.')
+     A*
+     ‚* MD5 HASH
+     A            COMD5         32A         COLHDG('MD5-HASH')
+     A*
+     ‚* ERSTELLUNGSSYSTEMNAME
+     A            COSYSN         8A         COLHDG('SYSTEMNAME')
+     A*
+     ‚* ANLAGEDATEN
+     A            COAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            COABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            COAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            COADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            COATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            COMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            COMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            COMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            COMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            COMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A*
+     A          K COSLIB
+     A          K COSRCN
+     A          K COMBR

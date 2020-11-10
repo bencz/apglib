@@ -1,0 +1,59 @@
+Ÿ    €* direkt vor dem * steht das Attribute-Byte für grün
+     €*               Hex 20
+
+     ˜* direkt vor dem * steht das Attribute-Byte für rose
+     ˜*               Hex 38
+
+     ‚* direkt vor dem * steht das Attribute-Byte für weis
+     ‚*               Hex 22
+
+     ˆ* direkt vor dem * steht das Attribute-Byte für rot
+     ˆ*               Hex 28
+
+     * direkt vor dem * steht das Attribute-Byte für blau
+     *               Hex 30
+
+     * direkt vor dem * steht das Attribute-Byte für gelb
+     *               Hex 32
+
+
+
+     „* direkt vor dem * steht das Attribute-Byte für unterstreichen
+     „*               Hex 24
+
+     * direkt vor dem * steht das Attribute-Byte für weis + underline
+     *               Hex 26
+
+     ”* direkt vor dem * steht das Attribute-Byte für blau + underline
+     ”*               Hex 34
+
+     –* direkt vor dem * steht das Attribute-Byte für gelb + underline
+     –*               Hex 36
+
+
+
+
+
+     “* gelb invers
+     “*               Hex 33
+
+     ‘* blau invers
+     ‘*               Hex 31
+
+     ›* blau invers
+     ›*               Hex 3B
+
+     ™* rose invers
+     ™*               Hex 39
+
+     ‰* rot invers
+     ‰*               Hex 29
+
+     * grün invers
+     *               Hex 21
+
+     ƒ* weis invers
+     ƒ*               Hex 23
+
+     *
+     *               Hex 19

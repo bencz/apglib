@@ -1,0 +1,52 @@
+     A*%%TS  SD  20121201  140754  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* PRIORITÄT ÄNDERN                                              *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  29.11.2012                                   *
+     A*                                                               *
+     A* FUNKTION      :  PRIORITÄT EINES OPL-PUNKTES ÄNDERN           *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A  *DS3                                MSGLOC(24)
+     A  *DS4                                MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A                                      CA12(12)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20121201  140754  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(FMT02)
+     A  *DS4                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A            SYS_DSP       10A  O  1  1COLOR(BLU)
+     A            MAINUEB       20A  O  1 12DSPATR(HI)
+     A                                  4  1'Priorität  :'
+     A            OPPRIO    R        B  4 14REFFLD(OPPRIO APG/POPLLST)
+     A                                      EDTCDE(4)
+     A                                  6  1'Prozent  . :'
+     A            OPPRZT    R        B  6 14REFFLD(OPPRZT APG/POPLLST)
+     A                                      EDTCDE(4)
+     A                                  6 18'%'
+     A                                      COLOR(BLU)
+     A                                  8  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20091120  073155  APG         REL-V5R4M0  5722-WDS
+     A  *DS3                                WINDOW(3 23 9 35)
+     A  *DS4                                WINDOW(3 23 9 35)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  19940426  153744  UB          REL-V2R2M0  5738-PW1
+     A                                      ASSUME
+     A                                 01 02' '
+     A                                      DSPATR(ND)

@@ -1,0 +1,47 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ZEITEN FESTHALTEN                                             *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  09.06.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  STARTZEIT FESTHALTEN                         *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PSTRTIMF                  TEXT('PLAN STARTZEIT')
+     A*
+     ‚* LAUFENDE NUMMER
+     A            STLFDN         9S 0       COLHDG('LFDN')
+     A
+     A            STUSER        10A         COLHDG('USER')
+     A            STDTS          8S 0       COLHDG('START' 'DATUM')
+     A            STTIS          6S 0       COLHDG('START' 'ZEIT')
+     A
+     A            STDTE          8S 0       COLHDG('END' 'DATUM')
+     A            STTIE          6S 0       COLHDG('END' 'ZEIT')
+     ‚* TEXT
+     A            STTEXT       100A         COLHDG('TEXT')
+     A
+     ‚* ANLAGEDATEN
+     A            STAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            STABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            STAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            STADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            STATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            STMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            STMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            STMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            STMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            STMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K STLFDN

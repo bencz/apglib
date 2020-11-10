@@ -1,0 +1,21 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH DTKW/DTLFDN                          *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  18.08.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORTIERUNG NACH KW                           *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCFGDATF                  PFILE(PCFGDAT)
+     ‚*
+     A          K DTKW
+     A          K DTLFDN
+     ‚*€
+     A          O DTKW                      COMP(EQ 0)

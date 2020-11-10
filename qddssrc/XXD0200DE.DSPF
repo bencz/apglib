@@ -1,0 +1,304 @@
+     A*%%TS  SD  20101111  173315  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* KÜCHEN UND LAGERDIENST                                        *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  28.08.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  PLANUNG KÜCHENDIENST                         *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20101111  172311  APG         REL-V5R4M0  5722-WDS
+     A                                      CA07(07)
+     A                                      CA12(12)
+     A                                      CA14(14)
+     A                                      CA18(18)
+     A                                      CA20(20)
+     A                                      CA21(21)
+     A                                      CA22(22)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  5  3'### Küchendienst #################-
+     A                                      ###############################'
+     A                                      COLOR(BLU)
+     A            ESSEN400       8A  O  5 69COLOR(BLU)
+     A                                  5 78'#'
+     A                                      COLOR(BLU)
+     A                                  5 80'Lagerdienst'
+     A                                      COLOR(BLU)
+     A                                  5 92'#########'
+     A                                      COLOR(BLU)
+     A                                  6  3'#'
+     A                                      COLOR(BLU)
+     A                                  6  9'MO        '
+     A                                      DSPATR(HI)
+     A  41                                  DSPATR(RI)
+     A                                  6 20'DI        '
+     A                                      DSPATR(HI)
+     A  42                                  DSPATR(RI)
+     A                                  6 31'MI        '
+     A                                      DSPATR(HI)
+     A  43                                  DSPATR(RI)
+     A                                  6 42'DO        '
+     A                                      DSPATR(HI)
+     A  44                                  DSPATR(RI)
+     A                                  6 53'FR        '
+     A                                      DSPATR(HI)
+     A  45                                  DSPATR(RI)
+     A                                  6 65'#'
+     A                                      COLOR(BLU)
+     A                                  6 67'FR        '
+     A                                      DSPATR(HI)
+     A  47                                  DSPATR(RI)
+     A                                  6 78'#'
+     A                                      COLOR(BLU)
+     A                                  6 80'FR        '
+     A                                      DSPATR(HI)
+     A  47                                  DSPATR(RI)
+     A                                  6 91'Wischen?'
+     A                                  6100'#'
+     A                                      COLOR(BLU)
+     A                                  7  3'#'
+     A                                      COLOR(BLU)
+     A                                  7  5'E+P'
+     A            KDMONE    R        O  7  9REFFLD(KDUSER APG/PKDPLAN)
+     A  41                                  DSPATR(RI)
+     A            KDDIEE    R        O  7 20REFFLD(KDUSER APG/PKDPLAN)
+     A  42                                  DSPATR(RI)
+     A            KDMITE    R        O  7 31REFFLD(KDUSER APG/PKDPLAN)
+     A  43                                  DSPATR(RI)
+     A            KDDONE    R        O  7 42REFFLD(KDUSER APG/PKDPLAN)
+     A  44                                  DSPATR(RI)
+     A            KDFREE    R        O  7 53REFFLD(KDUSER APG/PKDPLAN)
+     A  45                                  DSPATR(RI)
+     A                                  7 65'#'
+     A                                      COLOR(BLU)
+     A            KDES41        10A  O  7 67
+     A  47                                  DSPATR(RI)
+     A                                  7 78'#'
+     A                                      COLOR(BLU)
+     A            KDLG1         10A  O  7 80
+     A  47                                  DSPATR(RI)
+     A            KDLGW1    R        O  7 91REFFLD(KDFK01 APG/PKDPLAN)
+     A                                      EDTCDE(4)
+     A                                      COLOR(RED)
+     A                                  7100'#'
+     A                                      COLOR(BLU)
+     A                                  8  3'#'
+     A                                      COLOR(BLU)
+     A                                  8  5'IAW'
+     A            KDMONI    R        O  8  9REFFLD(KDUSER APG/PKDPLAN)
+     A  41                                  DSPATR(RI)
+     A            KDDIEI    R        O  8 20REFFLD(KDUSER APG/PKDPLAN)
+     A  42                                  DSPATR(RI)
+     A            KDMITI    R        O  8 31REFFLD(KDUSER APG/PKDPLAN)
+     A  43                                  DSPATR(RI)
+     A            KDDONI    R        O  8 42REFFLD(KDUSER APG/PKDPLAN)
+     A  44                                  DSPATR(RI)
+     A            KDFREI    R        O  8 53REFFLD(KDUSER APG/PKDPLAN)
+     A  45                                  DSPATR(RI)
+     A                                  8 65'#'
+     A                                      COLOR(BLU)
+     A            KDES42        10A  O  8 67
+     A  47                                  DSPATR(RI)
+     A                                  8 78'#'
+     A                                      COLOR(BLU)
+     A            KDLG2         10A  O  8 80
+     A  47                                  DSPATR(RI)
+     A            KDLGW2    R        O  8 91REFFLD(KDFK01 APG/PKDPLAN)
+     A                                      EDTCDE(4)
+     A                                      COLOR(RED)
+     A                                  8100'#'
+     A                                      COLOR(BLU)
+     A                                  9  3'#'
+     A                                      COLOR(BLU)
+     A                                  9  5'TML'
+     A            MLMON1    R        O  9  9REFFLD(KDUSER APG/PKDPLAN)
+     A  41                                  DSPATR(RI)
+     A            MLDIE1    R        O  9 20REFFLD(KDUSER APG/PKDPLAN)
+     A  42                                  DSPATR(RI)
+     A            MLMIT1    R        O  9 31REFFLD(KDUSER APG/PKDPLAN)
+     A  43                                  DSPATR(RI)
+     A            MLDON1    R        O  9 42REFFLD(KDUSER APG/PKDPLAN)
+     A  44                                  DSPATR(RI)
+     A            MLFRE1    R        O  9 53REFFLD(KDUSER APG/PKDPLAN)
+     A  45                                  DSPATR(RI)
+     A                                  9 65'#'
+     A                                      COLOR(BLU)
+     A                                  9 78'#'
+     A                                      COLOR(BLU)
+     A                                  9100'#'
+     A                                      COLOR(BLU)
+     A                                 10  3'#'
+     A                                      COLOR(BLU)
+     A                                 10  5'WML'
+     A            MLMON2    R        O 10  9REFFLD(KDUSER APG/PKDPLAN)
+     A  41                                  DSPATR(RI)
+     A            MLDIE2    R        O 10 20REFFLD(KDUSER APG/PKDPLAN)
+     A  42                                  DSPATR(RI)
+     A            MLMIT2    R        O 10 31REFFLD(KDUSER APG/PKDPLAN)
+     A  43                                  DSPATR(RI)
+     A            MLDON2    R        O 10 42REFFLD(KDUSER APG/PKDPLAN)
+     A  44                                  DSPATR(RI)
+     A            MLFRE2    R        O 10 53REFFLD(KDUSER APG/PKDPLAN)
+     A  45                                  DSPATR(RI)
+     A                                 10 65'#'
+     A                                      COLOR(BLU)
+     A                                 10 78'#'
+     A                                      COLOR(BLU)
+     A                                 10100'#'
+     A                                      COLOR(BLU)
+     A                                 11  3'##################################-
+     A                                      ###################################-
+     A                                      #############################'
+     A                                      COLOR(BLU)
+     A  48                             13  9'Offene Bestellungen vorhanden!'
+     A                                      DSPATR(RI)
+     A                                      COLOR(RED)
+     A                                 20  2'Von-Datum  . . . . :'
+     A            DT_VON        10A  B 20 23
+     A                                 21  2'User . . . . . . . :'
+     A            KDUSER    R        B 21 23REFFLD(KDUSER APG/PKDPLAN)
+     A                                 22  2'Dienst . . . . . .?:'
+     A            KDTYP     R        B 22 23REFFLD(KDTYP APG/PKDPLAN)
+     A                                 24  2'Beschreibung . . . :'
+     A            TXTSEL        30A  B 24 23
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F7=Bestellungen'
+     A                                      COLOR(BLU)
+     A                                 26 33'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A                                 26 48'F14=Wochenplan'
+     A                                      COLOR(BLU)
+     A                                 26 64'F20=Infos'
+     A  40                                  DSPATR(BL)
+     A  40                                  COLOR(RED)
+     A N40                                  COLOR(BLU)
+     A                                 26 75'F21=Kommandozeile'
+     A                                      COLOR(BLU)
+     A                                 26 94'F22=Dokumente öffnen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20101111  173315  APG         REL-V5R4M0  5722-WDS
+     A  04                                  SFLNXTCHG
+     A            KDDATE    R        H      REFFLD(KDDATE APG/PKDPLAN)
+     A            KDWOTA    R        H      REFFLD(KDWOTA APG/PKDPLAN)
+     A            KDHSER    R        H      REFFLD(KDUSER APG/PKDPLAN)
+     A            AUSW           1A  B 10  2VALUES(' ' '1' '4')
+     A            DT_KD     R        O 10  4REFFLD(KDTYP APG/PKDPLAN)
+     A            WOTA          10A  O 10 15
+     A            KDTYP     R        O 10 26REFFLD(KDTYP APG/PKDPLAN)
+     A            KDUSER    R        O 10 37REFFLD(KDUSER APG/PKDPLAN)
+     A  46                                  COLOR(YLW)
+     A            KDKOM1    R   30   O 10 48REFFLD(KDKOM1 APG/PKDPLAN)
+     A            KDGRND    R        O 10 79REFFLD(KDGRND APG/PKDPLAN)
+     A            TAUSCH    R        O 10110REFFLD(KDUSER APG/PKDPLAN)
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20101111  173315  APG         REL-V5R4M0  5722-WDS
+     A                                      SFLSIZ(0017)
+     A                                      SFLPAG(0016)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A                                      SFLDROP(CA01)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A                                      TEXT('REL.-RECORD-NR FEHLERH.-SATZ')
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            SYS_PGMTYP     8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  5  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  6  4'1=Auswählen'
+     A                                      COLOR(BLU)
+     A                                  6 17'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  8 79'<---------------'
+     A                                      DSPATR(HI)
+     A            SFT0045        6A  O  8 96DSPATR(HI)
+     A                                  8103'---------------->'
+     A                                      DSPATR(HI)
+     A            SFT0011       10A  O  9  4DSPATR(HI)
+     A            SFT0010       10A  O  9 15DSPATR(HI)
+     A            SFT0008       10A  O  9 26DSPATR(HI)
+     A            SFT0009       10A  O  9 37DSPATR(HI)
+     A            SFT0003       30A  O  9 48DSPATR(HI)
+     A            SFT0044       30A  O  9 79DSPATR(HI)
+     A            SFT0046       10A  O  9110DSPATR(HI)
+     A          R FMT04
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

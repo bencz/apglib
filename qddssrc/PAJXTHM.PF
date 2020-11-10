@@ -1,0 +1,70 @@
+     ‚*---------------------------------------------------------------*
+     ‚* AJAX-THEMENSAMMLUNG                                           *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  04.06.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SAMMLUNG DER PROGRAMME                       *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PAJXTHMF                  TEXT('AJAX PAJXTHM')
+     A*
+     ‚* BIBLIOTHEK BZW. VERSION + PGM-NAME
+     A            AXID          30A         COLHDG('THEMA')
+     A            AXKEY         30A         COLHDG('UNTERTHEMA')
+     ‚* BESCHREIBUNGSTEXT DES THEMAS + KOMMENTAR
+     A            AXMTXT        50A         COLHDG('BESCHREIBUNG')
+     A            AXKOM1        80A         COLHDG('KOMMENTAR 1')
+     A            AXKOM2        80A         COLHDG('KOMMENTAR 2')
+     A            AXKOM3        80A         COLHDG('KOMMENTAR 3')
+     A            AXKOML       250A         COLHDG('LANG KOMMENTAR')
+     A
+     ‚* ANLAGEDATEN
+     A            AXAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            AXABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            AXAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            AXADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            AXATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            AXMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            AXMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            AXMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            AXMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            AXMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* FUNKTIONSFELDER
+     A            AXFK01         1S 0       COLHDG('FUNKTION 1')
+     A            AXFK02         1S 0       COLHDG('FUNKTION 2')
+     A            AXFK03         1S 0       COLHDG('FUNKTION 3')
+     A            AXFK04         1S 0       COLHDG('FUNKTION 4')
+     A            AXFK05         1S 0       COLHDG('FUNKTION 5')
+     A            AXFK06         1S 0       COLHDG('FUNKTION 6')
+     A            AXFK07         1S 0       COLHDG('FUNKTION 7')
+     A            AXFK08         1S 0       COLHDG('FUNKTION 8')
+     A            AXFK09         1S 0       COLHDG('FUNKTION 9')
+     A            AXFK10         1S 0       COLHDG('FUNKTION 10')
+     A
+     ‚* DATENFELDER
+     A            AXDAT1        10A         COLHDG('DATEN/10-1')
+     A            AXDAT2        10A         COLHDG('DATEN/10-2')
+     A            AXDAT3        10A         COLHDG('DATEN/10-3')
+     A            AXDAT4        10A         COLHDG('DATEN/10-4')
+     A            AXDAT5        10A         COLHDG('DATEN/10-5')
+     A            AXDAT6        10A         COLHDG('DATEN/10-6')
+     A            AXDAT7        10A         COLHDG('DATEN/10-7')
+     A            AXDAT8        10A         COLHDG('DATEN/10-8')
+     A            AXDAT9        10A         COLHDG('DATEN/10-9')
+     A            AXDAT0        10A         COLHDG('DATEN/10-10')
+     A
+     ‚* KEY
+     A          K AXID
+     A          K AXKEY

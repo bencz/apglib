@@ -1,0 +1,59 @@
+     ‚*---------------------------------------------------------------*
+     ‚* HAUPTMENÜ                                                     *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  15.06.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  APG-HAUPTMENÜ                                *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGMNUF                  TEXT('MENÜ')
+     A*
+     ‚* MENÜPUNKT IST DER SCHLÜSSEL
+     A            MNMENU        10A         COLHDG('MENÜ')
+     A
+     ‚* REFERENZMENÜ + BESCHREIBUNG
+     A            MNRMNU        10A         COLHDG('REF.-MENÜ')
+     A            MNTID         10A         COLHDG('TEXT-ID')
+     A
+     ‚* POSITION INNERHALB DES MENÜ
+     A            MNPOS          9S 0       COLHDG('POSITION')
+     A            MNUPOS         9S 0       COLHDG('UNTER-POSITION')
+     A
+     ‚* RECHTE
+     A            MNREC         10A         COLHDG('ROLLE')
+     A
+     ‚* OPTIONEN
+     A            MNCTYP        10A         COLHDG('AUFRUFTYP')
+     A            MNVIEW         1S 0       COLHDG('SICHTBAR')
+     A            MNADM          1S 0       COLHDG('ADMIN-MENÜ')
+     A
+     ‚* AUFRUFPARAMETER
+     A            MNLIB         10A         COLHDG('AUFRUF-LIB')
+     A            MNPGM         10A         COLHDG('AUFRUF-PGM')
+     A            MNPARM       100A         COLHDG('AUFRUF-PARM')
+     A
+     ‚* ANLAGEDATEN
+     A            MNAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            MNABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            MNAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            MNADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            MNATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            MNMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            MNMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            MNMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            MNMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            MNMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K MNMENU

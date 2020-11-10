@@ -1,0 +1,61 @@
+‚    ***------------------------------------------------------------***
+     ‚* Aufgabe 1:
+     ‚* 1) Die unten stehenden Zeilen in die richtige
+     ‚*    Reihenfolge bringen. Die Nummerierung steht in Spalte 11.
+     ‚*    benutzen Sie denˆmove(m)‚Befehl und die Positionierung mit
+     ‚*   ˆafter(a)‚oderˆbefore(b)‚
+
+  1   *
+  4   *     EE                ++          PP     PP
+  6   *     EEEEEEEE       ++++++++       PPPPPPP
+  7   *     EE                ++          PP
+ 10   *     EEEEEEEE                      PP
+  9   *     EEEEEEEE                      PP
+  8   *     EE                ++          PP
+  3   *     EEEEEEEE                      PPPPPPPPP
+  5   *     EE                ++          PPPPPPPP
+  2   *     EEEEEEEE                      PPPPPPP
+ 11   *
+‚    ***------------------------------------------------------------***
+     ‚* Aufgabe 2:
+     ‚* 1) Die unten stehenden Zeilen in weiß darstellen
+     ‚*
+      *
+  1   *
+  2   *     EEEEEEEE                      PPPPPPP
+  3   *     EEEEEEEE                      PPPPPPPPP
+  4   *     EE                ++          PP     PP
+  5   *     EE                ++          PPPPPPPP
+  6   *     EEEEEEEE       ++++++++       PPPPPPP
+  7   *     EE                ++          PP
+  8   *     EE                ++          PP
+  9   *     EEEEEEEE                      PP
+ 10   *     EEEEEEEE                      PP
+ 11   *
+      *
+‚    ***------------------------------------------------------------***
+     ‚* Aufgabe 3:
+     ‚* 1) Kopieren Sie aus der Teildatei "A_FILES_DE" die Zeilen
+     ‚*    0017.00  bis  0066.00.
+     ‚* 2) Fügen Sie diese ab der nächsten    ***-------   Zeile   ein.
+     ‚* 3) Für diesen Zweck splitten Sie den Bildsch. mit der F15 Taste
+     ‚* 4) Anschließend verändern Sie die Farbe rosa in rot
+     ‚*
+‚    ***------------------------------------------------------------***
+     ‚* Aufgabe 4:
+     ‚* 1) Verdoppeln Sie bei jedem Statusblock die Zeile
+     ‚*    +-----+-------------------
+     ‚* 2) Fügen Sie anschließend eine Leerzeile zwischen den
+     ‚*    Linien +------+-------------------------
+     ‚*           +------+-------------------------
+     ‚*    ein
+     ‚*
+‚    ***------------------------------------------------------------***
+     ‚* Aufgabe 5:
+     ‚* 1) Löschen Sie die nachstehenden Zeilen heraus
+             +-------+-------------------------------------
+             ¦ P  0P ¦ Die Datei wurde erfolgreich geöffnet
+             ¦       ¦ enthält jedoch Felder, die Nullwerte
+             ¦       ¦ enthalten können.
+             +-------+-------------------------------------
+‚    ***------------------------------------------------------------***

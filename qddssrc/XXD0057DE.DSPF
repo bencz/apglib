@@ -1,0 +1,121 @@
+     A*%%TS  SD  20150917  072640  APG         REL-V7R1M0  5770-WDS
+     A*---------------------------------------------------------------*
+     A* BERICHTSHEFTDATEN                                             *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  15.09.2015                                   *
+     A*                                                               *
+     A* FUNKTION      :  PFLEGE FÜR RESERVEFELDER MARKIERUNGEN        *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      MSGLOC(27)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A          R FMT02                     SFL
+     A*%%TS  SD  20150917  072640  APG         REL-V7R1M0  5770-WDS
+     A  04                                  SFLNXTCHG
+     A            AUSW           1A  B 11  2VALUES(' ' '1' '2' '4' '6')
+     A            CMTFLD        10A  O 11  4
+     A            CMTNAM       117A  O 11 15
+     A          R FMT03                     SFLCTL(FMT02)
+     A*%%TS  SD  20150917  072640  APG         REL-V7R1M0  5770-WDS
+     A                                      SFLSIZ(0012)
+     A                                      SFLPAG(0011)
+     A                                      CA05(05)
+     A                                      CA08(08)
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A  91                                  SFLDSP
+     A  96                                  SFLDSPCTL
+     A  95                                  SFLCLR
+     A  91                                  SFLEND
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  3  2'Anzahl . . :'
+     A            ANZREC         4Y 0O  3 15COLOR(RED)
+     A                                      EDTCDE(4)
+     A            ANZREC2        4Y 0O  3 20COLOR(RED)
+     A                                      EDTCDE(4)
+     A                                  4  2'P3 . . . . :'
+     A            PALFDN         9Y 0B  4 15EDTCDE(4)
+     A                                  4 25'Angebot/SRD:'
+     A            QUOTXT        16A  B  4 38
+     A                                  4 55'Header:'
+     A            HEATXT        69A  B  4 63
+     A                                  6  2'Auswahl eingeben und Eingabetaste -
+     A                                      drücken.'
+     A                                      COLOR(BLU)
+     A                                  7  4'4=Löschen'
+     A                                      COLOR(BLU)
+     A                                  7 15'8=Fremdsprachentexte hinzufügen'
+     A                                      COLOR(BLU)
+     A            SFT0051       10   O  9  4DSPATR(HI)
+     A            SFT0003      117   O  9 15DSPATR(HI)
+     A            FLDNAM        10A  B 10  4
+     A            CMTNAM       117A  B 10 15
+     A*--------------------------------------------------------------
+     A          R FMT12                     SFL
+     A*%%TS  SD  20150917  072640  APG         REL-V7R1M0  5770-WDS
+     A  04                                  SFLNXTCHG
+     A            LIBNAM        10A  H
+     A            FILNAM        10A  H
+     A            AUSW           1A  B 24  2VALUES(' ' '1' '2' '4' '6')
+     A            MBRNAM        10A  O 24  4
+     A          R FMT13                     SFLCTL(FMT12)
+     A*%%TS  SD  20150917  072640  APG         REL-V7R1M0  5770-WDS
+     A  *DS4                                SFLLIN(0004)
+     A                                      SFLSIZ(0017)
+     A                                      SFLPAG(0016)
+     A                                      OVERLAY
+     A  92                                  SFLDSP
+     A  97                                  SFLDSPCTL
+     A  98                                  SFLCLR
+     A  92                                  SFLEND
+     A            SFRECNR        4S 0H      SFLRCDNBR(CURSOR)
+     A            SFT0019       10   O 22  4DSPATR(HI)
+     A            FILNAM        10   B 23  4
+     A          R FMT04
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                 26  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 16'F5=Aktualisieren'
+     A                                      COLOR(BLU)
+     A                                 26 34'F8=Neuanlage'
+     A                                      COLOR(BLU)
+     A                                 26 48'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A          R FMT05
+     A*%%TS  SD  20101111  170317  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 15 39'Es sind keine Datensätze zum Anzei-
+     A                                      gen vorhanden  '
+     A                                      DSPATR(HI)

@@ -1,0 +1,21 @@
+     ‚*---------------------------------------------------------------*
+     ‚* LOGISCHE SORTIERUNG NACH POSITION                             *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  15.06.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  SORITERUNG NACH POSITION                     *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCFGMNUF                  PFILE(PCFGMNU)
+     ‚*
+     A          K MNPOS
+     A          K MNUPOS
+     A          K MNMENU
+     ‚*€

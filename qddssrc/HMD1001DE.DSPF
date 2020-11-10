@@ -1,0 +1,95 @@
+     A*%%TS  SD  20131115  131953  APG         REL-V6R1M0  5761-WDS
+     A*---------------------------------------------------------------*
+     A* ÄNDERN EINES TAGS                                             *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  20.05.2009                                   *
+     A*                                                               *
+     A* FUNKTION      :  ANZEIGE/ÄNDERN EINES TAGS                    *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA03(03)
+     A          R FMT01
+     A*%%TS  SD  20131115  131953  APG         REL-V6R1M0  5761-WDS
+     A                                      CA12(12)
+     A                                      BLINK
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SFRECNR        4S 0H
+     A            PTLFDN    R        H      REFFLD(PTLFDN APG/PTAGLIB)
+     A                                  1  2'HMD1001DE'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A                                  1 13'FMT01'
+     A                                      COLOR(BLU)
+     A            MAINUEB       38A  O  1 20DSPATR(HI)
+     A            PGMTYP         8A  O  1 62COLOR(BLU)
+     A                                  1 72SYSNAME
+     A                                      DSPATR(HI)
+     A                                      COLOR(BLU)
+     A                                  2  2USER
+     A            LANGID         3A  O  2 13MSGID(SP0 0001 QTEMP/APGSPRACH)
+     A                                      COLOR(BLU)
+     A            SUBUEB        38A  O  2 20DSPATR(HI)
+     A                                  2 62DATE(*SYS *Y)
+     A                                      EDTCDE(Y)
+     A                                  2 72TIME
+     A                                  5  2'Tag . . . . . . :'
+     A            PTTAG     R     A  B  5 20REFFLD(PTTAG APG/PTAGLIB)
+     A  42                                  DSPATR(HI)
+     A  42                                  DSPATR(PR)
+     A  41                              5 62'Neuanlage'
+     A                                      COLOR(RED)
+     A  43                              6 62'             '
+     A                                      DSPATR(RI)
+     A                                      COLOR(BLU)
+     A  43                              7 62' '
+     A                                      DSPATR(RI)
+     A                                      COLOR(BLU)
+     A  43        ANZUSED        9Y 0O  7 64EDTCDE(3)
+     A  43                              7 74' '
+     A                                      DSPATR(RI)
+     A                                      COLOR(BLU)
+     A                                  8  2'Beschreibung  . :'
+     A            PTTEXT    R        B  8 20REFFLD(PTTEXT APG/PTAGLIB)
+     A                                      CHECK(LC)
+     A  43                              8 62'             '
+     A                                      DSPATR(RI)
+     A                                      COLOR(BLU)
+     A                                  9 54' '
+     A                                  9 66' '
+     A                                 10  2'Funktionscodes  :'
+     A                                      COLOR(BLU)
+     A                                 11  4'Sichtbar  . . :'
+     A            PTFK01    R        B 11 20REFFLD(PTFK01 APG/PTAGLIB)
+     A                                      VALUES(0 1)
+     A                                      EDTCDE(3)
+     A                                 11 23'(0=sichtbar/1=unsichtbar)'
+     A                                      COLOR(BLU)
+     A                                 12  4'Export QIS  . :'
+     A            PTFK02    R        B 12 20REFFLD(PTFK02 APG/PTAGLIB)
+     A                                      VALUES(0 1)
+     A                                      EDTCDE(3)
+     A                                 12 23'(0=nein/1=ja)'
+     A                                      COLOR(BLU)
+     A                                 23  2'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 23 16'F12=Abbrechen'
+     A                                      COLOR(BLU)

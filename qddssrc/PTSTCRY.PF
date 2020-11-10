@@ -1,0 +1,28 @@
+     ‚*---------------------------------------------------------------*
+     ‚* TEST-DATEI                                                    *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  11.01.2013                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  VERSCHLÜSSELUNGSTEST                         *
+     ‚*                                                               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A
+     A          R PTSTCRYF                  TEXT('TEST')
+     A
+     ‚* DATENFELDER
+     A            TCNORM        30A         COLHDG('NORMAL')
+     ‚* WAHRSCHEINLICH VARCHAR NÖTIG
+     ‚* HTTP://PUBLIB.BOULDER.IBM.COM/INFOCENTER/DB2LUW/V9/TOPIC/COM.IB
+     ‚* M.DB2.UDB.ADMIN.DOC/DOC/R0004210.HTM
+     A            TCCRYP        30A         COLHDG('CRYPTED')
+     A
+     ‚* KEY
+     A          K TCNORM

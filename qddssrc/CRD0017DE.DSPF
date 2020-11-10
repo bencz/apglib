@@ -1,0 +1,57 @@
+     A*%%TS  SD  20100121  184016  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* WINDOW ZUR EINGABE EINES DATUM                                *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  A. PIEGER                                    *
+     A*                                                               *
+     A* ERSTELLT AM   :  21.01.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  WINDOW ZUR EINGABE EINES DATUMS              *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4                 -
+     A                                             24 80 *DS3)
+     A  *DS4                                MSGLOC(27)
+     A  *DS3                                MSGLOC(24)
+     A                                      ERRSFL
+     A                                      PRINT
+     A                                      CA12(12 'Abbrechen')
+     A*--------------------------------------------------------------
+     A          R FMT01
+     A*%%TS  SD  20100121  184016  APG         REL-V5R4M0  5722-WDS
+     A  *DS4                                WINDOW(FMT02)
+     A  *DS3                                WINDOW(FMT02)
+     A                                      OVERLAY
+     A                                  1  1'CRD0017DE'
+     A                                      COLOR(BLU)
+     A            MAINUEB       20A  O  1 11DSPATR(HI)
+     A                                  3  1'Teildatei  :'
+     A            SRCMBR        10A  O  3 14
+     A                                  4  1'Datei  . . :'
+     A            SRCRCN        10A  O  4 14
+     A                                  5  1'Bibliothek :'
+     A            SRCLIB        10A  O  5 14
+     A                                  6  1'Zeile  . . :'
+     A            SRCSEQ         6Y 2O  6 14EDTCDE(2)
+     A                                  8  1'Datum  . . :'
+     A            DT_SRC         6Y 0B  8 14
+     A                                      EDTCDE(3)
+     A                                 11  1'F12=Abbrechen'
+     A                                      COLOR(BLU)
+     A*--------------------------------------------------------------
+     A          R FMT02
+     A*%%TS  SD  20010214  094701  JPF         REL-V4R2M0  5769-PW1
+     A                                      OVERLAY
+     A  *DS3                                WINDOW(8 17 12 43)
+     A  *DS4                                WINDOW(8 73 12 43)
+     A*--------------------------------------------------------------
+     A          R DUMMY
+     A*%%TS  SD  20000821  124406  KAB         REL-V4R2M0  5769-PW1
+     A                                      ASSUME
+     A                                  1  2' '
+     A                                      DSPATR(ND)

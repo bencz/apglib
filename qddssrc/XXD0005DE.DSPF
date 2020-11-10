@@ -1,0 +1,467 @@
+     A*%%TS  SD  20101004  153821  APG         REL-V5R4M0  5722-WDS
+     A*---------------------------------------------------------------*
+     A* RAUMPLANUNG                                                   *
+     A*---------------------------------------------------------------*
+     A*                                                               *
+     A* AUTOR         :  ANDREAS PIEGER                               *
+     A*                                                               *
+     A* ERSTELLT AM   :  22.02.2010                                   *
+     A*                                                               *
+     A* FUNKTION      :  RAUMPLAN                                     *
+     A*                                                               *
+     A* ÄNDERUNGEN:                                                   *
+     A* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     A*                                                               *
+     A*****************************************************************
+     A*
+     A*%%EC
+     A                                      DSPSIZ(27 132 *DS4)
+     A                                      PRINT
+     A                                      ERRSFL
+     A                                      CA03(03)
+     A*--------------------------------------------------------------
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A          R FMT01
+     A*%%TS  SD  20100303  073913  APG         REL-V5R4M0  5722-WDS
+     A  03                                  CSRLOC(CURY       CURX)
+     A                                      OVERLAY
+     A                                      CA12(12)
+     A                                      CA10(10)
+     A* MESSAGEFELD FÜR DIE EIGENTLICHE NACHRICHT
+     A  01        ERRMSG        78   M
+     A*
+     A* CURSORPOSITION BEI FEHLERAUSGABE
+     A            CURX           3S 0H
+     A            CURY           3S 0H
+     A            SYS_DSP       10A  O  1  2COLOR(BLU)
+     A            SYS_FMT        6A  O  1 13COLOR(BLU)
+     A            MAINUEB       72A  O  1 20DSPATR(HI)
+     A            SYS_CMP       21A  O  1 93COLOR(BLU)
+     A            PGMTYP         8A  O  1115COLOR(BLU)
+     A                                  1124SYSNAME
+     A                                      COLOR(BLU)
+     A            SYS_USER      10A  O  2  2
+     A            SYS_LANG       3A  O  2 13COLOR(BLU)
+     A            SUBUEB        72A  O  2 20DSPATR(HI)
+     A            SYS_CMT       21A  O  2 93COLOR(BLU)
+     A            DT_SYS         8A  O  2115
+     A            TI_SYS         8A  O  2124
+     A                                  2124TIME
+     A            WAHL           2Y 0B  4  3SNGCHCFLD(*AUTOSLT (*NUMCOL 1))
+     A                                      CHOICE(1 'ETAGE 1')
+     A                                      CHOICE(2 'ETAGE 2')
+     A                                      CHOICE(3 'ETAGE 3')
+     A                                  4 20'Gesuchter Mitarbeiter :'
+     A            MITARB        10   B  4 44
+     A                                      DSPATR(PC)
+     A                                  4 56'(z.B. APG)'
+     A                                      COLOR(BLU)
+     A                                  5 20'Gesuchtes Team  . . . :'
+     A            TEAM          10   B  5 44
+     A                                  5 56'(z.B. SEG)'
+     A                                      COLOR(BLU)
+     A          R FMT02
+     A*%%TS  SD  20101004  153821  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A            A_R011         1A  P
+     A            A_R012         1A  P
+     A            A_R013         1A  P
+     A            A_R014         1A  P
+     A            A_R015         1A  P
+     A            A_R016         1A  P
+     A            A_R017         1A  P
+     A            A_R018         1A  P
+     A            A_R019         1A  P
+     A            A_R021         1A  P
+     A            A_R022         1A  P
+     A            A_R030         1A  P
+     A            A_R031         1A  P
+     A            A_R032         1A  P
+     A            A_R033         1A  P
+     A            A_R034         1A  P
+     A            A_R035         1A  P
+     A            A_R036         1A  P
+     A            A_R037         1A  P
+     A            A_R038         1A  P
+     A            A_R039         1A  P
+     A            A_R041         1A  P
+     A            A_R042         1A  P
+     A            A_R043         1A  P
+     A            A_R044         1A  P
+     A            A_R045         1A  P
+     A            A_R046         1A  P
+     A            A_R047         1A  P
+     A                                  8 24'-----------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------'
+     A                                  9 24'|'
+     A            R011           3A  O  9 26
+     A  02                                  DSPATR(&A_R011)
+     A                                  9 30'|'
+     A            R012           3A  O  9 32
+     A  02                                  DSPATR(&A_R012)
+     A                                  9 36'|'
+     A            R013           3A  O  9 38
+     A  02                                  DSPATR(&A_R013)
+     A                                  9 42'|'
+     A            R014           3A  O  9 44
+     A  02                                  DSPATR(&A_R014)
+     A                                  9 48'|'
+     A            R015           3A  O  9 50
+     A  02                                  DSPATR(&A_R015)
+     A                                  9 54'|'
+     A                                  9 64'|'
+     A            R021           3A  O  9 66
+     A  02                                  DSPATR(&A_R021)
+     A                                  9 70'|'
+     A            R031           3A  O  9 72
+     A  02                                  DSPATR(&A_R031)
+     A                                  9 76'/'
+     A            R032           3A  O  9 78
+     A  02                                  DSPATR(&A_R032)
+     A                                  9 82'|'
+     A            R033           3A  O  9 84
+     A  02                                  DSPATR(&A_R033)
+     A                                  9 88'/'
+     A            R034           3A  O  9 90
+     A  02                                  DSPATR(&A_R034)
+     A                                  9 94'/'
+     A            R035           3A  O  9 96
+     A  02                                  DSPATR(&A_R035)
+     A                                  9100'|'
+     A                                  9109'|'
+     A                                 10 24'-----------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------'
+     A                                 11 24'|'
+     A                                 11 54'|'
+     A                                 11 70'|'
+     A                                 11 82'|'
+     A                                 11 90'TTT'
+     A                                 11100'|'
+     A                                 11109'|'
+     A                                 12 24'|'
+     A                                 12 54'/'
+     A                                 12 70'/'
+     A                                 12 82'/'
+     A                                 12100'/'
+     A                                 12109'|'
+     A                                 13 24'|'
+     A                                 13 54'|'
+     A                                 13 70'|'
+     A                                 13 82'|'
+     A                                 13100'|'
+     A                                 13109'|'
+     A                                 14 24'-------'
+     A                                 14 34'T'
+     A                                 14 36'-----------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------'
+     A                                 15 24'|'
+     A            R016           3A  O 15 26
+     A  02                                  DSPATR(&A_R016)
+     A                                 15 30'|'
+     A                                 15 32'TTT'
+     A                                 15 36'|'
+     A            R017           3A  O 15 38
+     A  02                                  DSPATR(&A_R017)
+     A                                 15 42'|'
+     A            R018           3A  O 15 44
+     A  02                                  DSPATR(&A_R018)
+     A                                 15 48'|'
+     A            R019           3A  O 15 50
+     A  02                                  DSPATR(&A_R019)
+     A                                 15 54'|'
+     A            R022          13A  O 15 56
+     A  02                                  DSPATR(&A_R022)
+     A                                 15 70'|'
+     A            R036           3A  O 15 72
+     A  02                                  DSPATR(&A_R036)
+     A                                 15 76'/'
+     A            R037           3A  O 15 78
+     A  02                                  DSPATR(&A_R037)
+     A                                 15 82'|'
+     A            R038           3A  O 15 84
+     A  02                                  DSPATR(&A_R038)
+     A                                 15 88'|'
+     A            R039           3A  O 15 90
+     A  02                                  DSPATR(&A_R039)
+     A                                 15 94'/'
+     A            R030           3A  O 15 96
+     A  02                                  DSPATR(&A_R030)
+     A                                 15100'|'
+     A            R041           6A  O 15102
+     A  02                                  DSPATR(&A_R041)
+     A                                 15109'|'
+     A            R042           3A  O 15111
+     A  02                                  DSPATR(&A_R042)
+     A                                 15115'|'
+     A            R043           3A  O 15117
+     A  02                                  DSPATR(&A_R043)
+     A                                 15121'|'
+     A                                 16 24'-----------------------------------
+     A                                      ----//------------------------------
+     A                                      -----------------------------'
+     A                                 17100'|'
+     A                                 17106'|'
+     A                                 17119'|'
+     A                                 17121'|'
+     A                                 18100'/'
+     A                                 18106'/'
+     A                                 18113'T'
+     A                                 18119'/'
+     A                                 18121'/'
+     A                                 19100'|'
+     A                                 19106'|'
+     A                                 19113'T'
+     A                                 19119'|'
+     A                                 19121'|'
+     A                                 20 82'-----------------------------------
+     A                                      ----'
+     A                                 20121'|'
+     A                                 21 82'|'
+     A            R044_1        15A  O 21 84
+     A  02                                  DSPATR(&A_R044)
+     A                                 21100'/'
+     A                                 21121'|'
+     A                                 22 82'|'
+     A            R044_2        15A  O 22 84
+     A  02                                  DSPATR(&A_R044)
+     A                                 22100'|---------------------'
+     A                                 23 82'|'
+     A            R044_3        15A  O 23 84
+     A  02                                  DSPATR(&A_R044)
+     A                                 23100'|'
+     A            R045           3A  O 23102
+     A  02                                  DSPATR(&A_R045)
+     A                                 23106'|'
+     A            R046           3A  O 23108
+     A  02                                  DSPATR(&A_R046)
+     A                                 23112'|'
+     A            R047           6A  O 23114
+     A  02                                  DSPATR(&A_R047)
+     A                                 23121'|'
+     A                                 24 82'-----------------------------------
+     A                                      ------'
+     A          R FMT03
+     A*%%TS  SD  20100908  071938  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A            A_R111         1A  P
+     A            A_R113         1A  P
+     A            A_R114         1A  P
+     A            A_R115         1A  P
+     A            A_R116         1A  P
+     A            A_R117         1A  P
+     A            A_R118         1A  P
+     A            A_R121         1A  P
+     A            A_R122         1A  P
+     A            A_R130         1A  P
+     A            A_R131         1A  P
+     A            A_R132         1A  P
+     A            A_R133         1A  P
+     A            A_R134         1A  P
+     A            A_R135         1A  P
+     A            A_R136         1A  P
+     A            A_R137         1A  P
+     A            A_R138         1A  P
+     A            A_R139         1A  P
+     A            A_R141         1A  P
+     A            A_R142         1A  P
+     A            A_R143         1A  P
+     A            A_R144         1A  P
+     A            A_R145         1A  P
+     A            A_R146         1A  P
+     A            A_R147         1A  P
+     A            A_R148         1A  P
+     A                                  8 24'-----------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------'
+     A                                  9 24'|'
+     A            R111          15A  O  9 26
+     A  02                                  DSPATR(&A_R111)
+     A                                  9 42'|'
+     A            R113           3A  O  9 44
+     A  02                                  DSPATR(&A_R113)
+     A                                  9 48'|'
+     A            R114           3A  O  9 50
+     A  02                                  DSPATR(&A_R114)
+     A                                  9 54'|'
+     A                                  9 58'|'
+     A            R123           3   O  9 60
+     A                                  9 64'|'
+     A            R121           3A  O  9 66
+     A  02                                  DSPATR(&A_R121)
+     A                                  9 70'|'
+     A            R131           3A  O  9 72
+     A  02                                  DSPATR(&A_R131)
+     A                                  9 76'/'
+     A            R132           3A  O  9 78
+     A  02                                  DSPATR(&A_R132)
+     A                                  9 82'|'
+     A            R133           3A  O  9 84
+     A  02                                  DSPATR(&A_R133)
+     A                                  9 88'/'
+     A            R134           3A  O  9 90
+     A  02                                  DSPATR(&A_R134)
+     A                                  9 94'/'
+     A            R135           3A  O  9 96
+     A  02                                  DSPATR(&A_R135)
+     A                                  9100'|'
+     A                                  9109'|'
+     A                                 10 24'-----------------------------------
+     A                                      ------------------------------------
+     A                                      -----------------'
+     A                                 11 21'TT'
+     A                                 11 24'|'
+     A                                 11 30'|'
+     A                                 11 54'|'
+     A                                 11 70'|'
+     A                                 11 90'TTT'
+     A                                 11109'|'
+     A                                 12 21'TT'
+     A                                 12 24'/'
+     A                                 12 30'/'
+     A                                 12 54'/'
+     A                                 12 70'/'
+     A                                 12109'|'
+     A                                 13 21'TT'
+     A                                 13 24'|'
+     A                                 13 30'|'
+     A                                 13 54'|'
+     A                                 13 70'|'
+     A                                 13109'|'
+     A                                 14 24'------- T   -------------------   -
+     A                                      -------     ------------------------
+     A                                      ----------/------------------'
+     A                                 15 24'|'
+     A            R115           3A  O 15 26
+     A  02                                  DSPATR(&A_R115)
+     A                                 15 30'|'
+     A                                 15 32'TTT'
+     A                                 15 36'|'
+     A            R116           3A  O 15 38
+     A  02                                  DSPATR(&A_R116)
+     A                                 15 42'|'
+     A            R117           3A  O 15 44
+     A  02                                  DSPATR(&A_R117)
+     A                                 15 48'|'
+     A            R118           3A  O 15 50
+     A  02                                  DSPATR(&A_R118)
+     A                                 15 54'|'
+     A                                 15 56'T'
+     A                                 15 58'|'
+     A            R122           3A  O 15 60
+     A  02                                  DSPATR(&A_R122)
+     A                                 15 64'|'
+     A                                 15 70'|'
+     A            R136           3A  O 15 72
+     A  02                                  DSPATR(&A_R136)
+     A                                 15 76'|'
+     A            R137           3A  O 15 78
+     A  02                                  DSPATR(&A_R137)
+     A                                 15 82'|'
+     A            R138           3A  O 15 84
+     A  02                                  DSPATR(&A_R138)
+     A                                 15 88'/'
+     A            R139           3A  O 15 90
+     A  02                                  DSPATR(&A_R139)
+     A                                 15 94'/'
+     A            R130           3A  O 15 96
+     A  02                                  DSPATR(&A_R130)
+     A                                 15100'|'
+     A                                 15109'|'
+     A            R141           3A  O 15111
+     A  02                                  DSPATR(&A_R141)
+     A                                 15115'|'
+     A            R142           3A  O 15117
+     A  02                                  DSPATR(&A_R142)
+     A                                 15121'|'
+     A                                 16 24'-----------------------------------
+     A                                      ------------------------------------
+     A                                      --------------'
+     A                                 16109'-------------'
+     A                                 17100'|'
+     A            R143           3A  O 17102
+     A  02                                  DSPATR(&A_R143)
+     A                                 17106'|'
+     A                                 17121'|'
+     A                                 18100'|-----|'
+     A                                 18113'T'
+     A                                 18121'|'
+     A                                 19100'|'
+     A            R144           3A  O 19102
+     A  02                                  DSPATR(&A_R144)
+     A                                 19106'|'
+     A                                 19113'T'
+     A                                 19121'|'
+     A                                 20 82'-------------------------'
+     A                                 20113'TTTTT'
+     A                                 20121'|'
+     A                                 21 82'|'
+     A            R145_1        15A  O 21 84
+     A  02                                  DSPATR(&A_R145)
+     A                                 21100'/'
+     A                                 21121'|'
+     A                                 22 82'|'
+     A            R145_2        15A  O 22 84
+     A  02                                  DSPATR(&A_R145)
+     A                                 22100'|---------------------'
+     A                                 23 82'|'
+     A            R145_3        15A  O 23 84
+     A  02                                  DSPATR(&A_R145)
+     A                                 23100'/'
+     A            R146           3A  O 23102
+     A  02                                  DSPATR(&A_R146)
+     A                                 23106'/'
+     A            R147           3A  O 23108
+     A  02                                  DSPATR(&A_R147)
+     A                                 23112'|'
+     A            R148           6A  O 23114
+     A  02                                  DSPATR(&A_R148)
+     A                                 23121'|'
+     A                                 24 82'-----------------------------------
+     A                                      ------'
+     A          R FMT04
+     A*%%TS  SD  20100309  070135  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A            A_R301         1A  P
+     A                                  8 24'-----------------------------------
+     A                                      -------'
+     A                                  9 24'|'
+     A                                  9 54'|'
+     A                                  9 64'|'
+     A                                 10 24'|'
+     A                                 10 54'|'
+     A                                 10 64'|'
+     A                                 11 24'|'
+     A                                 11 54'/'
+     A                                 11 64'|'
+     A                                 12 24'|'
+     A                                 12 54'|'
+     A            R301           3   O 12 60
+     A  02                                  DSPATR(&A_R301)
+     A                                 12 64'|'
+     A                                 13 24'|'
+     A                                 13 54'--/--'
+     A                                 13 64'|'
+     A                                 14 24'|'
+     A                                 14 54'|'
+     A                                 14 56'T'
+     A                                 14 58'|'
+     A                                 14 64'|'
+     A                                 15 24'|'
+     A                                 15 54'|'
+     A                                 15 56'T'
+     A                                 15 58'|'
+     A                                 15 64'|'
+     A                                 16 24'-----------------------------------
+     A                                      -------'
+     A          R FMT05
+     A*%%TS  SD  20100303  072921  APG         REL-V5R4M0  5722-WDS
+     A                                      OVERLAY
+     A                                 26  3'F3=Verlassen'
+     A                                      COLOR(BLU)
+     A                                 26 17'F10=Wechsel Raumname'
+     A                                      COLOR(BLU)
+     A                                 26 39'F12=Abbrechen'
+     A                                      COLOR(BLU)

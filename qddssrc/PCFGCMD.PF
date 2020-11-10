@@ -1,0 +1,66 @@
+     ‚*---------------------------------------------------------------*
+     ‚* BEFEHLSSATZ                                                   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  07.07.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  GÜLTIGER BEFEHLSSATZ UND PARAMETERDEFINITION *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGCMDF                  TEXT('CONFIG')
+     A*
+     ‚* NSPC, CMD UND PARM BILDEN DEN SCHLÜSSEL
+     A            CMNSPC        10A         COLHDG('NAMESPACE')
+     A            CMCMD         20A         COLHDG('COMMAND')
+     A
+     ‚* PARAMETER (BEI KOPFSATZ LEER)
+     A            CMPARM        20A         COLHDG('PARAMETER')
+     A            CMPVAL         1S 0       COLHDG('HAS VALUE?')
+     A            CMPTYP         1S 0       COLHDG('PARAMETER-TYPE')
+     ‚*                                      0 = ALPHANUMERISCH
+     ‚*                                      1 = NUMERISCH
+     A            CMPMXL         9S 0       COLHDG('MAX-VALUE' 'LENGTH')
+     A
+     ‚* DEFAULT-WERTE
+     A            CMDFTA       100A         COLHDG('DEFAULT-VALUE' 'ALPHA')
+     A            CMDFTN        20S 5       COLHDG('DEFAULT-VALUE' 'NUMERIC')
+     A
+     ‚* BESCHREIBUNG
+     A            CMTXT         40A         COLHDG('BESCHREIBUNG')
+     A
+     ‚* AKTIV JA/NEIN
+     A            CMAKT          1S 0       COLHDG('AKTIV')
+     A
+     ‚* AUFZURUFENDES PROGRAMM (NUR KOPFSATZ)
+     A            CMCLIB        10A         COLHDG('AUFZURUFENDES' 'LIB')
+     A            CMCPGM        10A         COLHDG('AUFZURUFENDES' 'PGM')
+     ‚* MAPPING FÜR PARM IM AUFZURUFENDEN PROGRAMM
+     A            CMCPRM        10A         COLHDG('AUFZURUFENDES' 'PARM')
+     A            CMCPRP         9S 0       COLHDG('AUFZURUFENDES' 'PARM-POS')
+     A
+     ‚* ANLAGEDATEN
+     A            CMAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            CMABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            CMAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            CMADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            CMATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            CMMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            CMMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            CMMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            CMMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            CMMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K CMNSPC
+     A          K CMCMD
+     A          K CMPARM

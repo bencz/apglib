@@ -1,0 +1,45 @@
+     ‚*---------------------------------------------------------------*
+     ‚* INFORMATIONSTEXTE ZUR ANZEIGE FÜR PROGRAMME                   *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  03.03.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  GENERELLE TEXTE                              *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PTXTFITF                  TEXT('CONFIG TXTFIT')
+     A*
+     ‚* DATEI, KEY, LAUFENDE POSITION
+     A            FTFILE        10A         COLHDG('DATEI')
+     A            FTKEY         50A         COLHDG('SCHLÜSSEL')
+     A            FTLFPO         9S 0       COLHDG('POSITION')
+     ‚* BESCHREIBUNGSTEXT
+     A            FTTEXT        80A         COLHDG('TEXT')
+     A            FTZUNR         9S 0       COLHDG('ZUGRIFFSNUMMER')
+     A
+     ‚* ANLAGEDATEN
+     A            FTAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            FTABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            FTAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            FTADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            FTATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            FTMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            FTMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            FTMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            FTMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            FTMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K FTFILE
+     A          K FTKEY
+     A          K FTLFPO

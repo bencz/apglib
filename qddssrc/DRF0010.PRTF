@@ -1,0 +1,46 @@
+     ‚*---------------------------------------------------------------*
+     ‚* DRUCKEN EINER SOURCE                                          *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  12.01.2010                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  DRUCKEN EINER SOURCE                         *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R FMT01                     SKIPB(1)
+     ‚* SEITENHEADER/USERNAME/DATUM/...
+     A                                     1'DRF0010'
+     A                                    12'SEU              '
+     A                                      SPACEA(1)
+     ‚* ZEILE-2
+     A            DUMMY          1A        1
+     A                                    62DATE
+     A                                      EDTCDE(Y)
+     A                                    71TIME
+     A                                      SPACEA(2)
+     ‚*---
+     A          R FMT02
+     ‚* ÜBERSCHRIFTEN
+     a            SFT0007        7A        4
+     a            SFT0005       10A       12
+     a            SFT0003       57A       13
+     A                                      SPACEA(1)
+     A          R FMT03
+     ‚* SOURCEZEILEN
+     A            SRCSEQ         6S 2      1
+     A                                      EDTCDE(3)
+     A            SRCDTA       120A        8
+     A            SRCDAT         6S 0    130
+     A                                      SPACEA(1)
+     A          R FMT04
+     A                                    01'--------------------------------'
+     A                                    33'--------------------------------'
+     A                                    65'--------------'
+     A                                      SPACEA(1)
+     ‚*

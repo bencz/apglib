@@ -1,0 +1,45 @@
+     ‚*---------------------------------------------------------------*
+     ‚* ZITATDATENBANK                                                *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  21.06.2011                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  ZITATDATENBANK                               *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A                                      UNIQUE
+     A
+     A          R PCFGZITF                  TEXT('CONFIG PZITATE')
+     A*
+     ‚* LFDN (KEY)
+     A            ZILFDN         9S 0       COLHDG('LFDN')
+     A
+     A            ZICAT         20A         COLHDG('KATEGORIE')
+     A            ZITYPE        20A         COLHDG('TYP')
+     A
+     ‚* BESCHREIBUNGSTEXT DES THEMAS + KOMMENTAR
+     A            ZITEXT       250A         COLHDG('TEXT')
+     A            ZIAUTH         9S 0       COLHDG('AUTOR-ID')
+     A
+     ‚* ANLAGEDATEN
+     A            ZIAUSR        10A         COLHDG('USER    ' 'ANLAGE')
+     A            ZIABS         10A         COLHDG('TERMINAL' 'ANLAGE')
+     A            ZIAPGM        10A         COLHDG('PROGRAMM' 'ANLAGE')
+     A            ZIADTA         8S 0       COLHDG('DATUM   ' 'ANLAGE')
+     A            ZIATIA         6S 0       COLHDG('ZEIT    ' 'ANLAGE')
+     A
+     ‚* MODIFIKATION
+     A            ZIMSER        10A         COLHDG('USER    ' 'MODIFIKATION')
+     A            ZIMBS         10A         COLHDG('TERMINAL' 'MODIFIKATION')
+     A            ZIMPGM        10A         COLHDG('PROGRAMM' 'MODIFIKATION')
+     A            ZIMDTA         8S 0       COLHDG('DATUM   ' 'MODIFIKATION')
+     A            ZIMTIA         6S 0       COLHDG('ZEIT    ' 'MODIFIKATION')
+     A
+     ‚* KEY
+     A          K ZILFDN

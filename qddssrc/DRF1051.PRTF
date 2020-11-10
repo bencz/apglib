@@ -1,0 +1,49 @@
+     ‚*---------------------------------------------------------------*
+     ‚* DRUCK CHKSRC-AUSGABE                                          *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.10.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  DRUCKEN DER CHKSRC-MELDUNGEN                 *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R FMT01                     SKIPB(1)
+     ‚* SEITENHEADER/USERNAME/DATUM/...
+     A                                     1'DRF0100'
+     A                                    12'CHKSRC           '
+     A                                      SPACEA(1)
+     ‚* ZEILE-2
+     A            DUMMY          1A        1
+     A                                    62DATE
+     A                                      EDTCDE(Y)
+     A                                    71TIME
+     A                                      SPACEA(2)
+     ‚*---
+     A          R FMT02
+     ‚* ÜBERSCHRIFTEN
+     A                                    01'--------------------------------'
+     A                                    33'--------------------------------'
+     A                                    65'--------------'
+     A                                       SPACEA(1)
+     a            SFT0007        7A        4
+     a            SFT0005       10A       12
+     a            SFT0003       57A       13
+     A                                       SPACEA(1)
+     A                                    01'--------------------------------'
+     A                                    33'--------------------------------'
+     A                                    65'--------------'
+     A                                       SPACEA(1)
+     A          R FMT03
+     ‚* FEHLERMELDUNGS-ZEILE
+     A            CRSECN    R              1REFFLD(CRSECN PCHKSRC)
+     A                                      EDTCDE(4)
+     A
+     A            CRFTXT    R              6REFFLD(CRFTXT PCHKSRC)
+     A                                       SPACEA(1)
+     ‚*

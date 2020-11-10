@@ -1,0 +1,39 @@
+     ‚*---------------------------------------------------------------*
+     ‚* SORTIERUNG FÜR GEBURTSTAGSMAIL                                *
+     ‚*---------------------------------------------------------------*
+     ‚*                                                               *
+     ‚* AUTOR         :  A. PIEGER                                    *
+     ‚*                                                               *
+     ‚* ERSTELLT AM   :  02.09.2009                                   *
+     ‚*                                                               *
+     ‚* FUNKTION      :  CFIN05, NUR H050-SCHLÜSSEL                   *
+     ‚*                                                               *
+     ‚* ÄNDERUNGEN:                                                   *
+     ‚* DATUM      VON   GRUND DER ÄNDERUNG                           *
+     ‚*                                                               *
+     ‚*****************************************************************
+     ‚*
+     A          R PCONFIGF                  PFILE(PCONFIG)
+     A
+     A            XXDAY          2   I      SST(CFIN04 7 2)
+     A            XXMON          2   I      SST(CFIN04 5 2)
+     A            XXYEAR         4   I      SST(CFIN04 1 4)
+     A
+     A            CFID
+     A            CFKEY
+     A            CFKEY2
+     A            CFKEY3
+     A            CFKEY4
+     A
+     A            CFIN04
+     A            CFKOPF
+     ‚*
+     A          K XXDAY
+     A          K XXMON
+     A          K XXYEAR
+     ‚*€
+     A          O CFID                      COMP(NE 'H050')
+     A          O CFKOPF                    COMP(EQ 1)
+     ‚* LEERE GEBURTSTAGE
+     A          O CFIN04                    COMP(EQ ' ')
+     A          O CFIN04                    COMP(EQ '00000000')
