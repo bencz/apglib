@@ -1,0 +1,52 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* SOURCE VERSCHIEBEN                                              */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  10.12.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  TEILDATEI/SOURCE VERSCHIEBEN                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&MOVMBR_REC &RETCODE)
+
+/*‚*         EINZELNE VARIABLEN WEIL AUFRUF AUS COMMAND              */
+             DCL        VAR(&MOVMBR_REC) TYPE(*CHAR) LEN(60)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FLIB)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FRCN)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FMBR)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TLIB)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TRCN)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TMBR)        TYPE(*CHAR) LEN(10)
+
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FLIB)     VALUE(%SST(&MOVMBR_REC 1 10))
+             CHGVAR     VAR(&FRCN)     VALUE(%SST(&MOVMBR_REC 11 10))
+             CHGVAR     VAR(&FMBR)     VALUE(%SST(&MOVMBR_REC 21 10))
+             CHGVAR     VAR(&TLIB)     VALUE(%SST(&MOVMBR_REC 31 10))
+             CHGVAR     VAR(&TRCN)     VALUE(%SST(&MOVMBR_REC 41 10))
+             CHGVAR     VAR(&TMBR)     VALUE(%SST(&MOVMBR_REC 51 10))
+
+/*‚*         SOURCE ERST KOPIEREN ...                                */
+             CPYF       FROMFILE(&FLIB/&FRCN) FROMMBR(&FMBR) +
+                        TOFILE(&TLIB/&TRCN) TOMBR(&TMBR) +
+                        MBROPT(*REPLACE)
+             MONMSG     MSGID(CPF0000)  EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO (ENDPGM)
+             ENDDO
+
+/*‚*         ... DANN LÖSCHEN                                        */
+             RMVM       FILE(&FLIB/&FRCN) MBR(&FMBR)
+             MONMSG     MSGID(CPF0000)  EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO (ENDPGM)
+             ENDDO
+
+ ENDPGM:     ENDPGM

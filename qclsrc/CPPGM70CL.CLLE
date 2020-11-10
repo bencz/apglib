@@ -1,0 +1,368 @@
+/*-------------------------------------------------------------------*/
+/*‚Ausführen von Systembefehlen für CPPGM70                         €*/
+/*-------------------------------------------------------------------*/
+             PGM        PARM(&CMD &FILE &LIB &MBR +
+                                  &TYPE  +
+                                  &TEXT +
+                                  &TXT3000 +
+                                  &LNG  +
+                                  &RETCODE)
+
+/*‚--------- Variablen-Definition                                   €*/
+             DCL        VAR(&CMD)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIB)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBR)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TYPE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TEXT)     TYPE(*CHAR) LEN(50)
+             DCL        VAR(&TXT3000)  TYPE(*CHAR) LEN(3000)
+             DCL        VAR(&LNG)      TYPE(*CHAR) LEN(03)
+             DCL        VAR(&RETCODE)  TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&SPR)      TYPE(*CHAR) LEN(03)
+             DCL        VAR(&PGMLIB)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MSI)      TYPE(*CHAR) LEN(7)
+             DCL        VAR(&MSD)      TYPE(*CHAR) LEN(132)
+
+             DCL        VAR(&RMMDTA)   TYPE(*CHAR) LEN(3100)
+             DCL        VAR(&RMMLNG)   TYPE(*CHAR) LEN(04)
+             DCL        VAR(&RMFMT)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RMID)     TYPE(*CHAR) LEN(07)
+             DCL        VAR(&RMFILE)   TYPE(*CHAR) LEN(20)
+             DCL        VAR(&RMRDTA)   TYPE(*CHAR) LEN(01)
+             DCL        VAR(&RMRLNG)   TYPE(*CHAR) LEN(04)
+             DCL        VAR(&RMRVAL)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RMRFCC)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RMERR)    TYPE(*CHAR) LEN(290)
+             DCL        VAR(&WRKPOS)   TYPE(*DEC)  LEN(09 0)
+             DCL        VAR(&WRKLNG)   TYPE(*DEC)  LEN(09 0)
+
+             CHGVAR     VAR(&RETCODE) VALUE(' ')
+
+/*‚--------- Unterfunktionen                                        €*/
+             IF         COND(&CMD = 'CRTDTAARA')  THEN(GOTO CRTDTAARA)
+             IF         COND(&CMD = 'RTVNETA')    THEN(GOTO RTVNETA)
+             IF         COND(&CMD = 'RTVDTAARA')  THEN(GOTO RTVDTAARA)
+             IF         COND(&CMD = 'CHGDTAARA')  THEN(GOTO CHGDTAARA)
+             IF         COND(&CMD = 'LGPGM008')   THEN(GOTO LGPGM008)
+             IF         COND(&CMD = 'DLTOVR')     THEN(GOTO DLTOVR)
+             IF         COND(&CMD = 'DSPFLD')     THEN(GOTO DSPFLD)
+             IF         COND(&CMD = 'DSPKEY')     THEN(GOTO DSPKEY)
+             IF         COND(&CMD = 'DSPSEL')     THEN(GOTO DSPSEL)
+             IF         COND(&CMD = 'DSPRCD')     THEN(GOTO DSPRCD)
+             IF         COND(&CMD = 'RTVMBRD')    THEN(GOTO RTVMBRD)
+             IF         COND(&CMD = 'RTVMSGD')    THEN(GOTO RTVMSGD)
+             IF         COND(&CMD = 'RTVOBJD')    THEN(GOTO RTVOBJD)
+
+             CHGVAR     VAR(&RETCODE) VALUE('C')
+             GOTO       ENDE
+
+/*‚--------- Ermittle Systemnamen                                   €*/
+RTVNETA:     RTVNETA    SYSNAME(&TXT3000)
+             GOTO       ENDE
+
+/*‚--------- Erstelle Dataarea in QTEMP                             €*/
+CRTDTAARA:   CRTDTAARA  DTAARA(&LIB/&FILE) +
+                        TYPE(&TYPE)  +
+                        LEN(&LNG)    +
+                        VALUE(&TXT3000) +
+                        TEXT(&TEXT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Einlesen der Dataarea                                  €*/
+RTVDTAARA:   RTVDTAARA  DTAARA(&LIB/&FILE) +
+                        RTNVAR(&TXT3000)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Zurückschreiben der Dataarea                           €*/
+CHGDTAARA:   CHGDTAARA  DTAARA(&LIB/&FILE) +
+                        VALUE(&TXT3000)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Programmtexte                                          €*/
+LGPGM008:    CHKOBJ     OBJ(*LIBL/PPGMTXT) OBJTYPE(*FILE) AUT(*USE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+               RCVMSG   MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+               CHGVAR   VAR(&TXT3000) VALUE(&MSI)
+               CHGVAR   VAR(&RETCODE) VALUE('1')
+               GOTO     ENDE
+             ENDDO
+             CHGVAR     &SPR 'DEU'
+             CHGVAR     &PGMLIB &LIB
+             IF         (%SST(&LIB 4 3) *NE ' ' *AND +
+                         %SST(&LIB 4 3) *NE 'QGPL') THEN(DO)
+               CHGVAR   %SST(&PGMLIB 4 3) 'PGM'
+             ENDDO
+             IF         (%SST(&LIB 4 3) *EQ ' ' *OR +
+                         %SST(&LIB 4 3) *EQ 'QGPL') THEN(DO)
+               CHGVAR   &PGMLIB 'LFSPGMV6'
+             ENDDO
+             IF         (%SST(&PGMLIB 7 2) < 'V5') THEN(DO)
+               CHKOBJ   OBJ(&PGMLIB/LGPGM008) OBJTYPE(*PGM) AUT(*USE)
+               MONMSG   MSGID(CPF0000) EXEC(DO)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+               ENDDO
+               CALL     PGM(&PGMLIB/LGPGM008) PARM(&MBR &TXT3000)
+               MONMSG   MSGID(CPF0000) EXEC(DO)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+               ENDDO
+               GOTO     ENDE
+             ENDDO
+             CHKOBJ     OBJ(&PGMLIB/LGPGM008) OBJTYPE(*PGM) AUT(*USE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+               CHGVAR   VAR(&RETCODE) VALUE('1')
+               GOTO     ENDE
+             ENDDO
+             CALL       PGM(&PGMLIB/LGPGM008) PARM(&MBR &TXT3000 &SPR)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+               CHGVAR   VAR(&RETCODE) VALUE('1')
+               GOTO     ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Retrieve Message-Description                           €*/
+RTVMSGD:     CHGVAR     &RMMDTA  ' '
+             CHGVAR     %BIN(&RMMLNG 1 4)  3100
+             CHGVAR     &RMFMT   'RTVM0100'
+             CHGVAR     &RMID    &MBR
+             CHGVAR     %SST(&RMFILE 01 10) 'LFSMSGF'
+             CHGVAR     %SST(&RMFILE 11 10) '*LIBL'
+             CHGVAR     &RMRDTA  ' '
+             CHGVAR     %BIN(&RMRLNG 1 4)  1
+             CHGVAR     &RMRVAL  '*NO'
+             CHGVAR     &RMRFCC  '*NO'
+             CHGVAR     &RMERR   ' '
+             IF         (%SST(&FILE 1 3) *NE '   ') THEN(DO)
+               CHGVAR   %SST(&RMFILE 01 10) &FILE
+               CHGVAR   %SST(&RMFILE 11 10) '*LIBL'
+             ENDDO
+             IF         (%SST(&MBR 1 3) *EQ 'CPF') THEN(DO)
+               CHGVAR   %SST(&RMFILE 01 10) 'QCPFMSG'
+               CHGVAR   %SST(&RMFILE 11 10) '*LIBL'
+             ENDDO
+             IF         (%SST(&MBR 1 3) *EQ 'SEU') THEN(DO)
+               CHGVAR   %SST(&RMFILE 01 10) 'ULCMSGF'
+               CHGVAR   %SST(&RMFILE 11 10) '*LIBL'
+             ENDDO
+             CALL       PGM(QMHRTVM) PARM(&RMMDTA +
+                                          &RMMLNG    +
+                                          &RMFMT     +
+                                          &RMID      +
+                                          &RMFILE    +
+                                          &RMRDTA    +
+                                          &RMRLNG    +
+                                          &RMRVAL    +
+                                          &RMRFCC    +
+                                          &RMERR )
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+               CHGVAR   VAR(&RETCODE) VALUE('1')
+               GOTO     ENDE
+             ENDDO
+             IF         (%SST(&RMERR 9 7) *NE ' ') THEN(DO)
+               CHGVAR   VAR(&RETCODE) VALUE('1')
+               GOTO     ENDE
+             ENDDO
+             CHGVAR     &WRKLNG %BIN(&RMMDTA 9 4)
+             CHGVAR     &WRKPOS 25
+             IF         (&WRKLNG *GT 0) THEN(DO)
+               CHGVAR   &MSD   %SST(&RMMDTA &WRKPOS &WRKLNG)
+               CHGVAR   &TXT3000 &MSD
+             ENDDO
+             CHGVAR     &WRKPOS (&WRKPOS + &WRKLNG)
+             CHGVAR     &WRKLNG %BIN(&RMMDTA 17 4)
+             IF         (&WRKLNG *GT 0) THEN(DO)
+               CHGVAR   %SST(&TXT3000 129 &WRKLNG) +
+                        %SST(&RMMDTA &WRKPOS &WRKLNG)
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Override für Dateien entfernen                         €*/
+DLTOVR:      DLTOVR     FILE(&FILE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Felddefinitionen                                       €*/
+DSPFLD:      IF         (%SST(&FILE 1 1) *EQ '?') THEN(DO)
+               DSPFFD   ??FILE() +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCFLD) +
+                        OUTMBR(&MBR *REPLACE)
+               MONMSG   MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+               ENDDO
+               GOTO     DSPFLD2
+             ENDDO
+DSPFLD1:     DSPFFD     FILE(&FILE) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCFLD) +
+                        OUTMBR(&MBR *REPLACE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+ DSPFLD2:    OVRDBF     FILE(QADSPFFD) TOFILE(QTEMP/ULCFLD) +
+                          MBR(&MBR) OVRSCOPE(*ACTGRPDFN)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Schlüssel für Zugriffspfade (logische Dateien)         €*/
+DSPKEY:      IF         (%SST(&FILE 1 1) *EQ '?') THEN(DO)
+               DSPFD    ??FILE() +
+                        TYPE(*ACCPTH) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCKEY) +
+                        OUTMBR(&MBR *REPLACE)
+               MONMSG   MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+               ENDDO
+               GOTO     DSPKEY2
+             ENDDO
+DSPKEY1:     DSPFD      FILE(&FILE) +
+                        TYPE(*ACCPTH) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCKEY) +
+                        OUTMBR(&MBR *REPLACE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+ DSPKEY2:    OVRDBF     FILE(QAFDACCP) TOFILE(QTEMP/ULCKEY) +
+                          MBR(&MBR) OVRSCOPE(*ACTGRPDFN)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Satzformate                                            €*/
+DSPRCD:      IF         (%SST(&FILE 1 1) *EQ '?') THEN(DO)
+               DSPFD    ??FILE() +
+                        TYPE(*RCDFMT) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCRCD) +
+                        OUTMBR(&MBR *REPLACE)
+               MONMSG   MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+               ENDDO
+               GOTO     DSPRCD2
+             ENDDO
+DSPRCD1:     DSPFD      FILE(&FILE) +
+                        TYPE(*RCDFMT) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCRCD) +
+                        OUTMBR(&MBR *REPLACE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+ DSPRCD2:    OVRDBF     FILE(QAFDRFMT) TOFILE(QTEMP/ULCRCD) +
+                          MBR(&MBR) OVRSCOPE(*ACTGRPDFN)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Satzselektionen (OMIT/SELECT)                          €*/
+DSPSEL:      IF         (%SST(&FILE 1 1) *EQ '?') THEN(DO)
+               DSPFD    ??FILE() +
+                        TYPE(*SELECT) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCSEL) +
+                        OUTMBR(&MBR *REPLACE)
+               MONMSG   MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+               ENDDO
+               GOTO     DSPSEL2
+             ENDDO
+DSPSEL1:     DSPFD      FILE(&FILE) +
+                        TYPE(*SELECT) +
+                        OUTPUT(*OUTFILE) OUTFILE(QTEMP/ULCSEL) +
+                        OUTMBR(&MBR *REPLACE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+ DSPSEL2:    OVRDBF     FILE(QAFDSELO) TOFILE(QTEMP/ULCSEL) +
+                          MBR(&MBR) OVRSCOPE(*ACTGRPDFN)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Einlesen der Member-Description                        €*/
+ RTVMBRD:    RTVMBRD    FILE(&LIB/&FILE) MBR(&MBR) +
+                          SRCTYPE(&TYPE) +
+                          TEXT(&TEXT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Einlesen der Objekt-Description                        €*/
+ RTVOBJD:    RTVOBJD    OBJ(&LIB/&FILE) +
+                        OBJTYPE(&TYPE) +
+                        TEXT(&TEXT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                RCVMSG  MSGTYPE(*FIRST) MSG(&MSD) MSGID(&MSI)
+                CHGVAR  VAR(&TXT3000) VALUE(&MSI)
+                CHGVAR  VAR(&RETCODE) VALUE('1')
+                GOTO    ENDE
+             ENDDO
+             GOTO       ENDE
+
+/*‚--------- Prozedur-Ende                                          €*/
+ ENDE:       ENDPGM

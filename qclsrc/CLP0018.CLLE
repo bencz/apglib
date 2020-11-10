@@ -1,0 +1,59 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* WRKUSRJOB                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  25.09.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  AUSFÜHREN WRKUSRJOB                            */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&WRKUJB_REC &RETCODE)
+
+             DCL        VAR(&WRKUJB_REC) TYPE(*CHAR) LEN(93)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&USER)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&STATUS)     TYPE(*CHAR) LEN(7)
+             DCL        VAR(&OUTPUT)     TYPE(*CHAR) LEN(6)
+             DCL        VAR(&TYPE)       TYPE(*CHAR) LEN(9)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&USER)     VALUE(%SST(&WRKUJB_REC 1 10))
+             CHGVAR     VAR(&STATUS)   VALUE(%SST(&WRKUJB_REC 11 7))
+             CHGVAR     VAR(&OUTPUT)   VALUE(%SST(&WRKUJB_REC 18 6))
+             CHGVAR     VAR(&TYPE)     VALUE(%SST(&WRKUJB_REC 24 9))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          USER GEFÜLLT?                                           */
+             IF         (&USER *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+/*‚          STATUS GEFÜLLT?                                         */
+             IF         (&STATUS *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&STATUS) VALUE('*ALL')
+             ENDDO
+/*‚          AUSGABETYP GEFÜLLT?                                     */
+             IF         (&OUTPUT *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OUTPUT) VALUE('*PRINT')
+             ENDDO
+/* ‚         JOBART GEFÜLLT?                                         */
+             IF         (&TYPE = ' ') THEN(DO)
+                        CHGVAR VAR(&TYPE) VALUE('*ALL')
+             ENDDO
+
+/* ‚         WRKUSRJOB AUSFÜHREN                                     */
+             WRKUSRJOB  USER(&USER) STATUS(&STATUS) OUTPUT(&OUTPUT) +
+                        JOBTYPE(&TYPE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ENDPGM:      ENDPGM

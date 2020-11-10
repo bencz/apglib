@@ -1,0 +1,79 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTPF                                                           */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  27.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN EINER PHYSISCHEN DATEI               */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTPF_REC &RETCODE)
+
+             DCL        VAR(&CRTPF_REC)  TYPE(*CHAR) LEN(76)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OBJ)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DLSIZE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DLMAXE)     TYPE(*CHAR) LEN(5)
+             DCL        VAR(&DLEXT)      TYPE(*CHAR) LEN(5)
+             DCL        VAR(&RECSIZE)    TYPE(*CHAR) LEN(6)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTPF_REC 1 10))
+             CHGVAR     VAR(&OBJ)      VALUE(%SST(&CRTPF_REC 11 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTPF_REC 21 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTPF_REC 31 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTPF_REC 41 10))
+             CHGVAR     VAR(&DLSIZE)   VALUE(%SST(&CRTPF_REC 51 10))
+             CHGVAR     VAR(&DLMAXE)   VALUE(%SST(&CRTPF_REC 61 5))
+             CHGVAR     VAR(&DLEXT)    VALUE(%SST(&CRTPF_REC 66 5))
+             CHGVAR     VAR(&RECSIZE)  VALUE(%SST(&CRTPF_REC 71 6))
+
+/*‚          BESTEHENDE PHYSICHE DATEI LÖSCHEN                       */
+             DLTF       FILE(&LIBOBJ/&OBJ)
+             MONMSG     MSGID(CPF0000)
+
+/*‚          BEI *NOMAX DARF NUR EIN WERT MITGEGEBEN WERDEN          */
+             IF         COND(&DLSIZE *EQ '0000000000') THEN(DO)
+                        CHGVAR VAR(&DLSIZE) VALUE(*NOMAX)
+             ENDDO
+
+/*‚          SOLL NUR EINE TEMPORÄRE DATEI ERSTELLT WERDEN?          */
+             IF         COND(&SRCMBR *EQ ' ') THEN(DO)
+                        CRTPF  FILE(&LIBOBJ/&OBJ) RCDLEN(&RECSIZE)
+                        MONMSG MSGID(CPF0000) EXEC(DO)
+                               CHGVAR VAR(&RETCODE) VALUE('1')
+                               GOTO ENDPGM
+                        ENDDO
+                        GOTO ENDPGM
+             ENDDO
+
+             IF         COND(&DLSIZE *EQ '*NOMAX') THEN(DO)
+                        CRTPF  FILE(&LIBOBJ/&OBJ)                     +
+                               SRCFILE(&LIBSRC/&FILE) SRCMBR(&SRCMBR) +
+                               OPTION(*EVENTF) SIZE(&DLSIZE)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE       CMD(DO)
+                        CRTPF  FILE(&LIBOBJ/&OBJ)                     +
+                               SRCFILE(&LIBSRC/&FILE) SRCMBR(&SRCMBR) +
+                               SIZE(&DLSIZE &DLEXT &DLMAXE)           +
+                               OPTION(*EVENTF)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

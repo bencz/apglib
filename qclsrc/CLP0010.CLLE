@@ -1,0 +1,44 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* SNDMSG                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  22.06.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  SENDEN EINER NACHRICHT AN EINEN USER           */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&SNDMSG_REC &RETCODE)
+
+             DCL        VAR(&SNDMSG_REC)  TYPE(*CHAR) LEN(522)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TEXT)        TYPE(*CHAR) LEN(512)
+             DCL        VAR(&USER)        TYPE(*CHAR) LEN(10)
+/*‚          ÜBERGABEPARAMETER IN WRK-FELDER UMSETZEN                */
+             CHGVAR     VAR(&TEXT)    VALUE(%SST(&SNDMSG_REC 1 512))
+             CHGVAR     VAR(&USER)    VALUE(%SST(&SNDMSG_REC 513 10))
+
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          SICHERHEITSHALBER BESTIMMTE USER AUßEN VOR LASSEN,      */
+/*‚          SOFERN EIN SCHERZKEKS MEINTE LUSTIG ZU SEIN...          */
+             IF         ((&USER *EQ 'HEH       ') +
+              *OR        (&USER *EQ 'MEH       ') +
+              *OR        (&USER *EQ 'LEH       ') +
+              *OR        (&USER *EQ 'MAE       ')) THEN(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('2')
+                        GOTO ENDPGM
+             ENDDO
+
+/*‚          JETZT DIE NACHRICHT SENDEN                              */
+             SNDMSG     MSG(&TEXT) TOUSR(&USER)
+             MONMSG     MSGID(CPF0000)  EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO (ENDPGM)
+             ENDDO
+
+ ENDPGM:     ENDPGM

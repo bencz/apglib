@@ -1,0 +1,54 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTCMOD                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  10.04.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN VON C-MODULEN                        */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTMOD_REC &RETCODE)
+
+             DCL        VAR(&CRTMOD_REC) TYPE(*CHAR) LEN(157)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+
+             DCL        VAR(&TGTRLS)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USRPRF)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DBG)        TYPE(*CHAR) LEN(7)
+             DCL        VAR(&DEFINE)     TYPE(*CHAR) LEN(80)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTMOD_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTMOD_REC 11 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTMOD_REC 21 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTMOD_REC 31 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTMOD_REC 41 10))
+             CHGVAR     VAR(&TGTRLS)   VALUE(%SST(&CRTMOD_REC 51 10))
+             CHGVAR     VAR(&DBG)      VALUE(%SST(&CRTMOD_REC 61 7))
+             CHGVAR     VAR(&DEFINE)   VALUE(%SST(&CRTMOD_REC 68 80))
+
+/* ‚         USERPROFILE VORHANDEN?                                 */
+             IF         (&USRPRF = ' ') THEN(DO)
+                        CHGVAR VAR(&USRPRF) VALUE('*USER')
+             ENDDO
+
+/* ‚         C-MODUL ERSTELLEN                                       */
+             CRTCMOD    MODULE(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE)   +
+                        SRCMBR(&SRCMBR) DBGVIEW(&DBG) TGTRLS(&TGTRLS) +
+                        OPTION(*EVENTF) DEFINE(&DEFINE) OUTPUT(*PRINT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ENDPGM:      ENDPGM

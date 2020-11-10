@@ -1,0 +1,40 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* DLTF                                                            */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  29.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  LÖSCHEN EINER DATEI                            */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&DLTF_REC &RETCODE)
+
+             DCL        VAR(&DLTF_REC)    TYPE(*CHAR) LEN(20)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FILENAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBNAME)     TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILENAME)   VALUE(%SST(&DLTF_REC 01 10))
+             CHGVAR     VAR(&LIBNAME)    VALUE(%SST(&DLTF_REC 11 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          WENN BIBLIOTHEK NICHT GEFÜLLT, DANN *LIBL ANNEHMEN      */
+             IF         COND(&LIBNAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&LIBNAME) VALUE('*LIBL')
+             ENDDO
+
+             DLTF       FILE(&LIBNAME/&FILENAME)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

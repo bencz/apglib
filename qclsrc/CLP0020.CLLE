@@ -1,0 +1,71 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTCBLPGM                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  16.09.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSATZ FÜR COBOL ERSTELLEN                     */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTCBL_REC &RETCODE)
+
+             DCL        VAR(&CRTCBL_REC) TYPE(*CHAR) LEN(137)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TGTRLS)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USRPRF)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OPTION)   TYPE(*CHAR) LEN(33)
+             DCL        VAR(&GENOPT)   TYPE(*CHAR) LEN(33)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTCBL_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTCBL_REC 11 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTCBL_REC 21 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTCBL_REC 31 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTCBL_REC 41 10))
+             CHGVAR     VAR(&TGTRLS)   VALUE(%SST(&CRTCBL_REC 61 10))
+             CHGVAR     VAR(&USRPRF)   VALUE(%SST(&CRTCBL_REC 71 10))
+             CHGVAR     VAR(&OPTION)   VALUE(%SST(&CRTCBL_REC 81 33))
+             CHGVAR     VAR(&GENOPT)   VALUE(%SST(&CRTCBL_REC 104 33))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          OPTIONEN GEFÜLLT?                                       */
+             IF         (&OPTION *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OPTION) VALUE('*SOURCE')
+             ENDDO
+/*‚          WANDLUNSGOPTIONEN GEFÜLLT?                              */
+             IF         (&GENOPT *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&GENOPT) VALUE('*SOURCE')
+             ENDDO
+/* ‚         RELEASE GEFÜLLT?                                        */
+             IF         (&TGTRLS = ' ') THEN(DO)
+                        CHGVAR VAR(&TGTRLS) VALUE('*CURRENT')
+             ENDDO
+/* ‚         USER-PROFIL VORHANDEN?                                  */
+             IF         (&USRPRF = ' ') THEN(DO)
+                        CHGVAR VAR(&USRPRF) VALUE('*USER')
+             ENDDO
+
+             CRTCBLPGM  PGM(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE) +
+                         SRCMBR(&SRCMBR) TGTRLS(&TGTRLS)         +
+                         OPTION(&OPTION) GENOPT(&GENOPT)         +
+                         USRPRF(&USRPRF)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+             GOTO       CMDLBL(ENDPGM)
+
+ ENDPGM:     ENDPGM

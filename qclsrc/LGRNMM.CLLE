@@ -1,0 +1,22 @@
+/********************************************************************/
+/* TEILDATEI UMBENENNEN                                             */
+/********************************************************************/
+             PGM        PARM(&LIBALT &FILEALT +
+                          &MBRALT &MBRNEU &RETCODE)
+
+             DCL        VAR(&LIBALT)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILEALT) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBRALT)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBRNEU)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RETCODE)  TYPE(*CHAR) LEN(1)
+
+/*‚SOURCE UMBENENNEN */
+             RNMM       FILE(&LIBALT/&FILEALT) MBR(&MBRALT) +
+                          NEWMBR(&MBRNEU)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO CMDLBL(ENDPGM)
+             ENDDO
+             CHGVAR     VAR(&RETCODE) VALUE(' ')
+
+ ENDPGM:     ENDPGM

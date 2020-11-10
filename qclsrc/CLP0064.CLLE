@@ -1,0 +1,20 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* PAUSE (PAUSEN)                                                  */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  14.09.2011                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  JOB PAUSIEREN                                  */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&SEKUNDEN)
+             DCL        VAR(&SEKUNDEN) TYPE(*CHAR) LEN(4)
+
+             DLYJOB     DLY(&SEKUNDEN)
+
+             ENDPGM

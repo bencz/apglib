@@ -1,0 +1,30 @@
+             PGM
+
+/*‚          SPRACHEN-ID                                             */
+             DCL        VAR(&LANGID)  TYPE(*CHAR) LEN(3)
+
+             MONMSG     MSGID(CPF0000)
+
+/*‚          SPRACHEN-ID ERMITTELN UM ZU PRÜFEN OB ENU ODER DEU      */
+             RTVJOBA    LANGID(&LANGID)
+
+/*‚          DEUTSCHE BIBLIOTHEKEN SETZEN                            */
+             IF         (&LANGID *EQ 'DEU') THEN(DO)
+                        CHGLIBL LIBL(QGPL QTEMP EHRHARDT +
+                                     PROPGMV1 PRODATV1)
+             ENDDO
+/*‚          ENGLISCHE BIBLIOTHEKEN SETZEN                           */
+             IF         (&LANGID *NE 'DEU') THEN(DO)
+                        CHGLIBL LIBL(QGPL QTEMP EHRHARDT +
+                                     PROENUV1 PROPGMV1 PRODATV1)
+             ENDDO
+
+/*‚          UND DEN GANZEN REST AUCH NOCH ERLEDIGEN                 */
+             DLTDTAARA  DTAARA(QTEMP/LFSSPRACHE)
+             RCLACTGRP  ACTGRP(*ELIGIBLE)
+             RCLRSC     LVL(*CALLER)
+             RCLRSC     LVL(*)
+
+             RCLACTGRP  ACTGRP(QILE)
+
+             ENDPGM

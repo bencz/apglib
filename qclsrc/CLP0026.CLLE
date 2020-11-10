@@ -1,0 +1,81 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTCMD                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  06.06.2016                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  KOPIEREN DATEI IN STREAMFILE                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CPYSTMF_REC &RETCODE)
+
+             DCL        VAR(&CPYSTMF_REC) TYPE(*CHAR) LEN(100)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&EXCLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&EXCPGM)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OVRPGM)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OVRLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PRDLIB)     TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTCMD_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTCMD_REC 11 10))
+             CHGVAR     VAR(&EXCLIB)   VALUE(%SST(&CRTCMD_REC 21 10))
+             CHGVAR     VAR(&EXCPGM)   VALUE(%SST(&CRTCMD_REC 31 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTCMD_REC 41 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTCMD_REC 51 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTCMD_REC 61 10))
+             CHGVAR     VAR(&OVRLIB)   VALUE(%SST(&CRTCMD_REC 71 10))
+             CHGVAR     VAR(&OVRPGM)   VALUE(%SST(&CRTCMD_REC 81 10))
+             CHGVAR     VAR(&PRDLIB)   VALUE(%SST(&CRTCMD_REC 91 10))
+
+             DCL        VAR(&PGM) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBOBJ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DBG) TYPE(*CHAR) LEN(7)
+             DCL        VAR(&COMPILE) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TGTRLS) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MSG) TYPE(*CHAR) LEN(80)
+             DCL        VAR(&APGM) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ALIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&APAR) TYPE(*CHAR) LEN(50)
+             DCL        VAR(&ART)  TYPE(*CHAR) LEN(01)
+             DCL        VAR(&RETCODE) TYPE(*CHAR) LEN(01)
+
+             IF         (&TGTRLS = ' ') THEN(DO)
+                        CHGVAR VAR(&TGTRLS) VALUE('*PRV')
+             ENDDO
+
+             IF         (&APGM *NE ' ') THEN(DO)
+                        CHGVAR VAR(&ART) VALUE('1')
+                        CALL PGM(CPPGM50CL) PARM(&APGM &ALIB +
+                             &APAR &ART &RETCODE)
+                        MONMSG MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+             ENDDO
+
+             CRTRPGPGM  PGM(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE) +
+                          SRCMBR(&SRCMBR) OPTION(&DBG *LSTDBG) +
+                          TGTRLS(&TGTRLS)
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+
+             GOTO       CMDLBL(ENDPGM)
+
+ FEHLER:
+             CHGVAR     VAR(&MSG) VALUE('Fehler beim Wandeln des +
+                          RPG Programmes ' !! &PGM)
+             SNDPGMMSG  MSGID(CPF9898) MSGF(QCPFMSG) MSGDTA(&MSG) +
+                          TOMSGQ(*TOPGMQ) MSGTYPE(*ESCAPE)
+
+ ENDPGM:     ENDPGM

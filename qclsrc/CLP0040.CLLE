@@ -1,0 +1,95 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* SBMJOB                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  14.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  PGM IM STAPELBETRIEB AUSFÜHREN LASSEN          */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&SBMJOB_REC &RETCODE)
+
+             DCL        VAR(&SBMJOB_REC) TYPE(*CHAR) LEN(1110)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&MSGDTA )    TYPE(*CHAR) LEN(100)
+
+             DCL        VAR(&PGMNAM)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PARM)       TYPE(*CHAR) LEN(1024)
+             DCL        VAR(&JOBNAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USRSBS)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TUSER)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&JOBD   )    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&INQMSGRP)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SBMNAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SBMUSER)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SBMNUM )    TYPE(*CHAR) LEN(6)
+
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&PGMNAM)   VALUE(%SST(&SBMJOB_REC 1 10))
+             CHGVAR     VAR(&PARM)     VALUE(%SST(&SBMJOB_REC 11 1024))
+             CHGVAR     VAR(&JOBNAME)  VALUE(%SST(&SBMJOB_REC 1035 10))
+             CHGVAR     VAR(&USRSBS)   VALUE(%SST(&SBMJOB_REC 1045 10))
+             CHGVAR     VAR(&TUSER)    VALUE(%SST(&SBMJOB_REC 1055 10))
+             CHGVAR     VAR(&JOBD   )  VALUE(%SST(&SBMJOB_REC 1065 10))
+             CHGVAR     VAR(&INQMSGRP) VALUE(%SST(&SBMJOB_REC 1075 10))
+             CHGVAR     VAR(&SBMNAME)  VALUE(%SST(&SBMJOB_REC 1085 10))
+             CHGVAR     VAR(&SBMUSER)  VALUE(%SST(&SBMJOB_REC 1095 10))
+             CHGVAR     VAR(&SBMNUM )  VALUE(%SST(&SBMJOB_REC 1105 6))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          DIESE WERTE WERDEN NACH JOB-START GEFÜLLT               */
+             CHGVAR     VAR(&SBMNAME) VALUE(' ')
+             CHGVAR     VAR(&SBMUSER) VALUE(' ')
+             CHGVAR     VAR(&SBMNUM ) VALUE('000000')
+
+/*‚          ANTWORTVERHALTEN AUF ANFRAGENACHRICHTEN GEFÜLLT?        */
+             IF         COND(&INQMSGRP *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&INQMSGRP) VALUE('*JOBD')
+             ENDDO
+/*‚          JOBQ GEFÜLLT?                                           */
+             IF         COND(&USRSBS *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&USRSBS) VALUE('QBATCH')
+             ENDDO
+
+             IF         COND(&PARM *EQ ' ') THEN(DO)
+                        SBMJOB CMD(CALL PGM(&PGMNAM))              +
+                               JOB(&JOBNAME) JOBD(&JOBD)           +
+                               JOBQ(&USRSBS) USER(&TUSER)          +
+                               INQMSGRPY(&INQMSGRP) CPYENVVAR(*YES)
+                        MONMSG MSGID(CPF0000) EXEC(DO)
+                               CHGVAR VAR(&RETCODE) VALUE('1')
+                               GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE CMD(DO)
+                        SBMJOB CMD(CALL PGM(&PGMNAM) PARM(&PARM))  +
+                               JOB(&JOBNAME) JOBD(&JOBD)           +
+                               JOBQ(&USRSBS) USER(&TUSER)          +
+                               INQMSGRPY(&INQMSGRP) CPYENVVAR(*YES)
+                        MONMSG MSGID(CPF0000) EXEC(DO)
+                               CHGVAR VAR(&RETCODE) VALUE('1')
+                               GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+/*‚          NEUEN JOBNAMEN ERMITTELN                                */
+             RCVMSG     RMV(*NO) MSGDTA(&MSGDTA)
+             CHGVAR     VAR(&SBMNAME) VALUE(%SST(&MSGDTA 1 10))
+             CHGVAR     VAR(&SBMUSER) VALUE(%SST(&MSGDTA 11 10))
+             CHGVAR     VAR(&SBMNUM)  VALUE(%SST(&MSGDTA 21 6))
+
+/*‚          NEUEN JOBNAMEN JETZT ZURÜCKGEBEN                        */
+             CHGVAR     VAR(%SST(&SBMJOB_REC 1085 10)) VALUE(&SBMNAME)
+             CHGVAR     VAR(%SST(&SBMJOB_REC 1095 10)) VALUE(&SBMUSER)
+             CHGVAR     VAR(%SST(&SBMJOB_REC 1105 6))  VALUE(&SBMNUM)
+
+ ENDPGM:
+             ENDPGM

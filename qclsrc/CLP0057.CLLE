@@ -1,0 +1,102 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CMDEXC AUSFÜHREN                                                */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  15.06.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  AS/400-BEFEHL AUSFÜHREN                        */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CMDEXC_REC &RETCODE)
+
+             DCL        VAR(&CMDEXC_REC) TYPE(*CHAR) LEN(4002)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&CMD)        TYPE(*CHAR) LEN(4000)
+             DCL        VAR(&F3)         TYPE(*CHAR) LEN(1)
+             DCL        VAR(&F12)        TYPE(*CHAR) LEN(1)
+
+/*‚          WEITERE VARIABLEN                                       */
+             DCL        VAR(&LEN)        TYPE(*DEC) LEN(15 5)
+             DCL        VAR(&RET)        TYPE(*CHAR) LEN(255)
+             DCL        VAR(&RET12)      TYPE(*CHAR) LEN(3000)
+             DCL        VAR(&ARCHIVEKEY) TYPE(*CHAR) LEN(80)
+             DCL        VAR(&IDENT)      TYPE(*CHAR) LEN(7)
+
+/*‚          VARIABLEN FÜR JOB-INFORMATIOEN   */
+             DCL        VAR(&RTNVAR)     TYPE(*CHAR) LEN(350)
+             DCL        VAR(&B4) TYPE(*CHAR) LEN(4) VALUE(x'00000000')
+             DCL        VAR(&INTJOBIDF)  TYPE(*CHAR) LEN(16) VALUE(' ')
+             DCL        VAR(&KEYF12)     TYPE(*CHAR) LEN(01)
+             DCL        VAR(&KEYF03)     TYPE(*CHAR) LEN(01)
+             DCL        VAR(&FULLJOB)    TYPE(*CHAR) LEN(26) VALUE('*')
+             DCL        VAR(&CHGJOBI)    TYPE(*CHAR) LEN(13)
+             DCL        VAR(&JOBIERR)    TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&CMD)       VALUE(%SST(&CMDEXC_REC 1 4000))
+             CHGVAR     VAR(&F3)        VALUE(%SST(&CMDEXC_REC 4001 1))
+             CHGVAR     VAR(&F12)       VALUE(%SST(&CMDEXC_REC 4002 1))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)    VALUE(' ')
+             CHGVAR     VAR(%BIN(&B4))   VALUE(350)
+
+/*    ‚      QCMDEXC AUFRUFEN                             */
+             CHGVAR     VAR(&LEN)        VALUE(4000)
+             CALL       PGM(QCMDEXC)     PARM(&CMD &LEN)
+             MONMSG     MSGID(CPF0000)
+
+/*    ‚      ERMITTELN WIE PGM VERLASSEN WURDE            */
+             CALL       PGM(QUSRJOBI)    PARM(&RTNVAR &B4 +
+                         'JOBI0600' &FULLJOB &INTJOBIDF)
+
+             CHGVAR     VAR(&KEYF03) VALUE(%SST(&RTNVAR 103 01))
+             CHGVAR     VAR(&KEYF12) VALUE(%SST(&RTNVAR 104 01))
+/*‚          WENN F12 ODER F3, DANN VARS SETZEN           */
+             IF         (&KEYF03 = '1')  THEN(DO)
+                        CHGVAR VAR(&F3) VALUE('1')
+             ENDDO
+             IF         (&KEYF12 = '1')  THEN(DO)
+                        CHGVAR VAR(&F12) VALUE('1')
+             ENDDO
+
+/*‚          JOB INFOMATIONEN ZURÜCKSETZEN                 */
+/*‚          -> EXIT KEY F3                                */
+             CHGVAR     VAR(&CHGJOBI)           VALUE(0)
+             CHGVAR     VAR(%BIN(&CHGJOBI 1 4)) VALUE(1)
+             CHGVAR     VAR(%BIN(&CHGJOBI 5 4)) VALUE(1)
+             CHGVAR     VAR(%BIN(&CHGJOBI 9 4)) VALUE(1)
+             CALL       PGM(QWCCCJOB)    PARM(&CHGJOBI &JOBIERR)
+             MONMSG     MSGID(CPF0000)
+
+/*‚          -> CANCEL KEY F12                             */
+             CHGVAR     VAR(&CHGJOBI)           VALUE(0)
+             CHGVAR     VAR(%BIN(&CHGJOBI 1 4)) VALUE(1)
+             CHGVAR     VAR(%BIN(&CHGJOBI 5 4)) VALUE(2)
+             CHGVAR     VAR(%BIN(&CHGJOBI 9 4)) VALUE(1)
+             CALL       PGM(QWCCCJOB)    PARM(&CHGJOBI &JOBIERR)
+             MONMSG     MSGID(CPF0000)
+
+/*‚          READ MSG FROM MSGQ, EINDEUTIGE FEHLERMELDUNG  */
+             RCVMSG     MSGQ(*PGMQ) MSGTYPE(*ANY) MSG(&RET) +
+                        SECLVL(&RET12) MSGID(&IDENT)
+             MONMSG     MSGID(CPF0000)
+
+/*‚          ARCHIVE COMMAND TO THE JOB LOG                */
+             SNDPGMMSG  MSG(&RET) TOPGMQ(*SAME) MSGTYPE(*INFO) +
+                        KEYVAR(&ARCHIVEKEY)
+             MONMSG     MSGID(CPF0000)
+
+             RCVMSG     MSGTYPE(*INFO) MSGKEY(&ARCHIVEKEY) RMV(*NO)
+             MONMSG     MSGID(CPF0000)
+
+/*‚          NEUE WERTE JETZT ZURÜCKGEBEN                            */
+             CHGVAR     VAR(%SST(&CMDEXC_REC 4001 1)) VALUE(&F3)
+             CHGVAR     VAR(%SST(&CMDEXC_REC 4002 1)) VALUE(&F12)
+
+ ENDPGM:     ENDPGM

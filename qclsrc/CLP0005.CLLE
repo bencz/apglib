@@ -1,0 +1,33 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTMSGF                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  11.01.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN EINER MSGF                           */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTMSGF_RC)
+
+/*‚ÜBERGABEPARAMETER                                                */
+             DCL        VAR(&CRTMSGF_RC)  TYPE(*CHAR) LEN(100)
+             DCL        VAR(&MSGF)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SPRLIB)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MSGTXT)      TYPE(*CHAR) LEN(50)
+
+/*‚ÜBERGABEPARAMETER IN WRK-FELDER UMSETZEN                         */
+             CHGVAR     VAR(&MSGF)       VALUE(%SST(&CRTMSGF_RC 1 10))
+             CHGVAR     VAR(&SPRLIB)     VALUE(%SST(&CRTMSGF_RC 11 10))
+             CHGVAR     VAR(&MSGTXT)     VALUE(%SST(&CRTMSGF_RC 21 50))
+
+             CRTMSGF    MSGF(&SPRLIB/&MSGF) TEXT(&MSGTXT) AUT(*ALL)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

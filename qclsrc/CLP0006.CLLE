@@ -1,0 +1,89 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RTVOBJD                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  27.01.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERMITTELN OBJEKTINFORMATION                    */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&OBJREC &RETCODE)
+
+             DCL        VAR(&OBJREC)   TYPE(*CHAR) LEN(157)
+             DCL        VAR(&OBJLIB)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OBJ)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OBJTYPE)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RTNLIB)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OBJATR)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OBJTEXT)  TYPE(*CHAR) LEN(50)
+             DCL        VAR(&SRCF)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCFLIB)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)   TYPE(*CHAR) LEN(50)
+             DCL        VAR(&CRTUSER)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&CRTSYS)   TYPE(*CHAR) LEN(8)
+             DCL        VAR(&USEDATE)  TYPE(*CHAR) LEN(7)
+             DCL        VAR(&USECNT)   TYPE(*DEC) LEN(5)
+             DCL        VAR(&RETCODE)  TYPE(*CHAR) LEN(01)
+
+             CHGVAR     VAR(&RETCODE) VALUE(' ')
+             CHGVAR     VAR(&OBJLIB)     VALUE(%SST(&OBJREC 1 10))
+             CHGVAR     VAR(&OBJ)        VALUE(%SST(&OBJREC 11 10))
+             CHGVAR     VAR(&OBJTYPE)    VALUE(%SST(&OBJREC 21 07))
+             CHGVAR     VAR(&RTNLIB)     VALUE(%SST(&OBJREC 28 10))
+             CHGVAR     VAR(&OBJATR)     VALUE(%SST(&OBJREC 38 10))
+             CHGVAR     VAR(&OBJTEXT)    VALUE(%SST(&OBJREC 48 50))
+             CHGVAR     VAR(&SRCF)       VALUE(%SST(&OBJREC 98 10))
+             CHGVAR     VAR(&SRCFLIB)    VALUE(%SST(&OBJREC 108 10))
+             CHGVAR     VAR(&SRCMBR)     VALUE(%SST(&OBJREC 118 10))
+             CHGVAR     VAR(&CRTUSER)    VALUE(%SST(&OBJREC 128 10))
+             CHGVAR     VAR(&CRTSYS)     VALUE(%SST(&OBJREC 138 8))
+             CHGVAR     VAR(&USEDATE)    VALUE(%SST(&OBJREC 146 7))
+             CHGVAR     VAR(&USECNT)     VALUE(%SST(&OBJREC 153 5))
+
+             RTVOBJD    OBJ(&OBJLIB/&OBJ) OBJTYPE(&OBJTYPE) +
+                          RTNLIB(&RTNLIB) OBJATR(&OBJATR) +
+                          TEXT(&OBJTEXT) SRCF(&SRCF) +
+                          CRTUSER(&CRTUSER) CRTSYSTEM(&CRTSYS) +
+                          USEDATE(&USEDATE) USECOUNT(&USECNT) +
+                          SRCFLIB(&SRCFLIB) SRCMBR(&SRCMBR)
+
+/* FEHLER "BIBLIOTHEK NICHT GEFUNDEN" ABFANGEN - RETCODE "1"         */
+             MONMSG     MSGID(CPF9810) EXEC(GOTO CMDLBL(ERRLIB))
+
+/* FEHLER "DATEI NICHT GEFUNDEN" ABFANGEN      - RETCODE "2"         */
+             MONMSG     MSGID(CPF9812) EXEC(GOTO CMDLBL(ERRFILE))
+
+/* SONSTIGE FEHLER ABFANGEN                    - RETCODE "9"         */
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(ERROR))
+
+             CHGVAR     VAR(%SST(&OBJREC 1 10))  VALUE(&OBJLIB)
+             CHGVAR     VAR(%SST(&OBJREC 11 10)) VALUE(&OBJ)
+             CHGVAR     VAR(%SST(&OBJREC 21 07)) VALUE(&OBJTYPE)
+             CHGVAR     VAR(%SST(&OBJREC 28 10)) VALUE(&RTNLIB)
+             CHGVAR     VAR(%SST(&OBJREC 38 10)) VALUE(&OBJATR)
+             CHGVAR     VAR(%SST(&OBJREC 48 50)) VALUE(&OBJTEXT)
+             CHGVAR     VAR(%SST(&OBJREC 98 10)) VALUE(&SRCF)
+             CHGVAR     VAR(%SST(&OBJREC 108 10)) VALUE(&SRCFLIB)
+             CHGVAR     VAR(%SST(&OBJREC 118 10)) VALUE(&SRCMBR)
+             CHGVAR     VAR(%SST(&OBJREC 128 10)) VALUE(&CRTUSER)
+             CHGVAR     VAR(%SST(&OBJREC 138 8)) VALUE(&CRTSYS)
+             CHGVAR     VAR(%SST(&OBJREC 146 7)) VALUE(&USEDATE)
+             CHGVAR     VAR(%SST(&OBJREC 153 5)) VALUE(&USECNT)
+
+             GOTO       CMDLBL(ENDE)
+
+ ERRLIB:     CHGVAR     VAR(&RETCODE) VALUE('1')
+             GOTO       CMDLBL(ENDE)
+
+ ERRFILE:    CHGVAR     VAR(&RETCODE) VALUE('2')
+             GOTO       CMDLBL(ENDE)
+
+ ERROR:      CHGVAR     VAR(&RETCODE) VALUE('9')
+             GOTO       CMDLBL(ENDE)
+
+ ENDE:       ENDPGM

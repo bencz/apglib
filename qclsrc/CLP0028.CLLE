@@ -1,0 +1,42 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTPNLGRP                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  19.11.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN EINES PNLGRP                         */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTPNL_REC &RETCODE)
+
+             DCL        VAR(&CRTPNL_REC) TYPE(*CHAR) LEN(50)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTPNL_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTPNL_REC 11 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTPNL_REC 21 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTPNL_REC 31 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTPNL_REC 41 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+             CRTPNLGRP  PNLGRP(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE) +
+                        SRCMBR(&SRCMBR) OPTION(*EVENTF)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

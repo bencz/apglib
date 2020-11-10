@@ -1,0 +1,20 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* ALLE SPOOLS LÖSCHEN                                             */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  14.07.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ALLE SPOOL-DATEIEN LÖSCHEN                     */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM
+
+             QSYS/DLTSPLF FILE(*SELECT) SELECT(APG PRT01)
+             MONMSG     MSGID(CPF0000)
+
+ ENDE:       ENDPGM

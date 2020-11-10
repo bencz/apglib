@@ -1,0 +1,36 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* ERSTELLEN DER P3AZUBI IN DER APG-LIB                            */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  06.10.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN P3AZUBI MITTELS RUNSQL               */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM
+
+             DCL        VAR(&SQLSTR)   TYPE(*CHAR) LEN(1000)
+
+/*‚          SQL-STRING AUFBAUEN                                     */
+/*‚         ˆACHTUNG:‚BEIM ÄNDERN DES STRINGS BITTESEHR SEHR‚GUT    */
+/*‚          AUFPASSEN, DA RUNSQL AN BESTIMMTEN STELLEN EIN LEER-    */
+/*‚          ZEICHEN BENÖTIGTˆ!!!‚                                   */
+             CHGVAR     VAR(&SQLSTR)  VALUE('SELECT PAPMO,   +
+                          CAST(PAPJH!!DIGITS(PAPJA) AS  +
+                          DECIMAL(4)) AS  +
+                          JAHR, PAPMA, COUNT(*) AS ANZP3,   +
+                          0 AS ANZCR  +
+                          FROM PPGMARBL3 GROUP BY PAPMO, PAPJH,  +
+                          PAPJA, PAPMA')
+
+/*‚          SQL AUSFÜHREN UND TEMP. DATEI ERSTELLEN                 */
+             PRORUNSQL  REQUEST(&SQLSTR) OUTPUT(*OUTFILE) +
+                        OUTFILE(APG/P3AZUBI)
+             MONMSG     MSGID(CPF0000)
+
+ ENDPGM:     ENDPGM

@@ -1,0 +1,40 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RUNSQL                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  15.12.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  SQL AUSFÜHREN                                  */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&RUNSQL_REC &RETCODE)
+
+             DCL        VAR(&RUNSQL_REC)  TYPE(*CHAR) LEN(1010)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&SQLANF)      TYPE(*CHAR) LEN(1000)
+             DCL        VAR(&OUTPUT)      TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&SQLANF)   VALUE(%SST(&RUNSQL_REC 01 1000))
+             CHGVAR     VAR(&OUTPUT)   VALUE(%SST(&RUNSQL_REC 1001 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          KEINE AUSGABEMETHODE? DANN DRUCKEN                      */
+             IF         COND(&OUTPUT *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OUTPUT) VALUE('*PRINT')
+             ENDDO
+
+             RUNSQL     REQUEST(&SQLANF) OUTPUT(&OUTPUT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

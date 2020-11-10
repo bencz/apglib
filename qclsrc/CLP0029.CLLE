@@ -1,0 +1,64 @@
+/*-------------------------------------------------------------------*/
+/*         L A G E R F Ü H R U N G S S Y S T E M   LFS 400           */
+/*-------------------------------------------------------------------*/
+             PGM        PARM(&MBR &SRCMBR &LIBOBJ &FILE &LIBSRC +
+                          &DEVT &LPI +
+                          &CPI &PROL &PAGR &COMPILE &PRFL &WDTH +
+                          &DRAW &FOVL &LOVL &HOLD &SAVE &COPI)
+
+             DCL        VAR(&MBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBOBJ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&COMPILE) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&MSG) TYPE(*CHAR) LEN(80)
+             DCL        VAR(&OVERLY) TYPE(*CHAR) LEN(21) VALUE(' ')
+             DCL        VAR(&FOVL) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LOVL) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&HOLD) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&SAVE) TYPE(*CHAR) LEN(4)
+             DCL        VAR(&COPI) TYPE(*CHAR) LEN(3)
+             DCL        VAR(&PRFL) TYPE(*CHAR) LEN(3)
+             DCL        VAR(&WDTH) TYPE(*CHAR) LEN(3)
+             DCL        VAR(&DEVT)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PRFL)   TYPE(*CHAR) LEN(03)
+             DCL        VAR(&PROL)   TYPE(*CHAR) LEN(03)
+             DCL        VAR(&CPI)    TYPE(*CHAR) LEN(04)
+             DCL        VAR(&LPI)    TYPE(*CHAR) LEN(04)
+             DCL        VAR(&PAGR)   TYPE(*CHAR) LEN(05)
+             DCL        VAR(&DRAW)   TYPE(*CHAR) LEN(07)
+
+  /* OVERLAY-DATEI ZUSAMMENBAUEN                                     */
+             IF        ((&FOVL = ' ') +
+              *AND      (&LOVL = ' ')) THEN(DO)
+                        CHGVAR VAR(&OVERLY) VALUE('*NONE')
+             ENDDO
+             ELSE DO
+                        IF (&LOVL *NE ' ') THEN(DO)
+                            CHGVAR VAR(&OVERLY) VALUE(&LOVL *TCAT '/' +
+                                                           *TCAT &FOVL)
+                        ENDDO
+                        ELSE DO
+                            CHGVAR VAR(&OVERLY) VALUE(&FOVL)
+                        ENDDO
+             ENDDO
+
+             CRTPRTF    FILE(&LIBOBJ/&MBR) SRCFILE(&LIBSRC/&FILE) +
+                          SRCMBR(&SRCMBR) DEVTYPE(&DEVT) +
+                          OPTION(*EVENTF) PAGESIZE(&PRFL &WDTH) +
+                          LPI(&LPI) CPI(&CPI) OVRFLW(&PROL) +
+                          DRAWER(&DRAW) PAGRTT(&PAGR) UOM(*CM) +
+                          FRONTOVL(&OVERLY) COPIES(&COPI) +
+                          HOLD(&HOLD) SAVE(&SAVE)
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+
+             GOTO       CMDLBL(ENDPGM)
+
+ FEHLER:
+             CHGVAR     VAR(&MSG) VALUE('Fehler beim Wandeln der +
+                          Druckdatei ' !! &MBR)
+             SNDPGMMSG  MSGID(CPF9898) MSGF(QCPFMSG) MSGDTA(&MSG) +
+                          TOMSGQ(*TOPGMQ) MSGTYPE(*ESCAPE)
+
+ ENDPGM:     ENDPGM

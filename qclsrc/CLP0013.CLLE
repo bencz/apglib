@@ -1,0 +1,62 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* FNDSTRPDM                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  09.08.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  SUCHEN ZEICHENFOLGE UND START SEU              */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&SUCHE &LIB &FILE &MBR &OPTION +
+                             &RET &RET12 &RETCODE)
+             DCL        VAR(&SUCHE)    TYPE(*CHAR) LEN(40)
+             DCL        VAR(&LIB)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBR)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OPTION)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RET)      TYPE(*CHAR) LEN(255)
+             DCL        VAR(&RET12)    TYPE(*CHAR) LEN(3000)
+             DCL        VAR(&RETCODE)  TYPE(*CHAR) LEN(01)
+             DCL        VAR(&IDENT)    TYPE(*CHAR) LEN(7)
+
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+             IF         COND(&LIB *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RETCODE)  VALUE('1')
+                        GOTO CMDLBL(ENDPGM)
+             ENDDO
+
+             IF         COND(&FILE *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RETCODE)  VALUE('1')
+                        GOTO CMDLBL(ENDPGM)
+             ENDDO
+
+             IF         COND(&MBR *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RETCODE)  VALUE('1')
+                        GOTO CMDLBL(ENDPGM)
+             ENDDO
+
+             FNDSTRPDM  STRING(&SUCHE) FILE(&LIB/&FILE) MBR(&MBR)-
+                          OPTION(&OPTION)
+             MONMSG     MSGID(CPF0000)
+
+             RCVMSG     MSGQ(*PGMQ) MSGTYPE(*ANY) MSG(&RET) +
+                          SECLVL(&RET12) MSGID(&IDENT)
+
+    /*‚      TEILDATEI WIRD VERWENDET*/
+             IF         COND(&IDENT *EQ 'EDT0221') THEN(DO)
+                              CHGVAR VAR(&RETCODE) VALUE('1')
+                              GOTO CMDLBL(ENDPGM)
+             ENDDO
+
+    /*‚      TEILDATEI NICHT GEFUNDEN*/
+             IF         COND(&IDENT *EQ 'EDT0223') THEN(DO)
+                              CHGVAR VAR(&RETCODE) VALUE('3')
+                              GOTO CMDLBL(ENDPGM)
+             ENDDO
+
+ ENDPGM:     ENDPGM

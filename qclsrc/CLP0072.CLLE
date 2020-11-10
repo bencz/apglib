@@ -1,0 +1,81 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* DLTSPLF                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  19.01.2014                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  AUSFÜHREN DLTSPLF                              */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&DLTSPL_REC &RETCODE)
+
+/*‚ÜBERGABEPARAMETER                                                */
+             DCL        VAR(&DLTSPL_REC)  TYPE(*CHAR) LEN(84)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FILE)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USER)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&JBNR)        TYPE(*CHAR) LEN(6)
+             DCL        VAR(&JOB)         TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SPLNR)       TYPE(*CHAR) LEN(11)
+             DCL        VAR(&DRUCKER)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FORMULAR)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USRDTA)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ASP)         TYPE(*CHAR) LEN(7)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&DLTSPL_REC 01 10))
+             CHGVAR     VAR(&USER)     VALUE(%SST(&DLTSPL_REC 11 10))
+             CHGVAR     VAR(&JBNR)     VALUE(%SST(&DLTSPL_REC 21 6))
+             CHGVAR     VAR(&JOB)      VALUE(%SST(&DLTSPL_REC 27 10))
+             CHGVAR     VAR(&SPLNR)    VALUE(%SST(&DLTSPL_REC 37 11))
+             CHGVAR     VAR(&DRUCKER)  VALUE(%SST(&DLTSPL_REC 48 10))
+             CHGVAR     VAR(&FORMULAR) VALUE(%SST(&DLTSPL_REC 58 10))
+             CHGVAR     VAR(&USRDTA)   VALUE(%SST(&DLTSPL_REC 68 10))
+             CHGVAR     VAR(&ASP)      VALUE(%SST(&DLTSPL_REC 78 7))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          MIT SELECT ODER OHNE?                                   */
+             IF         COND(&FILE *EQ '     ') THEN(DO)
+                        CHGVAR VAR(&FILE) VALUE(*SELECT)
+             ENDDO
+
+             IF         COND(&DRUCKER *EQ '     ') THEN(DO)
+                        CHGVAR VAR(&DRUCKER)  VALUE(*ALL)
+             ENDDO
+             IF         COND(&FORMULAR *EQ '     ') THEN(DO)
+                        CHGVAR VAR(&FORMULAR) VALUE(*ALL)
+             ENDDO
+             IF         COND(&USRDTA *EQ '     ') THEN(DO)
+                        CHGVAR VAR(&USRDTA)   VALUE(*ALL)
+             ENDDO
+             IF         COND(&ASP *EQ '     ') THEN(DO)
+                        CHGVAR VAR(&ASP)      VALUE(*ALL)
+             ENDDO
+
+/*‚          MITTELS *SELECT ODER OHNE?                              */
+             IF         COND(&FILE *EQ '*SELECT') THEN(DO)
+                        DLTSPLF FILE(&FILE) +
+                                SELECT(&USER &DRUCKER &FORMULAR +
+                                       &USRDTA &ASP)
+                        MONMSG  MSGID(CPF0000) EXEC(DO)
+                                CHGVAR VAR(&RETCODE) VALUE('1')
+                                GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE CMD(DO)
+                        DLTSPLF FILE(&FILE) JOB(&JBNR/&USER/&JOB) +
+                                SPLNBR(&SPLNR)
+                        MONMSG  MSGID(CPF0000) EXEC(DO)
+                                CHGVAR VAR(&RETCODE) VALUE('1')
+                                GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

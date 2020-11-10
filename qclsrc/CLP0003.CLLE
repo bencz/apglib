@@ -1,0 +1,39 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* ADDMSGD                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  11.01.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  HINZUFÜGEN EINER MSG                           */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+
+             PGM PARM(&ADDMSG_REC &RETCODE)
+
+             DCL VAR(&ADDMSG_REC)  TYPE(*CHAR) LEN(107)
+             DCL VAR(&MSGID)       TYPE(*CHAR) LEN(7)
+             DCL VAR(&MSGF)        TYPE(*CHAR) LEN(10)
+             DCL VAR(&MSGLIB)      TYPE(*CHAR) LEN(10)
+             DCL VAR(&MSG)         TYPE(*CHAR) LEN(80)
+
+             DCL VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             CHGVAR     VAR(&RETCODE) VALUE(' ')
+/* ÜBERGABEPARAMETER IN WRK-FELDER UMSETZEN                         */
+             CHGVAR     VAR(&MSGID)   VALUE(%SST(&ADDMSG_REC 1 7))
+             CHGVAR     VAR(&MSGF)    VALUE(%SST(&ADDMSG_REC 8 10))
+             CHGVAR     VAR(&MSGLIB)  VALUE(%SST(&ADDMSG_REC 18 10))
+             CHGVAR     VAR(&MSG)     VALUE(%SST(&ADDMSG_REC 28 80))
+
+             ADDMSGD    MSGID(&MSGID) MSGF(&MSGLIB/&MSGF) MSG(&MSG)
+             MONMSG     MSGID(CPF0000)  EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO (ENDPGM)
+             ENDDO
+
+ ENDPGM:     ENDPGM

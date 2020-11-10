@@ -1,0 +1,56 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CPYSPLF                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  06.11.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  SPOOLFILE KOPIEREN                             */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CPYSPL_REC &RETCODE)
+
+             DCL        VAR(&CPYSPL_REC)  TYPE(*CHAR) LEN(48)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&SPLNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&JOBNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOLIB)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOFILE)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBROPT)      TYPE(*CHAR) LEN(8)
+
+             DCL        VAR(&TERM)        TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&SPLNAME)    VALUE(%SST(&CPYSPL_REC 01 10))
+             CHGVAR     VAR(&JOBNAME)    VALUE(%SST(&CPYSPL_REC 11 10))
+             CHGVAR     VAR(&TOLIB)      VALUE(%SST(&CPYSPL_REC 21 10))
+             CHGVAR     VAR(&TOFILE)     VALUE(%SST(&CPYSPL_REC 31 10))
+             CHGVAR     VAR(&MBROPT)     VALUE(%SST(&CPYSPL_REC 41 8))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          WENN BIBLIOTHEK NICHT GEFÜLLT, DANN *LIBL ANNEHMEN      */
+             IF         COND(&TOLIB *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&TOLIB) VALUE('*LIBL')
+             ENDDO
+
+/*‚          WENN JOBNAME NICHT VORHANDEN, DANN AKTUELLEN JOB NEHMEN */
+             IF         COND(&JOBNAME *EQ ' ') THEN(DO)
+                        RTVJOBA JOB(&TERM)
+                        MONMSG  MSGID(CPF0000)
+                        CHGVAR  VAR(&JOBNAME) VALUE(&TERM)
+             ENDDO
+
+             CPYSPLF    FILE(&SPLNAME) TOFILE(&TOLIB/&TOFILE) +
+                        TOMBR(*FIRST) MBROPT(&MBROPT) JOB(&JOBNAME)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

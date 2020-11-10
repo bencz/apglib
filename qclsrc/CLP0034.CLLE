@@ -1,0 +1,63 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTCBLMOD                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  06.11.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  COBOL-MODUL ERSTELLEN                          */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTMOD_REC &RETCODE)
+
+             DCL        VAR(&CRTMOD_REC) TYPE(*CHAR) LEN(73)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TGTRLS)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OPTIMIZE)   TYPE(*CHAR) LEN(6)
+             DCL        VAR(&DBG)        TYPE(*CHAR) LEN(7)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTMOD_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTMOD_REC 11 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTMOD_REC 21 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTMOD_REC 31 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTMOD_REC 41 10))
+             CHGVAR     VAR(&TGTRLS)   VALUE(%SST(&CRTMOD_REC 51 10))
+             CHGVAR     VAR(&OPTIMIZE) VALUE(%SST(&CRTMOD_REC 61 6))
+             CHGVAR     VAR(&DBG)      VALUE(%SST(&CRTMOD_REC 67 7))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          OPTIMIERUNGSSTUFE GEFÜLLT?                              */
+             IF         (&OPTIMIZE *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OPTIMIZE) VALUE('*NONE')
+             ENDDO
+/* ‚         RELEASE GEFÜLLT?                                        */
+             IF         (&TGTRLS = ' ') THEN(DO)
+                        CHGVAR VAR(&TGTRLS) VALUE('*CURRENT')
+             ENDDO
+/* ‚         DEBUG-INFO GEFÜLLT?                                    */
+             IF         (&DBG = ' ') THEN(DO)
+                        CHGVAR VAR(&DBG) VALUE('*ALL')
+             ENDDO
+
+/* ‚         MODUL JETZT ERSTELLEN                                   */
+             CRTCBLMOD  MODULE(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE) +
+                         SRCMBR(&SRCMBR) DBGVIEW(&DBG)              +
+                         TGTRLS(&TGTRLS) OPTIMIZE(&OPTIMIZE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ENDPGM:      ENDPGM

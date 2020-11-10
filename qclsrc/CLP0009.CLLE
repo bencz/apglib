@@ -1,0 +1,22 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RMVLIBLE                                                        */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  03.06.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ENTFERNEN EINES LIB-EINTRAGS                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&LIB)
+
+             DCL        VAR(&LIB)  TYPE(*CHAR) LEN(10)
+
+             RMVLIBLE &LIB
+             MONMSG MSGID(CPF0000)
+
+ ENDPGM:     ENDPGM

@@ -1,0 +1,53 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* TEILDATEI ANLEGEN                                               */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  19.08.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  TEIDATEI ANLEGEN                               */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&PCCMD_REC &RETCODE)
+
+             DCL        VAR(&PCCMD_REC)  TYPE(*CHAR) LEN(249)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&BEFEHL)     TYPE(*CHAR) LEN(123)
+             DCL        VAR(&DATEI)      TYPE(*CHAR) LEN(123)
+             DCL        VAR(&DATEIART)   TYPE(*CHAR) LEN(3)
+/*‚          WEITERE VARIABLEN                                       */
+             DCL        VAR(&WINCMD)     TYPE(*CHAR) LEN(123)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&BEFEHL)    VALUE(%SST(&PCCMD_REC 1 123))
+             CHGVAR     VAR(&DATEI)     VALUE(%SST(&PCCMD_REC 124 123))
+             CHGVAR     VAR(&DATEIART)  VALUE(%SST(&PCCMD_REC 247 3))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)    VALUE(' ')
+
+/*‚          BEFEHL VORHANDEN?                                       */
+             IF         COND(&BEFEHL *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&BEFEHL) VALUE('EXPLORER')
+             ENDDO
+
+/*          ‚PC ORGANISATOR STARTEN                                  */
+             STRPCO     PCTA(*NO)
+             MONMSG     MSGID(IWS4010)
+             MONMSG     MSGID(CPF0000)
+
+             CHGVAR     VAR(&WINCMD) VALUE(&BEFEHL *TCAT ' "' *CAT +
+                                           &DATEI *CAT '"')
+
+/*        ‚  PC BEFEHL AUSFÜHREN                                     */
+             STRPCCMD   PCCMD(&WINCMD) PAUSE(*YES)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

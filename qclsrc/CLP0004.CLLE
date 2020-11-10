@@ -1,0 +1,73 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CHKOBJ                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  11.01.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  PRÜFEN OB ES EIN OBJEKT GIBT                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CHKOBJ_REC)
+
+/*‚ÜBERGABEPARAMETER                                                */
+             DCL        VAR(&CHKOBJ_REC) TYPE(*CHAR) LEN(48)
+             DCL        VAR(&OBJ)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OBJTYP)     TYPE(*CHAR) LEN(7)
+             DCL        VAR(&OBJLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBR)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ERG)        TYPE(*CHAR) LEN(1)
+             DCL        VAR(&AUT)        TYPE(*CHAR) LEN(10)
+
+/*‚ÜBERGABEPARAMETER IN WRK-FELDER UMSETZEN                         */
+             CHGVAR     VAR(&OBJLIB)     VALUE(%SST(&CHKOBJ_REC 1 10))
+             CHGVAR     VAR(&OBJ)        VALUE(%SST(&CHKOBJ_REC 11 10))
+             CHGVAR     VAR(&OBJTYP)     VALUE(%SST(&CHKOBJ_REC 21 7))
+             CHGVAR     VAR(&MBR)        VALUE(%SST(&CHKOBJ_REC 28 10))
+             CHGVAR     VAR(&AUT)        VALUE(%SST(&CHKOBJ_REC 38 10))
+             CHGVAR     VAR(&ERG)        VALUE(%SST(&CHKOBJ_REC 48 1))
+
+/*‚RÜCKGABEWERT AUF "1" (OBJEKT VORHANDEN) VORBELEGEN                */
+             CHGVAR     VAR(&ERG) VALUE('1')
+
+/*‚WENN MBR NICHT GEFÜLLT, DANN DFT-WERT = *NONE SETZEN              */
+             IF         (&MBR = ' ') THEN(DO)
+                        CHGVAR VAR(&MBR) VALUE('*NONE')
+             ENDDO
+/*‚WENN LIB NICHT GEFÜLLT, DANN DFT-WERT = *LIBL SETZEN              */
+             IF         (&OBJLIB = ' ') THEN(DO)
+                        CHGVAR VAR(&OBJLIB) VALUE('*LIBL')
+             ENDDO
+
+/*‚WENN LIB NICHT GEFÜLLT, DANN DFT-WERT = *NONE SETZEN              */
+             IF         (&AUT = ' ') THEN(DO)
+                        CHGVAR VAR(&AUT) VALUE('*NONE')
+             ENDDO
+
+/*‚PRÜFEN, OB ANGEGEBENES OBJEKT VORHANDEN IST                       */
+             CHKOBJ     OBJ(&OBJLIB/&OBJ) OBJTYPE(&OBJTYP) +
+                        MBR(&MBR)
+
+/*‚OBJEKTBERECHTIGUNG FEHLT, PROGRAMM IST ABER VORHANDEN, OK         */
+             MONMSG     MSGID(CPF9802) EXEC(DO)
+/*‚                     NACHRICHT AUS JOBLOG ENTFERNEN               */
+                        RCVMSG     MSGTYPE(*EXCP)
+/*‚                     SETZEN RET-CODE AUF "OBJEKT NICHT VORHANDEN" */
+                        CHGVAR     VAR(&ERG) VALUE('2')
+                        GOTO ENDPGM
+             ENDDO
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+/*‚                     NACHRICHT AUS JOBLOG ENTFERNEN               */
+                        RCVMSG     MSGTYPE(*EXCP)
+/*‚                     SETZEN RET-CODE AUF "OBJEKT NICHT VORHANDEN" */
+                        CHGVAR     VAR(&ERG) VALUE('0')
+             ENDDO
+
+/*‚RÜCKGABEPARAMETER FÜLLEN                                         */
+             CHGVAR     (%SST(&CHKOBJ_REC 48 1)) VALUE(&ERG)
+
+ ENDPGM:     ENDPGM

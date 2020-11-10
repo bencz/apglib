@@ -1,0 +1,21 @@
+/*‚* DELOVR                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  09.08.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  LÖSCHEN EINER ÜBERSCHREIBUNG                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&FILE)
+
+             DCL        VAR(&FILE) TYPE(*CHAR) LEN(10)
+
+             DLTOVR     FILE(&FILE) LVL(*JOB)
+             MONMSG     MSGID(CPF0000)
+
+ ENDPGM:     ENDPGM

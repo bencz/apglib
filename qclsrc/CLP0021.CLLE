@@ -1,0 +1,86 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTBNDCBL                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  16.09.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN ILE-COBOL PROGRAMME                  */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTILE_REC &RETCODE)
+
+             DCL        VAR(&CRTILE_REC) TYPE(*CHAR) LEN(103)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+
+             DCL        VAR(&ACTGRP)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TGTRLS)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USRPRF)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OPTIMIZE)   TYPE(*CHAR) LEN(6)
+             DCL        VAR(&DBG)        TYPE(*CHAR) LEN(7)
+             DCL        VAR(&BNDDIR)     TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTILE_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTILE_REC 11 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTILE_REC 21 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTILE_REC 31 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTILE_REC 41 10))
+             CHGVAR     VAR(&ACTGRP)   VALUE(%SST(&CRTILE_REC 51 10))
+             CHGVAR     VAR(&TGTRLS)   VALUE(%SST(&CRTILE_REC 61 10))
+             CHGVAR     VAR(&USRPRF)   VALUE(%SST(&CRTILE_REC 71 10))
+             CHGVAR     VAR(&OPTIMIZE) VALUE(%SST(&CRTILE_REC 81 6))
+             CHGVAR     VAR(&DBG)      VALUE(%SST(&CRTILE_REC 87 7))
+             CHGVAR     VAR(&BNDDIR)   VALUE(%SST(&CRTILE_REC 94 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          AKTIVIERUNGSGRUPPE GEFÜLLT?                             */
+             IF         (&ACTGRP *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&ACTGRP) VALUE('*CALLER')
+             ENDDO
+/*‚          OPTIMIERUNGSSTUFE GEFÜLLT?                              */
+             IF         (&OPTIMIZE *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OPTIMIZE) VALUE('*NONE')
+             ENDDO
+/* ‚         RELEASE GEFÜLLT?                                        */
+             IF         (&TGTRLS = ' ') THEN(DO)
+                        CHGVAR VAR(&TGTRLS) VALUE('*CURRENT')
+             ENDDO
+/* ‚         DEBUG-INFO GEFÜLLT?                                    */
+             IF         (&DBG = ' ') THEN(DO)
+                        CHGVAR VAR(&DBG) VALUE('*ALL')
+             ENDDO
+/* ‚         USER-PROFIL VORHANDEN?                                 */
+             IF         (&USRPRF = ' ') THEN(DO)
+                        CHGVAR VAR(&USRPRF) VALUE('*USER')
+             ENDDO
+/* ‚         BINDERVERZEICHNIS VORHANDEN?                           */
+             IF         (&BNDDIR = ' ') THEN(DO)
+                        CHGVAR VAR(&BNDDIR) VALUE('APGGUI')
+             ENDDO
+
+/* ‚         ILE COBOL PROGRAMM JETZT ERSTELLEN                      */
+             CRTBNDCBL  PGM(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE) +
+                         SRCMBR(&SRCMBR) DBGVIEW(&DBG)           +
+                         TGTRLS(&TGTRLS) OPTIMIZE(&OPTIMIZE)     +
+                         ACTGRP(&ACTGRP) USRPRF(&USRPRF)         +
+                         CVTOPT(*DATETIME *PICNGRAPHIC)          +
+                         BNDDIR(&BNDDIR)                         +
+                         DBGENCKEY(APGDBG)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ENDPGM:      ENDPGM

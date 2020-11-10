@@ -1,0 +1,51 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* DSPPFM                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  19.11.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  DISPLAY PHYSICAL FILE-MEMBER                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&DSPPFM_REC &RETCODE)
+
+             DCL        VAR(&DSPPFM_REC)  TYPE(*CHAR) LEN(30)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)      TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)     VALUE(%SST(&DSPPFM_REC 01 10))
+             CHGVAR     VAR(&FILE)       VALUE(%SST(&DSPPFM_REC 11 10))
+             CHGVAR     VAR(&SRCMBR)     VALUE(%SST(&DSPPFM_REC 21 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          WENN BIBLIOTHEK NICHT GEFÜLLT, DANN *LIBL ANNEHMEN      */
+             IF         COND(&LIBOBJ *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&LIBOBJ) VALUE('*LIBL')
+             ENDDO
+
+             IF         COND(&SRCMBR *EQ ' ') THEN(DO)
+                        DSPPFM     FILE(&LIBOBJ/&FILE)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE       CMD(DO)
+                        DSPPFM     FILE(&LIBOBJ/&FILE) MBR(&SRCMBR)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

@@ -1,0 +1,64 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CHGDTAARA                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  10.09.2013                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  AUSFÜHREN CHGDTAARA                            */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CHGDTAA &RETCODE)
+
+/*‚ÜBERGABEPARAMETER                                                */
+             DCL        VAR(&CHGDTAA) TYPE(*CHAR) LEN(2290)
+             DCL        VAR(&RETCODE) TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&DTAARA)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&STRPOS)  TYPE(*CHAR) LEN(4)
+             DCL        VAR(&LENPOS)  TYPE(*CHAR) LEN(4)
+             DCL        VAR(&DTAVAL)  TYPE(*CHAR) LEN(2000)
+
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&DTAARA)  VALUE(%SST(&CHGDTAA 1 10))
+             CHGVAR     VAR(&LIB)     VALUE(%SST(&CHGDTAA 11 10))
+             CHGVAR     VAR(&STRPOS)  VALUE(%SST(&CHGDTAA 21 4))
+             CHGVAR     VAR(&LENPOS)  VALUE(%SST(&CHGDTAA 25 4))
+             CHGVAR     VAR(&DTAVAL)  VALUE(%SST(&CHGDTAA 29 2000))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE) VALUE(' ')
+
+/*‚DTAARA AENDERN                                                    */
+             IF         COND(&DTAARA *EQ '*GDA') THEN(DO)
+                        CHGDTAARA DTAARA(*GDA (&STRPOS &LENPOS)) +
+                                  VALUE(&DTAVAL)
+                        MONMSG    MSGID(CPF0000) EXEC(DO)
+                                  CHGVAR   VAR(&RETCODE) VALUE('1')
+                        ENDDO
+             ENDDO
+             ELSE DO
+/*‚                     BEI *ALL KEINE LÄNGE ANGEBEN                 */
+                        IF   COND(&STRPOS *EQ '*ALL') THEN(DO)
+                             CHGDTAARA DTAARA(&LIB/&DTAARA +
+                                      (&STRPOS)) VALUE(&DTAVAL)
+                             MONMSG   MSGID(CPF0000) EXEC(DO)
+                                      CHGVAR   VAR(&RETCODE) VALUE('1')
+                             ENDDO
+                        ENDDO
+                        ELSE DO
+/*‚                          MIT GEGEBENER LÄNGE AKTUALISIEREN       */
+                             CHGDTAARA DTAARA(&LIB/&DTAARA +
+                                      (&STRPOS &LENPOS)) VALUE(&DTAVAL)
+                             MONMSG   MSGID(CPF0000) EXEC(DO)
+                                      CHGVAR   VAR(&RETCODE) VALUE('1')
+                             ENDDO
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

@@ -1,0 +1,64 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CPYTOSTMF                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  20.01.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  DO CPYTOSTMF                                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CPYSTM_REC &RETCODE)
+
+             DCL        VAR(&CPYSTM_REC)  TYPE(*CHAR) LEN(1305)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FROM)        TYPE(*CHAR) LEN(640)
+             DCL        VAR(&TO)          TYPE(*CHAR) LEN(640)
+             DCL        VAR(&MODE)        TYPE(*CHAR) LEN(8)
+             DCL        VAR(&TOCCSID)     TYPE(*CHAR) LEN(11)
+             DCL        VAR(&LINFMT)      TYPE(*CHAR) LEN(6)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FROM)     VALUE(%SST(&CPYSTM_REC 01 640))
+             CHGVAR     VAR(&TO)       VALUE(%SST(&CPYSTM_REC 641 640))
+             CHGVAR     VAR(&MODE)     VALUE(%SST(&CPYSTM_REC 1281 8))
+             CHGVAR     VAR(&TOCCSID)  VALUE(%SST(&CPYSTM_REC 1289 11))
+             CHGVAR     VAR(&LINFMT)   VALUE(%SST(&CPYSTM_REC 1300 6))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          DEFAULT IS REPLACE                                      */
+             IF         COND(&MODE *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&MODE) VALUE('*REPLACE')
+             ENDDO
+
+/*‚          DEFAULT IS *PCASCII                                     */
+             IF         COND(&MODE *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&TOCCSID) VALUE('*PCASCII')
+             ENDDO
+
+/*‚          SET LINE FORMAT TO CRLF IF NOT SET                      */
+             IF         COND(&LINFMT *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&LINFMT) VALUE('*CRLF')
+             ENDDO
+
+/*‚          COPY FILE TO STREAM FILE                                */
+             CPYTOSTMF  FROMMBR(&FROM) TOSTMF(&TO) STMFOPT(&MODE) +
+                          STMFCCSID(&TOCCSID) ENDLINFMT(&LINFMT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+             CHGAUT     OBJ(&TO) USER(*PUBLIC) OBJAUT(*ALL) +
+                          DTAAUT(*RWX)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

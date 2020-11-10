@@ -1,0 +1,52 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* APG                                                             */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  17.08.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  HINZUFÜGEN MEINER BIBLIOTHEK                   */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&X_FILE &X_LIB)
+
+             DCL        VAR(&X_LIB)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&X_FILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIB)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+
+/*‚          OPTIONALE PARAMETER ABFANGEN                            */
+             CHGVAR     VAR(&LIB) VALUE(&X_LIB)
+             MONMSG     MCH3601 EXEC(DO)
+                        CHGVAR VAR(&LIB) VALUE('APG')
+             ENDDO
+             CHGVAR     VAR(&FILE) VALUE(&X_FILE)
+             MONMSG     MCH3601 EXEC(DO)
+                        CHGVAR VAR(&FILE) VALUE('QCBLSRC')
+             ENDDO
+
+/* ‚         BIBLIOTHEKSLISTE ZURÜCKSETZEN                          */
+             CALL       PGM(EHRHARDT/CL)
+             MONMSG     CPF0000
+
+/* ‚         MEINE BIBLIOTHEK SETZEN                                */
+             ADDLIBLE   LIB(&LIB)
+             MONMSG     MSGID(CPF0000)
+
+/* ‚         PRÜFEN OB JEMAND MEINE PROGRAMME GEWANDELT HAT         */
+             CALL       PGM(APG/CMP0003)
+             MONMSG     CPF0000
+
+/* ‚         ANMELDEN BEI AMU/KINO                                  */
+             CALL       PGM(APG/XXP1000) PARM('1')
+             MONMSG     CPF0000
+
+/* ‚         JETZT GLEICH AUCH DEN PDM PASSEND STARTEN              */
+             WRKMBRPDM  FILE(&LIB/&FILE)
+             MONMSG     CPF0000
+
+ ENDE:       ENDPGM

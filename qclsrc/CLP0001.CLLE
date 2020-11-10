@@ -1,0 +1,27 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RTVJOBA                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  14.12.2007                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERMITTELN JOB-DATEN WIE USER/TERMINAL          */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&USER &TERM &CURLIB &LIBL)
+
+             DCL        VAR(&TERM)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USER)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&CURLIB)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBL)    TYPE(*CHAR) LEN(2750)
+             DCL        VAR(&LANG)    TYPE(*CHAR) LEN(3)
+
+             QSYS/RTVJOBA  JOB(&TERM) USER(&USER) CURLIB(&CURLIB) -
+                           USRLIBL(&LIBL)
+             MONMSG        MSGID(CPF0000)
+
+             ENDPGM

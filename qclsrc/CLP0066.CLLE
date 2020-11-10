@@ -1,0 +1,40 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RCLACTGRP                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  19.02.2013                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  AUSFÜHREN RCLACTGRP                            */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&RCLACT_REC &RETCODE)
+
+/*‚ÜBERGABEPARAMETER                                                */
+             DCL        VAR(&RCLACT_REC)  TYPE(*CHAR) LEN(19)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&ACTGRP)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OPTION)      TYPE(*CHAR) LEN(9)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&ACTGRP)   VALUE(%SST(&RCLACT_REC 01 10))
+             CHGVAR     VAR(&OPTION)   VALUE(%SST(&RCLACT_REC 11 9))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          KEINE OPTIONEN ANGEGEBEN?                               */
+             IF         COND(&ACTGRP *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&ACTGRP) VALUE('*ELIGIBLE')
+             ENDDO
+             IF         COND(&OPTION *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OPTION) VALUE('*NORMAL')
+             ENDDO
+
+             RCLACTGRP  ACTGRP(&ACTGRP) OPTION(&OPTION)
+
+ ENDPGM:     ENDPGM

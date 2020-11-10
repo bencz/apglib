@@ -1,0 +1,95 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* DSPFD                                                           */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  22.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  DSPFD IN EINER OUTFILE GENERIEREN              */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&DSPFD_REC &RETCODE)
+
+             DCL        VAR(&DSPFD_REC)  TYPE(*CHAR) LEN(94)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FILENAME)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBNAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TYPNAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTPUTTYP)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILEATR)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTFILE)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTMBR)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTOPT)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SYSWRK)     TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILENAME)   VALUE(%SST(&DSPFD_REC 01 10))
+             CHGVAR     VAR(&LIBNAME)    VALUE(%SST(&DSPFD_REC 11 10))
+             CHGVAR     VAR(&TYPNAME)    VALUE(%SST(&DSPFD_REC 21 10))
+             CHGVAR     VAR(&OUTPUTTYP)  VALUE(%SST(&DSPFD_REC 31 10))
+             CHGVAR     VAR(&FILEATR)    VALUE(%SST(&DSPFD_REC 41 10))
+             CHGVAR     VAR(&OUTFILE)    VALUE(%SST(&DSPFD_REC 51 10))
+             CHGVAR     VAR(&OUTLIB)     VALUE(%SST(&DSPFD_REC 61 10))
+             CHGVAR     VAR(&OUTMBR)     VALUE(%SST(&DSPFD_REC 71 10))
+             CHGVAR     VAR(&OUTOPT)     VALUE(%SST(&DSPFD_REC 81 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          NUR WENN DATEI ÜBERGEBEN, DANN DSPFD AUSFÜHREN          */
+             IF         COND(&FILENAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('2')
+                        GOTO ENDPGM
+             ENDDO
+
+/*‚          DEFAULT WERTE SETZEN                                    */
+             IF         COND(&LIBNAME *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&LIBNAME) VALUE('*LIBL')
+/*‚                     *ALL ÜBER *LIBL? LIEBER NICHT...             */
+                        IF  COND(&FILENAME *EQ '*ALL') THEN(DO)
+                            CHGVAR VAR(&RETCODE) VALUE('3')
+                            GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+/*‚          ERSETZEN ODER HINZUFÜGEN? ERSETZEN ALS DEFAULT          */
+             IF         COND(&OUTOPT *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&OUTOPT) VALUE('*REPLACE')
+             ENDDO
+
+/*‚          *FRIST ALS DEFAULT-TEILDATEI (BEI PHYSISCHEN/LOGISCHEN) */
+             IF         COND(&OUTMBR *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&OUTMBR) VALUE('*FIRST')
+             ENDDO
+
+/*‚          ATRRIBUT GEFÜLLT?                                       */
+             IF         COND(&FILEATR *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&FILEATR) VALUE('*ALL')
+             ENDDO
+
+/*‚          TYP GEFÜLLT?                                            */
+             IF         COND(&TYPNAME *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&TYPNAME) VALUE('*ALL')
+             ENDDO
+
+/*‚          SYSTEM GEFÜLLT?                                         */
+             IF         COND(&SYSWRK *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&SYSWRK) VALUE('*LCL')
+             ENDDO
+
+/*‚NUN DSPFD AUSFÜHREN                                              */
+             DSPFD      FILE(&LIBNAME/&FILENAME) TYPE(&TYPNAME)  +
+                        OUTPUT(&OUTPUTTYP) FILEATR(&FILEATR)     +
+                        OUTFILE(&OUTLIB/&OUTFILE) OUTMBR(&OUTMBR +
+                        &OUTOPT) SYSTEM(&SYSWRK)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

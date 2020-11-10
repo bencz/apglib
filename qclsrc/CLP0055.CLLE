@@ -1,0 +1,44 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* OVRDSPF                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  05.02.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  DISPLAYFILE ÜBERSCHREIBEN                      */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&OVRDSP_REC &RETCODE)
+
+             DCL        VAR(&OVRDSP_REC) TYPE(*CHAR) LEN(30)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FROMFILE)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOFILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOLIB)      TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FROMFILE)   VALUE(%SST(&OVRDSP_REC 01 10))
+             CHGVAR     VAR(&TOLIB)      VALUE(%SST(&OVRDSP_REC 11 10))
+             CHGVAR     VAR(&TOFILE)     VALUE(%SST(&OVRDSP_REC 21 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          BIBLIOTHEK VORHANDEN?                                   */
+             IF         COND(&TOLIB *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&TOLIB) VALUE('*LIBL')
+             ENDDO
+
+/*‚          DISPLAY ÜBERSCHREIBEN                                   */
+             OVRDSPF    FILE(&FROMFILE) TOFILE(&TOLIB/&TOFILE)      +
+                        LVLCHK(*NO) OVRSCOPE(*ACTGRPDFN)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

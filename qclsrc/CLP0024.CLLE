@@ -1,0 +1,81 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CRTCMD                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  19.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERSTELLEN EINES COMMANDS                       */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CRTCMD_REC &RETCODE)
+
+             DCL        VAR(&CRTCMD_REC) TYPE(*CHAR) LEN(100)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBOBJ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PGM)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&EXCLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&EXCPGM)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OVRPGM)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OVRLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PRDLIB)     TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBOBJ)   VALUE(%SST(&CRTCMD_REC 1 10))
+             CHGVAR     VAR(&PGM)      VALUE(%SST(&CRTCMD_REC 11 10))
+             CHGVAR     VAR(&EXCLIB)   VALUE(%SST(&CRTCMD_REC 21 10))
+             CHGVAR     VAR(&EXCPGM)   VALUE(%SST(&CRTCMD_REC 31 10))
+             CHGVAR     VAR(&LIBSRC)   VALUE(%SST(&CRTCMD_REC 41 10))
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&CRTCMD_REC 51 10))
+             CHGVAR     VAR(&SRCMBR)   VALUE(%SST(&CRTCMD_REC 61 10))
+             CHGVAR     VAR(&OVRLIB)   VALUE(%SST(&CRTCMD_REC 71 10))
+             CHGVAR     VAR(&OVRPGM)   VALUE(%SST(&CRTCMD_REC 81 10))
+             CHGVAR     VAR(&PRDLIB)   VALUE(%SST(&CRTCMD_REC 91 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          BEDIENER-ÜBERSCHREIBUNGSPROGRAMM GEFÜLLT?               */
+             IF         COND(&OVRPGM *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&OVRPGM) VALUE('*NONE')
+                        CHGVAR VAR(&OVRLIB) VALUE(' ')
+             ENDDO
+
+/*‚          BEFEHLVERARBEITUNGSPROGRAMM GEFÜLLT?                    */
+             IF         COND(&EXCPGM *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&EXCPGM) VALUE(&PGM)
+                        CHGVAR VAR(&EXCLIB) VALUE(&LIBOBJ)
+             ENDDO
+/*‚          PRODUKTIONSBIBLIOTHEK GEFÜLLT?                          */
+             IF         COND(&PRDLIB *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&PRDLIB) VALUE('*NOCHG')
+             ENDDO
+
+             IF         COND(&OVRPGM *NE '*NONE') THEN(DO)
+                        CRTCMD CMD(&LIBOBJ/&PGM) PGM(&EXCLIB/&EXCPGM) +
+                               SRCFILE(&LIBSRC/&FILE) SRCMBR(&SRCMBR) +
+                               PMTOVRPGM(&OVRLIB/&OVRPGM)             +
+                               PRDLIB(&PRDLIB)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE       CMD(DO)
+                        CRTCMD CMD(&LIBOBJ/&PGM) PGM(&EXCLIB/&EXCPGM) +
+                               SRCFILE(&LIBSRC/&FILE) SRCMBR(&SRCMBR) +
+                               PRDLIB(&PRDLIB)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

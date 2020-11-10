@@ -1,0 +1,59 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* DSPFFD                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  23.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  DSPFFD IN EINER OUTFILE GENERIEREN             */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&DSPFFD_REC &RETCODE)
+
+             DCL        VAR(&DSPFFD_REC)  TYPE(*CHAR) LEN(40)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FILENAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTFILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTLIB)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILENAME)   VALUE(%SST(&DSPFFD_REC 01 10))
+             CHGVAR     VAR(&LIBNAME)    VALUE(%SST(&DSPFFD_REC 11 10))
+             CHGVAR     VAR(&OUTFILE)    VALUE(%SST(&DSPFFD_REC 21 10))
+             CHGVAR     VAR(&OUTLIB)     VALUE(%SST(&DSPFFD_REC 31 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          NUR WENN DATEI ÜBERGEBEN, DANN DSPFFD AUSFÜHREN         */
+             IF         COND(&FILENAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('2')
+                        GOTO ENDPGM
+             ENDDO
+
+/*‚          DEFAULT WERTE SETZEN                                    */
+             IF         COND(&LIBNAME *EQ ' ') THEN(DO)
+                        CHGVAR  VAR(&LIBNAME) VALUE('*LIBL')
+/*‚                     *ALL ÜBER *LIBL? LIEBER NICHT...             */
+                        IF  COND(&FILENAME *EQ '*ALL') THEN(DO)
+                            CHGVAR VAR(&RETCODE) VALUE('3')
+                            GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+/*‚          NUN DSPDFFD AUSFÜHREN                                   */
+             DSPFFD     FILE(&LIBNAME/&FILENAME) OUTPUT(*OUTFILE) +
+                        OUTFILE(&OUTLIB/&OUTFILE) OUTMBR(*FIRST   +
+                        *REPLACE)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

@@ -1,0 +1,39 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RCVMSG                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  10.10.2012                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  EMPFANGEN EINER NACHRICHT AUS EINER MSQG       */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&RCVMSG_REC &RETCODE)
+
+             DCL        VAR(&RCVMSG_REC)  TYPE(*CHAR) LEN(522)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TEXT)        TYPE(*CHAR) LEN(512)
+             DCL        VAR(&USER)        TYPE(*CHAR) LEN(10)
+/*‚          ÜBERGABEPARAMETER IN WRK-FELDER UMSETZEN                */
+             CHGVAR     VAR(&TEXT)    VALUE(%SST(&SNDMSG_REC 1 512))
+             CHGVAR     VAR(&USER)    VALUE(%SST(&SNDMSG_REC 513 10))
+
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          VARIABLE GEFÜLTL?                                       */
+             IF         COND(&MSGQ *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&MSGQ) VALUE(&USER)
+             ENDDO
+
+/*‚          JETZT DIE NACHRICHT SENDEN                              */
+             RCVMSG     MSG(&TEXT) MSGQ(&MSGQ)
+             MONMSG     MSGID(CPF0000)  EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO (ENDPGM)
+             ENDDO
+
+ ENDPGM:     ENDPGM

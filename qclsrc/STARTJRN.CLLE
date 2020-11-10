@@ -1,0 +1,60 @@
+/*------------------------------------------------------------------*/
+/* JOURNAL FUER PHYS.DATEI STARTEN                                  */
+/*------------------------------------------------------------------*/
+             PGM
+             DCLF       FILE(*LIBL/STARTJRN)
+
+             DCL        VAR(&PFNAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&PFLIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RCVNAME) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&JRNNAME) TYPE(*CHAR) LEN(10)
+
+ ANF010:
+             SNDRCVF    RCDFMT(FMT01)
+
+             IF         (&IN03 = '1') THEN(DO)
+                        GOTO ENDE
+             ENDDO
+
+             CHGVAR VAR(&IN70) VALUE('0')
+             CHGVAR VAR(&IN71) VALUE('0')
+             CHGVAR VAR(&IN72) VALUE('0')
+
+             IF         (&PFNAME = '  ') THEN(DO)
+                        CHGVAR VAR(&IN70) VALUE('1')
+                        GOTO ANF010
+             ENDDO
+             IF         (&PFLIB  = '  ') THEN(DO)
+                        CHGVAR VAR(&IN72) VALUE('1')
+                        GOTO ANF010
+             ENDDO
+             CHKOBJ     OBJ(&PFLIB) OBJTYPE(*LIB)
+                        MONMSG CPF0000  EXEC(DO)
+                        CHGVAR VAR(&IN72) VALUE('1')
+                        GOTO ANF010
+             ENDDO
+             CHKOBJ     OBJ(&PFLIB/&PFNAME) OBJTYPE(*FILE)
+                        MONMSG CPF0000  EXEC(DO)
+                        CHGVAR VAR(&IN71) VALUE('1')
+                        GOTO ANF010
+             ENDDO
+
+             CHGVAR     VAR(&RCVNAME) VALUE(&PFNAME)
+             CHGVAR     VAR(&JRNNAME) VALUE(&PFNAME)
+             CHGVAR     VAR(%SST(&RCVNAME 1 1)) VALUE('R')
+             CHGVAR     VAR(%SST(&JRNNAME 1 1)) VALUE('J')
+
+             CRTJRNRCV  JRNRCV(&PFLIB/&RCVNAME) THRESHOLD(500000)
+
+             CRTJRN     JRN(&PFLIB/&JRNNAME) JRNRCV(&PFLIB/&RCVNAME) +
+                          MNGRCV(*SYSTEM)
+
+             STRJRNPF   FILE(&PFLIB/&PFNAME) JRN(&PFLIB/&JRNNAME) +
+                          IMAGES(*BOTH) OMTJRNE(*OPNCLO)
+
+             CHGVAR     VAR(&PFNAME) VALUE(' ')
+             GOTO ANF010
+
+
+ ENDE:
+             ENDPGM

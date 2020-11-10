@@ -1,0 +1,63 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* CPYF                                                            */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  20.01.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  CPYF AUSFÜHREN                                 */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&CPYF_REC &RETCODE)
+
+             DCL        VAR(&CPYF_REC)    TYPE(*CHAR) LEN(82)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+             DCL        VAR(&MODE)        TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FROMLIB)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FROMFILE)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FROMMBR)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOLIB)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOFILE)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOMBR)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBROPT)      TYPE(*CHAR) LEN(8)
+             DCL        VAR(&FMTOPT)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&CRTFIL)      TYPE(*CHAR) LEN(4)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FROMLIB)    VALUE(%SST(&CPYF_REC 01 10))
+             CHGVAR     VAR(&FROMFILE)   VALUE(%SST(&CPYF_REC 11 10))
+             CHGVAR     VAR(&FROMMBR)    VALUE(%SST(&CPYF_REC 21 10))
+             CHGVAR     VAR(&TOLIB)      VALUE(%SST(&CPYF_REC 31 10))
+             CHGVAR     VAR(&TOFILE)     VALUE(%SST(&CPYF_REC 41 10))
+             CHGVAR     VAR(&TOMBR)      VALUE(%SST(&CPYF_REC 51 10))
+             CHGVAR     VAR(&MBROPT)     VALUE(%SST(&CPYF_REC 61 8))
+             CHGVAR     VAR(&FMTOPT)     VALUE(%SST(&CPYF_REC 69 10))
+             CHGVAR     VAR(&CRTFIL)     VALUE(%SST(&CPYF_REC 79 4))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          WENN FROMMBR UND TOMBR VORHANDEN, DANN SO KOPIEREN      */
+             IF         COND((&FROMMBR *NE ' ')                     +
+              *AND          (&TOMBR    *NE ' ')) THEN(DO)
+                        CHGVAR VAR(&MODE) VALUE('1')
+             ENDDO
+
+/*‚          VON EINER TEILDATEI ZU EINER ANDEREN TEILDATEI          */
+             IF         COND(&MODE *EQ '1') THEN(DO)
+                        CPYF       FROMFILE(&FROMLIB/&FROMFILE)     +
+                                   TOFILE(&TOLIB/&TOFILE)           +
+                                   FROMMBR(&FROMMBR) TOMBR(&TOMBR)  +
+                                   MBROPT(&MBROPT) FMTOPT(&FMTOPT)  +
+                                   CRTFILE(&CRTFIL)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

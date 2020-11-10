@@ -1,0 +1,70 @@
+/*-------------------------------------------------------------------*/
+/*         L A G E R F Ü H R U N G S S Y S T E M   LFS 400           */
+/*-------------------------------------------------------------------*/
+             PGM        PARM(&MBR &SRCMBR &LIBOBJ &FILE &LIBSRC +
+                          &COMPILE &DLSIZE &DLMAXE &DLEXT &APGM +
+                          &ALIB &APAR)
+
+             DCL        VAR(&MBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBOBJ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&COMPILE) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&MSG) TYPE(*CHAR) LEN(80)
+             DCL        VAR(&DLSIZE) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DLMAXE) TYPE(*CHAR) LEN(5)
+             DCL        VAR(&DLEXT) TYPE(*CHAR) LEN(5)
+             DCL        VAR(&APGM)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ALIB)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&APAR) TYPE(*CHAR) LEN(50)
+             DCL        VAR(&ART)  TYPE(*CHAR) LEN(01)
+             DCL        VAR(&RETCODE) TYPE(*CHAR) LEN(01)
+
+             IF         (&APGM *NE ' ') THEN(DO)
+                        CHGVAR VAR(&ART) VALUE('1')
+                        CALL PGM(CPPGM50CL) PARM(&APGM &ALIB +
+                             &APAR &ART &RETCODE)
+                        MONMSG MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+             ENDDO
+
+  /* WENN ES DIE DATEI SCHON GIBT, DANN CHGPF                        */
+             CHKOBJ     OBJ(&LIBOBJ/&MBR) OBJTYPE(*FILE)
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(CRTPF))
+
+             CHGPF      FILE(&LIBOBJ/&MBR) SRCFILE(&LIBSRC/&FILE) +
+                          SRCMBR(&SRCMBR) OPTION(*EVENTF)
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+
+             GOTO       CMDLBL(ENDPGM)
+
+  /* BESTEHENDE PHYSICHE DATEI LÖSCHEN                               */
+CRTPF:       DLTF       FILE(&LIBOBJ/&MBR)
+             MONMSG     MSGID(CPF0000)
+
+  /* BEI *NOMAX DARF NUR EIN WERT MITGEGEBEN WERDEN FÜR DIE GRÖßE    */
+             IF         COND(&DLSIZE *EQ '0000000000') THEN(DO)
+                        CHGVAR     VAR(&DLSIZE) VALUE(*NOMAX)
+             ENDDO
+
+             IF         COND(&DLSIZE *EQ '*NOMAX') THEN(DO)
+             CRTPF      FILE(&LIBOBJ/&MBR) SRCFILE(&LIBSRC/&FILE) +
+                          SRCMBR(&SRCMBR) OPTION(*EVENTF) SIZE(&DLSIZE)
+                        MONMSG MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+             ENDDO
+             ELSE       CMD(DO)
+             CRTPF      FILE(&LIBOBJ/&MBR) SRCFILE(&LIBSRC/&FILE) +
+                          SRCMBR(&SRCMBR) OPTION(*EVENTF) +
+                          SIZE(&DLSIZE &DLEXT &DLMAXE)
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+             ENDDO
+
+             GOTO       CMDLBL(ENDPGM)
+
+ FEHLER:
+             CHGVAR     VAR(&MSG) VALUE('Fehler beim Wandeln der +
+                          physischen Datei ' !! &MBR)
+             SNDPGMMSG  MSGID(CPF9898) MSGF(QCPFMSG) MSGDTA(&MSG) +
+                          TOMSGQ(*TOPGMQ) MSGTYPE(*ESCAPE)
+
+ ENDPGM:     ENDPGM

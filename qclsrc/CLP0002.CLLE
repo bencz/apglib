@@ -1,0 +1,104 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RTVMBRD                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  11.01.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERMITTELN TEILDATEI-INFOS                      */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&RTVMBRD_RC &RETCODE)
+
+             DCL        VAR(&RTVMBRD_RC)  TYPE(*CHAR) LEN(174)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIB)         TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RCN)         TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MEMBER)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCART)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&CRTDAT)      TYPE(*CHAR) LEN(13)
+             DCL        VAR(&CHGDAT)      TYPE(*CHAR) LEN(13)
+             DCL        VAR(&SAVDAT)      TYPE(*CHAR) LEN(13)
+             DCL        VAR(&RSTDAT)      TYPE(*CHAR) LEN(13)
+             DCL        VAR(&USEDAT)      TYPE(*CHAR) LEN(7)
+             DCL        VAR(&X_USECNT)    TYPE(*CHAR) LEN(5)
+             DCL        VAR(&X_NBRREC)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&X_DLTREC)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USECNT)      TYPE(*DEC)  LEN(5)
+             DCL        VAR(&NBRREC)      TYPE(*DEC)  LEN(10)
+             DCL        VAR(&DLTREC)      TYPE(*DEC)  LEN(10)
+             DCL        VAR(&MBRTXT)      TYPE(*CHAR) LEN(50)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIB)    VALUE(%SST(&RTVMBRD_RC 1  10))
+             CHGVAR     VAR(&RCN)    VALUE(%SST(&RTVMBRD_RC 11 10))
+             CHGVAR     VAR(&MEMBER) VALUE(%SST(&RTVMBRD_RC 21 10))
+             CHGVAR     VAR(&SRCART) VALUE(%SST(&RTVMBRD_RC 31 10))
+             CHGVAR     VAR(&CRTDAT) VALUE(%SST(&RTVMBRD_RC 41 13))
+             CHGVAR     VAR(&CHGDAT) VALUE(%SST(&RTVMBRD_RC 54 13))
+             CHGVAR     VAR(&SAVDAT) VALUE(%SST(&RTVMBRD_RC 67 13))
+             CHGVAR     VAR(&RSTDAT) VALUE(%SST(&RTVMBRD_RC 80 13))
+             CHGVAR     VAR(&USEDAT) VALUE(%SST(&RTVMBRD_RC 93 7))
+             CHGVAR     VAR(&X_USECNT) VALUE(%SST(&RTVMBRD_RC 100 5))
+             CHGVAR     VAR(&X_NBRREC) VALUE(%SST(&RTVMBRD_RC 105 10))
+             CHGVAR     VAR(&X_DLTREC) VALUE(%SST(&RTVMBRD_RC 115 10))
+             CHGVAR     VAR(&USECNT) VALUE(&X_USECNT)
+             CHGVAR     VAR(&NBRREC) VALUE(&X_NBRREC)
+             CHGVAR     VAR(&DLTREC) VALUE(&X_DLTREC)
+             CHGVAR     VAR(&MBRTXT) VALUE(%SST(&RTVMBRD_RC 125 50))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          OHNE DDM FILE                                         */
+             RTVMBRD    FILE(&LIB/&RCN) MBR(&MEMBER) +
+                          SRCTYPE(&SRCART) SRCCHGDATE(&CHGDAT) +
+                          CRTDATE(&CRTDAT) TEXT(&MBRTXT) +
+                          NBRCURRCD(&NBRREC) NBRDLTRCD(&DLTREC) +
+                          SAVDATE(&SAVDAT) RSTDATE(&RSTDAT) +
+                          USEDATE(&USEDAT) USECOUNT(&USECNT)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+             ENDDO
+
+/*‚          API GIBT SPACES ZURÜCK. DATUM WIRD IM LFS             */
+/*‚          ABER NUMERISCH BEHANDELT.                             */
+             IF         (&CHGDAT *EQ '             ') THEN(DO)
+                        CHGVAR VAR(&CHGDAT) VALUE('0000000000000')
+             ENDDO
+             IF         (&CRTDAT *EQ '             ') THEN(DO)
+                        CHGVAR VAR(&CRTDAT) VALUE('0000000000000')
+             ENDDO
+             IF         (&SAVDAT *EQ '             ') THEN(DO)
+                        CHGVAR VAR(&SAVDAT) VALUE('0000000000000')
+             ENDDO
+             IF         (&RSTDAT *EQ '             ') THEN(DO)
+                        CHGVAR VAR(&RSTDAT) VALUE('0000000000000')
+             ENDDO
+             IF         (&USEDAT *EQ '       ') THEN(DO)
+                        CHGVAR VAR(&USEDAT) VALUE('0000000')
+             ENDDO
+
+             CHGVAR  VAR(&X_USECNT) VALUE(&USECNT)
+             CHGVAR  VAR(&X_NBRREC) VALUE(&NBRREC)
+             CHGVAR  VAR(&X_DLTREC) VALUE(&DLTREC)
+/*‚          DATEN WIEDER ZURÜCK IN RECORD SCHREIBEN               */
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 1 10))   VALUE(&LIB)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 11 10))  VALUE(&RCN)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 21 10))  VALUE(&MEMBER)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 31 10))  VALUE(&SRCART)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 41 13))  VALUE(&CRTDAT)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 54 13))  VALUE(&CHGDAT)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 67 13))  VALUE(&SAVDAT)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 80 13))  VALUE(&RSTDAT)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 93 7))   VALUE(&USEDAT)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 100 5))  VALUE(&X_USECNT)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 105 10)) VALUE(&X_NBRREC)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 115 10)) VALUE(&X_DLTREC)
+             CHGVAR  VAR(%SST(&RTVMBRD_RC 125 50)) VALUE(&MBRTXT)
+ENDE:
+     ENDPGM

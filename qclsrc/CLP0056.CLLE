@@ -1,0 +1,22 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RTVJOBA                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  08.02.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ERMITTELN DER SPRACHE                          */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&SPRACHE)
+
+             DCL        VAR(&SPRACHE) TYPE(*CHAR) LEN(10)
+
+             RTVJOBA    LANGID(&SPRACHE)
+             MONMSG     MSGID(CPF0000)
+
+             ENDPGM

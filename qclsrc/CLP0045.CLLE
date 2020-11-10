@@ -1,0 +1,48 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* GRTOBJAUT                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  05.11.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  SETZEN VON BERECHTIGUNGEN                      */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&GRTAUT_REC &RETCODE)
+
+             DCL        VAR(&GRTAUT_REC)  TYPE(*CHAR) LEN(47)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FILENAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILETYPE)    TYPE(*CHAR) LEN(7)
+             DCL        VAR(&TUSER)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&AUT)         TYPE(*CHAR) LEN(10)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILENAME)   VALUE(%SST(&GRTAUT_REC 01 10))
+             CHGVAR     VAR(&LIBNAME)    VALUE(%SST(&GRTAUT_REC 11 10))
+             CHGVAR     VAR(&FILETYPE)   VALUE(%SST(&GRTAUT_REC 21 7))
+             CHGVAR     VAR(&TUSER)      VALUE(%SST(&GRTAUT_REC 28 10))
+             CHGVAR     VAR(&AUT)        VALUE(%SST(&GRTAUT_REC 38 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          WENN BIBLIOTHEK NICHT GEFÜLLT, DANN *LIBL ANNEHMEN      */
+             IF         COND(&LIBNAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&LIBNAME) VALUE('*LIBL')
+             ENDDO
+
+             QSYS/GRTOBJAUT OBJ(&LIBNAME/&FILENAME)      +
+                            OBJTYPE(&FILETYPE)           +
+                            USER(&TUSER) AUT(&AUT) REPLACE(*YES)
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

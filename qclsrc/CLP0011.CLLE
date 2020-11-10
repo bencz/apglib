@@ -1,0 +1,53 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* OVRDBF                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  09.08.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ÜBERSCHREIBEN EINER TEILDATEI                  */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&OVRDBF_REC &RETCODE)
+
+             DCL        VAR(&OVRDBF_REC)  TYPE(*CHAR) LEN(43)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(01)
+
+             DCL        VAR(&FILE)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOLIB)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOFILE)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOMBR)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LVLCHK)      TYPE(*CHAR) LEN(3)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILE)    VALUE(%SST(&OVRDBF_REC 1 10))
+             CHGVAR     VAR(&TOLIB)   VALUE(%SST(&OVRDBF_REC 11 10))
+             CHGVAR     VAR(&TOFILE)  VALUE(%SST(&OVRDBF_REC 21 10))
+             CHGVAR     VAR(&TOMBR)   VALUE(%SST(&OVRDBF_REC 31 10))
+             CHGVAR     VAR(&LVLCHK)  VALUE(%SST(&OVRDBF_REC 41 3))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+             IF         COND(&LVLCHK *EQ ' ') THEN(DO)
+                        OVRDBF   FILE(&FILE) TOFILE(&TOLIB/&TOFILE) +
+                                 MBR(&TOMBR) OVRSCOPE(*JOB)
+                        MONMSG   MSGID(CPF0000) EXEC(DO)
+                                 CHGVAR VAR(&RETCODE) VALUE('1')
+                                 GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE DO
+                        OVRDBF   FILE(&FILE) TOFILE(&TOLIB/&TOFILE) +
+                                 MBR(&TOMBR) OVRSCOPE(*JOB) +
+                                 LVLCHK(&LVLCHK)
+                        MONMSG   MSGID(CPF0000) EXEC(DO)
+                                 CHGVAR VAR(&RETCODE) VALUE('1')
+                                 GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

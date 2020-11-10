@@ -1,0 +1,57 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* DLCOBJ                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  08.01.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  LOCK AUF DATEI ENTFERNEN                       */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&DLCOBJ_REC &RETCODE)
+
+             DCL        VAR(&DLCOBJ_REC)  TYPE(*CHAR) LEN(47)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&LIBNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILENAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBRNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TYPNAME)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SPRSTS)      TYPE(*CHAR) LEN(7)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIBNAME)    VALUE(%SST(&DLCOBJ_REC 01 10))
+             CHGVAR     VAR(&FILENAME)   VALUE(%SST(&DLCOBJ_REC 11 10))
+             CHGVAR     VAR(&MBRNAME)    VALUE(%SST(&DLCOBJ_REC 21 10))
+             CHGVAR     VAR(&TYPNAME)    VALUE(%SST(&DLCOBJ_REC 31 10))
+             CHGVAR     VAR(&SPRSTS)     VALUE(%SST(&DLCOBJ_REC 41 7))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          WENN BIBLIOTHEK NICHT GEFÜLLT, DANN *LIBL ANNEHMEN      */
+             IF         COND(&LIBNAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&LIBNAME) VALUE('*LIBL')
+             ENDDO
+
+/*‚          WENN SPERRSTATUS NICHT GEFÜLLT, DEFAULT NEHMEN          */
+             IF         COND(&SPRSTS *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&SPRSTS) VALUE('*EXCL')
+             ENDDO
+
+/*‚          WENN MBR NICHT GEFÜLLT, DEFAULT NEHMEN                  */
+             IF         COND(&MBRNAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&MBRNAME) VALUE('*FIRST')
+             ENDDO
+
+             DLCOBJ     OBJ((&LIBNAME/&FILENAME &TYPNAME        +
+                             &SPRSTS &MBRNAME))
+             MONMSG     MSGID(CPF0000) EXEC(DO)
+                        CHGVAR VAR(&RETCODE) VALUE('1')
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

@@ -1,0 +1,42 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* NETZWERKATTRIBUTE AUFFINDEN                                     */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  17.09.2010                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  NETZWERKATTRIBUTE AUFFINDEN                    */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&RTVNET_REC &RETCODE)
+
+             DCL        VAR(&RTVNET_REC) TYPE(*CHAR) LEN(18)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&AKTION)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SYSNAME)    TYPE(*CHAR) LEN(8)
+
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&AKTION)  VALUE(%SST(&RTVNET_REC 01 10))
+             CHGVAR     VAR(&SYSNAME) VALUE(%SST(&RTVNET_REC 11 8))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE) VALUE(' ')
+
+/*‚          SYSTEMNAME ERMITTELN?                                   */
+             IF         COND(&AKTION *EQ 'SYSNAME') THEN(DO)
+                        RTVNETA   SYSNAME(&SYSNAME)
+                        MONMSG MSGID(CPF0000) EXEC(DO)
+                               CHGVAR VAR(&RETCODE) VALUE('1')
+                               GOTO ENDPGM
+                        ENDDO
+/*‚                     WERT ZURÜCKGEBEN                             */
+                        CHGVAR VAR(%SST(&RTVNET_REC 1 8)) +
+                               VALUE(&SYSNAME)
+             ENDDO
+
+ ENDPGM:     ENDPGM

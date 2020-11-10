@@ -1,0 +1,28 @@
+             PGM        PARM(&LIB &FILE &MBR &RSMMBR)
+
+             DCL        VAR(&LIB)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBR)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RSMMBR)   TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RSMFILE)  TYPE(*CHAR) LEN(10)
+
+             CHGVAR     VAR(&RSMFILE) VALUE(&FILE)
+             IF         (&RSMFILE *EQ 'QCBLPGM') THEN(DO)
+                        CHGVAR VAR(&RSMFILE) VALUE('QCBLSRC')
+             ENDDO
+             IF         (&RSMFILE *EQ 'QDDSPGM') THEN(DO)
+                        CHGVAR VAR(&RSMFILE) VALUE('QDDSSRC')
+             ENDDO
+
+             CPYTOSTMF FROMMBR('/QSYS.LIB/RSMSRCV5.LIB/QCBLSRC.FILE/' +
+                               *TCAT &RSMMBR *TCAT '.MBR')  +
+                TOSTMF('/HOME/APG/RSM.CBLLE') +
+                STMFOPT(*REPLACE) STMFCCSID(*PCASCII)
+
+             CPYTOSTMF FROMMBR('/QSYS.LIB/' *TCAT &LIB *TCAT '.LIB/' +
+                               *TCAT &FILE *TCAT '.FILE/'            +
+                               *TCAT &MBR *TCAT '.MBR') +
+                TOSTMF('/HOME/APG/RCE.CBLLE') +
+                STMFOPT(*REPLACE) STMFCCSID(*PCASCII)
+
+             ENDPGM

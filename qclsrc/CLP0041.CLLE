@@ -1,0 +1,84 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* OVRPRTF                                                         */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  20.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  ÜBERSCHREIBEN EINES PRINTERFILES               */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&OVRPRT_REC &RETCODE)
+
+             DCL        VAR(&OVRPRT_REC)  TYPE(*CHAR) LEN(55)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(01)
+
+             DCL        VAR(&FILE)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOFILE)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTQ)        TYPE(*CHAR) LEN(10)
+             DCL        VAR(&USRDTA)      TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SPLFNAME)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RPLCHAR)     TYPE(*CHAR) LEN(1)
+             DCL        VAR(&RPLNPCHR)    TYPE(*CHAR) LEN(4)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&FILE)     VALUE(%SST(&OVRPRT_REC 1 10))
+             CHGVAR     VAR(&TOFILE)   VALUE(%SST(&OVRPRT_REC 11 10))
+             CHGVAR     VAR(&OUTQ)     VALUE(%SST(&OVRPRT_REC 21 10))
+             CHGVAR     VAR(&USRDTA)   VALUE(%SST(&OVRPRT_REC 31 10))
+             CHGVAR     VAR(&SPLFNAME) VALUE(%SST(&OVRPRT_REC 41 10))
+             CHGVAR     VAR(&RPLCHAR)  VALUE(%SST(&OVRPRT_REC 51 1))
+             CHGVAR     VAR(&RPLNPCHR) VALUE(%SST(&OVRPRT_REC 52 4))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          TOFILE VORHANDEN?                                       */
+             IF         (&TOFILE *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&TOFILE) VALUE(&FILE)
+             ENDDO
+/*‚          SPOOLFILENAME VORHANDEN?                                */
+             IF         (&SPLFNAME *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&SPLFNAME) VALUE(&FILE)
+             ENDDO
+/*‚          USERDATA VORHANDEN?                                     */
+             IF         (&USRDTA *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&USRDTA) VALUE(&FILE)
+             ENDDO
+
+/*‚          KEINE ANGABEN BEI ZEICHEN ERSETZEN VORHANDEN?           */
+             IF         (&RPLNPCHR *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&RPLCHAR)  VALUE(' ')
+                        CHGVAR VAR(&RPLNPCHR) VALUE('*YES')
+             ENDDO
+
+/*‚          MIT ZEICHEN ERSTZEN AUF JA                              */
+             IF         (&RPLNPCHR *EQ '*YES') THEN(DO)
+                        OVRPRTF  FILE(&FILE) TOFILE(&TOFILE) +
+                                 RPLUNPRT(&RPLNPCHR &RPLCHAR) +
+                                 OUTQ(&OUTQ) USRDTA(&USRDTA) +
+                                 SPLFNAME(&SPLFNAME) OVRSCOPE(*JOB)
+                        MONMSG  MSGID(CPF0000) EXEC(DO)
+                                CHGVAR VAR(&RETCODE) VALUE('1')
+                                GOTO ENDPGM
+                        ENDDO
+                        GOTO ENDPGM
+             ENDDO
+
+/*‚          MIT ZEICHEN ERSTZEN AUF NEIN                            */
+             IF         (&RPLNPCHR *EQ '*NO') THEN(DO)
+                        OVRPRTF  FILE(&FILE) TOFILE(&TOFILE) +
+                                 RPLUNPRT(&RPLNPCHR) +
+                                 OUTQ(&OUTQ) USRDTA(&USRDTA) +
+                                 SPLFNAME(&SPLFNAME) OVRSCOPE(*JOB)
+                        MONMSG  MSGID(CPF0000) EXEC(DO)
+                                CHGVAR VAR(&RETCODE) VALUE('1')
+                                GOTO ENDPGM
+                        ENDDO
+                        GOTO ENDPGM
+             ENDDO
+
+ ENDPGM:     ENDPGM

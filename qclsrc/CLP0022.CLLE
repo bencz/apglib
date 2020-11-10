@@ -1,0 +1,50 @@
+/*-------------------------------------------------------------------*/
+/*         L A G E R F Ü H R U N G S S Y S T E M   LFS 400           */
+/*-------------------------------------------------------------------*/
+             PGM        PARM(&PGM &SRCMBR &LIBOBJ &FILE &LIBSRC &DBG +
+                          &COMPILE &TGTRLS &APGM &ALIB &APAR +
+                          &USRPRF)
+
+             DCL        VAR(&PGM)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCMBR)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBOBJ)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE)    TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIBSRC)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&DBG)     TYPE(*CHAR) LEN(7)
+             DCL        VAR(&TYP)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ACTGRP)  TYPE(*CHAR) LEN(10) VALUE('QILE')
+             DCL        VAR(&COMPILE) TYPE(*CHAR) LEN(1)
+             DCL        VAR(&TGTRLS)  TYPE(*CHAR) LEN(10)
+             DCL        VAR(&APGM) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&ALIB) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&APAR) TYPE(*CHAR) LEN(50)
+             DCL        VAR(&USRPRF) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&RETCODE) TYPE(*CHAR) LEN(01)
+             DCL        VAR(&ART)    TYPE(*CHAR) LEN(01)
+             DCL        VAR(&MSG)    TYPE(*CHAR) LEN(80)
+
+             IF         (&TGTRLS = ' ') THEN(DO)
+                        CHGVAR VAR(&TGTRLS) VALUE('*PRV')
+             ENDDO
+
+             IF         (&APGM *NE ' ') THEN(DO)
+                        CHGVAR VAR(&ART) VALUE('1')
+                        CALL PGM(CPPGM50CL) PARM(&APGM &ALIB +
+                             &APAR &ART &RETCODE)
+                        MONMSG MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+             ENDDO
+
+             CRTCLPGM   PGM(&LIBOBJ/&PGM) SRCFILE(&LIBSRC/&FILE) +
+                          SRCMBR(&SRCMBR) OPTION(&DBG *LSTDBG) +
+                          USRPRF(&USRPRF) TGTRLS(&TGTRLS)
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(FEHLER))
+
+             GOTO       CMDLBL(ENDPGM)
+
+ FEHLER:
+             CHGVAR     VAR(&MSG) VALUE('Fehler beim Wandeln des +
+                          CL Programmes ' !! &PGM)
+             SNDPGMMSG  MSGID(CPF9898) MSGF(QCPFMSG) MSGDTA(&MSG) +
+                          TOMSGQ(*TOPGMQ) MSGTYPE(*ESCAPE)
+
+ ENDPGM:     ENDPGM

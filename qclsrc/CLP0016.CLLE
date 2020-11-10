@@ -1,0 +1,69 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* SNDPGMMSG                                                       */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  29.08.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  SENDEN EINER PROGRAMMNACHRICHT                 */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&SNDPGM_REC &RETCODE)
+
+             DCL        VAR(&SNDPGM_REC) TYPE(*CHAR) LEN(656)
+             DCL        VAR(&RETCODE)    TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&TEXT)       TYPE(*CHAR) LEN(512)
+             DCL        VAR(&TYP)        TYPE(*CHAR) LEN(7)
+             DCL        VAR(&MSGID)      TYPE(*CHAR) LEN(7)
+             DCL        VAR(&MSGF)       TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MSGDTA)     TYPE(*CHAR) LEN(100)
+             DCL        VAR(&TOPGMQ)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOMSGQ)     TYPE(*CHAR) LEN(10)
+/*‚          ÜBERGABEPARAMETER IN WRK-FELDER UMSETZEN                */
+             CHGVAR     VAR(&TEXT)    VALUE(%SST(&SNDPGM_REC 1 512))
+             CHGVAR     VAR(&TYP)     VALUE(%SST(&SNDPGM_REC 513 7))
+             CHGVAR     VAR(&MSGID)   VALUE(%SST(&SNDPGM_REC 520 7))
+             CHGVAR     VAR(&MSGF)    VALUE(%SST(&SNDPGM_REC 527 10))
+             CHGVAR     VAR(&MSGDTA)  VALUE(%SST(&SNDPGM_REC 537 100))
+             CHGVAR     VAR(&TOPGMQ)  VALUE(%SST(&SNDPGM_REC 637 10))
+             CHGVAR     VAR(&TOMSGQ)  VALUE(%SST(&SNDPGM_REC 647 10))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          MSGF GEFÜLLT?                                           */
+             IF         (&MSGF *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&MSGF) VALUE('QCPFMSG')
+             ENDDO
+/*‚          VARIABLE GEFÜLTL?                                       */
+             IF         COND(&TOMSGQ *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&TOMSGQ) VALUE('*TOPGMQ')
+             ENDDO
+/*‚          VARIABLE GEFÜLLT?                                       */
+             IF         COND(&TOPGMQ *EQ ' ') THEN(DO)
+                        CHGVAR VAR(&TOPGMQ) VALUE('*PRV')
+             ENDDO
+
+             IF         (&MSGID *EQ '       ') THEN(DO)
+                        SNDPGMMSG  MSG(&TEXT) MSGTYPE(&TYP)
+                        MONMSG     MSGID(CPF0000)  EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO (ENDPGM)
+                        ENDDO
+             ENDDO
+             ELSE DO
+                        SNDPGMMSG  MSGID(&MSGID) MSGTYPE(&TYP) +
+                                   MSGF(&MSGF) MSGDTA(&MSGDTA) +
+                                   TOPGMQ(&TOPGMQ) TOMSGQ(&TOMSGQ)
+                        MONMSG     MSGID(CPF0000)  EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO (ENDPGM)
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM

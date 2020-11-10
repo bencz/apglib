@@ -1,0 +1,51 @@
+/*‚*-----------------------------------------------------------------*/
+/*‚* RGZPFM                                                          */
+/*‚*---------------------------------------------------------------  */
+/*‚*                                                                 */
+/*‚* AUTOR         :  A. PIEGER                                      */
+/*‚*                                                                 */
+/*‚* ERSTELLT AM   :  08.10.2009                                     */
+/*‚*                                                                 */
+/*‚* FUNKTION      :  AUSFÜHREN RGZPFM                               */
+/*‚*                                                                 */
+/*‚* ÄNDERUNGEN:                                                     */
+/*‚*‚DATUM      VON   GRUND DER ÄNDERUNG                             */
+/*‚*                                                                 */
+/*‚****************************************************************  */
+             PGM        PARM(&RGZPFM_REC &RETCODE)
+
+/*‚ÜBERGABEPARAMETER                                                */
+             DCL        VAR(&RGZPFM_REC)  TYPE(*CHAR) LEN(37)
+             DCL        VAR(&RETCODE)     TYPE(*CHAR) LEN(1)
+
+             DCL        VAR(&FILEWRK)     TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIB)         TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MBR)         TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCOPT)      TYPE(*CHAR) LEN(7)
+/*‚          VARIABLEN AUS RECORD ÜBERNEHMEN                         */
+             CHGVAR     VAR(&LIB)      VALUE(%SST(&RGZPFM_REC 01 10))
+             CHGVAR     VAR(&FILEWRK)  VALUE(%SST(&RGZPFM_REC 11 10))
+             CHGVAR     VAR(&MBR)      VALUE(%SST(&RGZPFM_REC 21 10))
+             CHGVAR     VAR(&SRCOPT)   VALUE(%SST(&RGZPFM_REC 31 7))
+
+/*‚          RET-CODE ZURÜCKSETZEN                                   */
+             CHGVAR     VAR(&RETCODE)  VALUE(' ')
+
+/*‚          REORG EINER DATEI ODER TEILDATEI?                       */
+             IF         COND(&MBR *EQ '          ') THEN(DO)
+                        RGZPFM     FILE(&FILEWRK)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+             ELSE CMD(DO)
+                        RGZPFM     FILE(&LIB/&FILEWRK) MBR(&MBR) +
+                                   SRCOPT(&SRCOPT)
+                        MONMSG     MSGID(CPF0000) EXEC(DO)
+                                   CHGVAR VAR(&RETCODE) VALUE('1')
+                                   GOTO ENDPGM
+                        ENDDO
+             ENDDO
+
+ ENDPGM:     ENDPGM
