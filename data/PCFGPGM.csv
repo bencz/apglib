@@ -1,0 +1,21 @@
+CHKSRC  ;CR;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+AJAX    ;AJ;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+SEU     ;CR;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+CONFIG  ;CF;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+COMPILER;CM;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+PRINT   ;DR;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+HILFE   ;HL;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+EMAIL   ;HL;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+HERMES  ;HM;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+SCHULUNG;SC;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+TEST    ;XX;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+PLANUNG ;XX;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+LED     ;XX;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+API     ;XX;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+ANMELDEN;XX;1;APG       ;APGS4     ;UPDDTA    ;20100104;80400;          ;          ;          ;0;0
+PROJEKT ;XX;1;          ;          ;          ;0;0;          ;          ;          ;0;0
+HACK    ;XX;1;          ;          ;          ;0;0;          ;          ;          ;0;0
+EX:KD   ;EX;1;          ;          ;          ;0;0;          ;          ;          ;0;0
+OPL     ;XX;1;APG       ;APGS1     ;UPDDTA    ;0;0;          ;          ;          ;0;0
+FUN     ;XX;1;APG       ;APGS4     ;UPDDTA    ;20110620;71900;          ;          ;          ;0;0
+AZ:VERW ;AZ;1;          ;          ;          ;0;0;          ;          ;          ;0;0
