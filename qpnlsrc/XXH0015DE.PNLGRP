@@ -1,0 +1,90 @@
+:PNLGRP.
+:HELP NAME='XXH0015DE/FMT03        '.
+
+:H1.TODO- und OPL Tool
+
+:P.
+Um einen Punkt anzulegen, muss einfach nur ein Text eingetragen und
+bestätigt werden. Ggf. kann das Datum frei auf ein gültiges Datum
+geändert werden.
+Mit der F2-Taste kann die Kategorie gewechselt werden, sofern für
+den aktuellen User welche angelegt wurden. Neue Kategorien können
+unter APG/CONFIG im Schlüssel H102 angelegt werden.
+
+Weiterhin kann mit der Auswahl "Y" eine PERFORM-Liste angelegt,
+werden, welche die Aktionen automatisch bei Programmstart ausführt.
+So kann z.B. mit :INPUT die Einstellung für das Eingabefeld bei
+Programmstart geändert werden.
+
+:P.
+Alle Texte die mit einem ":" anfangen werden als Befehle interpretiert
+und führen bestimmte Operationen aus. Folgende Befehle sind bisher
+vorhanden:
+
+:SL.
+:LI.[–:SYSTEM€ ] Wechselt die Systeminformationen
+:LI.[–:INPUT€  ] Wie die F15-Taste.
+:LI.[–:SORT€   ] Wie die F14-Taste.
+:LI.[–:SHOW€   ] Wie die F13-Taste.
+:LI.[–:STYPE€  ] Wechseln des Sortierungstyp. War vorher nach Datum
+                 sortiert, wird auf die Prio-Sortierung gewechselt und
+                 umgekehrt.
+:LI.[–:DSPSIZE€] Wechselt die Displaygröße mitDSPSIZE 24€(24x80),
+                DSPSIZE 27€(27x132) oderDSPSIZE WDW€(Window)
+:ESL.
+
+:H1.Funktionstasten
+
+:SL.
+:LI.[–F1€ ]  Anzeigen der zweiten Zeile mit Änderungsdatum und -User
+:LI.[–F2€ ]  Wechseln der angezeigten Kategorie
+:LI.[–F3€ ]  Verlassen des Programms
+:LI.[–F5€ ]  Aktualsieren der Anzeige
+:LI.[–F12€]  Verlassen des Programms
+:LI.[–F13€]  Anzeigen aller, nur wichtiger oder nur offener Einträge
+:LI.[–F14€]  Ändern der Sortierung (Austeigend/Absteigend) nach Datum
+:LI.[–F15€]  Wechsel des Eingabefeldes (Groß/Klein)
+:LI.[–F20€]  Informationen anzeigen
+:LI.[–F21€]  Kommandozeile anzeigen
+:ESL.
+
+:H1.Auswahlfeld
+
+:P.
+Es können mehrere Auswahlmöglichkeiten im linken Auswahlfeld getroffen
+werden.
+
+:P.
+Für„alle€Zeilen gelten:
+
+:SL.
+:LI.[–1€]    Bearbeiten eines Eintrags im Vollbildschirm
+:LI.[–2€]    Ändern des aktuellen Eintrags
+:LI.[–4€]    Löschen des Eintrags
+:LI.[–8€]    Mehr Text zu einem Eintrag erfassen
+:LI.[–9€]    Abschließen des Eintrags (=100%)
+:LI.[–C€]    Kategorie des Eintrags ändern
+:LI.[–D€]    Text entschlüsseln (ˆTODO€)
+:LI.[–E€]    Text verschlüsseln (ˆTODO€)
+:LI.[–I€]    Important-Flag setzen/entfernen
+:LI.[–M€]    Öffnet MAT/WECKER mit dem TODO-Text
+:LI.[–S€]    Den Eintrag zur gemeinsamen Bearbeitung einem anderen
+             User kopieren. Jede Änderung wird für alle User sichtbar
+:LI.[–P€]    Priorität des Eintrags ändern
+:LI.[–Y€]    Anlegen/Editieren der PERFORM-Liste
+:ESL.
+
+:H1.Einstellungen in H102.2
+:P.
+Verschiedene Einstellungen können in H102.2 für den einzelnen User
+vorgenommen werden. Darunter kann die Displaygröße oder bestimmte
+Startwerte wie die Sortierung oder das Eingabefeld vorgegeben werden.
+:P.
+Weiterhin können für die Priorität und die Prozentangabe die Bereiche
+für das Einfärben in Rot, Gelb und Grün festgelegt werden.
+:P.
+Geändert werden kann der Schlüssel mit dem Aufruf APG/CONFIG auf der
+Kommandozeile.
+
+:EHELP.
+:EPNLGRP.

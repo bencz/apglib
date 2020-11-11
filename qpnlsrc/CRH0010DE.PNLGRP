@@ -1,0 +1,130 @@
+:PNLGRP.
+:HELP NAME='CRH0010DE/FMT01        '.
+
+:H1.HSEU - Highlighted Source Entry Tool
+
+:P.
+Der neue HSEU besitzt einen ähnlichen, wenn auch nicht gleichen,
+Befehlsumfang wie der normale SEU. Eine Auflistung der Befehle ist
+weiter unten vorhanden. Wichtigster Unterschied zum SEU ist das
+Auswahlfeld links neben der Source.
+In diesem Auswahlfeld können verschiedene HSEU-Befehle eingetragen
+werden. Mehr dazu weiter unten.
+
+:P.
+Ist ein Befehl mit einemˆTODO€gekennzeichnet, heißt dies, dass der
+Befehl vorgesehen, aber noch implementiert wurde.
+
+:P.
+Der HSEU kann nur in 27x132 angezeigt werden, allerdings ist in den
+Optionen die Möglichkeit vorhanden eine Trennlinie für die 24x80
+Auflösung anzuzeigen.
+
+:H1.Befehlszeile
+
+:P.
+Die meisten Funktionen sind dem SEU nachempfunden:
+
+:SL.
+:LI.BOTTOM                [–B€|–BOT€|–BOTTOM€]
+:LI.CLOSE                 [–CLS€|–CLOSE€]
+:LI.EDIT                  [–EDIT€]
+:LI.FIND <suchfolge>      [–F€|–FIND€]
+:LI.EXPR <suchfolge>      [–X€|–EXPR€|–REGEX€]
+:LI.GO <zeilennummer|tag> [–G€|–GO€]
+:LI.GOHIST                [–GOHIST€]
+:LI.NOTE <zeilennummer>   [–N€|–NOTE€]
+:LI.NOTES                 [–NOTES€]
+:LI.OPEN (Ansehen)        [–OPEN€]
+:LI.OPENC (Editieren)     [–OPENC€]
+:LI.PRINT                 [–PRINT€]
+:LI.RELOAD                [–RELOAD€]
+:LI.RESTORE               [–RESTORE€]
+:LI.SAVE                  [–SAVE€]
+:LI.SECTION oder FORMATE  [–SECTION€]
+:LI.SETCR [ON|OFF]        [–SECTION€]
+:LI.TAG bzw. HERMES       [–TAG€|–HERMES€]
+:LI.TOP                   [–T€|–TOP€]
+:LI.WRKLCK                [–WRKLCK€]
+:LI.SHOWPTR <name>        [–SHOWPTR€]
+:ESL.
+
+:P.
+Um die Source in anderen Tools anzuzeigen, können folgende Befehle
+verwendet werden.
+
+:SL.
+:LI.DSPPFM                [–DSPPFM€]
+:LI.STRSEU                [–STRSEU€]
+:LI.RUNSQL                [–RUNSQL€]
+:ESL.
+
+:H1.Linkes Auswahlfeld
+
+:P.
+Es können mehrere Auswahlmöglichkeiten im linken Auswahlfeld getroffen
+werden. Diese haben je nachdem, was in der Zeile steht evtl. eine
+andere Funktion.
+
+:P.
+Für„alle€Zeilen gelten:
+
+:SL.
+:LI.[–B€]    Zurück zur Zeile springen wo G eingetragen wurde.
+:LI.[–D€]    Datum auf einen bestimmten Wert setzen.
+:LI.[–N€]    Aktivieren der Notizfunktion für diese Zeile
+:LI.[–R€]    Zeile zurücksetzen.
+:LI.[–T€]    Die selektierte Zeile nach oben schieben.
+:ESL.
+
+:P.
+Für„Copymodule€gelten:
+
+:SL.
+:LI.[–5€]    ÖFFNEN bzw. SCHLIESSEN eines COPY-Moduls
+:ESL.
+
+:P.
+Für„Sections/Formate€gelten:
+
+:SL.
+:LI.[–5€]    Ein- bzw. Aufklappen einer Section/FormatsˆTODO
+:ESL.
+
+:P.
+Für Aufrufe einer Section mittels„PERFORM€gilt:
+
+:SL.
+:LI.[–G€]    Zur Section springen.
+:ESL.
+
+:H1.Zeilenbefehle
+
+:P.
+Folgende Zeilenbefehle werden derzeit unterstützt:
+
+:SL.
+:LI.[–D€]       Löschen einer Zeile.
+:LI.[–E€]       DBMAIN Extended Zeile.
+:LI.[–I€]       Hinzufügen einer neuen Zeile.
+:LI.[–T€]       Markieren einer Zeile.
+:LI.[–K€]       Auskommentieren einer Zeile.
+:LI.[–:<name>€] Hinzufügen eines Templates.
+:ESL.
+
+:EHELP.
+:HELP NAME='CRH0010DE/FMT02        '.
+:LINES.
+
+Testhilfetext FMT02
+
+:ELINES.
+:EHELP.
+:HELP NAME='CRH0010DE/FMT06        '.
+:LINES.
+
+Testhilfetext FMT03
+
+:ELINES.
+:EHELP.
+:EPNLGRP.
