@@ -1,0 +1,14 @@
+‚*---------------------------------------------------------------------
+‚* COMMAND-Funktion
+‚*  ˜a
+‚*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --
+‚* Alle COMMANDS müssen als ersten Wert den A200-Schlüssel mitgeben.
+‚* Über diesen Schlüssel wird ermittelt welches PGM aufgerufen werden
+‚* muss.
+‚* Alle weiteren Parameter können als optionale max. 50 Stellen große
+‚* Variablen übergeben werden (maximal 10 weitere Parameter).
+‚* Diese werden vom XXP0004, welches als Ausführungsprogramm gestartet
+‚* werden muss, aufbereitet und das eigentliche PGM aufgerufen.
+‚*
+‚*                                                     APG, 26.03.2010
+‚*---------------------------------------------------------------------
