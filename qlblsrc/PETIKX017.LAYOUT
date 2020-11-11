@@ -1,0 +1,4 @@
+!R! RES;  EXIT;
+!R! MAP 0, 0; Text 'asdasd'; EXIT;
+!R! RES;  EXIT;
+!R! MAP 0, 10; Text 'asdasd'; EXIT;
